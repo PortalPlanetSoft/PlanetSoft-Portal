@@ -1,7 +1,5 @@
 ## PlanetSoft-Portal
 
-Izrada projekta na praksi - Portal
-
 ### I) Initial run
 
 #### 1. Clone project from GitLab:
