@@ -1,4 +1,5 @@
 PlanetSoft-Portal
+```sh
 Izrada projekta na praksi - Portal
 
 ### I) Initial run
