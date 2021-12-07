@@ -1,5 +1,5 @@
-PlanetSoft-Portal
-```sh
+## PlanetSoft-Portal
+
 Izrada projekta na praksi - Portal
 
 ### I) Initial run
@@ -14,4 +14,3 @@ b) using HTTP
 ```sh
 git clone https://github.com/PortalPlanetSoft/PlanetSoft-Portal.git
 ```
-
