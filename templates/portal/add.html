@@ -1,0 +1,17 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block body %}
+
+    <img class="mx-auto d-block h-10 w-10" style="max-height: 500px; max-width: 500px" src={% static 'img/logo.png' %}></img>
+    <div class="w-25 mx-auto">
+    <form method="post" class="p-4 mx-auto">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+    </form>
+    </div>
+
+
+
+{% endblock %}
