@@ -1,9 +1,9 @@
 # PlanetSoft Portal - Internship project
 
 ## Table of Contents
-* [Initial run](<initial-run>)
-* [Project prerequisites](<#project-prerequisites>)
-* [Rules](<rules>)
+* [Initial run](#initial-run)
+* [Project prerequisites](#project-prerequisites)
+* [Rules](#rules)
 
 
 ## Initial run
