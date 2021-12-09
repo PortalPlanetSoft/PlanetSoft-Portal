@@ -2,21 +2,23 @@
 {% load static %}
 
 {% block body %}
-    <h1 class="p-2 text-center">This is the list of workers</h1>
+    <h1 class="p-2 text-center">Our Employees</h1>
     <div class="d-flex flex-row-reverse py-4 w-75 mx-auto">
         <a class="btn btn-success" href="{% url 'add' %}">Register a new employee</a>
     </div>
-    <div class="container-fluid">
+    <div class="container-xl">
 
     <div class="row">
         {% for emp in object_list %}
-            <div class="col-4 p-4">
-            <div class="border border-dark border-2 p-4">
-                <h1 class="border-bottom border-dark">{{ emp.name }}</h1>
+            <div class="col-xl-4 col-md-6 col-12 p-4">
+            <div class="border border-dark p-4 rounded">
+                <h2 class="border-bottom border-dark">{{ emp.name }}</h2>
                 <h4>{{ emp.position.title }}</h4>
                 <h5>{{ emp.email }}</h5>
                 <div class="border-top border-dark pt-2 d-flex justify-content-end">
-                    <button class="btn btn-primary">Preview</button>
+
+                    <button class="btn btn-primary px-4">Preview</button>
+                    <a class="btn btn-success px-4 ms-2" href="/edit/{{ emp.pk }}">Edit</a>
                 </div>
             </div>
 

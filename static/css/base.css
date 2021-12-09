@@ -6,6 +6,10 @@
     text-decoration: none;
     color: rgb(98, 158, 30);
 }
+.dv-footer-text{
+    color:rgb(166,206,57);
+    text-decoration: none;
+}
 
 .dv-navbar-link{
     color:rgb(166,206,57);

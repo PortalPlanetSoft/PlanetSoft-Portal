@@ -8,8 +8,8 @@ class AddEmployee(forms.ModelForm):
         fields = ('name', 'email', 'position')
 
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control mx-2'}),
-            'email': forms.TextInput(attrs={'class': 'form-control mx-2'}),
-            'position': forms.Select()
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.TextInput(attrs={'class': 'form-control'}),
+            'position': forms.Select(attrs={'class': 'form-control'})
 
         }

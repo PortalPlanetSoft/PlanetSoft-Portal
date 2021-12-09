@@ -5,10 +5,16 @@
 
     <img class="mx-auto d-block h-10 w-10" style="max-height: 500px; max-width: 500px" src={% static 'img/logo.png' %}></img>
     <div class="w-25 mx-auto">
+    <h2 class="text-center">Register Employee</h2>
     <form method="post" class="p-4 mx-auto">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit">
+    <div class="d-flex flex-row-reverse p-0">
+        <input type="submit" class="btn btn-success px-4">
+        <a class="btn btn-danger mx-2 px-4" href="/workers/">Cancle</a>
+
+    </div>
+
     </form>
     </div>
 
