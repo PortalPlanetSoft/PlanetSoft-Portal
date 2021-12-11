@@ -4,7 +4,7 @@ from django.db import models
 class CompanyPosition(models.Model):
     department_name = models.CharField(max_length=100)
     position_name = models.CharField(max_length=100)
-    office_number = models.IntegerField()
+    office_number = models.IntegerField(default=0)
 
 
 class Employee(models.Model):
@@ -14,3 +14,5 @@ class Employee(models.Model):
     position = models.ForeignKey(CompanyPosition, on_delete=models.CASCADE)
     # time joined the company
     time_joined = models.DateField(auto_now_add=True)
+
+
