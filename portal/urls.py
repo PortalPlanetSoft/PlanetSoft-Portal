@@ -6,5 +6,5 @@ app_name= 'portal'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('employees/', views.employees, name='employees')
+    path('employees/', views.EmployeeListView.as_view(), name='employees')
 ]

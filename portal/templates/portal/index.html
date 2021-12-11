@@ -1,16 +1,22 @@
 {% extends "portal/base.html" %}
 
+{% block title %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'portal/css/portalHome.css' %}">
+    <title>Planet Soft</title>
+{% endblock %}
 
 {% block body %}
+    <h1 class="text-center">Make your life easier with <span class="green">Planet Soft</span></h1>
 
-    <div>
-    
-    </div>
-    <div>
-    
-    </div>
-    <div>
-    
+    <div class="row">
+        <div class="col">
+        <p>{% lorem 150 w %}</p>
+
+        </div>
+        <div class="col">
+            <img src="{% static 'portal/images/logo_header.png' %}"/>
+        </div>
     </div>
 
 {% endblock %}

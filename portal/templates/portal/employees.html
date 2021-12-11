@@ -1,17 +1,40 @@
 {% extends "portal/base.html" %}
 
 {% block title %}
-        <title>Planet Soft Employees</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'portal/css/portalEmployees.css' %}">
+    <title>Planet Soft Employees</title>
 {% endblock %}
 
 {% block body %}
-    <h1>TEST</h1>
-
-    <div>
-    
-    </div>
-    <div>
-    
-    </div>
-
+    <h1 class="text-center">Meet the the team behind <span class="green">Planet Soft</span></h1>
+      <div class="row">
+          {% for employee in all_employees %}
+                  <!-- Beginning of Card-->
+                  <div class="col-sm">
+                       <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">{{employee.first_name}} {{ employee.last_name }}</h5>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-text">{% lorem 50 w %}</p>
+                                </div>
+                                 <div class="col">
+                                     <img src="{% static 'portal/images/logo_header.png' %}">
+                                 </div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Contact</a>
+                          </div>
+                       </div>
+                  </div>
+                  <!-- End of Card-->
+              <!-- Change the number to edit how many cards are shown in one row-->
+               {% if forloop.counter|divisibleby:4 %}
+                   </div>
+                   {% if forloop.counter < all_employees.count %}
+                       <div class="row">
+                   {% endif %}
+              {% endif %}
+          {% endfor %}
+          </div>
 {% endblock %}
