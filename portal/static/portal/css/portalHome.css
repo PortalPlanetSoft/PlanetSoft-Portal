@@ -1,0 +1,16 @@
+.nav {
+    background-color: #1b1f23; !important;
+     color: #ffffff;
+}
+/*todo doradi ovo*/
+.hover{
+    color: #a6ce39;!important;
+    text-underline: #a6ce39;!important;
+}
+
+#nav-items{
+    list-style-type: none;
+    padding: 0;
+    width: 705px;
+    align-items: center;
+}
