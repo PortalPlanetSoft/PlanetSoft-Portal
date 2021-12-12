@@ -1,7 +1,12 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+
+from django.views import generic
+from . models import Employee
 
 def index(request):
-    return HttpResponse("index")
+    return render(request, 'index/index.html')
 
-def employees(request):
-    return HttpResponse("employees")
+class EmployeeView(generic.ListView):
+    model = Employee
+    template_name = 'index/employees.html'
+    context_object_name = 'employee_list'

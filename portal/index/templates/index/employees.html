@@ -1,0 +1,18 @@
+{% extends 'index/base.html' %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'index/css/style.css' %}">
+
+{% block body %}
+
+    {% if employee_list %}
+        <ul>
+            {% for employee in employee_list %}
+                <li>{{ employee.first_name }} {{ employee.last_name }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No employees</p>
+    {% endif %}
+
+{% endblock %}
