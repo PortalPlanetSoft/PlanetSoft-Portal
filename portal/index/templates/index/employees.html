@@ -1,18 +1,23 @@
-{% extends 'index/base.html' %}
+{% extends 'index/base.html' %} {% load static %}
+<link rel="stylesheet" href="{% static 'index/css/style.css' %}" />
 
-{% load static %}
-<link rel="stylesheet" href="{% static 'index/css/style.css' %}">
-
-{% block body %}
-
-    {% if employee_list %}
-        <ul>
-            {% for employee in employee_list %}
-                <li>{{ employee.first_name }} {{ employee.last_name }}</li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>No employees</p>
-    {% endif %}
-
-{% endblock %}
+{% block body %} {% if employee_list %}
+<div class="card">
+  {% for employee in employee_list %}
+  <div class="card__item">
+    <img src="{% static 'index/img/person.jpg'%}" alt="Person" class="card__img" />
+    <h3 class="card__name">{{ employee.first_name }} {{ employee.last_name }}</h3>
+    <h5 class="card__job">{{ employee.position }}</h5>
+    <div class="card__socials">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-dribbble"></i>
+      <i class="fab fa-linkedin-in"></i>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p>No employees</p>
+{% endif %} {% endblock %}

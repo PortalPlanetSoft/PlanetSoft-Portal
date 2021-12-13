@@ -1,8 +1,23 @@
-{% extends 'index/base.html' %}
-
-{% load static %}
-<link rel="stylesheet" href="{% static 'index/css/style.css' %}">
+{% extends 'index/base.html' %} {% load static %}
+<link rel="stylesheet" href="{% static 'index/css/style.css' %}" />
 
 {% block body %}
-    index.html
+<div class="header__hero">
+  <div class="header__hero-left">
+    <h1 class="header__title">
+      Planet Soft <br />
+      <span>Portal</span>
+    </h1>
+    <p class="header__subtitle">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure vero
+      eligendi placeat illum officia similique? Veniam totam, autem aliquam
+      quisquam laudantium hic. Nesciunt, eveniet. Quod nam maiores ipsum atque
+      quisquam!
+    </p>
+    <a href="#contact" class="header__action">Get Started</a>
+  </div>
+  <div class="header__hero-right">
+    <img src="{% static 'index/img/hero_img.png'%}" alt="" />
+  </div>
+</div>
 {% endblock %}
