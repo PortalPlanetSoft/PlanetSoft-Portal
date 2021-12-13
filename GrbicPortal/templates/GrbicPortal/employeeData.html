@@ -1,0 +1,29 @@
+{% extends 'GrbicPortal/index.html' %}
+
+{% block body %}
+      <div class="row">
+          {% for employeeSingle in employeesList %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{employeeSingle.employeeName}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ employeeSingle.employeeDepartment }}</h6>
+                        <p class="card-text">Date of joining: {{ employeeSingle.employeeDateOfJoining }}</p>
+                        {% if employeeSingle.employeeGender %}
+                            <p class="card-text">Gender: Female</p>
+                        {% else %}
+                            <p class="card-text">Gender: Male</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                  <!-- End of Card-->
+              <!-- Change the number to edit how many cards are shown in one row-->
+                 {% if forloop.counter|divisibleby:4 %}
+                   </div>
+                   {% if forloop.counter < all_employees.count %}
+                       <div class="row">
+                   {% endif %}
+             {% endif %}
+          {% endfor %}
+          </div>
+{% endblock %}
