@@ -69,14 +69,14 @@ body ::placeholder {
 
 .heading-primary {
   color: #8cd658;
-  text-align: center;
-  font-size: 3rem;
-  padding: 2rem 0;
+  font-size: 4rem;
+  padding: 2rem 4rem;
 }
 @media (max-width: 37.5em) {
   .heading-primary {
     font-size: 4rem;
     padding: 2rem;
+    text-align: center;
   }
 }
 
