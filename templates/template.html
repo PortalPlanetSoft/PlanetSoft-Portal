@@ -16,8 +16,8 @@
     <div class="d-flex align-items-center justify-content-around p-4 px-5 dv-navbar-text">
         <a href="{% url 'homepage' %}" class="dv-navbar-text"><div class="d-flex align-items-center">
 
-            <img src={% static 'img/logo.png' %}></img>
-            <h1>Planet Soft</h1>
+            <img class="rotate" src={% static 'img/logo.png' %}></img>
+            <h1 class="d-none d-md-block">Planet Soft</h1>
         </div></a>
 
         <div></div>
@@ -35,10 +35,11 @@
 
     <footer class="w-100 px-5 sticky-bottom page-footer bg-light">
 
-        <div class="border-top border-dark text-center">
+        <div class="border-top border-dark text-center" style="overflow: hidden">
             <img class="mx-auto" src={% static 'img/logo.png' %}></img>
             <h5 class="dv-footer-text">Planet Soft</h5>
             <h6>Made by Dejan</h6>
+
         </div>
 
     </footer>

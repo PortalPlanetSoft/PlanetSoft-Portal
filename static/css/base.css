@@ -21,3 +21,32 @@
     color: rgb(98, 158, 30);
 
 }
+.rotate {
+  animation: rotation 4s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+
+.dv-card-transition{
+    cursor: pointer;
+}
+
+.dv-card-transition:hover{
+    transform: scale(1.05);
+    transition-duration: 100ms;
+    background-color: #e5e5e5;
+}
+
+.hero-image{
+    max-height: 500px;
+    max-width: 500px
+}
+
