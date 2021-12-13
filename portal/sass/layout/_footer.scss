@@ -1,0 +1,41 @@
+.footer {
+  background-color: $color-primary;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  @include respond(phone) {
+    position: relative;
+    margin-top: 10rem;
+  }
+  &__copy {
+    display: flex;
+    align-items: center;
+    margin-left: 30%;
+    @include respond(phone) {
+      margin-left: 2rem;
+    }
+    & p {
+        color: $color-white;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+  }
+  &__socials {
+    margin-right: 15rem;
+    @include respond(phone) {
+      margin-right: 0;
+      display: flex;
+    }
+    &-item {
+      text-decoration: none;
+      color: $color-white;
+      font-size: 2em;
+      margin: 0 2rem;
+      &:hover {
+        text-shadow: 0 .3rem 1rem lighten($color-white, 5%);
+      }
+    }
+  }
+}

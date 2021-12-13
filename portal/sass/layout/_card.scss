@@ -1,0 +1,95 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  @include respond(phone) {
+    flex-direction: column;
+  }
+
+  &__item {
+    width: 25%;
+    flex-grow: 0;
+    text-align: center;
+    margin: 4rem 4rem;
+    padding: 1rem;
+    background-color: $color-quaternary;
+    border-radius: 1rem;
+    border: 1px solid $color-tertiary;
+    transition: 0.2s ease-in;
+    box-shadow: 0 0.3rem 3rem rgba($color-tertiary, 0.15);
+
+
+    @include respond(phone) {
+      width: 80%;
+      padding: 1rem 0;
+    }
+
+    &:hover {
+      border: 1px solid $color-quaternary;
+      border-radius: 1rem;
+      box-shadow: 0 0.3rem 1rem rgba($color-black, 0.15);
+    }
+  }
+  &__img {
+    width: 30%;
+    border-radius: 50%;
+
+    @include respond(phone) {
+      width: 15vw;
+    }
+  }
+
+  &__name {
+    position: relative;
+    color: $color-black;
+    font-size: 2em;
+    margin-top: 4rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 150%;
+      left: 30%;
+      width: 39%;
+      height: 0.4rem;
+      border-radius: 1rem;
+      background-color: $color-tertiary;
+    }
+  }
+
+  &__job {
+    color: $color-secondary;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-top: 5rem;
+
+    @include respond(phone) {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__socials {
+    margin: 4rem 0;
+
+    i {
+      color: $color-secondary;
+      font-size: 1.5rem;
+      display: inline-block;
+      margin: 0 2rem;
+
+      @include respond(phone) {
+        font-size: 2.5rem;
+      }
+
+      &:hover {
+        text-shadow: $color-secondary 0 0.3rem 1rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// TEAM ITEM IS ONE PERSON

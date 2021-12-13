@@ -1,0 +1,22 @@
+.btn {
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: $color-primary;
+  transition: 0.3s ease;
+  &:hover {
+    background-color: lighten($color-primary, 5%);
+    box-shadow: 0 .3rem 1rem lighten($color-primary, 5%);
+  }
+}
+.btn-secondary {
+  background-color: $color-secondary;
+  &:hover {
+    background-color: lighten($color-secondary, 5%);
+    box-shadow: 0 .3rem 1rem lighten($color-secondary, 5%);
+  }
+}

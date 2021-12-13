@@ -1,0 +1,159 @@
+.header {
+    background-color: $color-white;
+    // NAVIGATION
+  &__navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $color-quaternary;
+    box-shadow: 0 3px 6px rgba($color-black, .15);
+
+    @include respond(phone) {
+        flex-direction: column;
+    }
+  }
+  &__logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    & h3 {
+      font-size: 2rem;
+      color: $color-primary;
+      @include respond(phone) {
+          font-size: 3rem;
+      }
+    }
+  }
+  &__nav {
+      @include respond(phone) {
+          display: flex;
+          flex-direction: column;
+      }
+    &-item {
+      text-decoration: none;
+      color: $color-primary;
+      font-size: 1.7rem;
+      padding: 0 2rem;
+      font-weight: bold;
+
+      @include respond(phone) {
+          padding: 2rem 0;
+          font-size: 2.5rem;
+          text-align: center;
+      }
+      &:hover {
+        text-shadow: 0 .3rem .7rem lighten($color-primary, 5%);
+      }
+    }
+  }
+  &__buttons {
+    margin-right: 15rem;
+    @include respond(phone) {
+        display: flex;
+        flex-direction: column;
+        margin-right: 0;
+    }
+    &-item {
+      text-decoration: none;
+      color: $color-white;
+      font-size: 1.2rem;
+      margin: 0 2rem;
+      @include respond(phone) {
+          font-size: 2rem;
+          text-align: center;
+          margin: 2rem 0;
+      }
+    }
+  }
+  
+
+&__hero {
+    z-index: 50;
+    position: relative;
+    padding: 0 20rem;
+    display: flex;
+    justify-content: space-around;
+    margin: 10rem 0;
+    &-left {
+    }
+    &-right {
+        width: 150%;
+        display: flex;
+        & img {
+            width: 110%;
+        }
+    }
+
+    @include respond(phone) {
+        padding: 0;
+    }
+
+}
+
+&__title {
+    color: $color-primary;
+    font-size: 6rem;
+    margin-bottom: 5rem;
+    text-shadow: $color-primary 0 .3rem .6rem;
+    z-index: 50;
+    position: relative;
+    text-align: center;
+    width: 60%;
+    & span {
+        color: $color-secondary;
+        text-shadow: $color-white 0 .3rem .6rem;
+    }
+
+    @include respond(phone) {
+        font-size: 8rem;
+        width: 100vw;
+        text-align: center;
+    }
+}
+
+&__subtitle {
+    color: $color-secondary;
+    font-size: 1.5rem;
+    width: 60%;
+    font-weight: 300;
+    line-height: 3rem;
+    margin-bottom: 5rem;
+    z-index: 99;
+    position: relative;
+    text-align: justify;
+
+    @include respond(phone) {
+        text-align: center;
+        width: 100vw;
+        padding: 0 5rem;
+    }
+}
+
+&__action {
+    display: inline-block;
+    text-decoration: none;
+    color: $color-white;
+    display: inline-block;
+    background: $color-primary;
+    font-size: 2rem;
+    padding: 2rem 6rem;
+    border-radius: 5rem;
+    box-shadow: 0 .3rem 1rem rgba($color-black, .15);
+    position: relative;
+    z-index: 99;
+    transition: .2s ease-in;
+
+    @include respond(phone) {
+        display: block;
+        text-align: center;
+        margin: 0 10rem;
+        font-size: 2.5rem;
+    }
+
+    &:hover {
+        background-color: lighten($color-primary, 5%);
+        box-shadow: 0 .3rem 1rem lighten($color-primary, 5%);
+    }
+}
+}
