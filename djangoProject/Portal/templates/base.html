@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'style/main.css' %}">
+    <link rel="stylesheet" href="{% static 'style/firstrow.css' %}">
+    <link rel="stylesheet" href="{% static 'style/slideshow.css' %}">
+    <link rel="stylesheet" href="{% static 'style/boxes.css' %}">
+    <link rel="stylesheet" href="{% static 'style/contact.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'>
+    <!--<script src="/js/script.js"></script>-->
+
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img id="logo" src="{% static '/images/logo/Planet_soft_logoonly_crop.png' %}">
+            <a class="navbar-brand" id="naslov">Planet Soft</a>
+        </div>
+        <ul class="nav navbar-nav navbar-center">
+            <li rel="home"><a href="{% url 'portal:index' %}">Home</a></li>
+            <li rel="infotable"><a>About us</a></li>
+            <li rel="contact"><a>Contact</a></li>
+            <li><a href="{% url 'portal:employees' %}">Employees</a></li>
+        </ul>
+
+    </div>
+</nav>
+{% block content %}
+
+{% endblock %}
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
