@@ -3,6 +3,8 @@ from portal.models import Employee
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from .forms import AddEmployee
+from django_filters.views import FilterView
+from .filtersets import EmployeeFilter
 from django.http import HttpResponse
 
 
@@ -13,9 +15,10 @@ def test(request):
 def homepage(request):
     return render(request, 'portal/homepage.html')
 
-class workersList(ListView):
+class workersList(FilterView):
     template_name = "portal/workersList.html"
     model = Employee
+    filterset_class = EmployeeFilter
 
 class addEmployee(CreateView):
     model = Employee
