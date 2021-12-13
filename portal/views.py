@@ -4,7 +4,6 @@ from django.views.generic.list import ListView
 from .models import Employee
 
 
-# Create your views here.
 def index(request):
     return render(request, 'portal/index.html')
 

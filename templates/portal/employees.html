@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-center">Meet the the team behind <span class="green">Planet Soft</span></h1>
+    <h2 class="text-center">Meet the the team behind <span class="green">Planet Soft</span></h2>
       <div class="row">
           {% for employee in all_employees %}
                   <!-- Beginning of Card-->
@@ -29,7 +29,7 @@
                   </div>
                   <!-- End of Card-->
               <!-- Change the number to edit how many cards are shown in one row-->
-               {% if forloop.counter|divisibleby:4 %}
+               {% if forloop.counter|divisibleby:6 %}
                    </div>
                    {% if forloop.counter < all_employees.count %}
                        <div class="row">

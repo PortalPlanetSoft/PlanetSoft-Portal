@@ -1,18 +1,20 @@
 from django.db import models
 
 
+class Article(models.Model):
+    title = models.CharField(max_length=255, null='false')
+    body = models.TextField(null='false')
+    slug = models.SlugField(null='false', unique='true')
+
+
 class CompanyPosition(models.Model):
-    department_name = models.CharField(max_length=100)
-    position_name = models.CharField(max_length=100)
-    office_number = models.IntegerField(default=0)
+    department_name = models.CharField(max_length=100, null='false')
+    position_name = models.CharField(max_length=100, null='false')
+    office_number = models.IntegerField()
 
 
 class Employee(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    # working position in the company
+    first_name = models.CharField(max_length=100, null='false')
+    last_name = models.CharField(max_length=125, null='false')
     position = models.ForeignKey(CompanyPosition, on_delete=models.CASCADE)
-    # time joined the company
-    time_joined = models.DateField(auto_now_add=True)
-
-
+    time_joined = models.DateField()
