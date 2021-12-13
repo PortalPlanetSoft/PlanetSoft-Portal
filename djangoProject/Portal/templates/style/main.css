@@ -1,0 +1,80 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-image: url("/images/background/background-image.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+
+/* nav */
+
+.navbar-navbar-default {
+    position: fixed;
+    top: 0px;
+    display: block;
+}
+
+.navbar-default.navbar-fixed-top {
+    height: 60px;
+}
+
+.navbar-nav.navbar-center {
+    margin-top: 5px;
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
+
+.navbar-nav>.active>a {
+    background-color: grey;
+    border-radius: 10%;
+    transition: 0.5s;
+}
+
+.navbar-nav>.active>a:hover {
+    background-color: #779d7f;
+    border-radius: 10%;
+    transition: 0.5s;
+}
+
+li {
+    font-size: 15px;
+}
+
+li:hover {
+    background-color: #a6ce3981;
+    border-radius: 10%;
+    transition: 0.5s;
+    cursor: grab;
+}
+
+
+/* logo */
+
+#logo {
+    margin-top: 5px;
+    margin-right: 10px;
+    height: 50px;
+    width: 50px;
+    float: left;
+    display: block;
+}
+
+#logo:hover {
+    background-color: #a6ce3981;
+    border-radius: 50%;
+    transition: 1s;
+    cursor: grab;
+}
+
+
+/* naslov nav bar */
+
+#naslov {
+    margin-top: 5px;
+    color: black;
+    float: right;
+}

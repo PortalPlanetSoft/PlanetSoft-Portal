@@ -1,0 +1,75 @@
+/* second element for the portal page */
+
+#infotable {
+    width: 100%;
+    position: absolute;
+    margin-top: 1200px;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
+/* td that contains text data */
+
+.tbox {
+    width: 33.33%;
+    height: 30px;
+    text-align: center;
+}
+
+.sbox {
+    width: 33.33%;
+    height: 30px;
+    text-align: center;
+}
+
+
+/* icon */
+
+.boxicon {
+    height: 160px;
+    width: 160px;
+    margin: auto;
+    display: block;
+}
+
+.boxicon:hover {
+    background-color: #d5fc6b2c;
+    border-radius: 20%;
+    transition: 0.5s;
+    cursor: grab;
+}
+
+
+/* (id)styling of text elements */
+
+.ttitle {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    color: seashell;
+    text-align: center;
+}
+
+.ttitle:hover {
+    color: #A6CE39;
+    transition: 0.5s;
+    cursor: grab;
+}
+
+.stitle {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    padding: 20px;
+    color: seashell;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.stitle:hover {
+    color: #A6CE39;
+    cursor: grab;
+    transition: 0.5s;
+}
+
+
+/*planet-soft boja #A6CE39*/

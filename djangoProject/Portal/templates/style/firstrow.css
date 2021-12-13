@@ -1,0 +1,40 @@
+/* first element of portal */
+
+#firstrow {
+    position: absolute;
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 500px;
+    width: 100%;
+}
+
+
+/* div of the title, logo + title , title : hover */
+
+#fronttext {
+    width: 100%;
+}
+
+#logomaintitle {
+    margin-left: 10px;
+    height: 75px;
+    width: 75px;
+}
+
+#maintitle {
+    padding: 20px;
+    font-size: 55px;
+    color: seashell;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: lighter;
+}
+
+#maintitle:hover {
+    padding: 20px;
+    color: #A6CE39;
+    font-size: 30px;
+    /* transition: 2s; */
+    cursor: grab;
+}
