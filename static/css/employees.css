@@ -1,0 +1,22 @@
+.test-klasa{
+    color:white;
+    background-color:#a8cc3c;
+    border: 35px;
+    border-color: white;
+    border-style: solid;
+    padding: 45px 15px;
+}
+table{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+a[href=^"zaposleni"]{
+    position: relative;
+    left: 30px;
+}
+
+ a[href=^'homepage']{
+     position: relative;
+    left: 30px;
+ }

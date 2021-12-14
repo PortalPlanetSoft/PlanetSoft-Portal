@@ -1,0 +1,28 @@
+{% load static %}
+<link href="{% static 'css/employees.css' %}" rel="stylesheet" type="text/css">
+
+<title> Zaposleni - Planet Soft </title>
+<link href="{% static 'img/i.png' %}" rel="shortcut icon" type="image/png">
+
+<a href="{% url 'homepage' %}"> Naslovna </a>
+<a href="{% url 'zaposleni' %}"> Zaposleni </a>
+<img alt="planet soft logo" src="{% static 'img/logo.png' %}">
+
+{% if employees_list %}
+<table>
+    <tr>
+        {% for employee in employees_list %}
+        <td class="test-klasa"><b> {{employee.name}} {{employee.surname}} </b> <br>
+            <p> {{employee.title}} <br> {{employee.email}}
+                <br> <br> <a href="/employees/{{ employee.id }}/"> PREVIEW </a></p></td>
+        {% if employee.id|divisibleby:3 %}
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+{% else %}
+<p>No employees are available.</p>
+{% endif %}
+
+
+

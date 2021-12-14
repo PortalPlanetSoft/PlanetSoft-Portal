@@ -1,0 +1,29 @@
+
+<img src="Pictures\in.jpg" alt = "planet soft logo" >
+
+<a href="\naslovna.html"> Naslovna </a>
+<a href="{% url 'zaposleni' %}"> Zaposleni </a>
+
+
+
+<head> 
+
+
+<title> Zaposleni - Planet Soft </title>
+ <link rel="icon"  type="image/png"  src="i.png" >
+ 
+
+</head>
+{% if employees_list %}
+    <table>
+	<tr>
+    {% for employee in employees_list %}
+        <td> <b> {{employee.name}} {{employee.surname}} </b> <br> <p> {{employee.title}} <br> {{employee.email}} <br> <a href="/employees/{{ employee.id }}/"> PREVIEW </a>  </p> </td> 
+		{% if employee.id|divisibleby:3 %}
+			</tr>
+		{% endif %}
+	{% endfor %}
+    </table>
+{% else %}
+    <p>No employees are available.</p>
+{% endif %}
