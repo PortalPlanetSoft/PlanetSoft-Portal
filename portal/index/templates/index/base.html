@@ -4,19 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planet Soft - Portal</title>
-    {% comment %}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
-      rel="stylesheet"
-    />
-    {% endcomment %} {% load static %}
+    {% load static %}
     <link rel="stylesheet" href="{% static 'index/css/fonts.css' %}" />
     <link rel="stylesheet" href="{% static 'index/css/style.css' %}" />
     <link rel="shortcut icon" href="{% static 'index/img/logo_green.png' %}" />
     <script
-      src="https://kit.fontawesome.com/8eec9bcb5c.js"
+      src="{% static 'index/icons/icons.js' %}"
       crossorigin="anonymous"
     ></script>
   </head>
