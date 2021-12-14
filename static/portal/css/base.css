@@ -1,6 +1,11 @@
-.nav {
-    background-color: #1b1f23; !important;
-    color: #ffffff;
+/* GENERAL STYLES */
+body {
+    background-color: #262a2d;
+    color: white;
+}
+
+.div-dark{
+    background-color: #1b1f23;
 }
 
 .green{

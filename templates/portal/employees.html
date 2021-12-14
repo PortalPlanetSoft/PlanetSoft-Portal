@@ -1,40 +1,34 @@
 {% extends "portal/base.html" %}
 
+{% block employees %}
+    active
+{% endblock %}
+
 {% block title %}
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'portal/css/portalEmployees.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'portal/css/card.css' %}">
     <title>Planet Soft Employees</title>
 {% endblock %}
 
 {% block body %}
-    <h2 class="text-center">Meet the the team behind <span class="green">Planet Soft</span></h2>
-      <div class="row">
-          {% for employee in all_employees %}
-                  <!-- Beginning of Card-->
-                  <div class="col-sm">
-                       <div class="card">
-                          <div class="card-body">
-                            <h5 class="card-title">{{employee.first_name}} {{ employee.last_name }}</h5>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="card-text">{% lorem 50 w %}</p>
-                                </div>
-                                 <div class="col">
-                                     <img src="{% static 'portal/images/logo_header.png' %}">
-                                 </div>
-                            </div>
-                            <a href="#" class="btn btn-primary">Contact</a>
+    <h2 class="text-center my-3">Meet the the team behind <span class="green">Planet Soft</span></h2>
+    <div class="row div-dark">
+          <div class="row gx-4 mx-2">
+                  {% for employee in all_employees %}
+                          <!-- Beginning of Card-->
+                          <div class="col-sm-3">
+                               <div class="card text-center mt-4">
+                                   <img src="{% static 'portal/images/logo_header.png' %}" alt="profile-pic" >
+                                   <div class="card-body m-2">
+                                       <h5 class="card-title">{{employee.first_name}} {{ employee.last_name }}</h5>
+                                       <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque diam turpis, non luctus libero varius a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In efficitur nisl a lorem fermentum, quis mattis nunc mollis. </p>
+                                       <a href="#" class="btn btn-primary mt-2 ">Contact</a>
+                                   </div>
+                               </div>
                           </div>
-                       </div>
-                  </div>
-                  <!-- End of Card-->
-              <!-- Change the number to edit how many cards are shown in one row-->
-               {% if forloop.counter|divisibleby:6 %}
-                   </div>
-                   {% if forloop.counter < all_employees.count %}
-                       <div class="row">
-                   {% endif %}
-              {% endif %}
-          {% endfor %}
+                          <!-- End of Card-->
+                  {% endfor %}
           </div>
+    </div>
 {% endblock %}

@@ -1,5 +1,9 @@
 {% extends "portal/base.html" %}
 
+{% block home %}
+    active
+{% endblock %}
+
 {% block title %}
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'portal/css/portalHome.css' %}">
@@ -7,16 +11,18 @@
 {% endblock %}
 
 {% block body %}
-    <h2 class="text-center">Make your life easier with <span class="green">Planet Soft</span></h2>
+    <h2 class="text-center my-3">Make your life easier with <span class="green">Planet Soft</span></h2>
 
-    <div class="row">
-        <div class="col">
-        <p>{% lorem 150 w %}</p>
+    <!-- todo fix this later just for showcase-->
+    <div class="row div-dark">
+        <div class="row mx-5">
+            <div class="col-6">
+            <p>{% lorem 150 w %}</p>
 
-        </div>
-        <div class="col">
-            <img src="{% static 'portal/images/logo_header.png' %}"/>
+            </div>
+            <div class="col-6">
+                <img src="{% static 'portal/images/logo_header.png' %}" alt="logo"/>
+            </div>
         </div>
     </div>
-
 {% endblock %}

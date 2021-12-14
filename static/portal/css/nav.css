@@ -1,0 +1,14 @@
+.nav {
+    background-color: #1b1f23; !important;
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover{
+    color: #a6ce39;
+    text-decoration: underline;
+}
+
+.navbar-dark .navbar-nav .nav-link.active{
+    color: #a6ce39;
+    text-decoration: underline;
+}
