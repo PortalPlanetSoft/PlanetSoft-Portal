@@ -54,26 +54,10 @@ primary.addEventListener("mouseover", hideshow);
 primary.addEventListener("mouseout", showhide);
 
 function hideshow() {
-    secondary.style.display = "none";
     primary.innerHTML = "PLANET SOFT je regionalna informatička grupacija koja posluje na teritoriji adrijatik regije. Primarni fokus kompanije su rješenja koja unaprijeđuju, optimizuju i automatizuju poslovne procese.";
 }
 
 function showhide() {
-    // ' We are Planet Soft. <img id="logomaintitle" src="{%'static /images/logo/Planet_soft_logoonly_crop.png'%}">'
-
-    // var content1 = 'We are Planet Soft. ';
-    // var content2 = ' <img id="logomaintitle" ';
-    // var content3 = ' src=" ';
-    // var content4 = " {%' ";
-    // var content5 = " static /images/logo/Planet_soft_logoonly_crop.png ";
-    // var content6 = " ' ";
-    // var content7 = ' %}"> ';
-
-    //var result=content1.concat(content2).concat(content3).concat(content4).concat(content5).concat(content6).concat(content7);
-
-    //document.getElementById("maintitle").innerHTML = `We are Planet Soft. <img id="logomaintitle" src="{%static '/images/logo/Planet_soft_logoonly_crop.png' %}">` ;
-    secondary.style.display = "block";
     primary.innerHTML = "We are Planet Soft. ";
-
-    // alert(content1.concat(content2));
+    primary.innerHTML += '<img class="logomaintitle" src="/static/images/logo/Planet_soft_logoonly_crop.png">';
 }

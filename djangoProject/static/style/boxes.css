@@ -8,6 +8,10 @@
     transform: translateY(-50%);
 }
 
+#infotabletd{
+    height:250px;
+    align-content: center;
+}
 
 /* td that contains text data */
 

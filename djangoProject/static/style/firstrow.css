@@ -9,6 +9,10 @@
     width: 100%;
 }
 
+#firstrowtd{
+    width:70%;
+}
+
 
 /* div of the title, logo + title , title : hover */
 
@@ -16,7 +20,7 @@
     width: 100%;
 }
 
-#logomaintitle {
+.logomaintitle {
     margin-left: 10px;
     height: 75px;
     width: 75px;

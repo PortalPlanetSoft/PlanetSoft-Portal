@@ -1,66 +1,30 @@
-<!DOCTYPE html>
-<html>
-
-<!--
-    - JS file ne radi
-    - anchoring elemenata za nav bar navigaciju
-    - 
--->
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style/main.css">
-    <link rel="stylesheet" href="style/firstrow.css">
-    <link rel="stylesheet" href="style/slideshow.css">
-    <link rel="stylesheet" href="style/boxes.css">
-    <link rel="stylesheet" href="style/contact.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!--<script src="/js/script.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-
-<body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <img id="logo" src="/images/logo/Planet_soft_logoonly_crop.png">
-                <a class="navbar-brand" id="naslov">Planet Soft</a>
-            </div>
-            <ul class="nav navbar-nav navbar-center">
-                <li rel="home"><a href="#">Home</a></li>
-                <li rel="infotable"><a href="#">About us</a></li>
-                <li rel="contact"><a href="#">Contact</a></li>
-                <li><a href="employees.html">Employees</a></li>
-            </ul>
-
-        </div>
-    </nav>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
     <table id="firstrow">
         <tr>
-            <td style="width: 70%;">
+            <td id="firstrowtd">
                 <div id="fronttext">
-                    <h1 id="maintitle">We are Planet Soft. <img id="logomaintitle" src="/images/logo/Planet_soft_logoonly_crop.png"></h1>
+                    <h1 id="maintitle">We are Planet Soft. <img class="logomaintitle" src="{% static 'images/logo/Planet_soft_logoonly_crop.png' %}">
+                    </h1>
                 </div>
             </td>
             <td>
                 <div class="slideshow-container">
 
                     <div class="mySlides fade">
-                        <img class="slideshowcontent" src="images/slideshow/alertness.png">
+                        <img class="slideshowcontent" src="{% static 'images/slideshow/alertness.png' %}">
                         <div class="text">We are fast.</div>
                     </div>
 
                     <div class="mySlides fade">
-                        <img class="slideshowcontent" src="images/slideshow/friendship.png">
+                        <img class="slideshowcontent" src="{% static 'images/slideshow/friendship.png' %}">
                         <div class="text">We are friendship.</div>
                     </div>
 
                     <div class="mySlides fade">
-                        <img class="slideshowcontent" src="images/slideshow/teamwork.png">
+                        <img class="slideshowcontent" src="{% static 'images/slideshow/teamwork.png' %}">
                         <div class="text">We are teamwork.</div>
                     </div>
                 </div>
@@ -68,17 +32,17 @@
         </tr>
     </table>
 
-    <div id="infotable" style="width:100%;">
+    <div id="infotable">
         <table>
             <tr>
-                <td style="height:250px;align-content: center;">
-                    <img class="boxicon" src="/images/boxes/resenje3.png">
+                <td id="infotabletd">
+                    <img class="boxicon" src="{% static '/images/boxes/resenje3.png' %}">
                 </td>
                 <td>
-                    <img class="boxicon" src="/images/boxes/resenje4.png">
+                    <img class="boxicon" src="{% static '/images/boxes/resenje4.png' %}">
                 </td>
                 <td>
-                    <img class="boxicon" src="/images/boxes/resenje5.png">
+                    <img class="boxicon" src="{% static '/images/boxes/resenje5.png' %}">
                 </td>
             </tr>
             <tr>
@@ -94,13 +58,16 @@
             </tr>
             <tr>
                 <td class="sbox">
-                    <p class="stitle">Upotrebom namjenskih alata za efikasno poslovanje direktno utičete na poboljšanje organizacije rada i smanjenje operativnih troškova.</p>
+                    <p class="stitle">Upotrebom namjenskih alata za efikasno poslovanje direktno utičete na poboljšanje
+                        organizacije rada i smanjenje operativnih troškova.</p>
                 </td>
                 <td class="sbox">
-                    <p class="stitle">Naše poslovanje temeljimo na etičkim principima i partnerskim odnosima s klijentima.</p>
+                    <p class="stitle">Naše poslovanje temeljimo na etičkim principima i partnerskim odnosima s
+                        klijentima.</p>
                 </td>
                 <td class="sbox">
-                    <p class="stitle">Politika kompanije obavezuje sve zaposlene da uvijek budemo korak ispred i da budemo apsolutno posvećeni dugoročnim stabilnim i uspješnim odnosima sa našim korisnicima.</p>
+                    <p class="stitle">Politika kompanije obavezuje sve zaposlene da uvijek budemo korak ispred i da
+                        budemo apsolutno posvećeni dugoročnim stabilnim i uspješnim odnosima sa našim korisnicima.</p>
                 </td>
             </tr>
         </table>
@@ -109,30 +76,34 @@
     <div id="contact">
         <table id="mainifctable">
             <tr>
-                <td style="width: 50%;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11328.6418308782!2d17.191539!3d44.777534!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf56ba984d4f1dff8!2sPlanet%20soft!5e0!3m2!1sen!2sba!4v1639251601534!5m2!1sen!2sba" allowfullscreen="" loading="lazy"></iframe>
+                <td id="iframetd">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11328.6418308782!2d17.191539!3d44.777534!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf56ba984d4f1dff8!2sPlanet%20soft!5e0!3m2!1sen!2sba!4v1639251601534!5m2!1sen!2sba"
+                            allowfullscreen="" loading="lazy"></iframe>
                 </td>
                 <td>
                     <table id="contacttable">
                         <tr class="tablerow">
-                            <td class="imagecontainer" style="width:70px; height:70px; margin:10px;">
-                                <img id="contactinfoimage1" src="/images/contact icons/123-1237313_pin-icon-white-location-pin-png.png">
+                            <td class="imagecontainer">
+                                <img id="contactinfoimage1"
+                                     src="{% static '/images/contact icons/123-1237313_pin-icon-white-location-pin-png.png' %}">
                             </td>
                             <td>
                                 <h1 class="contactinfotext">Adresa: Svetozara Markovića 5, Banja Luka</h1>
                             </td>
                         </tr>
                         <tr class="tablerow">
-                            <td class="imagecontainer" style="height:50px;">
-                                <img id="contactinfoimage2" src="/images/contact icons/110-1103824_19-telephone-clip-black-and-white-download-phone.png">
+                            <td class="imagecontainer">
+                                <img id="contactinfoimage2"
+                                     src="{% static '/images/contact icons/110-1103824_19-telephone-clip-black-and-white-download-phone.png' %}">
                             </td>
                             <td>
                                 <h1 class="contactinfotext">Telefon: +387 51 327 110</h1>
                             </td>
                         </tr>
                         <tr class="tablerow">
-                            <td class="imagecontainer" style="height:50px;">
-                                <img id="contactinfoimage3" src="/images/contact icons/kindpng_2535701.png">
+                            <td class="imagecontainer">
+                                <img id="contactinfoimage3"
+                                     src="{% static '/images/contact icons/kindpng_2535701.png' %}">
                             </td>
                             <td>
                                 <h1 class="contactinfotext">E-mail: office@planetsoft.eu</h1>
@@ -142,75 +113,6 @@
                 </td>
             </tr>
         </table>
-        <!--moze i bolje, nisam stigao, ali kontate ideju-->
     </div>
 
-    <script>
-        //js nece da radi u eksternom fajlu iz nekog razloga, ne znam kog, nisam imao vremena da cackam
-
-        $(document).ready(function() {
-            $('li').on('click', function() {
-                let gdje = $(this).attr('rel');
-                if (gdje == 'infotable') {
-                    let hash = '#';
-                    let result = hash.concat(gdje);
-                    $('html, body').animate({
-                        scrollTop: $(result).offset().top - 130,
-                        behavior: "smooth"
-                    }, 200);
-                } else if (gdje == 'contact') {
-                    let hash = '#';
-                    let result = hash.concat(gdje);
-                    $('html, body').animate({
-                        scrollTop: $(result).offset().top + 70,
-                        behavior: "smooth"
-                    }, 200);
-                } else {
-                    $('html, body').animate({
-                        scrollTop: 0,
-                        behavior: "smooth"
-                    }, 200);
-                }
-            });
-            $('ul.nav.navbar-nav > li')
-                .click(function(e) {
-                    $('ul.nav.navbar-nav > li')
-                        .removeClass('active');
-                    $(this).addClass('active');
-                });
-        });
-
-        var slideIndex = 0;
-        showSlides();
-
-        function showSlides() {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1
-            }
-
-            slides[slideIndex - 1].style.display = "block";
-            setTimeout(showSlides, 2000);
-        }
-
-        var primary = document.getElementById("maintitle");
-        primary.addEventListener("mouseover", hideshow);
-        primary.addEventListener("mouseout", showhide);
-
-        function hideshow() {
-            document.getElementById("maintitle").innerHTML = "PLANET SOFT je regionalna informatička grupacija koja posluje na teritoriji adrijatik regije. Primarni fokus kompanije su rješenja koja unaprijeđuju, optimizuju i automatizuju poslovne procese.";
-        }
-
-        function showhide() {
-            document.getElementById("maintitle").innerHTML = 'We are Planet Soft. <img id="logomaintitle" src="/images/logo/Planet_soft_logoonly_crop.png">';
-        }
-    </script>
-
-</body>
-
-</html>
+{% endblock %}
