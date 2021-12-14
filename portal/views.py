@@ -12,13 +12,16 @@ from django.http import HttpResponse
 def test(request):
     return render(request, 'portal/homepage.html')
 
+
 def homepage(request):
     return render(request, 'portal/homepage.html')
+
 
 class workersList(FilterView):
     template_name = "portal/workersList.html"
     model = Employee
     filterset_class = EmployeeFilter
+
 
 class addEmployee(CreateView):
     model = Employee
@@ -26,11 +29,9 @@ class addEmployee(CreateView):
     template_name = "portal/add.html"
     success_url = '/workers/'
 
+
 class editEmployee(UpdateView):
     model = Employee
     form_class = AddEmployee
     template_name = "portal/add.html"
     success_url = '/workers/'
-
-
-
