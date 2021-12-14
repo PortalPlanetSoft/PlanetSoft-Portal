@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planet Soft - Portal</title>
+    {% comment %}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
       rel="stylesheet"
     />
-    {% load static %}
+    {% endcomment %} {% load static %}
+    <link rel="stylesheet" href="{% static 'index/css/fonts.css' %}" />
     <link rel="stylesheet" href="{% static 'index/css/style.css' %}" />
     <link rel="shortcut icon" href="{% static 'index/img/logo_green.png' %}" />
     <script
@@ -41,14 +43,14 @@
     </header>
     {% block body %} {% endblock %}
     <footer class="footer">
-        <div class="footer__copy">
-          <p>Copyright &copy; Planet Soft. All rights reserved.</p>
-          <img src="{% static 'index/img/logo_white.png'%}" alt="" />
-        </div>
-        <div class="footer__socials">
-          <a href="#"> <i class="footer__socials-item fab fa-linkedin-in"></i></a>
-          <a href="#"> <i class="footer__socials-item fab fa-github"></i></a>
-        </div>
-      </footer>
+      <div class="footer__copy">
+        <p>Copyright &copy; Planet Soft. All rights reserved.</p>
+        <img src="{% static 'index/img/logo_white.png'%}" alt="" />
+      </div>
+      <div class="footer__socials">
+        <a href="#"> <i class="footer__socials-item fab fa-linkedin-in"></i></a>
+        <a href="#"> <i class="footer__socials-item fab fa-github"></i></a>
+      </div>
+    </footer>
   </body>
 </html>

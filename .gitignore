@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,pycharm+all,venv,python
 
 ### Django ###
+node_modules
 *.log
 *.pot
 *.pyc
