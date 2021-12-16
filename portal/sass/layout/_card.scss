@@ -21,7 +21,6 @@
     transition: 0.2s ease-in;
     box-shadow: 0 0.3rem 3rem rgba($color-tertiary, 0.15);
 
-
     @include respond(phone) {
       width: 80%;
       padding: 1rem 0;

@@ -48,7 +48,8 @@ body {
   box-sizing: border-box;
   background-color: $color-white;
   font-family: 'Nunito', sans-serif;
-  position: relative;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   @include respond(phone) {
     overflow-x: hidden;

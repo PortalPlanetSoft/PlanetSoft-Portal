@@ -40,7 +40,8 @@ body {
   box-sizing: border-box;
   background-color: #fff;
   font-family: 'Nunito', sans-serif;
-  position: relative;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh; }
   @media (max-width: 37.5em) {
     body {
@@ -153,8 +154,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: absolute;
-  bottom: 0;
   width: 100%; }
   @media (max-width: 37.5em) {
     .footer {
@@ -258,7 +257,8 @@ body {
 .hero {
   padding: 5rem 20rem;
   display: flex;
-  justify-content: space-around; }
+  justify-content: space-around;
+  flex: 1; }
   .hero__right {
     width: 150%;
     display: flex; }
