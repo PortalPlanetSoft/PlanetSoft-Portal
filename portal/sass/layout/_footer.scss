@@ -1,9 +1,11 @@
 .footer {
   background-color: $color-primary;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 
   @include respond(phone) {
     position: relative;
@@ -17,9 +19,9 @@
       margin-left: 2rem;
     }
     & p {
-        color: $color-white;
-        font-weight: bold;
-        font-size: 1.5rem;
+      color: $color-white;
+      font-weight: bold;
+      font-size: 1.5rem;
     }
   }
   &__socials {
@@ -34,7 +36,7 @@
       font-size: 2em;
       margin: 0 2rem;
       &:hover {
-        text-shadow: 0 .3rem 1rem lighten($color-white, 5%);
+        text-shadow: 0 0.3rem 1rem lighten($color-white, 5%);
       }
     }
   }

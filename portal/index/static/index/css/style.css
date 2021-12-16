@@ -39,7 +39,9 @@
 body {
   box-sizing: border-box;
   background-color: #fff;
-  font-family: 'Nunito', sans-serif; }
+  font-family: 'Nunito', sans-serif;
+  position: relative;
+  min-height: 100vh; }
   @media (max-width: 37.5em) {
     body {
       overflow-x: hidden; } }
@@ -145,82 +147,15 @@ body {
           font-size: 2rem;
           text-align: center;
           margin: 2rem 0; } }
-  .header__hero {
-    z-index: 50;
-    position: relative;
-    padding: 5rem 20rem;
-    display: flex;
-    justify-content: space-around;
-    height: 85vh; }
-    .header__hero-right {
-      width: 150%;
-      display: flex; }
-      .header__hero-right img {
-        width: 110%; }
-    @media (max-width: 37.5em) {
-      .header__hero {
-        padding: 0; } }
-  .header__title {
-    color: #8cd658;
-    font-size: 6rem;
-    margin-bottom: 5rem;
-    text-shadow: #8cd658 0 0.3rem 0.6rem;
-    z-index: 50;
-    position: relative;
-    text-align: center;
-    width: 60%; }
-    .header__title span {
-      color: #01c090;
-      text-shadow: #fff 0 0.3rem 0.6rem; }
-    @media (max-width: 37.5em) {
-      .header__title {
-        font-size: 8rem;
-        width: 100vw;
-        text-align: center; } }
-  .header__subtitle {
-    color: #01c090;
-    font-size: 1.5rem;
-    width: 60%;
-    font-weight: 300;
-    line-height: 3rem;
-    margin-bottom: 5rem;
-    z-index: 99;
-    position: relative;
-    text-align: justify; }
-    @media (max-width: 37.5em) {
-      .header__subtitle {
-        text-align: center;
-        width: 100vw;
-        padding: 0 5rem; } }
-  .header__action {
-    display: inline-block;
-    text-decoration: none;
-    color: #fff;
-    display: inline-block;
-    background: #8cd658;
-    font-size: 2rem;
-    padding: 2rem 6rem;
-    border-radius: 5px;
-    box-shadow: 0 0.3rem 1rem rgba(1, 53, 53, 0.15);
-    position: relative;
-    z-index: 99;
-    transition: 0.2s ease-in; }
-    @media (max-width: 37.5em) {
-      .header__action {
-        display: block;
-        text-align: center;
-        margin: 0 10rem;
-        font-size: 2.5rem; } }
-    .header__action:hover {
-      background-color: #9adb6c;
-      box-shadow: 0 0.3rem 1rem #9adb6c; }
 
 .footer {
   background-color: #8cd658;
-  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around; }
+  justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+  width: 100%; }
   @media (max-width: 37.5em) {
     .footer {
       position: relative;
@@ -319,3 +254,70 @@ body {
       .card__socials i:hover {
         text-shadow: #01c090 0 0.3rem 1rem;
         cursor: pointer; }
+
+.hero {
+  padding: 5rem 20rem;
+  display: flex;
+  justify-content: space-around; }
+  .hero__right {
+    width: 150%;
+    display: flex; }
+    .hero__right img {
+      width: 110%; }
+  @media (max-width: 37.5em) {
+    .hero {
+      padding: 0; } }
+  .hero__title {
+    color: #8cd658;
+    font-size: 6rem;
+    margin-bottom: 5rem;
+    text-shadow: #8cd658 0 0.3rem 0.6rem;
+    z-index: 50;
+    position: relative;
+    text-align: center;
+    width: 60%; }
+    .hero__title span {
+      color: #01c090;
+      text-shadow: #fff 0 0.3rem 0.6rem; }
+    @media (max-width: 37.5em) {
+      .hero__title {
+        font-size: 8rem;
+        width: 100vw;
+        text-align: center; } }
+  .hero__desc {
+    color: #01c090;
+    font-size: 1.5rem;
+    width: 60%;
+    font-weight: 300;
+    line-height: 3rem;
+    margin-bottom: 5rem;
+    z-index: 99;
+    position: relative;
+    text-align: justify; }
+    @media (max-width: 37.5em) {
+      .hero__desc {
+        text-align: center;
+        width: 100vw;
+        padding: 0 5rem; } }
+  .hero__action {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    background: #8cd658;
+    font-size: 2rem;
+    padding: 2rem 6rem;
+    border-radius: 5px;
+    box-shadow: 0 0.3rem 1rem rgba(1, 53, 53, 0.15);
+    position: relative;
+    z-index: 99;
+    transition: 0.2s ease-in; }
+    @media (max-width: 37.5em) {
+      .hero__action {
+        display: block;
+        text-align: center;
+        margin: 0 10rem;
+        font-size: 2.5rem; } }
+    .hero__action:hover {
+      background-color: #9adb6c;
+      box-shadow: 0 0.3rem 1rem #9adb6c; }
