@@ -1,0 +1,35 @@
+@import "bootstrap.css";
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.meni {
+    padding: 5px 20px;
+    letter-spacing: 4px;
+    overflow: hidden;
+    box-shadow: 0px 2px 5px darkolivegreen;
+    position: relative;
+}
+
+.meni img {
+    width: 70px;
+    height: 70px;
+}
+
+.meni ul {
+    padding: 15px 15px;
+    list-style: none;
+}
+
+.meni a {
+    text-decoration: none;
+    padding: 15px 15px;
+    color: #000;
+    display: inline;
+    border-bottom: 1px solid #eee;
+}
+
+.meni a:hover {
+    background-color: yellowgreen;
+}
+

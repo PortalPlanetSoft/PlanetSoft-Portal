@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    {% block title %}
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+        <title>Planet Soft</title>
+    {% endblock %}
+
+    <div class="project container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>What is Lorem Ipsum</h2>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard
+                    dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                    make a
+                    type specimen
+                    book. It has survived not only five centuries, but also the leap into electronic typesetting,
+                    remaining
+                    essentially
+                    unchanged.</p>
+            </div>
+            <div class="col-sm-6">
+                <img src="{% static 'img/Planet-Soft-2a-1.jpg' %}" class="d-block w-75" alt="...">
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    {% block title %}
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/employee.css' %}">
+        <title>Planet Soft</title>
+    {% endblock %}
+    <div class="container">
+        <div class="row row-cols-12">
+            {% for object in object_list %}
+                <div class="dk_card_name col-12 col-md-6 p-4 border border-black border-2">
+                    <h3>{{ object.name }}</h3>
+                    <h4>{{ object.position.title }}</h4>
+                    <h5>{{ object.email }}</h5>
+                    <a href="#" class="">Preview</a>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

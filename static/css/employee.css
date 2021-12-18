@@ -1,0 +1,10 @@
+.dk_card_name a {
+    text-decoration: none;
+    padding: 5px 10px;
+    color: white;
+    background-color: black;
+}
+
+.dk_card_name a:hover {
+    background-color: greenyellow;
+}
