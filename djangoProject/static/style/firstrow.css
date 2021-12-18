@@ -1,23 +1,8 @@
-/* first element of portal */
-
-#firstrow {
+.container_fluid1 {
     position: absolute;
-    margin-top: 150px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 500px;
-    width: 100%;
-}
-
-#firstrowtd{
-    width:70%;
-}
-
-
-/* div of the title, logo + title , title : hover */
-
-#fronttext {
-    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .logomaintitle {
@@ -39,6 +24,5 @@
     padding: 20px;
     color: #A6CE39;
     font-size: 30px;
-    /* transition: 2s; */
     cursor: grab;
 }

@@ -2,117 +2,77 @@
 {% load static %}
 {% block content %}
 
-    <table id="firstrow">
-        <tr>
-            <td id="firstrowtd">
-                <div id="fronttext">
-                    <h1 id="maintitle">We are Planet Soft. <img class="logomaintitle" src="{% static 'images/logo/Planet_soft_logoonly_crop.png' %}">
-                    </h1>
-                </div>
-            </td>
-            <td>
-                <div class="slideshow-container">
-
-                    <div class="mySlides fade">
-                        <img class="slideshowcontent" src="{% static 'images/slideshow/alertness.png' %}">
-                        <div class="text">We are fast.</div>
-                    </div>
-
-                    <div class="mySlides fade">
-                        <img class="slideshowcontent" src="{% static 'images/slideshow/friendship.png' %}">
-                        <div class="text">We are friendship.</div>
-                    </div>
-
-                    <div class="mySlides fade">
-                        <img class="slideshowcontent" src="{% static 'images/slideshow/teamwork.png' %}">
-                        <div class="text">We are teamwork.</div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
-
-    <div id="infotable">
-        <table>
-            <tr>
-                <td id="infotabletd">
-                    <img class="boxicon" src="{% static '/images/boxes/resenje3.png' %}">
-                </td>
-                <td>
-                    <img class="boxicon" src="{% static '/images/boxes/resenje4.png' %}">
-                </td>
-                <td>
-                    <img class="boxicon" src="{% static '/images/boxes/resenje5.png' %}">
-                </td>
-            </tr>
-            <tr>
-                <td class="tbox">
-                    <h1 class="ttitle">Efikasnost.</h1>
-                </td>
-                <td class="tbox">
-                    <h1 class="ttitle">Pouzdanost.</h1>
-                </td>
-                <td class="tbox">
-                    <h1 class="ttitle">Profesionalna podrška.</h1>
-                </td>
-            </tr>
-            <tr>
-                <td class="sbox">
-                    <p class="stitle">Upotrebom namjenskih alata za efikasno poslovanje direktno utičete na poboljšanje
-                        organizacije rada i smanjenje operativnih troškova.</p>
-                </td>
-                <td class="sbox">
-                    <p class="stitle">Naše poslovanje temeljimo na etičkim principima i partnerskim odnosima s
-                        klijentima.</p>
-                </td>
-                <td class="sbox">
-                    <p class="stitle">Politika kompanije obavezuje sve zaposlene da uvijek budemo korak ispred i da
-                        budemo apsolutno posvećeni dugoročnim stabilnim i uspješnim odnosima sa našim korisnicima.</p>
-                </td>
-            </tr>
-        </table>
+    <div class="container_fluid1">
+        <h2 id="maintitle">We are Planet Soft. <img class="logomaintitle"
+                                                    src="{% static 'images/logo/Planet_soft_logoonly_crop.png' %}"></h2>
     </div>
 
-    <div id="contact">
-        <table id="mainifctable">
-            <tr>
-                <td id="iframetd">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11328.6418308782!2d17.191539!3d44.777534!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf56ba984d4f1dff8!2sPlanet%20soft!5e0!3m2!1sen!2sba!4v1639251601534!5m2!1sen!2sba"
-                            allowfullscreen="" loading="lazy"></iframe>
-                </td>
-                <td>
-                    <table id="contacttable">
-                        <tr class="tablerow">
-                            <td class="imagecontainer">
-                                <img id="contactinfoimage1"
-                                     src="{% static '/images/contact icons/123-1237313_pin-icon-white-location-pin-png.png' %}">
-                            </td>
-                            <td>
-                                <h1 class="contactinfotext">Adresa: Svetozara Markovića 5, Banja Luka</h1>
-                            </td>
-                        </tr>
-                        <tr class="tablerow">
-                            <td class="imagecontainer">
-                                <img id="contactinfoimage2"
-                                     src="{% static '/images/contact icons/110-1103824_19-telephone-clip-black-and-white-download-phone.png' %}">
-                            </td>
-                            <td>
-                                <h1 class="contactinfotext">Telefon: +387 51 327 110</h1>
-                            </td>
-                        </tr>
-                        <tr class="tablerow">
-                            <td class="imagecontainer">
-                                <img id="contactinfoimage3"
-                                     src="{% static '/images/contact icons/kindpng_2535701.png' %}">
-                            </td>
-                            <td>
-                                <h1 class="contactinfotext">E-mail: office@planetsoft.eu</h1>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+
+    <div class="container_fluid2">
+
+        <div class="first_child_container2">
+            <div>
+                <img src="{% static '/images/boxes/resenje3.png' %}">
+            </div>
+            <div>
+                <h2>Efikasnost.</h2>
+            </div>
+            <div>
+                <p>Upotrebom namjenskih alata za efikasno poslovanje direktno utičemo na poboljšanje
+                    organizacije rada i smanjenje operativnih troškova.</p>
+            </div>
+        </div>
+
+        <div class="second_child_container2">
+            <div>
+                <img src="{% static '/images/boxes/resenje4.png' %}">
+            </div>
+            <div>
+                <h2>Pouzdanost.</h2>
+            </div>
+            <div>
+                <p>Naše poslovanje temeljimo na etičkim principima i partnerskim odnosima s
+                    klijentima.</p>
+            </div>
+        </div>
+
+        <div class="third_child_container2">
+            <div>
+                <img src="{% static '/images/boxes/resenje5.png' %}">
+            </div>
+            <div>
+                <h2>Profesionalna podrška.</h2>
+            </div>
+            <div>
+                <p>Politika kompanije obavezuje sve zaposlene da uvijek budemo korak ispred i da
+                    budemo apsolutno posvećeni dugoročnim stabilnim i uspješnim odnosima sa našim korisnicima.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container_fluid3">
+
+        <div class="first_child_container3">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11328.6418308782!2d17.191539!3d44.777534!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf56ba984d4f1dff8!2sPlanet%20soft!5e0!3m2!1sen!2sba!4v1639251601534!5m2!1sen!2sba"
+                    allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <div class="second_child_container3">
+            <div>
+                <h2><img id="contactinfoimage1"
+                             src="{% static '/images/contact icons/123-1237313_pin-icon-white-location-pin-png.png' %}"> Adresa: Svetozara Markovića 5, Banja Luka </h2>
+            </div>
+            <div>
+                <h2><img id="contactinfoimage2"
+                             src="{% static '/images/contact icons/110-1103824_19-telephone-clip-black-and-white-download-phone.png' %}"> Telefon: +387 51 327 110</h2>
+            </div>
+            <div>
+                <h2><img id="contactinfoimage3"
+                             src="{% static '/images/contact icons/kindpng_2535701.png' %}"> E-mail: office@planetsoft.eu</h2>
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}

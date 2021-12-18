@@ -1,79 +1,57 @@
-/* second element for the portal page */
-
-#infotable {
-    width: 100%;
+.container_fluid2 {
     position: absolute;
-    margin-top: 1200px;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    top: 150%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
 }
 
-#infotabletd{
-    height:250px;
-    align-content: center;
+.first_child_container2, .second_child_container2, .third_child_container2 {
+    width: 33%;
+    float: left;
+    padding: 50px;
 }
 
-/* td that contains text data */
-
-.tbox {
-    width: 33.33%;
-    height: 30px;
-    text-align: center;
-}
-
-.sbox {
-    width: 33.33%;
-    height: 30px;
-    text-align: center;
-}
-
-
-/* icon */
-
-.boxicon {
+.first_child_container2 > div > img, .second_child_container2 > div > img, .third_child_container2 > div > img {
     height: 160px;
     width: 160px;
-    margin: auto;
     display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.boxicon:hover {
+.first_child_container2 > div > img:hover, .second_child_container2 > div > img:hover, .third_child_container2 > div > img:hover {
     background-color: #d5fc6b2c;
     border-radius: 20%;
     transition: 0.5s;
     cursor: grab;
 }
 
-
-/* (id)styling of text elements */
-
-.ttitle {
+.first_child_container2 > div > h2, .second_child_container2 > div > h2, .third_child_container2 > div > h2 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     color: seashell;
     text-align: center;
 }
 
-.ttitle:hover {
+.first_child_container2 > div > h2:hover, .second_child_container2 > div > h2:hover, .third_child_container2 > div > h2:hover {
     color: #A6CE39;
     transition: 0.5s;
     cursor: grab;
 }
 
-.stitle {
+.first_child_container2 > div > p, .second_child_container2 > div > p, .third_child_container2 > div > p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 20px;
-    padding: 20px;
+    font-size: 15px;
+    padding-top: 20px;
     color: seashell;
     text-align: center;
-    margin-top: 10px;
 }
 
-.stitle:hover {
+.first_child_container2 > div > p:hover, .second_child_container2 > div > p:hover, .third_child_container2 > div > p:hover {
     color: #A6CE39;
     cursor: grab;
     transition: 0.5s;
 }
-
 
 /*planet-soft boja #A6CE39*/

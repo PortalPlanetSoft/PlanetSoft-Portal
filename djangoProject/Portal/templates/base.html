@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'style/main.css' %}">
     <link rel="stylesheet" href="{% static 'style/firstrow.css' %}">
-    <link rel="stylesheet" href="{% static 'style/slideshow.css' %}">
     <link rel="stylesheet" href="{% static 'style/boxes.css' %}">
     <link rel="stylesheet" href="{% static 'style/contact.css' %}">
     <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'>
@@ -24,11 +23,8 @@
         </div>
         <ul class="nav navbar-nav navbar-center">
             <li rel="home"><a href="{% url 'portal:index' %}">Home</a></li>
-            <li rel="infotable"><a>About us</a></li>
-            <li rel="contact"><a>Contact</a></li>
             <li><a href="{% url 'portal:employees' %}">Employees</a></li>
         </ul>
-
     </div>
 </nav>
 
