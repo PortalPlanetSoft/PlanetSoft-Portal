@@ -3,6 +3,17 @@
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   display: inline-block;
+
+  &--toggle-left {
+    padding-left: 1rem;
+    padding-right: 3rem;
+    border-radius: 3rem;
+  }
+  &--toggle-right {
+    padding-right: 1rem;
+    padding-left: 3rem;
+    border-radius: 3rem;
+  }
 }
 
 .btn-primary {
@@ -10,13 +21,13 @@
   transition: 0.3s ease;
   &:hover {
     background-color: lighten($color-primary, 5%);
-    box-shadow: 0 .3rem 1rem lighten($color-primary, 5%);
+    box-shadow: 0 0.3rem 1rem lighten($color-primary, 5%);
   }
 }
 .btn-secondary {
   background-color: $color-secondary;
   &:hover {
     background-color: lighten($color-secondary, 5%);
-    box-shadow: 0 .3rem 1rem lighten($color-secondary, 5%);
+    box-shadow: 0 0.3rem 1rem lighten($color-secondary, 5%);
   }
 }

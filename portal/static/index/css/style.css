@@ -4,12 +4,12 @@
     height: 1vh; }
   to {
     transform: translateY(0);
-    height: 50vh; } }
+    height: 55vh; } }
 
 @keyframes hideNav {
   from {
     transform: translateY(0);
-    height: 50vh; }
+    height: 55vh; }
   to {
     transform: translateY(-60);
     height: 1vh; } }
@@ -51,6 +51,9 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #01d9a3; }
+
+html.dark {
+  filter: invert(0.9) hue-rotate(230deg); }
 
 body {
   box-sizing: border-box;
@@ -95,6 +98,14 @@ body {
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   display: inline-block; }
+  .btn--toggle-left {
+    padding-left: 1rem;
+    padding-right: 3rem;
+    border-radius: 3rem; }
+  .btn--toggle-right {
+    padding-right: 1rem;
+    padding-left: 3rem;
+    border-radius: 3rem; }
 
 .btn-primary {
   background-color: #8cd658;

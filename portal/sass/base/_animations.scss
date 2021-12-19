@@ -5,14 +5,14 @@
   }
   to {
     transform: translateY(0);
-    height: 50vh;
+    height: 55vh;
   }
 }
 
 @keyframes hideNav {
     from {
         transform: translateY(0);
-        height: 50vh;
+        height: 55vh;
       }
       to {
         transform: translateY(-60);
