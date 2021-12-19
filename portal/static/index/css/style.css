@@ -14,6 +14,26 @@
     transform: translateY(-60);
     height: 1vh; } }
 
+@keyframes btnIconToLeft {
+  from {
+    padding-right: 1rem;
+    padding-left: 3rem;
+    border-radius: 3rem; }
+  to {
+    padding-left: 1rem;
+    padding-right: 3rem;
+    border-radius: 3rem; } }
+
+@keyframes btnIconToRight {
+  from {
+    padding-left: 1rem;
+    padding-right: 3rem;
+    border-radius: 3rem; }
+  to {
+    padding-right: 1rem;
+    padding-left: 3rem;
+    border-radius: 3rem; } }
+
 :root {
   font-size: 62.5%;
   scroll-behavior: smooth; }
@@ -98,14 +118,14 @@ body {
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   display: inline-block; }
-  .btn--toggle-left {
+  .btn--toggle {
     padding-left: 1rem;
     padding-right: 3rem;
-    border-radius: 3rem; }
-  .btn--toggle-right {
-    padding-right: 1rem;
-    padding-left: 3rem;
-    border-radius: 3rem; }
+    border-radius: 3rem;
+    animation-name: none;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards; }
 
 .btn-primary {
   background-color: #8cd658;
@@ -122,8 +142,7 @@ body {
 
 .header {
   background-color: #fff;
-  position: relative;
-  overflow-y: au; }
+  position: relative; }
   .header__navbar {
     display: flex;
     flex-direction: row;

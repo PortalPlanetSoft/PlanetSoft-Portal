@@ -1,3 +1,4 @@
+// Animation for showing and hiding navigation on mobile phones
 @keyframes showNav {
   from {
     transform: translateY(-60rem);
@@ -8,14 +9,39 @@
     height: 55vh;
   }
 }
-
 @keyframes hideNav {
-    from {
-        transform: translateY(0);
-        height: 55vh;
-      }
-      to {
-        transform: translateY(-60);
-        height: 1vh;
-      }
+  from {
+    transform: translateY(0);
+    height: 55vh;
+  }
+  to {
+    transform: translateY(-60);
+    height: 1vh;
+  }
+}
+
+// Animation for dark mode button to toggle from left to right
+@keyframes btnIconToLeft {
+  from {
+    padding-right: 1rem;
+    padding-left: 3rem;
+    border-radius: 3rem;
+  }
+  to {
+    padding-left: 1rem;
+    padding-right: 3rem;
+    border-radius: 3rem;
+  }
+}
+@keyframes btnIconToRight {
+  from {
+    padding-left: 1rem;
+    padding-right: 3rem;
+    border-radius: 3rem;
+  }
+  to {
+    padding-right: 1rem;
+    padding-left: 3rem;
+    border-radius: 3rem;
+  }
 }

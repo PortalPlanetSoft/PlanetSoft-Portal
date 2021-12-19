@@ -4,16 +4,26 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   display: inline-block;
 
-  &--toggle-left {
+  &--toggle {
     padding-left: 1rem;
     padding-right: 3rem;
     border-radius: 3rem;
+    animation-name: none;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
   }
-  &--toggle-right {
-    padding-right: 1rem;
-    padding-left: 3rem;
-    border-radius: 3rem;
-  }
+
+  // &--toggle-left {
+  //   padding-left: 1rem;
+  //   padding-right: 3rem;
+  //   border-radius: 3rem;
+  // }
+  // &--toggle-right {
+  //   padding-right: 1rem;
+  //   padding-left: 3rem;
+  //   border-radius: 3rem;
+  // }
 }
 
 .btn-primary {

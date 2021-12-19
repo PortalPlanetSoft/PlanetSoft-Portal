@@ -46,7 +46,8 @@
 
 html {
   &.dark {
-    filter: invert(0.9) hue-rotate(230deg);
+     filter: invert(0.9) hue-rotate(230deg);
+
   }
 }
 body {

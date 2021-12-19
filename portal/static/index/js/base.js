@@ -7,29 +7,29 @@ const darkToggleBtn = document.querySelector('#dark-toggle-btn');
 
 navToggleBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  toggleNav(navigation);
+  navToggleBtn.firstChild.classList.toggle('fa-times');
+  toggleAnimation(navigation, 'showNav', 'hideNav');
 });
 darkToggleBtn.addEventListener('click', (e) => {
   e.preventDefault();
   toggleDark();
 });
 
-function toggleNav(navigation) {
-  navToggleBtn.firstChild.classList.toggle('fa-times');
+function toggleAnimation(element, firstAnimName, secondAnimName) {
   if (
-    navigation.style.animationName === '' ||
-    navigation.style.animationName === 'hideNav'
+    element.style.animationName === '' ||
+    element.style.animationName === secondAnimName
   ) {
-    navigation.style.animationName = 'showNav';
+    element.style.animationName = firstAnimName;
     return;
   }
-  navigation.style.animationName = 'hideNav';
+  element.style.animationName = secondAnimName;
 }
 
 function toggleDark() {
   document.documentElement.classList.toggle('dark');
 
-  darkToggleBtn.classList.toggle('btn--toggle-right');
+  toggleAnimation(darkToggleBtn, 'btnIconToRight', 'btnIconToLeft');
 
   darkToggleBtn.firstChild.className === 'fas fa-sun'
     ? (darkToggleBtn.firstChild.className = 'fas fa-moon')
