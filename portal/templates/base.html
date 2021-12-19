@@ -18,17 +18,20 @@
           <img src="{% static 'index/img/logo_green.png'%}" alt="Logo" />
           <h3>Planet Soft</h3>
         </div>
-        <div class="header__nav">
-          <a href="/" class="header__nav-item">Početna</a>
-          <a href="/employees/" class="header__nav-item">Zaposleni</a>
-          <a href="#" class="header__nav-item">O nama</a>
-          <a href="#" class="header__nav-item">Kontakt</a>
-        </div>
-        <div class="header__buttons">
-          <a href="#" class="btn btn-primary header__buttons-item">Login</a>
-          <a href="#" class="btn btn-secondary header__buttons-item"
-            >Register</a
-          >
+        <a href="#" class="header__nav-item header__nav-toggle-btn" id="nav-toggle-btn"><i class="fas fa-bars"></i></a>
+        <div class="header__navigation" id="navigation">
+          <div class="header__nav">
+            <a href="/" class="header__nav-item">Početna</a>
+            <a href="/employees/" class="header__nav-item">Zaposleni</a>
+            <a href="#" class="header__nav-item">O nama</a>
+            <a href="#" class="header__nav-item">Kontakt</a>
+          </div>
+          <div class="header__buttons">
+            <a href="#" class="btn btn-primary header__buttons-item">Login</a>
+            <a href="#" class="btn btn-secondary header__buttons-item"
+              >Register</a
+            >
+          </div>
         </div>
       </nav>
     </header>
@@ -43,5 +46,7 @@
         <a href="#"> <i class="footer__socials-item fab fa-github"></i></a>
       </div>
     </footer>
+
+    <script src="{% static 'index/js/base.js' %}"></script>
   </body>
 </html>

@@ -44,6 +44,9 @@
   background: lighten($color-secondary, 5%);
 }
 
+html {
+  // filter: invert(0.9) hue-rotate(230deg);
+}
 body {
   box-sizing: border-box;
   background-color: $color-white;
@@ -53,6 +56,7 @@ body {
   min-height: 100vh;
   @include respond(phone) {
     overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   ::selection {

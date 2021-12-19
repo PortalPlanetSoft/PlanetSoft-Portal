@@ -1,5 +1,7 @@
 .header {
   background-color: $color-white;
+  position: relative;
+  overflow-y: au;
   // NAVIGATION
   &__navbar {
     display: flex;
@@ -11,6 +13,7 @@
 
     @include respond(phone) {
       flex-direction: column;
+      align-items: flex-start;
     }
   }
   &__logo {
@@ -22,13 +25,32 @@
       color: $color-primary;
       @include respond(phone) {
         font-size: 3rem;
+        z-index: 5;
       }
+    }
+  }
+  &__navigation {
+    display: flex;
+    flex-direction: row;
+    @include respond(phone) {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      z-index: 5;
+      transform: translateY(-60rem);
+      height: 1vh;
+      animation-name: none;
+      animation-duration: 1s;
+      animation-timing-function: ease;
+      animation-fill-mode: forwards;
     }
   }
   &__nav {
     @include respond(phone) {
       display: flex;
+      width: 100%;
       flex-direction: column;
+      align-items: center;
     }
     &-item {
       text-decoration: none;
@@ -41,18 +63,31 @@
         padding: 2rem 0;
         font-size: 2.5rem;
         text-align: center;
+        z-index: 4;
       }
       &:hover {
         text-shadow: 0 0.3rem 0.7rem lighten($color-primary, 5%);
       }
     }
   }
+  &__nav-toggle-btn {
+    display: none;
+    @include respond(phone) {
+      display: inline-block;
+      position: absolute;
+      top: 1rem;
+      right: 5rem;
+    }
+  }
   &__buttons {
     margin-right: 15rem;
+    margin-left: 30rem;
     @include respond(phone) {
       display: flex;
       flex-direction: column;
-      margin-right: 0;
+      align-items: center;
+      width: 100%;
+      margin: 0;
     }
     &-item {
       text-decoration: none;

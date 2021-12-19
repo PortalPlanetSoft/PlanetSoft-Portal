@@ -1,3 +1,19 @@
+@keyframes showNav {
+  from {
+    transform: translateY(-60rem);
+    height: 1vh; }
+  to {
+    transform: translateY(0);
+    height: 50vh; } }
+
+@keyframes hideNav {
+  from {
+    transform: translateY(0);
+    height: 50vh; }
+  to {
+    transform: translateY(-60);
+    height: 1vh; } }
+
 :root {
   font-size: 62.5%;
   scroll-behavior: smooth; }
@@ -45,7 +61,8 @@ body {
   min-height: 100vh; }
   @media (max-width: 37.5em) {
     body {
-      overflow-x: hidden; } }
+      overflow-x: hidden;
+      overflow-y: scroll; } }
   body ::selection {
     background-color: #8cd658;
     color: #fff; }
@@ -93,7 +110,9 @@ body {
     box-shadow: 0 0.3rem 1rem #01d9a3; }
 
 .header {
-  background-color: #fff; }
+  background-color: #fff;
+  position: relative;
+  overflow-y: au; }
   .header__navbar {
     display: flex;
     flex-direction: row;
@@ -103,7 +122,8 @@ body {
     box-shadow: 0 3px 6px rgba(1, 53, 53, 0.15); }
     @media (max-width: 37.5em) {
       .header__navbar {
-        flex-direction: column; } }
+        flex-direction: column;
+        align-items: flex-start; } }
   .header__logo {
     display: flex;
     flex-direction: row;
@@ -113,11 +133,29 @@ body {
       color: #8cd658; }
       @media (max-width: 37.5em) {
         .header__logo h3 {
-          font-size: 3rem; } }
+          font-size: 3rem;
+          z-index: 5; } }
+  .header__navigation {
+    display: flex;
+    flex-direction: row; }
+    @media (max-width: 37.5em) {
+      .header__navigation {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        z-index: 5;
+        transform: translateY(-60rem);
+        height: 1vh;
+        animation-name: none;
+        animation-duration: 1s;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards; } }
   @media (max-width: 37.5em) {
     .header__nav {
       display: flex;
-      flex-direction: column; } }
+      width: 100%;
+      flex-direction: column;
+      align-items: center; } }
   .header__nav-item {
     text-decoration: none;
     color: #8cd658;
@@ -128,16 +166,28 @@ body {
       .header__nav-item {
         padding: 2rem 0;
         font-size: 2.5rem;
-        text-align: center; } }
+        text-align: center;
+        z-index: 4; } }
     .header__nav-item:hover {
       text-shadow: 0 0.3rem 0.7rem #9adb6c; }
+  .header__nav-toggle-btn {
+    display: none; }
+    @media (max-width: 37.5em) {
+      .header__nav-toggle-btn {
+        display: inline-block;
+        position: absolute;
+        top: 1rem;
+        right: 5rem; } }
   .header__buttons {
-    margin-right: 15rem; }
+    margin-right: 15rem;
+    margin-left: 30rem; }
     @media (max-width: 37.5em) {
       .header__buttons {
         display: flex;
         flex-direction: column;
-        margin-right: 0; } }
+        align-items: center;
+        width: 100%;
+        margin: 0; } }
     .header__buttons-item {
       text-decoration: none;
       color: #fff;
