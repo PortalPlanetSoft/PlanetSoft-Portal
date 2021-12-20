@@ -13,6 +13,4 @@ class EmployeeListView(ListView):
     context_object_name = 'all_employees'
     template_name = 'portal/employees.html'
 
-    def get_queryset(self):
-        return Employee.objects.select_related('position')
 

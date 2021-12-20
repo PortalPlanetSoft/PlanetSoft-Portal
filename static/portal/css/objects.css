@@ -1,0 +1,28 @@
+.quarter-circle1 {
+    background: #a6ce39;
+    border-radius: 100% 0 0 0;
+    left: 0;
+    transform-origin: bottom right;
+    width: 150px;
+    height: 150px;
+}
+
+.quarter-circle2 {
+    background: #6DB33F;
+    border-radius: 0 100% 0 0;
+    transform-origin: bottom left;
+    right: 0;
+    width: 150px;
+    height: 150px;
+}
+
+.semicircle {
+    height: 300px;
+    width: 600px;
+    background: #1F2227;
+    border-radius: 0 0 300px 300px;
+    left: 0;
+    bottom: 0;
+    transform-origin: top center;
+    transform: rotate(-140deg)
+}

@@ -6,22 +6,70 @@
 
 {% block title %}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'portal/css/portalHome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'portal/css/objects.css' %}">
     <title>Planet Soft</title>
 {% endblock %}
 
 {% block body %}
-    <h2 class="text-center my-3">Make your life easier with <span class="green">Planet Soft</span></h2>
+    <!-- Beginning of Banner -->
+    <div role="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <div class="quarter-circle1"></div>
+                    <div class="quarter-circle2"></div>
+                </div>
+                <div class="col-6 text-center  my-3">
+                    <h2>Make your life easier with <br><span class="green">Planet Soft</span></h2>
+                </div>
+                <div class="col-3">
+                    <div class="quarter-circle1"></div>
+                    <div class="quarter-circle2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Banner -->
 
-    <!-- todo fix this later just for showcase-->
-    <div class="row div-dark">
-        <div class="row mx-5">
+    <div class="container-fluid  div-dark">
+        <div class="row px-5 pt-4">
+            <h2>What we do:</h2>
+        </div>
+        <div class="row px-5 pb-5">
             <div class="col-6">
-            <p>{% lorem 150 w %}</p>
-
+                <p>{% lorem 150 w %}</p>
             </div>
             <div class="col-6">
                 <img src="{% static 'portal/images/logo_header.png' %}" alt="logo"/>
+                <p>Ovdje ce biti kartice</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row py-5">
+            <div class="col-4">
+                <h3>Get ahead</h3>
+                <p>
+                    {% lorem 30 w %}
+                </p>
+                <a href="">Learn more</a>
+
+            </div>
+            <div class="col-4">
+                <h3>Get support</h3>
+                <p>
+                    {% lorem 30 w %}
+                </p>
+                <a href="">Learn more</a>
+
+            </div>
+            <div class="col-4">
+                <h3>Upcoming events</h3>
+                <p>
+                    {% lorem 30 w %}
+                </p>
+                <a href="">Learn more</a>
             </div>
         </div>
     </div>

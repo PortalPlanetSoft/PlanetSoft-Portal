@@ -12,23 +12,34 @@
 {% endblock %}
 
 {% block body %}
-    <h2 class="text-center my-3">Meet the the team behind <span class="green">Planet Soft</span></h2>
-    <div class="row div-dark">
-          <div class="row gx-4 mx-2">
-                  {% for employee in all_employees %}
-                          <!-- Beginning of Card-->
-                          <div class="col-sm-3">
-                               <div class="card text-center mt-4">
-                                   <img src="{% static 'portal/images/logo_header.png' %}" alt="profile-pic" >
-                                   <div class="card-body m-2">
-                                       <h5 class="card-title">{{employee.first_name}} {{ employee.last_name }}</h5>
-                                       <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque diam turpis, non luctus libero varius a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In efficitur nisl a lorem fermentum, quis mattis nunc mollis. </p>
-                                       <a href="#" class="btn btn-primary mt-2 ">Contact</a>
-                                   </div>
-                               </div>
-                          </div>
-                          <!-- End of Card-->
-                  {% endfor %}
-          </div>
+    <h2 class="text-center my-3 py-5">Meet the the team behind <br><span class="green">Planet Soft</span></h2>
+    <div class="container-fluid div-dark">
+        <div class="row pt-4"><h3>Meet the team:</h3></div>
+        <div class="row gy-6 justify-content-center pb-5">
+            {% for employee in all_employees %}
+                <!-- Beginning of Card-->
+                <div class="col-sm-3">
+                    <div class="card text-center p-2 mt-4">
+                        <img src="{% static 'portal/images/logo_header.png' %}" alt="profile-pic">
+                        <h5 class="card-title">{{ employee.first_name }} {{ employee.last_name }}</h5>
+                        <h6 class="card-title">{{ employee.position.position_name }}
+                            ({{ employee.position.department.department_name }})</h6>
+                        <div class="card-body m-2">
+                            <p class="card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+                                pellentesque diam turpis, non luctus libero varius a. Class aptent taciti sociosqu ad
+                                litora torquent per conubia nostra, per inceptos himenaeos. In efficitur nisl a lorem
+                                fermentum, quis mattis nunc mollis.
+                            </p>
+                            <a href="#" class="btn btn-primary mt-2 ">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Card-->
+            {% endfor %}
+        </div>
     </div>
+
+    <div style="height: 300px">Just a temporary div with inline styling</div>
+
 {% endblock %}

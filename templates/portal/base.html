@@ -1,60 +1,62 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        {% load static %}
-        <link rel="icon" href="{% static 'portal/images/logo_header.png' %}" type="image/icon type">
+<head>
+    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="icon" href="{% static 'portal/images/logo_header.png' %}" type="image/icon type">
 
-        <!-- Bootstrap -->
-        {% load bootstrap5 %}
-        {% bootstrap_css %}
-        {% bootstrap_javascript %}
+    <!-- Bootstrap -->
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 
-        <!-- All custom CSS goes after Bootstrap CSS so you can override it -->
-        <link rel="stylesheet" type="text/css" href="{% static 'portal/css/base.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'portal/css/nav.css' %}">
+    <!-- All custom CSS goes after Bootstrap CSS so you can override it -->
+    <link rel="stylesheet" type="text/css" href="{% static 'portal/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'portal/css/nav.css' %}">
 
-        <!-- Block for page title-->
-        {% block title %}
-            <title>Planet Soft</title>
-        {% endblock %}
+    <!-- Block for page title-->
+    {% block title %}
+        <title>Planet Soft</title>
+    {% endblock %}
 
-    </head>
-    <body>
-        <!-- Beginning of Nav bar-->
-        <nav class="nav navbar navbar-dark navbar-expand-lg ">
-            <a class="navbar-brand">
-                <img src="{% static 'portal/images/logo_header.png' %}" width="63" height="36" alt="">Planet Soft
-            </a>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link {% block home %}{% endblock %}" href="{% url 'portal:index' %}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link hover {% block projects %}{% endblock %}" href="">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% block about %}{% endblock %}" href="">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% block employees %}{% endblock %}" href="{% url 'portal:employees' %}">Employees</a>
-                </li>
-            </ul>
-        </nav>
-        <!-- End of Nav bar-->
+</head>
+<body>
+<!-- Beginning of Nav bar-->
+<nav class="nav navbar navbar-dark navbar-expand-lg ">
+    <a class="navbar-brand">
+        <img src="{% static 'portal/images/logo_header.png' %}" width="63" height="36" alt="">Planet Soft
+    </a>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link {% block home %}{% endblock %}" href="{% url 'portal:index' %}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link hover {% block projects %}{% endblock %}" href="">Projects</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% block about %}{% endblock %}" href="">About us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% block employees %}{% endblock %}" href="{% url 'portal:employees' %}">Employees</a>
+        </li>
+    </ul>
+</nav>
+<!-- End of Nav bar-->
 
-        <!-- Block for page title-->
-        {% block body %}
-        {% endblock %}
+<!-- Block for page title-->
+{% block body %}
+{% endblock %}
 
-         <!-- Beginning of Nav bar-->
-        <footer>
-        </footer>
-        <!-- End of Nav bar-->
+<!-- Beginning of Footer bar-->
+<footer class="text-center sticky-bottom">
+<div class="div-dark flex-fluid fixed-">
+    <span class="green"><img src="{% static "/portal/images/logo_header.png" %}" width="" alt="planet-soft-logo">Copyright &copy; 2021 planetsoft.ba. All Rights Reserved</span>
+</div>
+</footer>
+<!-- End of Footer bar-->
 
-        <!-- Custom JS-->
-    </body>
+<!-- Custom JS-->
+</body>
 </html>

@@ -4,10 +4,16 @@ body {
     color: white;
 }
 
-.div-dark{
+.div-dark {
     background-color: #1b1f23;
 }
 
-.green{
+.green {
     color: #a6ce39;
+}
+
+.relative{
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
