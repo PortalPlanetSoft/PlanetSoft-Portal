@@ -1,0 +1,53 @@
+.child_container {
+    position: absolute;
+    padding-top: 900px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.child_container .container_row1 {
+    width: 100%;
+}
+
+.child_container .container_row2 {
+    margin-top: 200px;
+    width: 100%;
+}
+
+.container_row1 > div, .container_row2 > div {
+    float: left;
+    background-color: rgba(255, 255, 255, 0.212);
+    width: 30%;
+    height: 200px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.fc_box {
+    width: 70%;
+    float: left;
+    padding: 20px;
+}
+
+.sc_box {
+    float: left;
+    padding: 30px;
+}
+
+p {
+    padding: 5px;
+    color:whitesmoke;
+}
+
+.sc_box > img {
+    height: 80px;
+    width: 80px;
+}
+
+.container_row1 > div:hover, .container_row2 > div:hover {
+    background-color: #779d7f;
+    transition: 0.5s;
+    cursor: grab;
+}
