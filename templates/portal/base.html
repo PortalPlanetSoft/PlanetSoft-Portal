@@ -5,14 +5,17 @@
     <meta charset="UTF-8">
     <title>Planet Soft</title>
 
-    <!-- Font Awesome Dependency -->
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+
+    <link href="{% static 'portal/css/base.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon"href="{% static 'img/favicon.ico' %}">
+
 
 
 </head>
 <body>
-    <!-- Font Awesome Use Case Example -->
-    <i class="fas fa-address-card fa-5x"></i>
+{% block body %}
+{% endblock %}
 </body>
 </html>
