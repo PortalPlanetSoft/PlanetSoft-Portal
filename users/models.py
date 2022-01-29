@@ -2,19 +2,13 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+class CompanyPosition(models.Model):
+    position_name = models.CharField(default="Undefined", max_length=100)
+
+
 class User(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_editor = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=False)
-
-
-class Admin(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-
-
-class Editor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-
-
-class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    gender = models.BooleanField(default=False)
+    company_position=models.ForeignKey(CompanyPosition, on_delete=models.PROTECT, default=None)
