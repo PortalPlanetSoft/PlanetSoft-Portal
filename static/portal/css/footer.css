@@ -1,0 +1,22 @@
+.footer {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid var(--accent);
+    justify-content: center;
+    color: var(--primary);
+    position: absolute;
+    bottom: 0;
+    width: 99.9vw;
+}
+.footer__card {
+    border: 1px solid var(--accent);
+    margin: 2rem;
+    padding: 1rem;
+}
+.footer__card-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+.footer__card-text {
+    padding: .5rem;
+}
