@@ -9,13 +9,30 @@
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 
     <link href="{% static 'portal/css/base.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/css/navbar.css' %}" rel="stylesheet" type="text/css">
     <link rel="icon"href="{% static 'img/favicon.ico' %}">
 
 
 
 </head>
 <body>
+    <nav class="nav">
+        <div class="nav__left">
+            <img src="{% static 'portal/images/logo_green.png' %}" alt="Planet Soft Logo" class="nav__logo">
+            <h1 class="nav__title">PLANET SOFT</h1>
+        </div>
+        <div class="nav__right">
+            <div class="nav__navigation">
+                <a href="#" class="nav__item"><i class="fas fa-home nav__icon u-mr-sm"></i> POČETNA</a>
+                <a href="#" class="nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
+                <a href="#" class="nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
+                <a href="#" class="nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
+                <a href="#" class="nav__item"><i class="fas fa-user"></i> LOG IN</a>
+            </div>
+        </div>
+    </nav>
 {% block body %}
+
 {% endblock %}
 </body>
 </html>
