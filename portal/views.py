@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView, DetailView, CreateView, UpdateView
+from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView
 
 from portal.forms import AddEditUserForm
 from users.models import User
@@ -39,3 +39,9 @@ def user_delete(request, pk):
     user.save()
     # user.delete()
     return render(request, 'portal/templates/user/users.html', {'users': User.objects.filter(is_active=True)})
+
+
+class EmployeeList(ListView):
+    template_name = "portal/templates/homepage.html"
+    model = User
+    success_url = '/home/'

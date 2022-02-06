@@ -10,4 +10,5 @@ urlpatterns = [
     path('users/<int:pk>/edit', UserUpdateView.as_view(), name='user-edit'),
     path('users/<int:pk>/delete', views.user_delete, name='user-delete'),
     path('', views.HomePage.as_view(), name='index'),
+    path('home/', views.EmployeeList.as_view(), name='home'),
 ]
