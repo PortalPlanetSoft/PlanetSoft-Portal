@@ -1,47 +1,39 @@
-from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView
-
-from portal.forms import AddEditUserForm
+from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView, DeleteView
+from portal.forms import AddEmployeeForm, EditEmployeeForm
 from users.models import User
 
 
 class HomePage(TemplateView):
-    template_name = "portal/templates/homepage.html"
-
-
-class Users(TemplateView):
-    template_name = 'portal/templates/user/users.html'
-
-
-class UserDetailView(DetailView):
-    model = User
-    template_name = 'portal/templates/user/user-detail.html'
-    context_object_name = 'user'
-
-
-class UserCreateView(CreateView):
-    model = User
-    template_name = 'portal/templates/user/user-create.html'
-    success_url = '/users/'
-    form_class = AddEditUserForm
-
-
-class UserUpdateView(UpdateView):
-    model = User
-    template_name = 'portal/templates/user/user-create.html'
-    success_url = '/users/'
-    form_class = AddEditUserForm
-
-
-def user_delete(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    user.is_active = False
-    #user.save()
-    user.delete()
-    return redirect('users')
+    template_name = 'portal/templates/homepage.html'
 
 
 class EmployeeList(ListView):
-    template_name = "portal/templates/homepage.html"
+    template_name = 'portal/templates/employee/employees.html'
     model = User
-    success_url = '/home/'
+    success_url = '/employees/'
+
+
+class EmployeeDetail(DetailView):
+    model = User
+    template_name = 'portal/templates/employee/employee-detail.html'
+    context_object_name = 'employee'
+
+
+class EmployeeCreate(CreateView):
+    model = User
+    template_name = 'portal/templates/employee/employee-create.html'
+    success_url = '/employees/'
+    form_class = AddEmployeeForm
+
+
+class EmployeeUpdate(UpdateView):
+    model = User
+    template_name = 'portal/templates/employee/employee-create.html'
+    success_url = '/employees/'
+    form_class = EditEmployeeForm
+
+
+class EmployeeDelete(DeleteView):
+    model = User
+    success_url = '/employees/'
+    template_name = 'portal/templates/employee/employee-confirm-deletion.html'

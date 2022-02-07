@@ -1,14 +1,13 @@
 from django.urls import path
 
 from . import views
-from .views import UserDetailView, UserCreateView, UserUpdateView, Users
+from .views import EmployeeDetail, EmployeeCreate, EmployeeUpdate, EmployeeList, EmployeeDelete
 
 urlpatterns = [
-    path('employees/', Users.as_view(), name='users'),
-    path('users/create/', UserCreateView.as_view(), name='create-user'),
-    path('users/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
-    path('users/<int:pk>/edit', UserUpdateView.as_view(), name='user-edit'),
-    path('users/<int:pk>/delete', views.user_delete, name='user-delete'),
     path('', views.HomePage.as_view(), name='index'),
-    path('home/', views.EmployeeList.as_view(), name='home'),
+    path('employees/', EmployeeList.as_view(), name='employees'),
+    path('employees/create/', EmployeeCreate.as_view(), name='employee-create'),
+    path('employees/<int:pk>/', EmployeeDetail.as_view(), name='employee-detail'),
+    path('employees/<int:pk>/', EmployeeUpdate.as_view(), name='employee-edit'),
+    path('employees/<int:pk>/', EmployeeDelete.as_view(), name='employee-delete'),
 ]
