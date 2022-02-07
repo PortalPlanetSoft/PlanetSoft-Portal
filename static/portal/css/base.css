@@ -1,8 +1,8 @@
 :root {
-  --medium-gray: #444;
-  --light-gray: #666;
-  --primary: #005b82;
-  --accent: #a8ce3b;
+    --medium-gray: #444;
+    --light-gray: #666;
+    --primary: #005B82;
+    --accent: #A8CE3B;
 }
 
 html,
@@ -22,54 +22,87 @@ body {
 .content {
     flex: 1 0 auto;
 }
-h1 {
-  font-size: 4rem;
-  margin: 0;
-  padding: 0;
+h1{
+    font-size: 4rem;
+    margin: 0;
+    padding: 0;
 }
-h2 {
-  font-size: 3.33rem;
-  margin: 0;
-  padding: 0;
+h2{
+    font-size: 3.33rem;
+    margin: 0;
+    padding: 0;
 }
-h3 {
-  font-size: 2.66rem;
-  margin: 0;
-  padding: 0;
+h3{
+    font-size: 2.66rem;
+    margin: 0;
+    padding: 0;
 }
-h4 {
-  font-size: 2rem;
-  margin: 0;
-  padding: 0;
+h4{
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
 }
-p {
-  font-size: 1.33rem;
-  margin: 0;
-  padding: 0;
+p{
+    font-size: 1.33rem;
+    margin: 0;
+    padding: 0;
 }
-a {
-  text-decoration: none;
-  cursor: pointer;
-  font-size: 1.33rem;
+a{
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.33rem;
 }
-a:hover {
-  color: var(--medium-gray);
+a:hover{
+    color: var(--medium-gray);
 }
+
+.dk-search input {
+    font-size: 0.7rem;
+    border: none;
+}
+
+.dk-search button {
+    border: none;
+    float: right;
+
+}
+
+.dk-search {
+    padding: 0.5rem;
+    font-size: 0.7rem;
+    border: 1px solid var(--primary);
+    margin-top: 2rem;
+    margin-left: 10rem;
+    border-radius: 0.5rem;
+    width: 15rem;
+}
+
 .dk-grid-container {
-  display: grid;
-  grid-column-gap: 2rem;
-  grid-template-columns: auto auto auto;
-  padding: 1rem 10rem 1rem 10rem;
+    display: grid;
+    grid-column-gap: 5rem;
+    grid-row-gap: 5rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 3rem 10rem 3rem 10rem;
 }
+
 .dk-item {
-  border: 2px solid black;
-  padding: 2rem;
+    border: 2px solid var(--primary);
+    padding: 3rem;
+    border-radius: 0.5rem;
 }
+
 .dk-icon {
-  width: fit-content;
-  border: 1px solid black;
-  padding: 0.5rem;
+    width: fit-content;
+    border: 1px solid var(--primary);
+    padding: 1rem;
+    border-radius: 0.5rem;
 }
-.dk-item h2 {
-  padding: 3rem 0 3rem 0;
+
+.dk-item h4 {
+    padding: 3rem 0 4rem 0;
+    color: var(--primary);
+}
+
+.dk-item p {
+    color: var(--primary);
 }
