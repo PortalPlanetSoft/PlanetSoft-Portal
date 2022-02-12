@@ -36,6 +36,7 @@ class EmployeeUpdate(UpdateView):
     form_class = EditEmployeeForm
 
 
+
 class EmployeeDelete(DeleteView):
     model = User
     success_url = '/employees/'

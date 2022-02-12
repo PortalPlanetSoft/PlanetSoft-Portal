@@ -7,6 +7,8 @@
 
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <script src="{% static 'portal/js/jquery/jquery-3.6.0.min.js' %}"></script>
+
 
     <link href="{% static 'portal/css/base.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'portal/css/navbar.css' %}" rel="stylesheet" type="text/css">
@@ -34,6 +36,9 @@
                 </div>
             </div>
         </nav>
+
+        <div id="modal-container" class="modal-container"></div>
+
     {% block body %}
     
     {% endblock %}
@@ -59,5 +64,8 @@
         <address class="footer__card-text"><b>ADRESA</b>: Airport City, Omladinskih brigada 90b</address>
     </div>
 </footer>
+
+<script src = "{% static 'portal/js/modal-utils.js'  %}"></script>
+
 </body>
 </html>

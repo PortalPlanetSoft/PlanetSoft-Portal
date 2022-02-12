@@ -146,3 +146,12 @@ a:hover {
     margin-right: 8rem;
     margin-bottom: 2rem;
 }
+
+.modal-container{
+    display: none;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vm;
+}
