@@ -8,6 +8,8 @@
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 
+    
+    <link href="{% static 'portal/css/animations.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'portal/css/base.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'portal/css/navbar.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'portal/css/form.css' %}" rel="stylesheet" type="text/css">
@@ -26,7 +28,7 @@
                 <h1 class="ov-nav__title">PLANET SOFT</h1>
             </div>
             <div class="ov-nav__right">
-                <div class="ov-nav__navigation">
+                <div class="ov-nav__navigation" id="ov-navigation">
                     <a href="{% url 'index' %}" class="ov-nav__item"><i class="fas fa-home nav__icon u-mr-sm"></i> POČETNA</a>
                     <a href="#" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
                     <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
@@ -34,6 +36,7 @@
                     <a href="#" class="ov-nav__item"><i class="fas fa-user"></i> PRIJAVA</a>
                 </div>
             </div>
+            <span class="ov-nav__hamburger-btn" id="ov-nav-toggle"><i class="fa-solid fa-bars"></i></span>
         </nav>
     {% block body %}
     
@@ -60,5 +63,7 @@
         <address class="ov-footer__card-text"><b>ADRESA</b>: Airport City, Omladinskih brigada 90b</address>
     </div>
 </footer>
+
+    <script src="{% static 'portal/js/base.js' %}"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@
   align-items: center;
   border-bottom: 1px solid var(--accent);
   padding-left: 2rem;
+  position: relative;
 }
 .ov-nav__left {
   display: flex;
@@ -37,4 +38,13 @@
 .ov-nav__item:hover {
   background-color: #e3eaf0;
   border-bottom: 3px solid var(--accent);
+}
+
+.ov-nav__hamburger-btn {
+  font-size: 4rem;
+  color: var(--primary);
+  position: absolute;
+  right: 4rem;
+  top: 1rem;
+  display: none;
 }
