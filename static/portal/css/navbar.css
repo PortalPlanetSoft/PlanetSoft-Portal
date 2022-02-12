@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--accent);
-  padding: 0 2rem;
+  padding-left: 2rem;
 }
 .ov-nav__left {
   display: flex;
@@ -12,11 +12,11 @@
   align-items: center;
 }
 .ov-nav__logo {
-  padding-right: 1rem;
+  padding-right: 3rem;
   width: 5rem;
 }
 .ov-nav__title {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   color: var(--primary);
 }
 .ov-nav__right {}

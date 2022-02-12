@@ -13,6 +13,8 @@ body {
     width: 100%;
     font-family: sans-serif;
     height: 100%;
+    background-image: url('../images/background.png');
+    background-size: 100vw auto;
 }
 
 body {
