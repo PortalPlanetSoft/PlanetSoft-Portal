@@ -9,22 +9,27 @@ ERROR_MESSAGES = {
     'username': {
         'unique': "This username is already taken.",
         'invalid': "The username can contain letters, digits and @/./+/-/_ only.",
-        'max_length': "This username is too long."
+        'max_length': "This username is too long.",
+        'required': "This field is required.",
     },
     'first_name': {
         'max_length': "This first name is too long.",
         'min_length': "This first name is too short.",
+        'required': "This field is required.",
     },
     'last_name': {
         'max_length': "This last name is too long.",
         'min_length': "This last name is too short.",
+        'required': "This field is required.",
     },
     'email': {
         'invalid': "Please enter a valid email address.",
         'unique': "This email address is already used.",
+        'required': "This field is required.",
     },
     'company_position': {
         'max_length': "This first name is too long.",
+        'required': "This field is required.",
     },
 }
 
@@ -50,7 +55,7 @@ class AddEmployeeForm(forms.ModelForm):
             'password': forms.PasswordInput(attrs={'placeholder': 'Password'}),
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
-            'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Email Address'}),
             'company_position': forms.Select(choices=(CompanyPosition.objects.all()))
         }
 
