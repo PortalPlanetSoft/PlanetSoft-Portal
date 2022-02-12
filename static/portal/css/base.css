@@ -146,3 +146,11 @@ a:hover {
     margin-right: 8rem;
     margin-bottom: 2rem;
 }
+
+.bk-currentPage{
+    font-size: 1.5rem;
+}
+
+.bk-noNextPage{
+    font-size: 1.33rem;
+}

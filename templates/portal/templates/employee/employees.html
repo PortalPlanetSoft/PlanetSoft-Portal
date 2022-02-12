@@ -1,29 +1,30 @@
 {% extends 'portal/base.html' %}
 {% load static %}
-{% block body %}
 
-    <div class="dk-search">
+
+{% block body %}
+    <form class="dk-search">
         <input type="text" placeholder="PRETRAGA.." name="q">
         <div class="dk-i">
             <i class="fas fa-search"></i>
         </div>
-        <a href="{% url 'employee-create' %}" class="button">Dodajte zaposlenog <i class="fa fa-solid fa-plus"></i> </a>
-    </div>
+        <a href="{% url 'employee-create' %}" class="button">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i> </a>
+    </form>
     <div class="dk-grid-container">
         {% for object in object_list %}
             <div class="dk-item">
                 <div class="dk-icon">
                     {% if object.gender == 0 %}
-                        <img src='{% static 'img/1.png' %}'>
+                        <img src='{% static 'img/1.png' %}' alt='man-profile'>
                     {% else %}
-                        <img src='{% static 'img/2.png' %}'>
+                        <img src='{% static 'img/2.png' %}' alt='woman-profile'>
                     {% endif %}
                 </div>
-                <a href="{% url 'employee-create' %}" class="button">
-                    <i class="fa fa-solid fa-pen-nib"></i>
+                <a href="{% url 'employee-edit' object.pk %}" class="button">
+                    <i class="fa-regular fa-pen-to-square"></i>
                 </a>
-                <a href="{% url 'employee-create' %}" class="button">
-                    <i class="fa fa-solid fa-minus"></i>
+                <a href="{% url 'employee-delete' object.pk %}" class="button">
+                  <i class="fa-regular fa-square-minus"></i>
                 </a>
                 <h4>{{ object.first_name }} {{ object.last_name }}</h4>
                 <p>{{ object.company_position.position_name }}</p>
@@ -34,11 +35,11 @@
         {% if page_obj.has_previous %}
             <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
         {% else %}
-            <span>&lt;</span>
+            <span class="bk-noNextPage">&lt;</span>
         {% endif %}
         {% for i in page_obj.paginator.page_range %}
             {% if page_obj.number == i %}
-                <span>{{ i }} </span>
+                <span class="bk-currentPage">{{ i }}</span>
             {% else %}
                 <a href="?page={{ i }}">{{ i }}</a>
             {% endif %}
@@ -46,7 +47,7 @@
         {% if page_obj.has_next %}
             <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
         {% else %}
-            <span>&gt;</span>
+            <span class="bk-noNextPage">&gt;</span>
         {% endif %}
 
     </div>
