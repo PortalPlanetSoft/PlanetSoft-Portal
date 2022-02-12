@@ -1,0 +1,54 @@
+@media only screen and (max-width: 1200px) {
+  body {
+    background-repeat: no-repeat;
+  }
+  /* NAVIGATION */
+  .ov-nav {
+    flex-direction: column;
+  }
+  .ov-nav__left {
+    padding: 2rem 0;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+  }
+  .ov-nav__title {
+    font-size: 2.5rem;
+  }
+  .ov-nav__navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ov-nav__item {
+    font-size: 2rem;
+    padding: 2rem 0;
+  }
+  .ov-nav__item:last-child {
+    margin-left: 0;
+  }
+
+  /* SEARCH AND FILTERS */
+  .dk-search input {
+      font-size: 2rem;
+      padding: 1rem;
+  }
+  .dk-search a {
+      font-size: 2rem;
+  }
+  /* CARDS */
+  .dk-grid-container {
+    grid-template-columns: 1fr;
+  }
+  .dk-item a {
+      font-size: 2rem;
+  }
+  .dk-pagination a,
+  .dk-pagination span {
+    font-size: 3rem;
+  }
+
+  /* FOOTER */
+  .ov-footer {
+      flex-direction: column;
+  }
+}
