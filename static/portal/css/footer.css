@@ -1,4 +1,4 @@
-.footer {
+.ov-footer {
   display: flex;
   flex-direction: row;
   border: 1px solid var(--accent);
@@ -7,15 +7,15 @@
   flex-shrink: 0;
   position: relative;
 }
-.footer__card {
+.ov-footer__card {
   border: 1px solid var(--accent);
   margin: 2rem;
   padding: 1rem;
 }
-.footer__card-title {
+.ov-footer__card-title {
   font-size: 1.5rem;
   margin-bottom: 2rem;
 }
-.footer__card-text {
+.ov-footer__card-text {
   padding: 0.5rem;
 }

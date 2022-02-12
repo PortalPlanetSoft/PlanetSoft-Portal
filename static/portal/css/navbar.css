@@ -1,4 +1,4 @@
-.nav {
+.ov-nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -6,22 +6,22 @@
   border-bottom: 1px solid var(--accent);
   padding: 0 2rem;
 }
-.nav__left {
+.ov-nav__left {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.nav__logo {
+.ov-nav__logo {
   padding-right: 1rem;
   width: 5rem;
 }
-.nav__title {
+.ov-nav__title {
   font-size: 1.75rem;
   color: var(--primary);
 }
-.nav__right {}
-.nav__navigation {}
-.nav__item {
+.ov-nav__right {}
+.ov-nav__navigation {}
+.ov-nav__item {
   padding:1rem;
   display: inline-block;
   font-size: 1rem;
@@ -30,11 +30,11 @@
   border-bottom: 3px solid transparent;
   transition: .3s ease;
 }
-.nav__item:last-child {
+.ov-nav__item:last-child {
   margin-left: 6rem;
 }
 
-.nav__item:hover {
+.ov-nav__item:hover {
   background-color: #e3eaf0;
   border-bottom: 3px solid var(--accent);
 }

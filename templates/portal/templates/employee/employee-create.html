@@ -1,8 +1,8 @@
 {% extends 'portal/base.html' %}
 
 {% block body %}
-    <form method="post" class="form">
-        <h3 class="form__title">Dodavanje novog korisnika</h3>
+    <form method="post" class="ov-form">
+        <h3 class="ov-form__title">Dodavanje novog korisnika</h3>
     {% csrf_token %}
     {{ form.as_p }}
         <input type="submit" value="Potvrdi">

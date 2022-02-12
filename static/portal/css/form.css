@@ -1,4 +1,4 @@
-.form {
+.ov-form {
   border: 1px solid var(--primary);
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
@@ -8,7 +8,7 @@
   min-height: 85vh;
   
 }
-.form__title {
+.ov-form__title {
   color: var(--primary);
   background-color: #e3ebf1;
   font-size: 1.5rem;
@@ -18,17 +18,17 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.form label {
+.ov-form label {
   color: var(--primary);
   display: block;
   padding: 1rem 0;
   font-weight: bold;
 }
 
-form p {
+.ov-form p {
   margin: 0 2rem;
 }
-.form input[type='text'] {
+.ov-form input[type='text'] {
   display: block;
   border: none;
   outline: 0;
@@ -38,7 +38,7 @@ form p {
   font-size: 1rem;
   color: var(--primary);
 }
-.form input[type='submit'] {
+.ov-form input[type='submit'] {
   text-align: right;
   border: none;
   border: 1px solid var(--primary);
@@ -50,7 +50,7 @@ form p {
   padding: 0.5rem 2.5rem;
   border-radius: 5px;
 }
-.form input[type="submit"]:hover {
+.ov-form input[type="submit"]:hover {
     cursor: pointer;
 }
 
