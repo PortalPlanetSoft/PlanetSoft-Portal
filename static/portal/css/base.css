@@ -106,6 +106,7 @@ a:hover {
     border: 2px solid var(--primary);
     padding: 3rem;
     border-radius: 0.5rem;
+    background-color: #fff;
 }
 
 .dk-icon img {

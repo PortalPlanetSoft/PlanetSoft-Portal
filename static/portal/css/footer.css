@@ -6,6 +6,7 @@
   color: var(--primary);
   flex-shrink: 0;
   position: relative;
+  background-color: #fff;
 }
 .ov-footer__card {
   border: 1px solid var(--accent);
