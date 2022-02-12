@@ -1,19 +1,55 @@
 {% extends 'portal/base.html' %}
-
+{% load static %}
 {% block body %}
 
-    <form class="dk-search">
-        <input type="text" placeholder="PRETRAGA.." name="q">
-        <button class="button"><i class="fas fa-search"></i></button>
-    </form>
+    <div class="dk-search">
+        <input type="text" placeholder="PRETRAGA..">
+        <div class="dk-i">
+            <i class="fas fa-search"></i>
+        </div>
+        <a href="{% url 'employee-create' %}" class="button">Dodajte zaposlenog <i class="fa fa-solid fa-plus"></i> </a>
+    </div>
     <div class="dk-grid-container">
         {% for object in object_list %}
             <div class="dk-item">
-                <div class="dk-icon"><i class="far fa-user fa-5x"></i></div>
+                <div class="dk-icon">
+                    {% if object.gender == 0 %}
+                        <img src='{% static 'img/1.png' %}'>
+                    {% else %}
+                        <img src='{% static 'img/2.png' %}'>
+                    {% endif %}
+                </div>
+                <a href="{% url 'employee-create' %}" class="button">
+                    <i class="fa fa-solid fa-pen-nib"></i>
+                </a>
+                <a href="{% url 'employee-create' %}" class="button">
+                    <i class="fa fa-solid fa-minus"></i>
+                </a>
                 <h4>{{ object.first_name }} {{ object.last_name }}</h4>
                 <p>{{ object.company_position.position_name }}</p>
             </div>
         {% endfor %}
     </div>
+    <div class="dk-pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+        {% else %}
+            <span>&lt;</span>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+                <span>{{ i }} </span>
+            {% else %}
+                <a href="?page={{ i }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+        {% else %}
+            <span>&gt;</span>
+        {% endif %}
+
+    </div>
+
 
 {% endblock %}

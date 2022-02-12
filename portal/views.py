@@ -1,4 +1,5 @@
-from django.db.models import Q
+from django.core.paginator import Paginator
+from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView, DeleteView
 from portal.forms import AddEmployeeForm, EditEmployeeForm
 from users.models import User
@@ -12,17 +13,7 @@ class EmployeeList(ListView):
     template_name = 'portal/templates/employee/employees.html'
     model = User
     success_url = '/employees/'
-
-    def get_queryset(self, *args, **kwargs):
-        query_set = super().get_queryset()
-        query = self.request.GET.get('q')
-        if query:
-            filtered_query = query_set.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
-            if len(filtered_query) == 0:
-                query_set = query_set.filter(company_position__position_name__icontains=query)
-            else:
-                query_set = filtered_query
-        return query_set
+    paginate_by = 9
 
 
 class EmployeeDetail(DetailView):
@@ -49,3 +40,11 @@ class EmployeeDelete(DeleteView):
     model = User
     success_url = '/employees/'
     template_name = 'portal/templates/employee/employee-confirm-deletion.html'
+
+
+def EmployeesList(request):
+    employee_list = User.objects.all()
+    paginator = Paginator(employee_list, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'portal/templates/employee/employees.html', {'page_obj': page_obj})
