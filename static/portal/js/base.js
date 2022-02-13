@@ -5,15 +5,21 @@ const modal = document.querySelector('#ov-modal');
 const btnshowModal = document.querySelector('#ov-btnShowModal');
 const btncloseModal = document.querySelector('#ov-btnCloseModal');
 
-btnshowModal.addEventListener('click', (e) => {
-  e.preventDefault();
-  modal.style.display = "block";
-});
 
-btncloseModal.addEventListener('click', e => {
-  e.preventDefault();
-  modal.style.display = "none";
-})
+if (btnshowModal !== null) {
+  btnshowModal.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal.style.display = "flex";
+  });
+}
+
+if(btncloseModal !== null) {
+  btncloseModal.addEventListener('click', e => {
+    e.preventDefault();
+    modal.style.display = "none";
+  })
+}
+
 
 
 // Navigation hamburger menu

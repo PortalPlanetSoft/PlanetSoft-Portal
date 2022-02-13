@@ -30,23 +30,23 @@
     margin-left: 0;
   }
   .ov-nav__hamburger-btn {
-      display: inline-block;
+    display: inline-block;
   }
 
   /* SEARCH AND FILTERS */
   .dk-search input {
-      font-size: 2rem;
-      padding: 1rem;
+    font-size: 2rem;
+    padding: 1rem;
   }
   .dk-search a {
-      font-size: 2rem;
+    font-size: 2rem;
   }
   /* CARDS */
   .dk-grid-container {
     grid-template-columns: 1fr;
   }
   .dk-item a {
-      font-size: 2rem;
+    font-size: 2rem;
   }
   .dk-pagination a,
   .dk-pagination span {
@@ -55,6 +55,28 @@
 
   /* FOOTER */
   .ov-footer {
-      flex-direction: column;
+    flex-direction: column;
+  }
+
+  /* MODAL*/
+  .ov-modal {
+    justify-content: flex-start;
+    padding-top: 15rem;
+  }
+  /* FORM */
+  .ov-form {
+    width: 90%;
+  }
+  .ov-form__title {
+    font-size: 3rem;
+  }
+  .ov-form label,
+  .ov-form input[type='text'],
+  .ov-form input[type='password'],
+  .ov-form input[type='email'],
+  .ov-form select,
+  .ov-form input[type="submit"],
+  .ov-form button{
+    font-size: 2rem;
   }
 }
