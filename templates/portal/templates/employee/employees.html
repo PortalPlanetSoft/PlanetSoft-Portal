@@ -3,7 +3,7 @@
 
 
 {% block body %}
-    <div class="ov-modal">
+    <div id="ov-modal" class="ov-modal">
         <form method="post" class="ov-form">
             <h3 class="ov-form__title">Podešavanje osnovnih podataka</h3>
         {% csrf_token %}
@@ -49,7 +49,7 @@
                 </select>
             </p>
             <div class="ov-form__btn-container">
-                <button class="ov-form__btn ov-form__btn--blue">Odbaci</button>
+                <button id="ov-btnCloseModal" class="ov-form__btn ov-form__btn--blue">Odbaci</button>
                 <input class="ov-form__btn" type="submit" value="Potvrdi">
             </div>
         </form>
@@ -59,7 +59,7 @@
         <div class="dk-i">
             <i class="fas fa-search"></i>
         </div>
-        <a href="{% url 'employee-create' %}" class="button">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i> </a>
+        <a id="ov-btnShowModal" href="{% url 'employee-create' %}" class="button">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i> </a>
     </form>
     <div class="dk-grid-container">
         {% for object in object_list %}

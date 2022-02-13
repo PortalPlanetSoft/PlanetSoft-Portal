@@ -25,7 +25,7 @@
 .ov-form label:not(:first-child) {
   display: inline;
 }
-.ov-form p {
+.ov-form p, .ov-form div#id_gender{
   margin: 0 2rem;
 }
 .ov-form input[type='text'],
