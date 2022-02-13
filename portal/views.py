@@ -31,7 +31,7 @@ class EmployeeCreate(CreateView):
 
 class EmployeeUpdate(UpdateView):
     model = User
-    template_name = 'portal/templates/employee/employee-create.html'
+    template_name = 'portal/templates/employee/employee-edit.html'
     success_url = '/employees/'
     form_class = EditEmployeeForm
 

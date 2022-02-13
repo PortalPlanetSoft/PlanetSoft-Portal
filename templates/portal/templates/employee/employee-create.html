@@ -1,7 +1,6 @@
-
-    <form method="post" class="form">
-        <h3 class="form__title">Dodavanje novog korisnika</h3>
+<form method="post" class="form">
+    <h3 class="form__title">Dodavanje novog korisnika</h3>
     {% csrf_token %}
     {{ form.as_p }}
-        <input type="submit" value="Potvrdi">
-    </form>
+    <input type="submit" value="Potvrdi">
+</form>
