@@ -180,9 +180,12 @@ a:hover {
     cursor: pointer;
 }
 
-/*display: none;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-height: 100vm;*/
+
+
+.bk-currentPage{
+    font-size: 1.5rem;
+}
+
+.bk-noNextPage{
+    font-size: 1.33rem;
+}
