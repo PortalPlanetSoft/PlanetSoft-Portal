@@ -1,7 +1,6 @@
 const updateForm = document.getElementById("update-form");
 const modalContainer = document.getElementById("modal-container");
 
-let span = document.getElementsByClassName("close-button")[0];
 
 function showUserEditModal(id) {
     console.log(id);
@@ -26,8 +25,17 @@ function showUserEditModal(id) {
         );
     })
 
-    span.onclick = function () {
+
+}
+
+window.onclick = function (event) {
+    if (event.target == modalContainer) {
         modalContainer.style.display = "none";
     }
 }
 
+let span = document.getElementById("close-button");
+
+span.onclick = function () {
+    modalContainer.style.display = "none";
+}
