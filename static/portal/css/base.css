@@ -151,7 +151,6 @@ a:hover {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 20px;
     width: 100%;
     overflow: auto;
     justify-content: center;

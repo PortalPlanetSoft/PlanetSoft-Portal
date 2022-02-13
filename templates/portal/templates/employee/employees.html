@@ -6,7 +6,7 @@
         <div class="dk-i">
             <i class="fas fa-search"></i>
         </div>
-        <a href="{% url 'employee-create' %}" class="button">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i> </a>
+        <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i> </a>
     </form>
     <div class="dk-grid-container">
         {% for object in object_list %}
@@ -19,10 +19,10 @@
                     {% endif %}
                 </div>
                 <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">
-                    <i class="fa fa-solid fa-pen-nib"></i>
+                    <i class="fa-regular fa-pen-to-square"></i>
                 </a>
-                <a id="button-user-delete" class="button">
-                    <i class="fa fa-solid fa-minus"></i>
+                <a id="button-user-delete" class="button" onclick="showUserDeleteModal({{ object.id }})">
+                    <i class="fa-regular fa-square-minus"></i>
                 </a>
                 <h4>{{ object.first_name }} {{ object.last_name }}</h4>
                 <p>{{ object.company_position.position_name }}</p>

@@ -1,6 +1,5 @@
-<form method="post" class="form">
-    <h3 class="form__title">Dodavanje novog korisnika</h3>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Potvrdi">
-</form>
+<h3 class="form__title">Dodavanje novog korisnika</h3>
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Potvrdi"><button id="close-button" onclick="modalContainer.style.display = 'none';">X</button>
+
