@@ -5,6 +5,9 @@
         <h3 class="ov-form__title">Dodavanje novog korisnika</h3>
     {% csrf_token %}
     {{ form.as_p }}
-        <input type="submit" value="Potvrdi">
+    <div class="ov-form__btn-container">
+        <button class="ov-form__btn ov-form__btn--blue">Odbaci</button>
+        <input class="ov-form__btn" type="submit" value="Potvrdi">
+    </div>
     </form>
 {% endblock %}
