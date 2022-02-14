@@ -1,5 +1,6 @@
-<h3 class="form__title">Dodavanje novog korisnika</h3>
+<h3 class="ov-form__title">Dodavanje novog korisnika</h3>
 {% csrf_token %}
 {{ form.as_p }}
-<input type="submit" value="Potvrdi"><button id="close-button" onclick="modalContainer.style.display = 'none';">X</button>
-
+<div class="ov-form__btn-container">
+<input class="ov-form__btn" type="submit" value="Potvrdi"><button id="close-button" onclick="modalContainer.style.display = 'none';">X</button>
+</div>
