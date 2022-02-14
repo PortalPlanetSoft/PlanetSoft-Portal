@@ -1,14 +1,14 @@
-.form {
+.ov-form {
   border: 1px solid var(--primary);
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   background-color: #fff;
-  margin: 2rem auto;
+  margin: 3rem auto;
   width: 40%;
   min-height: 85vh;
   
 }
-.form__title {
+.ov-form__title {
   color: var(--primary);
   background-color: #e3ebf1;
   font-size: 1.5rem;
@@ -18,17 +18,21 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.form label {
+.ov-form label {
   color: var(--primary);
   display: block;
   padding: 1rem 0;
   font-weight: bold;
 }
-
-form p {
+.ov-form label:not(:first-child) {
+  display: inline;
+}
+.ov-form p, .ov-form div#id_gender{
   margin: 0 2rem;
 }
-.form input[type='text'] {
+.ov-form input[type='text'],
+.ov-form input[type='password'],
+.ov-form input[type='email'] {
   display: block;
   border: none;
   outline: 0;
@@ -38,11 +42,22 @@ form p {
   font-size: 1rem;
   color: var(--primary);
 }
-.form input[type='submit'] {
-  text-align: right;
-  border: none;
+
+.ov-form select {
+  color: var(--primary);
   border: 1px solid var(--primary);
-  float: right;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1rem;
+  padding: .3rem;
+}
+
+.ov-form__btn-container {
+  text-align: right;
+}
+.ov-form__btn {
+  border: 1px solid var(--primary);
+  outline: none;
   background-color: #ecf4d4;
   color: var(--primary);
   margin: 1rem 2rem;
@@ -50,11 +65,14 @@ form p {
   padding: 0.5rem 2.5rem;
   border-radius: 5px;
 }
-.form input[type="submit"]:hover {
-    cursor: pointer;
+.ov-form__btn--blue {
+  background-color: #e3ebf1;
+}
+.ov-form__btn:hover {
+  cursor: pointer;
 }
 
-.errorlist{
+.errorlist {
   position: relative;
   width: 86%;
   margin-left: 32px;

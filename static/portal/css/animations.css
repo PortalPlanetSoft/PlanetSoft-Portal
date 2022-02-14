@@ -1,0 +1,21 @@
+/* Animation for showing and hiding navigation on mobile phones */
+@keyframes showNav {
+  from {
+    transform: translateY(-60rem);
+    height: 1vh;
+  }
+  to {
+    transform: translateY(0);
+    height: 30vh;
+  }
+}
+@keyframes hideNav {
+  from {
+    transform: translateY(0);
+    height: 30vh;
+  }
+  to {
+    transform: translateY(-60);
+    height: 1vh;
+  }
+}
