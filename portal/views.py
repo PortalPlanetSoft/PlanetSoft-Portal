@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.http import HttpResponseBadRequest
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView, DeleteView
 from portal.forms import AddEmployeeForm, EditEmployeeForm
 from users.models import User
@@ -38,12 +39,23 @@ class EmployeeCreate(CreateView):
     success_url = '/employees/'
     form_class = AddEmployeeForm
 
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        print(response)
+        response.status_code = HttpResponseBadRequest
+        return response
+
 
 class EmployeeUpdate(UpdateView):
     model = User
     template_name = 'portal/templates/employee/employee-edit.html'
     success_url = '/employees/'
     form_class = EditEmployeeForm
+
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        response.status_code = HttpResponseBadRequest
+        return response
 
 
 class EmployeeDelete(DeleteView):
