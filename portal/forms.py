@@ -4,7 +4,7 @@ from users.models import CompanyPosition
 from .models import User
 
 
-CHOICES = [('True', 'Female'), ('False', 'Male')]
+CHOICES = [('F', 'Female'), ('M', 'Male')]
 ERROR_MESSAGES = {
     'username': {
         'unique': "This username is already taken.",
