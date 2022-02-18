@@ -41,10 +41,11 @@
 }
 
 .ov-nav__hamburger-btn {
-  font-size: 4rem;
+  font-size: 5rem;
   color: var(--primary);
   position: absolute;
   right: 4rem;
   top: 1rem;
   display: none;
+  z-index: 2;
 }

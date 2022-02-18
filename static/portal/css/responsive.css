@@ -11,20 +11,30 @@
   .ov-nav__title {
     font-size: 2.5rem;
   }
+
   .ov-nav__navigation {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateY(-60rem);
+    justify-content: center; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100vw;
+    border: 1px solid red;
     height: 1vh;
+    transform: translateY(-60rem);
     animation-name: none;
     animation-duration: 1s;
     animation-timing-function: ease;
     animation-fill-mode: forwards;
+    z-index: 1;
+
   }
   .ov-nav__item {
-    font-size: 2rem;
-    padding: 2rem 0;
+    font-size: 4rem;
+    padding: 4rem 0;
   }
   .ov-nav__item:last-child {
     margin-left: 0;

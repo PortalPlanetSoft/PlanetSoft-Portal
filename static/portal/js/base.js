@@ -24,9 +24,13 @@ if(btncloseModal !== null) {
 
 // Navigation hamburger menu
 navToggleBtn.addEventListener('click', (e) => {
-  navToggleBtn.firstChild.getAttribute('data-icon') === 'bars'
-    ? navToggleBtn.firstChild.setAttribute('data-icon', 'xmark')
-    : navToggleBtn.firstChild.setAttribute('data-icon', 'bars');
+  if(navToggleBtn.firstChild.getAttribute('data-icon') === 'bars') {
+  navToggleBtn.firstChild.setAttribute('data-icon', 'xmark')
+  navToggleBtn.style.position = "fixed";
+  } else {
+    navToggleBtn.firstChild.setAttribute('data-icon', 'bars');
+    navToggleBtn.style.position = "absolute";
+  }
   toggleAnimation(navigation, 'showNav', 'hideNav');
 });
 
