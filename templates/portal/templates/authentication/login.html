@@ -1,19 +1,12 @@
 {% extends 'portal/base.html' %}
 
 {% block body %}
-        <div class="content-section">
-        <form method="POST">
+        <div class="login-container">
+        <form class="ov-form" method="POST">
+            <h3 class="ov-form__title">Prijava</h3>
             {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
-                {{ form.as_p }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
-            </div>
+            {{ form.as_p }}
+                <button class="ov-form__btn" type="submit">Login</button>
         </form>
-        <div class="border-top pt-3">
-
-        </div>
     </div>
 {% endblock %}

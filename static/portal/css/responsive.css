@@ -78,8 +78,7 @@
     flex-direction: column;
   }
 
-  /* MODAL*/
-  /* FORM */
+  /* MODAL FORM */
   .modal-container .ov-form {
     width: 80vw;
   }
@@ -97,4 +96,10 @@
     display: block;
     width: 90%;
   }
+
+  /* LOGIN */
+.login-container .ov-form {
+  width: 90%;
 }
+}
+
