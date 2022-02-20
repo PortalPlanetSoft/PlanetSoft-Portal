@@ -6,8 +6,8 @@
     <div id="ov-modal" class="ov-modal">
         <form method="post" class="ov-form">
             <h3 class="ov-form__title">Podešavanje osnovnih podataka</h3>
-        {% csrf_token %}
-        {{ form.as_p }}
+            {% csrf_token %}
+            {{ form.as_p }}
             <p>
                 <label for="username">Username:</label>
                 <input type="text" name="username" maxlength="150">
@@ -63,11 +63,15 @@
         <div class="dk-i">
             <i class="fas fa-search"></i>
         </div>
-        <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i> </a>
+        <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i>
+        </a>
     </form>
     <div class="dk-grid-container">
         {% for object in object_list %}
             <div class="dk-item">
+                <div class="dk-img">
+                    <img src='{% static 'img/t.png' %}'>
+                </div>
                 <div class="dk-icon">
                     {% if object.gender == 0 %}
                         <img src='{% static 'img/1.png' %}' alt='man-profile'>
@@ -75,14 +79,14 @@
                         <img src='{% static 'img/2.png' %}' alt='woman-profile'>
                     {% endif %}
                 </div>
-                <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">
-                    <i class="fa-regular fa-pen-to-square"></i>
-                </a>
-                <a id="button-user-delete" class="button" onclick="showUserDeleteModal({{ object.id }})">
-                    <i class="fa-regular fa-square-minus"></i>
-                </a>
-                <h4>{{ object.first_name }} {{ object.last_name }}</h4>
+                <div class="dk-name">
+                    <h4>{{ object.first_name }}</h4>  <h4>{{ object.last_name }}</h4></div>
                 <p>{{ object.company_position.position_name }}</p>
+                <div class="dk-edit">
+                    <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">Izmjeniti
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </a>
+                </div>
             </div>
         {% endfor %}
     </div>
