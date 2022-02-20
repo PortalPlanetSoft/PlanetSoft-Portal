@@ -3,8 +3,6 @@ from django import forms
 from users.models import CompanyPosition
 from .models import User
 
-
-CHOICES = [('F', 'Female'), ('M', 'Male')]
 ERROR_MESSAGES = {
     'username': {
         'unique': "This username is already taken.",
@@ -37,13 +35,16 @@ ERROR_MESSAGES = {
 class AddEmployeeForm(forms.ModelForm):
     first_name = forms.CharField(max_length=150, min_length=3)
     last_name = forms.CharField(max_length=150, min_length=3)
-    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
+    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=User.GENDER_CHOICES)
     gender.required = False
-    field_order = ['username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position']
+    work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
+    field_order = ['username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
+                   'work_location']
 
     class Meta:
         model = User
-        fields = {'username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position'}
+        fields = {'username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
+                  'work_location'}
         help_texts = {
             "username": None,
         }
@@ -70,13 +71,14 @@ class AddEmployeeForm(forms.ModelForm):
 class EditEmployeeForm(forms.ModelForm):
     first_name = forms.CharField(max_length=150, min_length=3)
     last_name = forms.CharField(max_length=150, min_length=3)
-    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
+    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=User.GENDER_CHOICES)
     gender.required = False
-    field_order = ['username', 'first_name', 'last_name', 'email', 'gender', 'company_position']
+    work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
+    field_order = ['username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location']
 
     class Meta:
         model = User
-        fields = {'username', 'first_name', 'last_name', 'email', 'gender', 'company_position'}
+        fields = {'username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location'}
 
         help_texts = {
             "username": None,

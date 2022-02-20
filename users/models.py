@@ -14,6 +14,10 @@ class User(AbstractUser):
         ('F', 'Female'),
         ('M', 'Male')
     ]
+    WORK_LOCATION = [
+        ('BL', 'Banja Luka'),
+        ('BG', 'Beograd')
+    ]
     is_admin = models.BooleanField(default=False)
     is_editor = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=False)
@@ -21,4 +25,5 @@ class User(AbstractUser):
     last_name = models.CharField('last name', max_length=150)
     email = models.EmailField('email address', unique=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='F')
+    work_location = models.CharField(max_length=2, choices=WORK_LOCATION, default='BL')
     company_position = models.ForeignKey(CompanyPosition, on_delete=models.PROTECT, default=None)
