@@ -3,6 +3,12 @@ from django import forms
 from users.models import CompanyPosition
 from .models import User
 
+HELP_MESSAGES = {
+    'username': 'The username can contains letters, digits and @/./+/-/_.',
+    'first_name': 'The first name',
+}
+
+
 ERROR_MESSAGES = {
     'username': {
         'unique': "This username is already taken.",

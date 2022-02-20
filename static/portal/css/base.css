@@ -118,6 +118,7 @@ a:hover {
 .dk-edit {
     padding: 3rem 0 0 0;
     color: var(--primary);
+    text-align: center;
 
 }
 
@@ -199,8 +200,7 @@ a:hover {
 }
 
 .dk-pagination {
-    float: right;
-    margin-right: 11rem;
+    text-align: center;
     margin-bottom: 2rem;
 }
 
