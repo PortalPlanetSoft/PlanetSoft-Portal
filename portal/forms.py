@@ -69,6 +69,7 @@ class AddEmployeeForm(forms.ModelForm):
 
 
 class EditEmployeeForm(forms.ModelForm):
+    use_required_attribute = False
     first_name = forms.CharField(max_length=150, min_length=3)
     last_name = forms.CharField(max_length=150, min_length=3)
     gender = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)

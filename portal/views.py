@@ -38,12 +38,24 @@ class EmployeeCreate(CreateView):
     success_url = '/employees/'
     form_class = AddEmployeeForm
 
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        print(response)
+        response.status_code = 400
+        return response
+
 
 class EmployeeUpdate(UpdateView):
     model = User
     template_name = 'portal/templates/employee/employee-edit.html'
     success_url = '/employees/'
     form_class = EditEmployeeForm
+
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        print(response)
+        response.status_code = 400
+        return response
 
 
 class EmployeeDelete(DeleteView):
