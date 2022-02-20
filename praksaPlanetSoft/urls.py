@@ -23,5 +23,8 @@ urlpatterns = [
          name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='portal/templates/authentication/logged_out.html'),
          name='logout'),
+    path('password-change/',
+         auth_views.PasswordChangeView.as_view(template_name='portal/templates/authentication/password_change.html'),
+         name='password-change'),
     path('', include('portal.urls')),
 ]
