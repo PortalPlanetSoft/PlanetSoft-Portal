@@ -31,13 +31,15 @@
             </div>
             <div class="ov-nav__right">
                 <div class="ov-nav__navigation" id="ov-navigation">
+                    {% if user.is_authenticated %}
+                    <span class="ov-nav__item">Dobrodo&scaron;{% if user.gender == 'M' %}ao{% else %}la{% endif %} {{ user.username }}</span>
+                    {% endif %}
                     <a href="{% url 'index' %}" class="ov-nav__item"><i class="fas fa-home nav__icon u-mr-sm"></i> POČETNA</a>
                     <a href="#" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
                     <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
                     <a href="#" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
                     {% if user.is_authenticated %}
                         <a href="{% url 'profile' %}" class="ov-nav__item"><i class="fas fa-user"></i> PROFIL</a>
-                        <span>Dobrodo&scaron;{% if user.gender == 'M' %}ao{% else %}la{% endif %} {{ user.username }}</span>
                         <a href="{% url 'logout' %}" class="ov-nav__item"><i class="fa-solid fa-arrow-right-from-bracket"></i> ODJAVA</a>
                     {% else %}
                          <a href="{% url 'login' %}" class="ov-nav__item"><i class="fas fa-user"></i> PRIJAVA</a>
