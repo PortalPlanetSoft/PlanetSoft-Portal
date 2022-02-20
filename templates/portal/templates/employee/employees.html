@@ -3,61 +3,6 @@
 
 
 {% block body %}
-    <div id="ov-modal" class="ov-modal">
-        <form method="post" class="ov-form">
-            <h3 class="ov-form__title">Podešavanje osnovnih podataka</h3>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <p>
-                <label for="username">Username:</label>
-                <input type="text" name="username" maxlength="150">
-            </p>
-            <p>
-                <label for="password">Password:</label>
-                <input type="password" name="password" maxlength="150">
-            </p>
-            <p>
-                <label for="first_name">First name:</label>
-                <input type="text" name="first_name" maxlength="150">
-            </p>
-            <p>
-                <label for="last_name">Last name:</label>
-                <input type="text" name="last_name" maxlength="150">
-            </p>
-            <p>
-                <label for="email">Email:</label>
-                <input type="email" name="email" maxlength="150">
-            </p>
-            <p>
-                <label>Gender:</label>
-            </p>
-            <div id="id_gender">
-                <div>
-                    <label for="female"><input type="radio" name="female"> Female</label>
-                </div>
-                <div>
-                    <label for="male"><input type="radio" name="male"> Male</label>
-                </div>
-            </div>
-            <p>
-
-
-            </p>
-            <p>
-                <label for="company_position">Company position:</label>
-                <select name="company_position">
-                    <option value="junior_backend_dev">Junior Backend Dev</option>
-                    <option value="senior_backend_dev">Senior Backend Dev</option>
-                    <option value="junior_frontend_dev">Junior Frontend Dev</option>
-                    <option value="senior_frontend_dev">Senior Frontend Dev</option>
-                </select>
-            </p>
-            <div class="ov-form__btn-container">
-                <button id="ov-btnCloseModal" class="ov-form__btn ov-form__btn--blue">Odbaci</button>
-                <input class="ov-form__btn" type="submit" value="Potvrdi">
-            </div>
-        </form>
-    </div>
     <form class="dk-search">
         <input type="text" placeholder="PRETRAGA.." name="q">
         <div class="dk-i">
