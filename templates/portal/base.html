@@ -37,6 +37,7 @@
                     <a href="#" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
                     {% if user.is_authenticated %}
                         <a href="{% url 'profile' %}" class="ov-nav__item"><i class="fas fa-user"></i> PROFIL</a>
+                        <span>Dobrodo&scaron;ao {{ user.username }}</span>
                         <a href="{% url 'logout' %}" class="ov-nav__item"><i class="fa-solid fa-arrow-right-from-bracket"></i> ODJAVA</a>
                     {% else %}
                          <a href="{% url 'login' %}" class="ov-nav__item"><i class="fas fa-user"></i> PRIJAVA</a>

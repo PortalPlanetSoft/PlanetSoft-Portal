@@ -63,7 +63,9 @@
         <div class="dk-i">
             <i class="fas fa-search"></i>
         </div>
-        <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i> </a>
+        {% if user.is_admin or user.is_superuser %}
+            <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i> </a>
+        {% endif %}
     </form>
     <div class="dk-grid-container">
         {% for object in object_list %}
@@ -75,12 +77,14 @@
                         <img src='{% static 'img/2.png' %}' alt='woman-profile'>
                     {% endif %}
                 </div>
-                <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">
-                    <i class="fa-regular fa-pen-to-square"></i>
-                </a>
-                <a id="button-user-delete" class="button" onclick="showUserDeleteModal({{ object.id }})">
-                    <i class="fa-regular fa-square-minus"></i>
-                </a>
+                {% if user.is_admin or user.is_superuser %}
+                    <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </a>
+                    <a id="button-user-delete" class="button" onclick="showUserDeleteModal({{ object.id }})">
+                        <i class="fa-regular fa-square-minus"></i>
+                    </a>
+                {% endif %}
                 <h4>{{ object.first_name }} {{ object.last_name }}</h4>
                 <p>{{ object.company_position.position_name }}</p>
             </div>

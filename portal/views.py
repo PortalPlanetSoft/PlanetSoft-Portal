@@ -1,9 +1,8 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models import Q
-from django.http import HttpResponseBadRequest
-from django.shortcuts import get_object_or_404
-from django.utils.decorators import method_decorator
+from django.http import HttpResponseBadRequest, Http404
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView, DeleteView
+
 from portal.forms import AddEmployeeForm, EditEmployeeForm
 from users.models import User
 
@@ -36,7 +35,7 @@ class EmployeeDetail(DetailView):
     context_object_name = 'employee'
 
 
-class EmployeeCreate(CreateView):
+class EmployeeCreate(UserPassesTestMixin, CreateView):
     model = User
     template_name = 'portal/templates/employee/employee-create.html'
     success_url = '/employees/'
@@ -48,8 +47,14 @@ class EmployeeCreate(CreateView):
         response.status_code = HttpResponseBadRequest
         return response
 
+    def test_func(self):
+        if self.request.user.is_admin or self.request.user.is_superuser:
+            return True
+        else:
+            raise Http404("You are not authorized to add new employees")#todo promjeni response
 
-class EmployeeUpdate(UpdateView):
+
+class EmployeeUpdate(UserPassesTestMixin, UpdateView):
     model = User
     template_name = 'portal/templates/employee/employee-edit.html'
     success_url = '/employees/'
@@ -60,11 +65,23 @@ class EmployeeUpdate(UpdateView):
         response.status_code = HttpResponseBadRequest
         return response
 
+    def test_func(self):
+        if self.request.user.is_admin or self.request.user.is_superuser:
+            return True
+        else:
+            raise Http404("You are not authorized to edit employees")  # todo promjeni response
 
-class EmployeeDelete(DeleteView):
+
+class EmployeeDelete(UserPassesTestMixin, DeleteView):
     model = User
     success_url = '/employees/'
     template_name = 'portal/templates/employee/employee-confirm-deletion.html'
+
+    def test_func(self):
+        if self.request.user.is_admin or self.request.user.is_superuser:
+            return True
+        else:
+            raise Http404("You are not authorized to delete employees")  # todo promjeni response
 
 
 class Profile(DetailView):
