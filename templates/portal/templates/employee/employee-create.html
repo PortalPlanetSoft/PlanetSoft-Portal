@@ -2,7 +2,7 @@
 {% csrf_token %}
 {{ form.as_p }}
 <div class="ov-form__btn-container">
+    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Odbaci</button>
     <input class="ov-form__btn" type="submit" value="Potvrdi" onclick="pageReload()">
-    <button type="button" id="close-button" class="ov-form__btn" onclick="closeFunction()">X</button>
 </div>
 

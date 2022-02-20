@@ -27,7 +27,7 @@
 .ov-form label:not(:first-child) {
   display: inline;
 }
-.ov-form p, .ov-form div#id_gender{
+.ov-form p, .ov-form div#id_gender, .ov-form div[id^="id_work_location"]{
   margin: 0 2rem;
 }
 .ov-form input[type='text'],
@@ -82,8 +82,4 @@
   color: #842029;
   background-color: #f8d7da;
   border-color: #f5c2c7;
-}
-
-#generic-form{
-  width:100%;
 }

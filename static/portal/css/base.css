@@ -208,12 +208,20 @@ a:hover {
     display: none;
     position: fixed;
     z-index: 1;
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
     overflow: auto;
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: 100vm;
+}
+.modal-container .ov-form {
+    max-height: 70vh;
+    overflow: scroll;
+    width: 100%;
 }
 
 .modal-header,
