@@ -139,12 +139,13 @@ a:hover {
     height: 7rem;
     position: relative;
     border-radius: 1rem;
+    text-align: center;
 
 }
 
 .dk-img {
     border-bottom: 1px solid var(--primary);
-
+    text-align: center;
 }
 
 .dk-item {
@@ -167,6 +168,10 @@ a:hover {
     position: relative;
     top: -3rem;
     background-color: #fff;
+}
+
+.dk-icon{
+    text-align: center;
 }
 
 .dk-name {

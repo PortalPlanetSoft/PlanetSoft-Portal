@@ -63,14 +63,16 @@
         <div class="dk-i">
             <i class="fas fa-search"></i>
         </div>
+        {% if user.is_admin or user.is_superuser %}
         <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i>
         </a>
+        {% endif %}
     </form>
     <div class="dk-grid-container">
         {% for object in object_list %}
             <div class="dk-item">
                 <div class="dk-img">
-                    <img src='{% static 'img/t.png' %}'>
+                    <img src='{% static 'img/t.png' %}' alt="card-header-logo">
                 </div>
                 <div class="dk-icon">
                     {% if object.gender == 'M' %}
@@ -82,11 +84,13 @@
                 <div class="dk-name">
                     <h4>{{ object.first_name }}</h4>  <h4>{{ object.last_name }}</h4></div>
                 <p>{{ object.company_position.position_name }}</p>
+                {% if user.is_admin or user.is_superuser %}
                 <div class="dk-edit">
                     <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">Izmjeniti
                         <i class="fa-regular fa-pen-to-square"></i>
                     </a>
                 </div>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
