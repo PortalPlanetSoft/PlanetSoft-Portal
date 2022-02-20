@@ -44,9 +44,15 @@
   }
 
   /* SEARCH AND FILTERS */
+  .dk-search {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .dk-search input {
     font-size: 2rem;
     padding: 1rem;
+
   }
   .dk-search a {
     font-size: 2rem;
@@ -54,6 +60,10 @@
   /* CARDS */
   .dk-grid-container {
     grid-template-columns: 1fr;
+  }
+
+  .dk-item {
+    width: 100%;
   }
   .dk-item a {
     font-size: 2rem;

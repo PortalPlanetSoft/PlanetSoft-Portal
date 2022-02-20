@@ -4,9 +4,11 @@
 
 {% block body %}
     <form class="dk-search">
-        <input type="text" placeholder="PRETRAGA.." name="q">
-        <div class="dk-i">
-            <i class="fas fa-search"></i>
+        <div class="ov-input-container">
+            <input type="text" placeholder="PRETRAGA.." name="q">
+            <div class="dk-i">
+                <i class="fas fa-search"></i>
+            </div>
         </div>
         {% if user.is_admin or user.is_superuser %}
         <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i>
