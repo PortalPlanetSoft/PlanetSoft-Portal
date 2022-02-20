@@ -43,8 +43,7 @@ class EmployeeCreate(UserPassesTestMixin, CreateView):
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
-        print(response)
-        response.status_code = HttpResponseBadRequest
+        response.status_code = 400
         return response
 
     def test_func(self):
@@ -62,7 +61,7 @@ class EmployeeUpdate(UserPassesTestMixin, UpdateView):
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
-        response.status_code = HttpResponseBadRequest
+        response.status_code = 400
         return response
 
     def test_func(self):
