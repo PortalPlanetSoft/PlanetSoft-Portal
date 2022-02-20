@@ -1,5 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseBadRequest
+from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView, DeleteView
 from portal.forms import AddEmployeeForm, EditEmployeeForm
 from users.models import User
@@ -62,3 +65,10 @@ class EmployeeDelete(DeleteView):
     model = User
     success_url = '/employees/'
     template_name = 'portal/templates/employee/employee-confirm-deletion.html'
+
+
+class Profile(DetailView):
+    template_name = 'portal/templates/authentication/profile.html'
+
+    def get_object(self, queryset=None):
+        return User.objects.filter(pk=self.request.user.id)
