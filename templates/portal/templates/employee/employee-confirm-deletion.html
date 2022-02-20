@@ -1,11 +1,5 @@
-<form id="delete-form" method="post">
-    {% csrf_token %}
-    <p>Are you sure you want to delete employee "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
-    <button id="close-button" onclick="modalContainer.style.display = 'none';">X</button>
-</form>
+{% csrf_token %}
+<p>Are you sure you want to delete employee "{{ object }}"?</p>
+<input type="submit" value="Confirm" class="ov-form__btn" onclick="pageReload()">
+<button type="button" id="close-button" class="ov-form__btn" onclick="closeFunction()">X</button>
 
-<script type="text/javascript">
-    const prp = window.CSRF_TOKEN = "{{ csrf_token }}";
-    console.log(prp);
-</script>
