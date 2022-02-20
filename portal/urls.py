@@ -1,7 +1,8 @@
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 
 from . import views
-from .views import EmployeeCreate, EmployeeUpdate, EmployeeList, EmployeeDelete
+from .views import EmployeeCreate, EmployeeUpdate, EmployeeList, EmployeeDelete, Profile
 
 urlpatterns = [
     path('', views.HomePage.as_view(), name='index'),
