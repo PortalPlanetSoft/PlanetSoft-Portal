@@ -81,15 +81,12 @@
 }
 
 .errorlist {
-  position: relative;
-  width: 86%;
-  margin-left: 32px;
-  padding: 1rem 1rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  margin: 1rem 2rem;
   border-radius: 0.25rem;
-  color: #842029;
-  background-color: #f8d7da;
-  border-color: #f5c2c7;
+  color: var(--alert);
+  background-color: var(--alert-light);
+  border-color: var(--alert-light);
 }
 
 .dv-btn-delete{

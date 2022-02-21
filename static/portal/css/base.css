@@ -265,3 +265,11 @@ a:hover {
     align-items: center;
     justify-content: center;
 }
+.login-container .ov-form {
+    width: 25%;
+}
+.login-container .ov-form__btn{
+    display: block;
+    width: 100%;
+    font-size: 1.25rem;
+}
