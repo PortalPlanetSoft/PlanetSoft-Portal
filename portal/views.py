@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models import Q
 from django.http import HttpResponseBadRequest, Http404
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView, DeleteView
-
 from portal.forms import AddEmployeeForm, EditEmployeeForm
 from users.models import User
 
