@@ -33,7 +33,7 @@
                 <p>{{ object.company_position.position_name }}</p>
                 {% if user.is_admin or user.is_superuser %}
                 <div class="dk-edit">
-                    <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">Izmjeniti
+                        <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">Izmjeniti
                         <i class="fa-regular fa-pen-to-square"></i>
                     </a>
                 </div>

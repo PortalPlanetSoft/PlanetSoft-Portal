@@ -54,16 +54,17 @@
 }
 
 .ov-form__btn-container {
-  text-align: right;
+  display: flex;
+  justify-content: space-around;
 }
 .ov-form__btn {
   border: 1px solid var(--primary);
   outline: none;
   background-color: #ecf4d4;
   color: var(--primary);
-  margin: 1rem 2rem;
-  font-size: 1rem;
-  padding: 0.5rem 2.5rem;
+  margin: 1rem 0.25rem;
+  font-size: 0.8rem;
+  padding: 0.5rem 1.25rem;
   border-radius: 5px;
 }
 .ov-form__btn--blue {
@@ -83,4 +84,16 @@
   color: #842029;
   background-color: #f8d7da;
   border-color: #f5c2c7;
+}
+
+.dv-btn-delete{
+  border: 1px solid red;
+  outline: none;
+  background-color: #ecf4d4;
+  color: red;
+  margin: 1rem 0.25rem;
+  font-size: 0.8rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 5px;
+  cursor: pointer;
 }

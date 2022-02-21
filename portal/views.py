@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models import Q
 from django.http import HttpResponseBadRequest, Http404
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView, DeleteView
-
 from portal.forms import AddEmployeeForm, EditEmployeeForm
 from users.models import User
 
@@ -20,6 +19,7 @@ class EmployeeList(ListView):
     def get_queryset(self, *args, **kwargs):
         query_set = super().get_queryset()
         query = self.request.GET.get('q')
+        print(query)
         if query:
             filtered_query = query_set.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
             if len(filtered_query) == 0:
@@ -58,6 +58,11 @@ class EmployeeUpdate(UserPassesTestMixin, UpdateView):
     template_name = 'portal/templates/employee/employee-edit.html'
     success_url = '/employees/'
     form_class = EditEmployeeForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(EmployeeUpdate, self).get_context_data(**kwargs)
+        ctx["object_id"]=self.kwargs["pk"]
+        return ctx
 
     def form_invalid(self, form):
         response = super().form_invalid(form)

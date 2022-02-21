@@ -26,10 +26,17 @@ function showUserEditModal(id) {
                 type: 'post',
                 dataType: 'html',
                 data: mm.serialize(),
+                success: function (data, textStatus, xhr) {
+
+                    closeFunction();
+                    pageReload();
+                },
+                error: function (data, xhr, textStatus) {
+                    alert("Status code: " + xhr.status);
+                }
             },
         );
-        closeFunction();
-        pageReload();
+
     })
 }
 
@@ -77,9 +84,10 @@ function showUserAddModal() {
             dataType: 'html',
             data: mm.serialize(),
             success: function (data, textStatus, xhr) {
-                alert("Status code: " + xhr.status);
+                closeFunction();
+                pageReload();
             },
-            error: function (data,xhr, textStatus) {
+            error: function (data, xhr, textStatus) {
                 alert("Status code: " + xhr.status);
             }
         });
@@ -93,15 +101,17 @@ window.onclick = function (event) {
     }
 }
 
-/*function for modal closing on button press
+//function for modal closing on button press
 function closeFunction() {
     modalContainer.style.display = "none";
-    //window.open("http://127.0.0.1:8000/employees/", "_self");
+    window.open("http://127.0.0.1:8000/employees/", "_self");
 }
 
-*/
-///function that reloads to target page so that up-to-date results (post edit) can be shown
-/*function pageReload() {
-    window.open("http://127.0.0.1:8000/employees/", "_self");
-}*/
 
+//function that reloads to target page so that up-to-date results (post edit) can be shown
+function pageReload() {
+    window.open("http://127.0.0.1:8000/employees/", "_self");
+}
+function log(obj){
+    console.log(obj);
+}
