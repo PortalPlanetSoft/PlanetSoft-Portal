@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -29,7 +29,6 @@
     animation-timing-function: ease;
     animation-fill-mode: forwards;
     z-index: 1;
-
   }
   .ov-nav__item {
     font-size: 4rem;
@@ -51,7 +50,6 @@
   .dk-search input {
     font-size: 2rem;
     padding: 1rem;
-
   }
   .dk-search a {
     font-size: 2rem;
@@ -66,6 +64,9 @@
   }
   .dk-item a {
     font-size: 2rem;
+  }
+  .dk-name h4 {
+    font-size: 2.5rem;
   }
   .dk-pagination a,
   .dk-pagination span {
@@ -89,16 +90,24 @@
   .ov-form input[type='password'],
   .ov-form input[type='email'],
   .ov-form select,
-  .ov-form input[type="submit"],
-  .ov-form button{
+  .ov-form input[type='submit'],
+  .ov-form button {
     font-size: 3rem;
     display: block;
     width: 90%;
   }
+  .ov-form option{
+    font-size: 1rem;
+  }
+  .ov-form__btn-container {
+    flex-direction: column;
+  }
+  .ov-form__btn-container button:first-child {
+    order: 3;
+  }
 
   /* LOGIN */
-.login-container .ov-form {
-  width: 90%;
+  .login-container .ov-form {
+    width: 90%;
+  }
 }
-}
-

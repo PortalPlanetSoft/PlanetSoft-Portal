@@ -3,11 +3,9 @@
 {{ form.as_p }}
 
 <div class="ov-form__btn-container">
-    <button type="button" id="close-button" class="dv-btn-delete" onclick="showUserDeleteModal({{ object.id }})">Izbrisi korisnika</button>
-    <div> <input class="ov-form__btn" type="submit" value="Potvrdi">
-    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Odbaci</button></div>
-
-
+    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red" onclick="showUserDeleteModal({{ object.id }})">Izbrisi korisnika</button>
+    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Odbaci</button>
+    <input class="ov-form__btn" type="submit" value="Potvrdi">
 </div>
 
 
