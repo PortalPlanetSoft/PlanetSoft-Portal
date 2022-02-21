@@ -107,16 +107,23 @@
   }
 
   /* LOGIN */
-  .login-container .ov-form {
+  .ov-login .ov-form, .ov-password-change .ov-form{
     width: 70%;
   }
-  .login-container .ov-form input {
-    width: 100%;
+
+  .ov-password-change .ov-form {
+    font-size: 2.5rem;
   }
-  .login-container .ov-form__btn {
+  .ov-login .ov-form__btn, .ov-password-change .ov-form__btn{
     font-size: 2.5rem;
     font-weight: bold;
     padding: 1rem 0;
+  }
+  .ov-logout h4{
+    font-size: 3rem;
+  }
+  .ov-logout a {
+    font-size: 2.5rem;
   }
   .errorlist li {
     font-size: 2rem;
