@@ -1,8 +1,13 @@
 :root {
+    --white: #fff;
     --medium-gray: #444;
     --light-gray: #666;
     --primary: #005B82;
+    --primary-light: #e3ebf1;
     --accent: #A8CE3B;
+    --accent-light: #ecf4d4;
+    --alert: #842029;
+    --alert-light: #f5c2c7;
 }
 
 html,
@@ -21,6 +26,18 @@ body {
     display: flex;
     flex-direction: column;
 
+}
+::-webkit-scrollbar {
+    width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--primary-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 1rem;
 }
 
 .ov-content {

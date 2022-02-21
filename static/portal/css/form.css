@@ -2,7 +2,7 @@
   border: 1px solid var(--primary);
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-  background-color: #fff;
+  background-color: var(--white);
   margin: 3rem auto;
   max-height: 70vh;
   overflow: unset;
@@ -11,7 +11,7 @@
 }
 .ov-form__title {
   color: var(--primary);
-  background-color: #e3ebf1;
+  background-color: var(--primary-light);
   font-size: 1.5rem;
   text-align: center;
   padding: 1rem;
@@ -60,7 +60,7 @@
 .ov-form__btn {
   border: 1px solid var(--primary);
   outline: none;
-  background-color: #ecf4d4;
+  background-color: var(--accent-light);
   color: var(--primary);
   margin: 1rem 0.25rem;
   font-size: 0.8rem;
@@ -68,7 +68,7 @@
   border-radius: 5px;
 }
 .ov-form__btn--blue {
-  background-color: #e3ebf1;
+  background-color: var(--primary-light);
 }
 .ov-form__btn:hover {
   cursor: pointer;

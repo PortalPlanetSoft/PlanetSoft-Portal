@@ -20,9 +20,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #fff;
+    background-color: var(--white);
     width: 100vw;
-    border: 1px solid red;
     height: 1vh;
     transform: translateY(-60rem);
     animation-name: none;

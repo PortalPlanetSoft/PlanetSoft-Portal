@@ -36,7 +36,7 @@
 }
 
 .ov-nav__item:hover {
-  background-color: #e3eaf0;
+  background-color: var(--primary-light);
   border-bottom: 3px solid var(--accent);
 }
 
