@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpResponseBadRequest, Http404
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView, DeleteView
 from portal.forms import AddEmployeeForm, EditEmployeeForm
-from users.models import User
+from users.models import User, CompanyPosition
 
 
 class HomePage(TemplateView):
@@ -16,16 +17,38 @@ class EmployeeList(ListView):
     success_url = '/employees/'
     paginate_by = 9
 
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeList, self).get_context_data(**kwargs)
+
+        page = self.request.GET.get('page', 1)
+        users = self.object_list
+        paginator = self.paginator_class(users, self.paginate_by)
+        users = paginator.page(page)
+        if self.request.GET.get('position'):
+            if self.request.GET.get('position') == 'all':
+                context['selected'] = self.request.GET.get('position')
+            else:
+                context['selected'] = int('0'+self.request.GET.get('position'))
+        if self.request.GET.get('search'):#todo nije najbolje za search ali okej je
+            context['search'] = self.request.GET.get('search')
+        context['position'] = self.request.GET.get('position')
+        context['object_list'] = users
+        context['position_list'] = CompanyPosition.objects.all()
+        return context
+
     def get_queryset(self, *args, **kwargs):
         query_set = super().get_queryset()
-        query = self.request.GET.get('q')
-        print(query)
-        if query:
-            filtered_query = query_set.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
+        search = self.request.GET.get('search')
+        position = self.request.GET.get('position')
+        if search:
+            filtered_query = query_set.filter(Q(first_name__icontains=search) | Q(last_name__icontains=search))
             if len(filtered_query) == 0:
-                query_set = query_set.filter(company_position__position_name__icontains=query)
+                query_set = query_set.filter(company_position__position_name__icontains=search)
             else:
                 query_set = filtered_query
+
+        if position and position != 'all':
+            query_set = query_set.filter(Q(company_position__id__exact=position))
         return query_set
 
 
