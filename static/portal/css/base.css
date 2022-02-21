@@ -273,3 +273,24 @@ a:hover {
     width: 100%;
     font-size: 1.25rem;
 }
+
+.ov-logout-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+}
+.ov-logout-container h4 {}
+.ov-logout-container a {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 1rem 3rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    transition: .5s ease;
+}
+.ov-logout-container a:hover {
+    background-color: var(--primary);
+    filter: brightness(1.2);
+}
