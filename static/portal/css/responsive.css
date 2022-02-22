@@ -16,9 +16,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     position: fixed;
-    top: 0;
+    top: -15%;
     left: 0;
     background-color: var(--white);
     width: 100vw;
@@ -31,14 +31,22 @@
     z-index: 1;
   }
   .ov-nav__item {
-    font-size: 4rem;
-    padding: 4rem 0;
+    font-size: 3rem;
+    padding: 6rem 0;
   }
   .ov-nav__item:last-child {
     margin-left: 0;
   }
   .ov-nav__hamburger-btn {
     display: inline-block;
+  }
+
+  /* DROPDOWN */
+  .ov-nav__navigation-dropdown {
+    bottom: 10%;
+    left: 25%;
+    text-align: center;
+    width: 50%;
   }
 
   /* SEARCH AND FILTERS */

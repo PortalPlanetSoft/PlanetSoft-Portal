@@ -3,19 +3,23 @@
   from {
     transform: translateY(-60rem);
     height: 1vh;
+    top: -15%;
   }
   to {
     transform: translateY(0);
     height: 100vh;
+    top: 0;
   }
 }
 @keyframes hideNav {
   from {
     transform: translateY(0);
     height: 100vh;
+    top: 0;
   }
   to {
     transform: translateY(-60rem);
     height: 1vh;
+    top: -15%;
   }
 }
