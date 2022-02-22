@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 
 urlpatterns = [
@@ -24,7 +25,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='portal/templates/authentication/logged_out.html'),
          name='logout'),
     path('password-change/',
-         auth_views.PasswordChangeView.as_view(template_name='portal/templates/authentication/password_change.html'),
+         login_required(auth_views.PasswordChangeView.as_view(template_name='portal/templates/authentication/password_change.html')),
          name='password-change'),
     path('', include('portal.urls')),
 ]
