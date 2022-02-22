@@ -20,12 +20,16 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', auth_views.LoginView.as_view(template_name='portal/templates/homepage.html'),
-         name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='portal/templates/authentication/logged_out.html'),
+    path('', auth_views.LoginView.as_view(template_name='portal/templates/homepage.html',
+                                          redirect_authenticated_user=True), name='login'),
+
+    path('logout/',
+         login_required(auth_views.LogoutView.as_view(template_name='portal/templates/authentication/logged_out.html')),
          name='logout'),
+
     path('password-change/',
-         login_required(auth_views.PasswordChangeView.as_view(template_name='portal/templates/authentication/password_change.html')),
+         login_required(auth_views.PasswordChangeView.as_view(template_name='portal/templates/authentication'
+                                                                            '/password_change.html')),
          name='password-change'),
     path('', include('portal.urls')),
 ]
