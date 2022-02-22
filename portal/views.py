@@ -1,14 +1,14 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.paginator import Paginator
 from django.db.models import Q
-from django.http import HttpResponseBadRequest, Http404
-from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, ListView, DeleteView
+from django.http import Http404
+from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView
+
 from portal.forms import AddEmployeeForm, EditEmployeeForm
 from users.models import User, CompanyPosition
 
-
-class HomePage(TemplateView):
+'''class HomePage(TemplateView):
     template_name = 'portal/templates/homepage.html'
+'''
 
 
 class EmployeeList(ListView):
@@ -21,19 +21,22 @@ class EmployeeList(ListView):
         context = super(EmployeeList, self).get_context_data(**kwargs)
 
         page = self.request.GET.get('page', 1)
-        users = self.object_list
+        users = self.object_list.order_by('first_name', 'last_name')
         paginator = self.paginator_class(users, self.paginate_by)
         users = paginator.page(page)
 
+        # parametar pozicije u kompaniji za GET request
         if self.request.GET.get('position'):
             if self.request.GET.get('position') == 'all':
                 context['selected'] = self.request.GET.get('position')
             else:
-                context['selected'] = int('0'+self.request.GET.get('position'))
+                context['selected'] = int('0' + self.request.GET.get('position'))
 
-        if self.request.GET.get('search'):#todo nije najbolje za search ali okej je
+        # parametar pretrage za GET request
+        if self.request.GET.get('search'):
             context['search'] = self.request.GET.get('search')
 
+        # parametar lokacije za GET request
         if self.request.GET.get('location'):
             context['location'] = self.request.GET.get('location')
 
@@ -83,7 +86,7 @@ class EmployeeCreate(UserPassesTestMixin, CreateView):
         if self.request.user.is_admin or self.request.user.is_superuser:
             return True
         else:
-            raise Http404("You are not authorized to add new employees")#todo promjeni response
+            raise Http404("You are not authorized to add new employees")  # todo promjeni response
 
 
 class EmployeeUpdate(UserPassesTestMixin, UpdateView):
@@ -94,7 +97,7 @@ class EmployeeUpdate(UserPassesTestMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         ctx = super(EmployeeUpdate, self).get_context_data(**kwargs)
-        ctx["object_id"]=self.kwargs["pk"]
+        ctx["object_id"] = self.kwargs["pk"]
         return ctx
 
     def form_invalid(self, form):
