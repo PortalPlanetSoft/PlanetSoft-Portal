@@ -290,3 +290,8 @@ a:hover {
     padding: 1rem 2rem;
     color: var(--primary);
 }
+
+.dk-search .radio {
+    margin-left: 0.5rem;
+     width: auto;
+}
