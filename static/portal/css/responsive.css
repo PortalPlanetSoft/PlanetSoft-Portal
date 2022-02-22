@@ -136,4 +136,12 @@
   .errorlist li {
     font-size: 2rem;
   }
+
+  /* DELETE MODAL */
+  .ov-delete-modal__question {
+    width: 50%;
+    margin: 0 auto !important;
+    color: var(--primary);
+    font-size: 2.5rem;
+}
 }
