@@ -16,9 +16,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     position: fixed;
-    top: -15%;
+    top: 0;
     left: 0;
     background-color: var(--white);
     width: 100vw;
@@ -43,10 +43,12 @@
 
   /* DROPDOWN */
   .ov-nav__navigation-dropdown {
-    bottom: 10%;
-    left: 25%;
+    position: unset;
+    background: unset;
     text-align: center;
     width: 50%;
+    display: block;
+    border: none;
   }
 
   /* SEARCH AND FILTERS */
