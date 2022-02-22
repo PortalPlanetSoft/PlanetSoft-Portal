@@ -3,65 +3,26 @@
 
 
 {% block body %}
-    <div id="ov-modal" class="ov-modal">
-        <form method="post" class="ov-form">
-            <h3 class="ov-form__title">Podešavanje osnovnih podataka</h3>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <p>
-                <label for="username">Username:</label>
-                <input type="text" name="username" maxlength="150">
-            </p>
-            <p>
-                <label for="password">Password:</label>
-                <input type="password" name="password" maxlength="150">
-            </p>
-            <p>
-                <label for="first_name">First name:</label>
-                <input type="text" name="first_name" maxlength="150">
-            </p>
-            <p>
-                <label for="last_name">Last name:</label>
-                <input type="text" name="last_name" maxlength="150">
-            </p>
-            <p>
-                <label for="email">Email:</label>
-                <input type="email" name="email" maxlength="150">
-            </p>
-            <p>
-                <label>Gender:</label>
-            </p>
-            <div id="id_gender">
-                <div>
-                    <label for="female"><input type="radio" name="female"> Female</label>
-                </div>
-                <div>
-                    <label for="male"><input type="radio" name="male"> Male</label>
-                </div>
-            </div>
-            <p>
-
-
-            </p>
-            <p>
-                <label for="company_position">Company position:</label>
-                <select name="company_position">
-                    <option value="junior_backend_dev">Junior Backend Dev</option>
-                    <option value="senior_backend_dev">Senior Backend Dev</option>
-                    <option value="junior_frontend_dev">Junior Frontend Dev</option>
-                    <option value="senior_frontend_dev">Senior Frontend Dev</option>
-                </select>
-            </p>
-            <div class="ov-form__btn-container">
-                <button id="ov-btnCloseModal" class="ov-form__btn ov-form__btn--blue">Odbaci</button>
-                <input class="ov-form__btn" type="submit" value="Potvrdi">
-            </div>
-        </form>
-    </div>
     <form class="dk-search">
-        <input type="text" placeholder="PRETRAGA.." name="q">
-        <div class="dk-i">
-            <i class="fas fa-search"></i>
+        <div class="ov-input-container">
+            <input type="text" placeholder="PRETRAGA.." name="search">
+            <div class="dk-i">
+                <i class="fas fa-search"></i>
+            </div>
+            <label>Position:
+                <select name="position">
+                <option {% if selected == 'all' %} selected {% endif %}value="all">All positions</option>
+                    {% for position in position_list %}
+                        <option {% if selected == position.pk %} selected {% endif %} value="{{ position.pk }}">{{position.position_name}}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+               <input type="radio" name="location" value="all" {% if location == None or location == 'all'  %}checked{% endif %} class="radio"> <label>All locations</label>
+               <input type="radio" name="location" value="BL" {% if location == 'BL'  %}checked{% endif %} class="radio"> <label>Banja Luka</label>
+                <input type="radio" name="location" value="BG" {% if location == 'BG'  %}checked{% endif %} class="radio"><label>Beograd</label>
+
+            <input type="submit" value="submit" />
         </div>
         {% if user.is_admin or user.is_superuser %}
         <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i>
@@ -86,7 +47,7 @@
                 <p>{{ object.company_position.position_name }}</p>
                 {% if user.is_admin or user.is_superuser %}
                 <div class="dk-edit">
-                    <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">Izmjeniti
+                        <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">Izmjeniti
                         <i class="fa-regular fa-pen-to-square"></i>
                     </a>
                 </div>
@@ -96,7 +57,7 @@
     </div>
     <div class="dk-pagination">
         {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if position %}position={{ position }}&{% endif %}page={{ page_obj.previous_page_number }}">&lt;</a>
         {% else %}
             <span class="bk-noNextPage">&lt;</span>
         {% endif %}
@@ -104,11 +65,11 @@
             {% if page_obj.number == i %}
                 <span class="bk-currentPage">{{ i }}</span>
             {% else %}
-                <a href="?page={{ i }}">{{ i }}</a>
+                <a href="?{% if search %}search={{ search }}&{% endif %}{% if position %}position={{ position }}&{% endif %}page={{ i }}">{{ i }}</a>
             {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if position %}position={{ position }}&{% endif %}page={{ page_obj.next_page_number }}">&gt;</a>
         {% else %}
             <span class="bk-noNextPage">&gt;</span>
         {% endif %}

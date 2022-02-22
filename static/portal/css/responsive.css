@@ -16,13 +16,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #fff;
+    background-color: var(--white);
     width: 100vw;
-    border: 1px solid red;
     height: 1vh;
     transform: translateY(-60rem);
     animation-name: none;
@@ -30,11 +29,10 @@
     animation-timing-function: ease;
     animation-fill-mode: forwards;
     z-index: 1;
-
   }
   .ov-nav__item {
-    font-size: 4rem;
-    padding: 4rem 0;
+    font-size: 3rem;
+    padding: 6rem 0;
   }
   .ov-nav__item:last-child {
     margin-left: 0;
@@ -43,7 +41,22 @@
     display: inline-block;
   }
 
+  /* DROPDOWN */
+  .ov-nav__navigation-dropdown {
+    position: unset;
+    background: unset;
+    text-align: center;
+    width: 50%;
+    display: block;
+    border: none;
+  }
+
   /* SEARCH AND FILTERS */
+  .dk-search {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .dk-search input {
     font-size: 2rem;
     padding: 1rem;
@@ -55,8 +68,15 @@
   .dk-grid-container {
     grid-template-columns: 1fr;
   }
+
+  .dk-item {
+    width: 100%;
+  }
   .dk-item a {
     font-size: 2rem;
+  }
+  .dk-name h4 {
+    font-size: 2.5rem;
   }
   .dk-pagination a,
   .dk-pagination span {
@@ -68,14 +88,9 @@
     flex-direction: column;
   }
 
-  /* MODAL*/
-  .ov-modal {
-    justify-content: flex-start;
-    padding-top: 15rem;
-  }
-  /* FORM */
-  .ov-form {
-    width: 90%;
+  /* MODAL FORM */
+  .modal-container .ov-form {
+    width: 80vw;
   }
   .ov-form__title {
     font-size: 3rem;
@@ -85,8 +100,50 @@
   .ov-form input[type='password'],
   .ov-form input[type='email'],
   .ov-form select,
-  .ov-form input[type="submit"],
-  .ov-form button{
+  .ov-form input[type='submit'],
+  .ov-form button {
+    font-size: 3rem;
+    display: block;
+    width: 90%;
+  }
+  .ov-form option{
+    font-size: 1rem;
+  }
+  .ov-form__btn-container {
+    flex-direction: column;
+  }
+  .ov-form__btn-container button:first-child {
+    order: 3;
+  }
+
+  /* LOGIN */
+  .ov-login .ov-form, .ov-password-change .ov-form{
+    width: 70%;
+  }
+
+  .ov-password-change .ov-form {
+    font-size: 2.5rem;
+  }
+  .ov-login .ov-form__btn, .ov-password-change .ov-form__btn{
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding: 1rem 0;
+  }
+  .ov-logout h4{
+    font-size: 3rem;
+  }
+  .ov-logout a {
+    font-size: 2.5rem;
+  }
+  .errorlist li {
     font-size: 2rem;
   }
+
+  /* DELETE MODAL */
+  .ov-delete-modal__question {
+    width: 50%;
+    margin: 0 auto !important;
+    color: var(--primary);
+    font-size: 2.5rem;
+}
 }

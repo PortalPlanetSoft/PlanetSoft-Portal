@@ -27,7 +27,7 @@ function showUserEditModal(id) {
                 dataType: 'html',
                 data: mm.serialize(),
                 success: function (data, textStatus, xhr) {
-                    alert("Status code: " + xhr.status);
+
                     closeFunction();
                     pageReload();
                 },
@@ -84,7 +84,6 @@ function showUserAddModal() {
             dataType: 'html',
             data: mm.serialize(),
             success: function (data, textStatus, xhr) {
-                alert("Status code: " + xhr.status);
                 closeFunction();
                 pageReload();
             },
@@ -113,4 +112,6 @@ function closeFunction() {
 function pageReload() {
     window.open("http://127.0.0.1:8000/employees/", "_self");
 }
-
+function log(obj){
+    console.log(obj);
+}
