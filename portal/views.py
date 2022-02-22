@@ -24,13 +24,19 @@ class EmployeeList(ListView):
         users = self.object_list
         paginator = self.paginator_class(users, self.paginate_by)
         users = paginator.page(page)
+
         if self.request.GET.get('position'):
             if self.request.GET.get('position') == 'all':
                 context['selected'] = self.request.GET.get('position')
             else:
                 context['selected'] = int('0'+self.request.GET.get('position'))
+
         if self.request.GET.get('search'):#todo nije najbolje za search ali okej je
             context['search'] = self.request.GET.get('search')
+
+        if self.request.GET.get('location'):
+            context['location'] = self.request.GET.get('location')
+
         context['position'] = self.request.GET.get('position')
         context['object_list'] = users
         context['position_list'] = CompanyPosition.objects.all()
@@ -40,6 +46,7 @@ class EmployeeList(ListView):
         query_set = super().get_queryset()
         search = self.request.GET.get('search')
         position = self.request.GET.get('position')
+        location = self.request.GET.get('location')
         if search:
             filtered_query = query_set.filter(Q(first_name__icontains=search) | Q(last_name__icontains=search))
             if len(filtered_query) == 0:
@@ -49,6 +56,9 @@ class EmployeeList(ListView):
 
         if position and position != 'all':
             query_set = query_set.filter(Q(company_position__id__exact=position))
+
+        if location and location != 'all':
+            query_set = query_set.filter(Q(work_location__exact=location))
         return query_set
 
 

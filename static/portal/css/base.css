@@ -248,3 +248,8 @@ a:hover {
     align-items: center;
     justify-content: center;
 }
+
+.dk-search .radio {
+    margin-left: 0.5rem;
+     width: auto;
+}
