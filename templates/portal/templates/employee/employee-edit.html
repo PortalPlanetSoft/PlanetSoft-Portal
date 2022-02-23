@@ -1,7 +1,10 @@
 <h3 class="ov-form__title">Uređivanje postojećeg korisnika</h3>
 {% csrf_token %}
+{% if form %}
 {{ form.as_p }}
-
+{% else %}
+{{ form_preview.as_p }}
+{% endif %}
 <div class="ov-form__btn-container">
     <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red" onclick="showUserDeleteModal({{ object.id }})">Izbrisi korisnika</button>
     <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Odbaci</button>

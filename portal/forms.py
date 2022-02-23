@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 from django import forms
 
 from users.models import CompanyPosition
@@ -46,17 +47,23 @@ class AddEmployeeForm(forms.ModelForm):
     gender.required = False
     work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
     field_order = ['username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
-                   'work_location']
+                   'work_location', 'is_admin', 'is_editor']
 
     class Meta:
         model = User
         fields = {'username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
-                  'work_location'}
+                  'work_location', 'is_admin', 'is_editor', 'profile_pic'}
         help_texts = {
             "username": None,
         }
 
         error_messages = ERROR_MESSAGES
+
+        labels = {
+            'is_admin': _('Admin'),
+            'is_editor': _('Editor'),
+            'profile_pic': _('Avatar'),
+        }
 
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': 'Username'}),
@@ -64,7 +71,9 @@ class AddEmployeeForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
             'email': forms.TextInput(attrs={'placeholder': 'Email Address'}),
-            'company_position': forms.Select(choices=(CompanyPosition.objects.all()))
+            'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
+            'is_admin': forms.CheckboxInput(attrs={'label': 'Admin'}),
+            'is_editor': forms.CheckboxInput(attrs={'label': 'Editor'}),
         }
 
     def save(self, commit=True):
@@ -82,11 +91,13 @@ class EditEmployeeForm(forms.ModelForm):
     gender = forms.ChoiceField(widget=forms.RadioSelect, choices=User.GENDER_CHOICES)
     gender.required = False
     work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
-    field_order = ['username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location']
+    field_order = ['username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
+                   'is_admin', 'is_editor']
 
     class Meta:
         model = User
-        fields = {'username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location'}
+        fields = {'username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
+                  'is_admin', 'is_editor', 'profile_pic'}
 
         help_texts = {
             "username": None,
@@ -94,10 +105,18 @@ class EditEmployeeForm(forms.ModelForm):
 
         error_messages = ERROR_MESSAGES
 
+        labels = {
+            'is_admin': _('Admin'),
+            'is_editor': _('Editor'),
+            'profile_pic': _('Avatar'),
+        }
+
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': 'Username'}),
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
             'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
-            'company_position': forms.Select(choices=(CompanyPosition.objects.all()))
+            'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
+            'is_admin': forms.CheckboxInput(attrs={'label': 'Admin'}),
+            'is_editor': forms.CheckboxInput(attrs={'label': 'Editor'}),
         }

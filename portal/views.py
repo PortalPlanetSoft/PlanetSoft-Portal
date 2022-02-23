@@ -129,3 +129,21 @@ class Profile(DetailView):
 
     def get_object(self, queryset=None):
         return User.objects.filter(pk=self.request.user.id)
+
+
+class Preview(DetailView):
+    template_name = 'portal/templates/employee/employee-edit.html'
+
+    def get_object(self, queryset=None):
+        return User.objects.filter(pk=self.request.user.id)
+
+    def get_context_data(self, **kwargs):
+        context = super(Preview, self).get_context_data(**kwargs)
+        form = EditEmployeeForm
+        base_fields = {}
+        for field in form.base_fields.items():
+            field[1].required = True
+            base_fields[field[0]] = field[1]
+        form.base_fields = base_fields
+        context['form_preview'] = form
+        return context
