@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models import Q
 from django.http import Http404
 from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView
+from django.views.generic.edit import FormMixin
 
 from portal.forms import AddEmployeeForm, EditEmployeeForm
 from users.models import User, CompanyPosition
@@ -139,11 +140,11 @@ class Preview(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(Preview, self).get_context_data(**kwargs)
-        form = EditEmployeeForm
+        '''
         base_fields = {}
         for field in form.base_fields.items():
-            field[1].required = True
+            field[1].disabled = True
             base_fields[field[0]] = field[1]
-        form.base_fields = base_fields
-        context['form_preview'] = form
+        form.base_fields = base_fields'''
+        context['form_preview'] = EditEmployeeForm(instance=self.request.user, disable_fields=True)
         return context

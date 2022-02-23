@@ -120,3 +120,19 @@ class EditEmployeeForm(forms.ModelForm):
             'is_admin': forms.CheckboxInput(attrs={'label': 'Admin'}),
             'is_editor': forms.CheckboxInput(attrs={'label': 'Editor'}),
         }
+
+    def __init__(self, disable_fields=False, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if disable_fields:
+            self.fields['username'].disabled = True
+            self.fields['first_name'].disabled = True
+            self.fields['last_name'].disabled = True
+            self.fields['email'].disabled = True
+            self.fields['gender'].disabled = True
+            self.fields['company_position'].disabled = True
+            self.fields['work_location'].disabled = True
+            self.fields['is_admin'].disabled = True
+            self.fields['is_editor'].disabled = True
+            self.fields['profile_pic'].disabled = True
+
+
