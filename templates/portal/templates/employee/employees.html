@@ -17,7 +17,8 @@
                 <select name="position">
                 <option {% if selected == 'all' %} selected {% endif %}value="all">Sve pozicije</option>
                     {% for position in position_list %}
-                        <option {% if selected == position.pk %} selected {% endif %} value="{{ position.pk }}">{{position.position_name}}</option>
+                        <option {% if selected == position.pk %} selected {% endif %}
+                                                                 value="{{ position.pk }}">{{ position.position_name }}</option>
                     {% endfor %}
                 </select>
 
@@ -26,8 +27,9 @@
             <input type="submit" value="submit" />
         </div>
         {% if user.is_admin or user.is_superuser %}
-        <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i class="fa-solid fa-circle-plus fa-xl"></i>
-        </a>
+            <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i
+                    class="fa-solid fa-circle-plus fa-xl"></i>
+            </a>
         {% endif %}
     </form>
     <div class="dk-grid-container">
@@ -43,7 +45,7 @@
                         <img src='{% static 'img/2.png' %}' alt='woman-profile'>
                     {% endif %}
                 </div>
-                <div class="dk-name">
+                <div class="dk-name" onclick="showUserPreviewModal({{ object.id }})">
                     <h4>{{ object.first_name }}</h4>  <h4>{{ object.last_name }}</h4></div>
                 <p>{{ object.company_position.position_name }}</p>
 
@@ -62,6 +64,7 @@
             </div>
         {% endfor %}
     </div>
+
     <div class="dk-pagination">
         {% if page_obj.has_previous %}
             <a href="?{% if search %}search={{ search }}&{% endif %}{% if position %}position={{ position }}&{% endif %}{% if location %}location={{ location }}&{% endif %}page={{ page_obj.previous_page_number }}">&lt;</a>
