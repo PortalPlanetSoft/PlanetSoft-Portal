@@ -46,12 +46,12 @@ class AddEmployeeForm(forms.ModelForm):
     gender = forms.ChoiceField(widget=forms.RadioSelect, choices=User.GENDER_CHOICES)
     gender.required = False
     work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
-    field_order = ['username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
+    field_order = ['username', 'password', 'first_name', 'last_name', 'email', 'gender',
                    'work_location', 'is_admin', 'is_editor']
 
     class Meta:
         model = User
-        fields = {'username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
+        fields = {'username', 'password', 'first_name', 'last_name', 'email', 'gender',
                   'work_location', 'is_admin', 'is_editor', 'profile_pic'}
         help_texts = {
             "username": None,
@@ -71,7 +71,7 @@ class AddEmployeeForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
             'email': forms.TextInput(attrs={'placeholder': 'Email Address'}),
-            'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
+            #'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
             'is_admin': forms.CheckboxInput(attrs={'label': 'Admin'}),
             'is_editor': forms.CheckboxInput(attrs={'label': 'Editor'}),
         }
@@ -91,12 +91,12 @@ class EditEmployeeForm(forms.ModelForm):
     gender = forms.ChoiceField(widget=forms.RadioSelect, choices=User.GENDER_CHOICES)
     gender.required = False
     work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
-    field_order = ['username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
+    field_order = ['username', 'first_name', 'last_name', 'email', 'gender', 'work_location',
                    'is_admin', 'is_editor']
 
     class Meta:
         model = User
-        fields = {'username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
+        fields = {'username', 'first_name', 'last_name', 'email', 'gender', 'work_location',
                   'is_admin', 'is_editor', 'profile_pic'}
 
         help_texts = {
@@ -116,7 +116,7 @@ class EditEmployeeForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
             'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
-            'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
+            #'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
             'is_admin': forms.CheckboxInput(attrs={'label': 'Admin'}),
             'is_editor': forms.CheckboxInput(attrs={'label': 'Editor'}),
         }

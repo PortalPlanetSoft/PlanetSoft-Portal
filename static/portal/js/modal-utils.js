@@ -36,6 +36,17 @@ function showUserEditModal(id) {
             success: (data) => genericForm.innerHTML = data,
         },
     );
+}
+
+//onclick function for user editing modal
+function showUserEditModal(id) {
+    modalContainer.style.display = "flex";
+    $.ajax({
+            url: urlAddress + '/employees/' + id + '/',
+            type: 'get',
+            success: (data) => genericForm.innerHTML = data,
+        },
+    );
 
     $("#generic-form").on("submit", (e) => {
         e.preventDefault();
