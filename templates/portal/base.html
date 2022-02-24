@@ -31,8 +31,6 @@
         <div class="ov-nav__right">
             <div class="ov-nav__navigation" id="ov-navigation">
                 {% if user.is_authenticated %}
-                    <span class="ov-nav__item">Dobrodo&scaron;{% if user.gender == 'M' %}ao{% else %}
-                        la{% endif %} {{ user.username }}</span>
                     <a href="#" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
                     <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
                     <a href="#" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
