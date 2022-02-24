@@ -1,3 +1,4 @@
+const modalContent = document.getElementById("modal-content");
 const genericForm = document.getElementById("generic-form");
 const modalContainer = document.getElementById("modal-container");
 const urlAddress = 'http://127.0.0.1:8000';
@@ -25,7 +26,7 @@ $(function () {
 window.onload = function () {
     genericForm.onsubmit = setTimeout(function () {
     }, 10);
-}
+};
 
 //onclick function for user editing modal
 function showUserEditModal(id) {
@@ -44,15 +45,16 @@ function showUserEditModal(id) {
     $.ajax({
             url: urlAddress + '/employees/' + id + '/',
             type: 'get',
-            success: (data) => genericForm.innerHTML = data,
+            success: (data) => modalContent.innerHTML = data,
         },
-    );
-
-    $("#generic-form").on("submit", (e) => {
+    ).then(res=>{
+          $('a#submitForm').on('click', e=>{
         e.preventDefault();
-        const mm = $("#generic-form");
+        e.stopPropagation();
+        console.log('Link clicked')
+              const mm = $("#edit-emp-form");
         $.ajax({
-                url: urlAddress + '/employees/' + id + '/',
+                 url: urlAddress + '/employees/' + id + '/',
                 type: 'post',
                 dataType: 'html',
                 data: mm.serialize(),
@@ -67,10 +69,17 @@ function showUserEditModal(id) {
                     showToast(0);
                     sessionStorage.clear();
                 },
+           },
+       );
+
             },
         );
-    })
-}
+    });
+
+    };
+
+
+
 
 //onclick function for user deleting modal
 function showUserDeleteModal(id) {
@@ -78,13 +87,13 @@ function showUserDeleteModal(id) {
     $.ajax({
             url: urlAddress + '/employees/delete/' + id + '/',
             type: 'get',
-            success: (data) => genericForm.innerHTML = data,
+            success: (data) => modalContent.innerHTML = data,
         },
-    );
-
-    $("#generic-form").on("submit", (e) => {
+    ).then(res=>{
+        $("a#submitForm").on("click", (e) => {
         e.preventDefault();
-        const mm = $("#generic-form");
+        e.stopPropagation()
+        const mm = $("#delete-emp-form");
         $.ajax({
                 url: urlAddress + '/employees/delete/' + id + '/',
                 type: 'POST',
@@ -104,6 +113,10 @@ function showUserDeleteModal(id) {
             },
         );
     })
+
+    });
+
+
 }
 
 
@@ -114,12 +127,11 @@ function showUserAddModal() {
         url: urlAddress + '/employees/create/',
         type: 'get',
         dataType: 'html',
-        success: (data) => genericForm.innerHTML = data,
-    })
-
-    $("#generic-form").on("submit", (e) => {
+        success: (data) => modalContent.innerHTML = data,
+    }).then(res=>{
+        $("a#submitForm").on("click", (e) => {
         e.preventDefault();
-        const mm = $("#generic-form");
+        const mm = $("#create-emp-form");
         $.ajax({
             url: urlAddress + '/employees/create/',
             type: 'post',
@@ -139,6 +151,10 @@ function showUserAddModal() {
             },
         });
     })
+
+    })
+
+
 }
 
 //toast message that is displayed every time a successful/unsuccessful change is made
@@ -177,4 +193,6 @@ function closeFunction() {
 function pageReload() {
     window.location.reload();
 }
-
+function log(obj){
+    console.log(obj);
+}
