@@ -27,6 +27,7 @@ body {
     flex-direction: column;
 
 }
+
 ::-webkit-scrollbar {
     width: 1rem;
 }
@@ -88,6 +89,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
 }
+
 .dk-search input {
     padding: 0.5rem;
     font-size: 0.7rem;
@@ -178,7 +180,7 @@ a:hover {
     background-color: #fff;
 }
 
-.dk-icon{
+.dk-icon {
     text-align: center;
 }
 
@@ -212,7 +214,6 @@ a:hover {
 }
 
 
-
 .close-button {
     color: #aaaaaa;
     float: right;
@@ -237,9 +238,27 @@ a:hover {
 }
 
 
-
 .dk-search .radio {
     margin-left: 0.5rem;
-     width: auto;
+    width: auto;
 }
 
+#toast-container {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#toast-container.show {
+    visibility: visible;
+}

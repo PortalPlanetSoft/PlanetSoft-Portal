@@ -3,7 +3,30 @@ let editForm = document.getElementById("edit-emp-form");
 let modalContainer = document.getElementById("modal-container");
 let modalContent = document.getElementById("modal-content");
 const urlAddress = 'http://127.0.0.1:8000';
+const genericForm = document.getElementById("generic-form");
+const modalContainer = document.getElementById("modal-container");
+const urlAddress = 'http://127.0.0.1:8000';
+let result = 3;
 
+//pageOnLoad function that fetches action result from sessionStorage so the toast alert can be shown
+$(function () {
+    result = sessionStorage.getItem("result");
+    if (result == 1) {
+        showToast(1);
+        sessionStorage.clear();
+    } else if (result == 0) {
+        showToast(0);
+        sessionStorage.clear();
+    } else if (result == 2) {
+        showToast(2);
+        sessionStorage.clear();
+    } else {
+        result = 3;
+        sessionStorage.clear();
+    }
+});
+
+//pageOnLoad function that creates timeout so edited data can be loaded
 window.onload = function () {
     genericForm.onsubmit = setTimeout(function () {
     }, 10);
@@ -15,7 +38,17 @@ function showUserEditModal(id) {
     $.ajax({
             url: urlAddress + '/employees/' + id + '/',
             type: 'get',
-            //dataType: 'html',
+            success: (data) => genericForm.innerHTML = data,
+        },
+    );
+}
+
+//onclick function for user editing modal
+function showUserEditModal(id) {
+    modalContainer.style.display = "flex";
+    $.ajax({
+            url: urlAddress + '/employees/' + id + '/',
+            type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
     ).then(res=>{
@@ -25,20 +58,26 @@ function showUserEditModal(id) {
         console.log('Link clicked')
               const mm = $("#edit-emp-form");
         $.ajax({
-               url: urlAddress + '/employees/' + id + '/',
-               type: 'post',
-               dataType: 'html',
-               data: mm.serialize(),
-               success: function (data, textStatus, xhr) {
-                   console.log(data, textStatus, xhr);
-                   closeFunction();
-                   pageReload();
-               },
-               error: function (data, xhr, textStatus) {
-                   console.log("Status code edit: " + xhr.status);
-               }
+                 url: urlAddress + '/employees/' + id + '/',
+                type: 'post',
+                dataType: 'html',
+                data: mm.serialize(),
+                success: function (data, textStatus, xhr) {
+                    sessionStorage.clear();
+                    sessionStorage.setItem("result", 1);
+                    closeFunction();
+                },
+                error: function (data, xhr, textStatus) {
+                    sessionStorage.clear();
+                    sessionStorage.setItem("result", 0);
+                    showToast(0);
+                    sessionStorage.clear();
+                },
            },
        );
+
+            },
+        );
     })
 
     });
@@ -63,12 +102,20 @@ function showUserDeleteModal(id) {
                 url: urlAddress + '/employees/delete/' + id + '/',
                 type: 'POST',
                 data: mm.serialize(),
-                success:function(data){pageReload()},
+                success: function (data, textStatus, xhr) {
+                    sessionStorage.clear();
+                    sessionStorage.setItem("result", 2);
+                    closeFunction();
+                    pageReload();
+                },
+                error: function (data, xhr, textStatus) {
+                    sessionStorage.clear();
+                    sessionStorage.setItem("result", 0);
+                    showToast(0);
+                    sessionStorage.clear();
+                },
             },
-
         );
-        closeFunction();
-
     })
 
     });
@@ -95,13 +142,17 @@ function showUserAddModal() {
             dataType: 'html',
             data: mm.serialize(),
             success: function (data, textStatus, xhr) {
+                sessionStorage.clear();
+                sessionStorage.setItem("result", 1);
                 closeFunction();
                 pageReload();
             },
             error: function (data, xhr, textStatus) {
-                console.log("Status code: " + xhr.status);
-
-            }
+                sessionStorage.clear();
+                sessionStorage.setItem("result", 0);
+                showToast(0);
+                sessionStorage.clear();
+            },
         });
     })
 
@@ -109,6 +160,24 @@ function showUserAddModal() {
 
 
 }
+
+//toast message that is displayed every time a successful/unsuccessful change is made
+function showToast(result) {
+    const toastContainer = document.getElementById("toast-container");
+    const toastMessage = document.getElementById("toast-message");
+    if (result == 1) {
+        toastMessage.innerHTML = "Uspješno sačuvano!";
+    } else if (result == 0) {
+        toastMessage.innerHTML = "Neuspješno!";
+    } else if (result == 2) {
+        toastMessage.innerHTML = "Uspješno obrisano!";
+    }
+    toastContainer.className = "show";
+    setTimeout(function () {
+        toastContainer.className = toastContainer.className.replace("show", "");
+    }, 3000);
+}
+
 
 //function that closes the modal if area outside of modal is clicked
 window.onclick = function (event) {
@@ -120,16 +189,13 @@ window.onclick = function (event) {
 //function for modal closing on button press
 function closeFunction() {
     modalContainer.style.display = "none";
-    //window.open("http://127.0.0.1:8000/employees/", "_self");
-}
+    window.location.reload();
+};
 
 
 //function that reloads to target page so that up-to-date results (post edit) can be shown
 function pageReload() {
-    console.log('nesto');
-      setTimeout(() => {window.open("http://127.0.0.1:8000/employees/", "_self");}, 1000);
-
-    //window.open("http://127.0.0.1:8000/employees/", "_self");
+    window.location.reload();
 }
 function log(obj){
     console.log(obj);
