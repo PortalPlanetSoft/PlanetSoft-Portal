@@ -20,10 +20,11 @@ class User(AbstractUser):
     ]
     is_admin = models.BooleanField(default=False)
     is_editor = models.BooleanField(default=False)
-    is_employee = models.BooleanField(default=False)
+    is_employee = models.BooleanField(default=True)
     first_name = models.CharField('first name', max_length=150)
     last_name = models.CharField('last name', max_length=150)
     email = models.EmailField('email address', unique=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='F')
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True, blank=True)
     work_location = models.CharField(max_length=2, choices=WORK_LOCATION, default='BL')
     company_position = models.ForeignKey(CompanyPosition, on_delete=models.PROTECT, default=None)
+    profile_pic = models.ImageField(upload_to='avatars/', null=True, blank=True)
