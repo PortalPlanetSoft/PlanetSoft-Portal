@@ -10,7 +10,6 @@
     <script src="{% static 'portal/js/jquery/jquery-3.6.0.min.js' %}"></script>
 
 
-
     <link href="{% static 'portal/css/animations.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'portal/css/base.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'portal/css/navbar.css' %}" rel="stylesheet" type="text/css">
@@ -21,37 +20,40 @@
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
 
-
 </head>
 <body>
 <div class="ov-content">
     <nav class="ov-nav">
-            <div class="ov-nav__left">
-                <img src="{% static 'portal/images/logo_green.png' %}" alt="Planet Soft Logo" class="ov-nav__logo">
-                <h1 class="ov-nav__title">PLANET SOFT</h1>
+        <div class="ov-nav__left">
+            <img src="{% static 'portal/images/logo_green.png' %}" alt="Planet Soft Logo" class="ov-nav__logo">
+            <h1 class="ov-nav__title">PLANET SOFT</h1>
+        </div>
+        <div class="ov-nav__right">
+            <div class="ov-nav__navigation" id="ov-navigation">
+                {% if user.is_authenticated %}
+                    <span class="ov-nav__item">Dobrodo&scaron;{% if user.gender == 'M' %}ao{% else %}
+                        la{% endif %} {{ user.username }}</span>
+                    <a href="#" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
+                    <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
+                    <a href="#" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
+                    <a href="{% url 'profile' %}" class="ov-nav__item ov-nav__item--dropdown-toggle"><i
+                            class="fas fa-user"></i> PROFIL</a>
+                    <!-- <a href="{% url 'logout' %}" class="ov-nav__item"><i class="fa-solid fa-arrow-right-from-bracket"></i> ODJAVA</a> -->
+                    <div class="ov-nav__navigation-dropdown">
+                        <a href="{% url 'password-change' %}" class="ov-nav__item ov-nav__navigation-dropdown-item">PROMJENA
+                            ŠIFRE</a>
+                        <a href="{% url 'logout' %}" class="ov-nav__item ov-nav__navigation-dropdown-item"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i> ODJAVA</a>
+                    </div>
+                {% endif %}
+
             </div>
-            <div class="ov-nav__right">
-                <div class="ov-nav__navigation" id="ov-navigation">
-                    {% if user.is_authenticated %}
-                        <span class="ov-nav__item">Dobrodo&scaron;{% if user.gender == 'M' %}ao{% else %}la{% endif %} {{ user.username }}</span>
-                        <a href="#" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
-                        <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
-                        <a href="#" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
-                        <a href="{% url 'profile' %}" class="ov-nav__item ov-nav__item--dropdown-toggle"><i class="fas fa-user"></i> PROFIL</a>
-                        <!-- <a href="{% url 'logout' %}" class="ov-nav__item"><i class="fa-solid fa-arrow-right-from-bracket"></i> ODJAVA</a> -->
-                        <div class="ov-nav__navigation-dropdown">
-                            <a href="{% url 'password-change' %}" class="ov-nav__item ov-nav__navigation-dropdown-item">PROMJENA ŠIFRE</a>
-                            <a href="{% url 'logout' %}" class="ov-nav__item ov-nav__navigation-dropdown-item"><i class="fa-solid fa-arrow-right-from-bracket"></i> ODJAVA</a>
-                        </div>
-                    {% endif %}
-
-                </div>
-            </div>
-            <span class="ov-nav__hamburger-btn" id="ov-nav-toggle"><i class="fa-solid fa-bars"></i></span>
-        </nav>
+        </div>
+        <span class="ov-nav__hamburger-btn" id="ov-nav-toggle"><i class="fa-solid fa-bars"></i></span>
+    </nav>
 
 
-    <div  id="modal-container" class="modal-container">
+    <div id="modal-container" class="modal-container">
         <div class="modal-header">
 
         </div>
@@ -63,6 +65,7 @@
         </div>
     </div>
 
+    <div id="toast-container"><p id="toast-message"></p></div>
 
     {% block body %}
 
@@ -90,7 +93,7 @@
     </div>
 </footer>
 
-    <script src="{% static 'portal/js/base.js' %}"></script>
+<script src="{% static 'portal/js/base.js' %}"></script>
 
 <script src="{% static 'portal/js/modal-utils.js' %}"></script>
 

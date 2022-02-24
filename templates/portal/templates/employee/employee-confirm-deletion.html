@@ -3,8 +3,8 @@
     {% csrf_token %}
     <p class="ov-delete-modal__question">Jeste li sigurni da želite da izbrišete zaposlenog:"{{ object }}"?</p>
     <div class="ov-form__btn-container">
-        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Ne</button>
-        <input type="submit" value="Da" class="ov-form__btn" onclick="pageReload()">
+        <button type="button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Ne</button>
+        <input type="submit" value="Da" class="ov-form__btn">
     </div>
 
 </div>
