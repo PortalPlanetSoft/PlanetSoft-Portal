@@ -1,8 +1,8 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models import Q
 from django.http import Http404
+from django.shortcuts import render
 from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView
-from django.views.generic.edit import FormMixin
 
 from portal.forms import AddEmployeeForm, EditEmployeeForm
 from users.models import User, CompanyPosition
@@ -136,15 +136,32 @@ class Preview(DetailView):
     template_name = 'portal/templates/employee/employee-edit.html'
 
     def get_object(self, queryset=None):
-        return User.objects.filter(pk=self.request.user.id)
+        return User.objects.filter(pk=self.kwargs['pk'])
 
     def get_context_data(self, **kwargs):
         context = super(Preview, self).get_context_data(**kwargs)
-        '''
+        # todo pitaj ovo
+        ''' todo pitaj
         base_fields = {}
         for field in form.base_fields.items():
             field[1].disabled = True
             base_fields[field[0]] = field[1]
         form.base_fields = base_fields'''
-        context['form_preview'] = EditEmployeeForm(instance=self.request.user, disable_fields=True)
+        context['form_preview'] = EditEmployeeForm(instance=context['object'].get(), disable_fields=True)
         return context
+
+
+def error_500(request, exception=None):
+    return render(request, "errors/500.html", {})
+
+
+def error_404(request, exception):
+    return render(request, "errors/404.html", {})
+
+
+def error_403(request, exception=None):
+    return render(request, "errors/403.html", {})
+
+
+def error_400(request, exception=None):
+    return render(request, "errors/400.html", {})
