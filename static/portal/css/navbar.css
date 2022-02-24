@@ -34,6 +34,9 @@
   border-bottom: 3px solid transparent;
   transition: .3s ease;
 }
+.ov-nav__item--icon-only {
+  font-size: 1.5rem;
+}
 /* .ov-nav__item:last-child {
   margin-left: 6rem;
 } */
@@ -63,6 +66,9 @@
   background-color: var(--white);
   display: none;
   border: 1px solid var(--accent);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 1;
 }
 
 .ov-nav__navigation-dropdown-item {

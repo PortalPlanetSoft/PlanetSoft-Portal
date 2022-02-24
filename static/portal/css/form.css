@@ -100,3 +100,55 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.ov-container-center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+}
+.ov-form, .ov-password-change .ov-form{
+  width: 25%;
+}
+.ov-form__btn, .ov-password-change .ov-form__btn{
+  display: block;
+  width: 100%;
+  font-size: 1.25rem;
+}
+.ov-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.ov-login__left {
+  width: 40%;
+}
+.ov-login .ov-form {
+  width: 50%;
+  border: none;
+  box-shadow: none;
+}
+.ov-login img {
+  width: 50%;
+}
+.ov-login button {
+  width: unset;
+  padding: .5rem 3rem;
+}
+.ov-logout a {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 1rem 3rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+  transition: .5s ease;
+}
+.ov-logout a:hover {
+  background-color: var(--primary);
+  filter: brightness(1.2);
+}
+.ov-password-change div{
+  padding: 1rem 2rem;
+  color: var(--primary);
+}
