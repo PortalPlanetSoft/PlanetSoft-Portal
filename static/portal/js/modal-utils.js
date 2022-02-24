@@ -1,6 +1,8 @@
 let genericForm = document.getElementById("generic-form");
+let editForm = document.getElementById("edit-emp-form");
 let modalContainer = document.getElementById("modal-container");
-let urladdress = 'http://127.0.0.1:8000';
+let modalContent = document.getElementById("modal-content");
+const urlAddress = 'http://127.0.0.1:8000';
 
 window.onload = function () {
     genericForm.onsubmit = setTimeout(function () {
@@ -11,57 +13,67 @@ window.onload = function () {
 function showUserEditModal(id) {
     modalContainer.style.display = "flex";
     $.ajax({
-            url: urladdress + '/employees/' + id + '/',
+            url: urlAddress + '/employees/' + id + '/',
             type: 'get',
             //dataType: 'html',
-            success: (data) => genericForm.innerHTML = data,
+            success: (data) => modalContent.innerHTML = data,
         },
-    );
-
-    $("#generic-form").on("submit", (e) => {
+    ).then(res=>{
+          $('a#submitForm').on('click', e=>{
         e.preventDefault();
-        const mm = $("#generic-form");
+        e.stopPropagation();
+        console.log('Link clicked')
+              const mm = $("#edit-emp-form");
         $.ajax({
-                url: urladdress + '/employees/' + id + '/',
-                type: 'post',
-                dataType: 'html',
-                data: mm.serialize(),
-                success: function (data, textStatus, xhr) {
-
-                    closeFunction();
-                    pageReload();
-                },
-                error: function (data, xhr, textStatus) {
-                    alert("Status code: " + xhr.status);
-                }
-            },
-        );
-
+               url: urlAddress + '/employees/' + id + '/',
+               type: 'post',
+               dataType: 'html',
+               data: mm.serialize(),
+               success: function (data, textStatus, xhr) {
+                   console.log(data, textStatus, xhr);
+                   closeFunction();
+                   pageReload();
+               },
+               error: function (data, xhr, textStatus) {
+                   console.log("Status code edit: " + xhr.status);
+               }
+           },
+       );
     })
+
+    });
+
+
 }
 
 //onclick function for user deleting modal
 function showUserDeleteModal(id) {
     modalContainer.style.display = "flex";
     $.ajax({
-            url: urladdress + '/employees/delete/' + id + '/',
+            url: urlAddress + '/employees/delete/' + id + '/',
             type: 'get',
-            success: (data) => genericForm.innerHTML = data,
+            success: (data) => modalContent.innerHTML = data,
         },
-    );
-
-    $("#generic-form").on("submit", (e) => {
+    ).then(res=>{
+        $("a#submitForm").on("click", (e) => {
         e.preventDefault();
-        const mm = $("#generic-form");
+        e.stopPropagation()
+        const mm = $("#delete-emp-form");
         $.ajax({
-                url: urladdress + '/employees/delete/' + id + '/',
+                url: urlAddress + '/employees/delete/' + id + '/',
                 type: 'POST',
                 data: mm.serialize(),
+                success:function(data){pageReload()},
             },
+
         );
         closeFunction();
-        pageReload();
+
     })
+
+    });
+
+
 }
 
 
@@ -69,17 +81,16 @@ function showUserDeleteModal(id) {
 function showUserAddModal() {
     modalContainer.style.display = "flex";
     $.ajax({
-        url: urladdress + '/employees/create/',
+        url: urlAddress + '/employees/create/',
         type: 'get',
         dataType: 'html',
-        success: (data) => genericForm.innerHTML = data,
-    })
-
-    $("#generic-form").on("submit", (e) => {
+        success: (data) => modalContent.innerHTML = data,
+    }).then(res=>{
+        $("a#submitForm").on("click", (e) => {
         e.preventDefault();
-        const mm = $("#generic-form");
+        const mm = $("#create-emp-form");
         $.ajax({
-            url: urladdress + '/employees/create/',
+            url: urlAddress + '/employees/create/',
             type: 'post',
             dataType: 'html',
             data: mm.serialize(),
@@ -88,10 +99,15 @@ function showUserAddModal() {
                 pageReload();
             },
             error: function (data, xhr, textStatus) {
-                alert("Status code: " + xhr.status);
+                console.log("Status code: " + xhr.status);
+
             }
         });
     })
+
+    })
+
+
 }
 
 //function that closes the modal if area outside of modal is clicked
@@ -104,13 +120,16 @@ window.onclick = function (event) {
 //function for modal closing on button press
 function closeFunction() {
     modalContainer.style.display = "none";
-    window.open("http://127.0.0.1:8000/employees/", "_self");
+    //window.open("http://127.0.0.1:8000/employees/", "_self");
 }
 
 
 //function that reloads to target page so that up-to-date results (post edit) can be shown
 function pageReload() {
-    window.open("http://127.0.0.1:8000/employees/", "_self");
+    console.log('nesto');
+      setTimeout(() => {window.open("http://127.0.0.1:8000/employees/", "_self");}, 1000);
+
+    //window.open("http://127.0.0.1:8000/employees/", "_self");
 }
 function log(obj){
     console.log(obj);
