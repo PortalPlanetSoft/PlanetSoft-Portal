@@ -1,8 +1,4 @@
-let genericForm = document.getElementById("generic-form");
-let editForm = document.getElementById("edit-emp-form");
-let modalContainer = document.getElementById("modal-container");
-let modalContent = document.getElementById("modal-content");
-const urlAddress = 'http://127.0.0.1:8000';
+const modalContent = document.getElementById("modal-content");
 const genericForm = document.getElementById("generic-form");
 const modalContainer = document.getElementById("modal-container");
 const urlAddress = 'http://127.0.0.1:8000';
@@ -30,7 +26,7 @@ $(function () {
 window.onload = function () {
     genericForm.onsubmit = setTimeout(function () {
     }, 10);
-}
+};
 
 //onclick function for user editing modal
 function showUserEditModal(id) {
@@ -78,12 +74,12 @@ function showUserEditModal(id) {
 
             },
         );
-    })
-
     });
 
+    };
 
-}
+
+
 
 //onclick function for user deleting modal
 function showUserDeleteModal(id) {
