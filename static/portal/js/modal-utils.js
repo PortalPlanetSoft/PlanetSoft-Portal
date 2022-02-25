@@ -47,12 +47,11 @@ function showUserEditModal(id) {
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
-    ).then(res=>{
-          $('a#submitForm').on('click', e=>{
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Link clicked')
-              const mm = $("#edit-emp-form");
+    );
+
+    };
+function sumbitEditUserForm(id){
+     const mm = $("#edit-emp-form");
         $.ajax({
                  url: urlAddress + '/employees/' + id + '/',
                 type: 'post',
@@ -68,16 +67,11 @@ function showUserEditModal(id) {
                     sessionStorage.setItem("result", 0);
                     showToast(0);
                     sessionStorage.clear();
+                    modalContent.innerHTML = data.responseText;
                 },
            },
        );
-
-            },
-        );
-    });
-
-    };
-
+}
 
 
 
@@ -89,11 +83,11 @@ function showUserDeleteModal(id) {
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
-    ).then(res=>{
-        $("a#submitForm").on("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation()
-        const mm = $("#delete-emp-form");
+    );
+}
+
+function sumbitUserDeleteForm(id){
+    const mm = $("#delete-emp-form");
         $.ajax({
                 url: urlAddress + '/employees/delete/' + id + '/',
                 type: 'POST',
@@ -109,13 +103,10 @@ function showUserDeleteModal(id) {
                     sessionStorage.setItem("result", 0);
                     showToast(0);
                     sessionStorage.clear();
+                    x
                 },
             },
         );
-    })
-
-    });
-
 
 }
 
@@ -128,10 +119,13 @@ function showUserAddModal() {
         type: 'get',
         dataType: 'html',
         success: (data) => modalContent.innerHTML = data,
-    }).then(res=>{
-        $("a#submitForm").on("click", (e) => {
-        e.preventDefault();
-        const mm = $("#create-emp-form");
+    });
+
+
+}
+
+function submitCreateUserForm(){
+    const mm = $("#create-emp-form");
         $.ajax({
             url: urlAddress + '/employees/create/',
             type: 'post',
@@ -142,18 +136,16 @@ function showUserAddModal() {
                 sessionStorage.setItem("result", 1);
                 closeFunction();
                 pageReload();
+
             },
             error: function (data, xhr, textStatus) {
                 sessionStorage.clear();
                 sessionStorage.setItem("result", 0);
                 showToast(0);
                 sessionStorage.clear();
+                modalContent.innerHTML = data.responseText;
             },
         });
-    })
-
-    })
-
 
 }
 

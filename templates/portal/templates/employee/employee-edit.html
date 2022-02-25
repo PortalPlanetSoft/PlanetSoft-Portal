@@ -3,11 +3,27 @@
 
 {% if form %}
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for error in form.non_field_errors %}
+            <div>
+                {{ error }}
+            </div>
+        {% endfor %}
+        {% for field in form %}
+            <div>
+            <label>{{ field.label }}</label>
+
+                {{ field }}
+            </div>
+            {% if field.errors %}
+            <div>
+            {{ field.errors }}
+            </div>
+            {% endif %}
+        {%  endfor %}
     <div class="ov-form__btn-container">
     <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red" onclick="showUserDeleteModal({{ object.id }})">Izbrisi korisnika</button>
     <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Odbaci</button>
-        <a id="submitForm" class="ov-form__btn" value="Potvrdi">Submit</a>
+        <a id="submitForm" class="ov-form__btn" value="Potvrdi" onclick="sumbitEditUserForm({{ object.id }})">Submit</a>
 
 </div>
 {% else %}
