@@ -48,8 +48,7 @@ function showUserEditModal(id) {
             success: (data) => modalContent.innerHTML = data,
         },
     );
-
-    };
+};
 function sumbitEditUserForm(id){
      const mm = $("#edit-emp-form");
         $.ajax({
