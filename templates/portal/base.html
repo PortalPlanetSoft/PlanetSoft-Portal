@@ -7,15 +7,93 @@
 
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <script src="{% static 'portal/js/jquery/jquery-3.6.0.min.js' %}"></script>
 
+
+    <link href="{% static 'portal/css/animations.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'portal/css/base.css' %}" rel="stylesheet" type="text/css">
-    <link rel="icon"href="{% static 'img/favicon.ico' %}">
-
+    <link href="{% static 'portal/css/navbar.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/css/form.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/css/modal.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/css/footer.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/css/responsive.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
 
 </head>
 <body>
-{% block body %}
-{% endblock %}
+<div class="ov-content">
+    <nav class="ov-nav">
+        <div class="ov-nav__left">
+            <img src="{% static 'portal/images/logo_green.png' %}" alt="Planet Soft Logo" class="ov-nav__logo">
+            <h1 class="ov-nav__title">PLANET SOFT</h1>
+        </div>
+        <div class="ov-nav__right">
+            <div class="ov-nav__navigation" id="ov-navigation">
+                {% if user.is_authenticated %}
+                    <a href="#" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
+                    <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
+                    <a href="#" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
+                    <a href="{% url 'profile' %}" class="ov-nav__item ov-nav__item--dropdown-toggle ov-nav__item--icon-only"><i
+                            class="fas fa-user"></i></a>
+                    <!-- <a href="{% url 'logout' %}" class="ov-nav__item"><i class="fa-solid fa-arrow-right-from-bracket"></i> ODJAVA</a> -->
+                    <div class="ov-nav__navigation-dropdown">
+                        <a href="{% url 'password-change' %}" class="ov-nav__item ov-nav__navigation-dropdown-item">PROMJENA
+                            ŠIFRE</a>
+                        <a href="{% url 'logout' %}" class="ov-nav__item ov-nav__navigation-dropdown-item"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i> ODJAVA</a>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+        <span class="ov-nav__hamburger-btn" id="ov-nav-toggle"><i class="fa-solid fa-bars"></i></span>
+    </nav>
+
+
+    <div id="modal-container" class="modal-container">
+        <div class="modal-header">
+
+        </div>
+        <div class="modal-content" id="modal-content">
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+
+    <div id="toast-container"><p id="toast-message"></p></div>
+
+    {% block body %}
+
+    {% endblock %}
+</div>
+
+<footer class="ov-footer">
+    <div class="ov-footer__card">
+        <h3 class="ov-footer__card-title">Banja Luka, sprat I</h3>
+        <address class="ov-footer__card-text"><b>TELEFON</b>: +387 51 327 110</address>
+        <address class="ov-footer__card-text"><b>EMAIL</b>: office@planetsoft.eu</address>
+        <address class="ov-footer__card-text"><b>ADRESA</b>: Svetozara Markovića 5, ulaz 11</address>
+    </div>
+    <div class="ov-footer__card">
+        <h3 class="ov-footer__card-title">Banja Luka, sprat III</h3>
+        <address class="ov-footer__card-text"><b>TELEFON</b>: +387 51 327 110</address>
+        <address class="ov-footer__card-text"><b>EMAIL</b>: office@planetsoft.eu</address>
+        <address class="ov-footer__card-text"><b>ADRESA</b>: Svetozara Markovića 5, ulaz 11</address>
+    </div>
+    <div class="ov-footer__card">
+        <h3 class="ov-footer__card-title">Beograd</h3>
+        <address class="ov-footer__card-text"><b>TELEFON</b>: +381 11 424 0936</address>
+        <address class="ov-footer__card-text"><b>EMAIL</b>: officebg@planetsoft.eu</address>
+        <address class="ov-footer__card-text"><b>ADRESA</b>: Airport City, Omladinskih brigada 90b</address>
+    </div>
+</footer>
+
+<script src="{% static 'portal/js/base.js' %}"></script>
+
+<script src="{% static 'portal/js/modal-utils.js' %}"></script>
+
+
 </body>
 </html>
