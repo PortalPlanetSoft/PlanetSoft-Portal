@@ -1,11 +1,13 @@
 <form id="create-emp-form" class="ov-form">
-<h3 class="ov-form__title">Dodavanje novog korisnika</h3>
-{% csrf_token %}
-{{ form.as_p }}
-<div class="ov-form__btn-container">
-    <a class="ov-form__btn" id="submitForm">Potvrdi</a>
-    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Odbaci</button>
-</div>
+    <h3 class="ov-form__title">Dodavanje novog korisnika</h3>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="ov-form__btn-container">
+        <a class="ov-form__btn" id="submitForm">Potvrdi</a>
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">
+            Odbaci
+        </button>
+    </div>
 </form>
 
 

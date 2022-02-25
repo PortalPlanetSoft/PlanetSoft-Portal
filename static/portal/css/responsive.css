@@ -117,8 +117,22 @@
   }
 
   /* LOGIN */
-  .ov-login .ov-form, .ov-password-change .ov-form{
+.ov-form, .ov-password-change .ov-form{
     width: 70%;
+  }
+  .ov-login {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .ov-login .ov-form {
+    width: 70%;
+  }
+  .ov-login__left {
+    width: 100%;
+  }
+  .ov-login__right {
+    display: none;
   }
 
   .ov-password-change .ov-form {

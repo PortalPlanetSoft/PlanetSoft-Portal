@@ -225,6 +225,6 @@ function pageReload() {
     window.location.reload();
 }
 
-function log(obj) {
+function log(obj){
     console.log(obj);
 }

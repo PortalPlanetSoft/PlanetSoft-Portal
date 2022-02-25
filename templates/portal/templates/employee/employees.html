@@ -9,25 +9,22 @@
             <div class="dk-i">
                 <i class="fas fa-search"></i>
             </div>
-            <label>Position:
+
+               <input type="radio" name="location" value="all" {% if location == None or location == 'all'  %}checked{% endif %} class="radio"> <label>Sve lokacije</label>
+               <input type="radio" name="location" value="BL" {% if location == 'BL'  %}checked{% endif %} class="radio"> <label>Banja Luka</label>
+                <input type="radio" name="location" value="BG" {% if location == 'BG'  %}checked{% endif %} class="radio"> <label>Beograd</label>
+
                 <select name="position">
-                    <option {% if selected == 'all' %} selected {% endif %}value="all">All positions</option>
+                <option {% if selected == 'all' %} selected {% endif %}value="all">Sve pozicije</option>
                     {% for position in position_list %}
                         <option {% if selected == position.pk %} selected {% endif %}
                                                                  value="{{ position.pk }}">{{ position.position_name }}</option>
                     {% endfor %}
                 </select>
-            </label>
 
-            <input type="radio" name="location" value="all"
-                   {% if location == None or location == 'all' %}checked{% endif %} class="radio"> <label>All
-            locations</label>
-            <input type="radio" name="location" value="BL" {% if location == 'BL' %}checked{% endif %} class="radio">
-            <label>Banja Luka</label>
-            <input type="radio" name="location" value="BG" {% if location == 'BG' %}checked{% endif %}
-                   class="radio"><label>Beograd</label>
 
-            <input type="submit" value="submit"/>
+
+            <input type="submit" value="submit" />
         </div>
         {% if user.is_admin or user.is_superuser %}
             <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i
