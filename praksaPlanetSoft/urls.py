@@ -32,7 +32,7 @@ urlpatterns = [
 
     path('password-change/',
          login_required(auth_views.PasswordChangeView.as_view(template_name='portal/templates/authentication'
-                                                                            '/password_change.html')),
+                                                                            '/password_change.html', success_url='/profile')),
          name='password-change'),
     path('', include('portal.urls')),
 ]

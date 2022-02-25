@@ -1,10 +1,12 @@
+<form id="delete-emp-form" class="ov-form">
 <h3 class="ov-form__title">Brisanje zaposlenog</h3>
 <div class="ov-delete-modal">
     {% csrf_token %}
     <p class="ov-delete-modal__question">Jeste li sigurni da želite da izbrišete zaposlenog:"{{ object }}"?</p>
     <div class="ov-form__btn-container">
-        <button type="button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Ne</button>
-        <input type="submit" value="Da" class="ov-form__btn">
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Ne</button>
+        <a type="submitForm" id="submitForm" value="Da" class="ov-form__btn">Da</a>
     </div>
 
 </div>
+</form>

@@ -48,7 +48,7 @@
                         <img src='{% static 'img/2.png' %}' alt='woman-profile'>
                     {% endif %}
                 </div>
-                <div class="dk-name" onclick="showUserPreviewModal({{ object.id }})">
+                <div class="dk-name">
                     <h4>{{ object.first_name }}</h4>  <h4>{{ object.last_name }}</h4></div>
                 <p>{{ object.company_position.position_name }}</p>
 
@@ -58,7 +58,7 @@
                         <i class="fa-regular fa-pen-to-square"></i>
                     {% else %}
                         <!-- OVDJE DODAJ JS I TO ZA OTVARANJE MODALA ZA PREVIEW  -->
-                        <a id="button-user-edit" class="button" href="{% url 'employee-preview' pk=object.pk%}">Detalji
+                        <a id="button-user-edit" class="button" onclick="showUserPreviewModal({{ object.id }})">Detalji
                         <i class="fa-regular fa-address-card"></i>
                     {% endif %}
                         </a>
