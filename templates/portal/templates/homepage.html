@@ -1,21 +1,5 @@
-{% extends 'portal/base.html' %}
-{% load static %}
+{% extends "../base.html" %}
 
-{% block body %}
-        <div class="ov-container-center-content ov-login">
-        <div class="ov-login__left">
-            <form class="ov-form" method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div>
-                    <button class="ov-form__btn" type="submit">Prijava</button>
-                </div>
-            </form>
-        </div>
-        <div class="ov-login__right">
-            <img src='{% static 'img/login_image.jpg' %}' alt="">
-        </div>
-
-    </div>
+{% block body%}
 
 {% endblock %}
