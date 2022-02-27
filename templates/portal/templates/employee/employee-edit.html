@@ -1,5 +1,5 @@
-<form id="edit-emp-form" class="ov-form">
-<h3 class="ov-form__title">Uređivanje postojećeg korisnika</h3>
+<form id="edit-emp-form" enctype="multipart/form-data" class="ov-form">
+    <h3 class="ov-form__title">Uređivanje postojećeg korisnika</h3>
 
 {% if form %}
     {% csrf_token %}
@@ -25,11 +25,13 @@
     <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Odbaci</button>
         <a id="submitForm" class="ov-form__btn" value="Potvrdi" onclick="sumbitEditUserForm({{ object.id }})">Submit</a>
 
-</div>
-{% else %}
-    {{ form_preview.as_p }}
-    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Zatvori</button>
-{% endif %}
+        </div>
+    {% else %}
+        {{ form_preview.as_p }}
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">
+            Zatvori
+        </button>
+    {% endif %}
 </form>
 
 

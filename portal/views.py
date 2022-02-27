@@ -1,10 +1,12 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.views import PasswordChangeView
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.http import Http404
 from django.shortcuts import render
-from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView, FormView
 
-from portal.forms import AddEmployeeForm, EditEmployeeForm
+from portal.forms import AddEmployeeForm, EditEmployeeForm, ProfileForm
 from users.models import User, CompanyPosition
 
 '''class HomePage(TemplateView):
@@ -87,7 +89,7 @@ class EmployeeCreate(UserPassesTestMixin, CreateView):
         if self.request.user.is_admin or self.request.user.is_superuser:
             return True
         else:
-            raise Http404("You are not authorized to add new employees")  # todo promjeni response
+            raise PermissionDenied("You are not authorized to add new employees")
 
 
 class EmployeeUpdate(UserPassesTestMixin, UpdateView):
@@ -110,7 +112,7 @@ class EmployeeUpdate(UserPassesTestMixin, UpdateView):
         if self.request.user.is_admin or self.request.user.is_superuser:
             return True
         else:
-            raise Http404("You are not authorized to edit employees")  # todo promjeni response
+            raise PermissionDenied("You are not authorized to edit employees")
 
 
 class EmployeeDelete(UserPassesTestMixin, DeleteView):
@@ -121,15 +123,19 @@ class EmployeeDelete(UserPassesTestMixin, DeleteView):
     def test_func(self):
         if self.request.user.is_admin or self.request.user.is_superuser:
             return True
-        else:
-            raise Http404("You are not authorized to delete employees")  # todo promjeni response
+        elif self.request.user.is_authenticated:
+            raise PermissionDenied("You are not authorized to delete employees")
+        raise
 
 
-class Profile(DetailView):
+class Profile(UpdateView, FormView):
     template_name = 'portal/templates/authentication/profile.html'
+    form_class = ProfileForm
+    model = User
+    success_url = '/profile/'
 
     def get_object(self, queryset=None):
-        return User.objects.filter(pk=self.request.user.id)
+        return User.objects.filter(pk=self.request.user.id).first()
 
 
 class Preview(DetailView):
@@ -151,17 +157,24 @@ class Preview(DetailView):
         return context
 
 
+class PasswordChange(PasswordChangeView):
+    success_url = reverse_lazy('logout')
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form), status=401)
+
+
 def error_500(request, exception=None):
-    return render(request, "errors/500.html", {})
+    return render(request, "errors/500.html", {'error_message': exception})
 
 
 def error_404(request, exception):
-    return render(request, "errors/404.html", {})
+    return render(request, "errors/404.html", {'error_message': exception})
 
 
 def error_403(request, exception=None):
-    return render(request, "errors/403.html", {})
+    return render(request, "errors/403.html", {'error_message': exception})
 
 
 def error_400(request, exception=None):
-    return render(request, "errors/400.html", {})
+    return render(request, "errors/400.html", {'error_message': exception})
