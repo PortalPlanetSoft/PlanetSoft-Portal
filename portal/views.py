@@ -2,12 +2,11 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView
+from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView, FormView
 
-from portal.forms import AddEmployeeForm, EditEmployeeForm
+from portal.forms import AddEmployeeForm, EditEmployeeForm, ProfileForm
 from users.models import User, CompanyPosition
 
 '''class HomePage(TemplateView):
@@ -129,8 +128,9 @@ class EmployeeDelete(UserPassesTestMixin, DeleteView):
         raise
 
 
-class Profile(DetailView):
+class Profile(DetailView, FormView):
     template_name = 'portal/templates/authentication/profile.html'
+    form_class = ProfileForm
 
     def get_object(self, queryset=None):
         return User.objects.filter(pk=self.request.user.id)
