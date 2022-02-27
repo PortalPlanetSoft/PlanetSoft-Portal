@@ -1,7 +1,9 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.views import PasswordChangeView
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView
 
 from portal.forms import AddEmployeeForm, EditEmployeeForm
@@ -149,6 +151,13 @@ class Preview(DetailView):
         form.base_fields = base_fields'''
         context['form_preview'] = EditEmployeeForm(instance=context['object'].get(), disable_fields=True)
         return context
+
+
+class PasswordChange(PasswordChangeView):
+    success_url = reverse_lazy('logout')
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form), status=401)
 
 
 def error_500(request, exception=None):

@@ -1,6 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
 
+from praksaPlanetSoft import settings
 from users.models import CompanyPosition
 from .models import User
 
@@ -46,13 +47,15 @@ class AddEmployeeForm(forms.ModelForm):
     gender = forms.ChoiceField(widget=forms.RadioSelect, choices=User.GENDER_CHOICES)
     gender.required = False
     work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
+
     field_order = ['username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
-                   'work_location', 'is_admin', 'is_editor']
+                   'work_location', 'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone',
+                   'profile_pic']
 
     class Meta:
         model = User
         fields = {'username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
-                  'work_location', 'is_admin', 'is_editor', 'profile_pic'}
+                  'work_location', 'is_admin', 'is_editor', 'profile_pic', 'birth_date', 'phone', 'business_phone'}
         help_texts = {
             "username": None,
         }
@@ -63,17 +66,23 @@ class AddEmployeeForm(forms.ModelForm):
             'is_admin': _('Admin'),
             'is_editor': _('Editor'),
             'profile_pic': _('Avatar'),
+            'birth_date': _('Datum rođenja'),
+            'phone': _('Broj telefona'),
+            'business_phone': _('Poslovni broj telefona'),
         }
 
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': 'Username'}),
-            'password': forms.PasswordInput(attrs={'placeholder': 'Password'}),
-            'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
-            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
-            'email': forms.TextInput(attrs={'placeholder': 'Email Address'}),
+            'password': forms.PasswordInput(attrs={'placeholder': 'Lozinka'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Ime'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Prezime'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Email adresa'}),
             'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
             'is_admin': forms.CheckboxInput(attrs={'label': 'Admin'}),
             'is_editor': forms.CheckboxInput(attrs={'label': 'Editor'}),
+            'birth_date': forms.DateInput(attrs={'placeholder': 'Datum rođenja', 'type': 'date'}),
+            'phone': forms.TextInput(attrs={'placeholder': 'Broj telefona'}),
+            'business_phone': forms.TextInput(attrs={'placeholder': 'Poslovni broj telefona'})
         }
 
     def save(self, commit=True):
@@ -92,12 +101,12 @@ class EditEmployeeForm(forms.ModelForm):
     gender.required = False
     work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
     field_order = ['username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
-                   'is_admin', 'is_editor']
+                   'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone', 'profile_pic']
 
     class Meta:
         model = User
         fields = {'username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
-                  'is_admin', 'is_editor', 'profile_pic'}
+                  'is_admin', 'is_editor', 'profile_pic', 'birth_date', 'phone', 'business_phone'}
 
         help_texts = {
             "username": None,
@@ -109,6 +118,9 @@ class EditEmployeeForm(forms.ModelForm):
             'is_admin': _('Admin'),
             'is_editor': _('Editor'),
             'profile_pic': _('Avatar'),
+            'birth_date': _('Datum rođenja'),
+            'phone': _('Broj telefona'),
+            'business_phone': _('Poslovni broj telefona'),
         }
 
         widgets = {
@@ -119,6 +131,9 @@ class EditEmployeeForm(forms.ModelForm):
             'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
             'is_admin': forms.CheckboxInput(attrs={'label': 'Admin'}),
             'is_editor': forms.CheckboxInput(attrs={'label': 'Editor'}),
+            'birth_date': forms.DateInput(attrs={'placeholder': 'Datum rođenja', 'type': 'date'}),
+            'phone': forms.TextInput(attrs={'placeholder': 'Broj telefona'}),
+            'business_phone': forms.TextInput(attrs={'placeholder': 'Poslovni broj telefona'})
         }
 
     def __init__(self, disable_fields=False, *args, **kwargs):
@@ -134,5 +149,8 @@ class EditEmployeeForm(forms.ModelForm):
             self.fields['is_admin'].disabled = True
             self.fields['is_editor'].disabled = True
             self.fields['profile_pic'].disabled = True
+            self.fields['business_phone'].disabled = True
+            self.fields['phone'].disabled = True
+            self.fields['birth_date'].disabled = True
 
 

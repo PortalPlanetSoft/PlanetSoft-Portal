@@ -28,3 +28,6 @@ class User(AbstractUser):
     work_location = models.CharField(max_length=2, choices=WORK_LOCATION, default='BL')
     company_position = models.ForeignKey(CompanyPosition, on_delete=models.PROTECT, default=None)
     profile_pic = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    birth_date = models.DateField(null=True, default=None, blank=True)
+    phone = models.CharField(max_length=15, null=True, blank=True)
+    business_phone = models.CharField(max_length=15, null=True, blank=True)
