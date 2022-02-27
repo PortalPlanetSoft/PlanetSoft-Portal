@@ -1,4 +1,4 @@
-<form id="create-emp-form" class="ov-form">
+<form id="create-emp-form" enctype="multipart/form-data" class="ov-form">
     <h3 class="ov-form__title">Dodavanje novog korisnika</h3>
     {% csrf_token %}
     {{ form.as_p }}

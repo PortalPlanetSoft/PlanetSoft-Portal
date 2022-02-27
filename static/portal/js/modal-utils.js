@@ -45,13 +45,11 @@ function showPasswordChangeModal() {
             $.ajax({
                     url: urlAddress + '/password-change/',
                     type: 'POST',
-                    dataType: 'html',
                     data: mm.serialize(),
                     success: function (data, textStatus, xhr) {
                         sessionStorage.clear();
                         sessionStorage.setItem("result", 1);
                         closeFunction();
-                        pageReload();
                     },
                     error: function (data, xhr, textStatus) {
                         sessionStorage.clear();
@@ -225,6 +223,6 @@ function pageReload() {
     window.location.reload();
 }
 
-function log(obj){
+function log(obj) {
     console.log(obj);
 }
