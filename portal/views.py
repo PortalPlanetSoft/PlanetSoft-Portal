@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.views import PasswordChangeView
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render
@@ -89,7 +90,7 @@ class EmployeeCreate(UserPassesTestMixin, CreateView):
         if self.request.user.is_admin or self.request.user.is_superuser:
             return True
         else:
-            raise Http404("You are not authorized to add new employees")  # todo promjeni response
+            raise PermissionDenied("You are not authorized to add new employees")
 
 
 class EmployeeUpdate(UserPassesTestMixin, UpdateView):
@@ -112,7 +113,7 @@ class EmployeeUpdate(UserPassesTestMixin, UpdateView):
         if self.request.user.is_admin or self.request.user.is_superuser:
             return True
         else:
-            raise Http404("You are not authorized to edit employees")  # todo promjeni response
+            raise PermissionDenied("You are not authorized to edit employees")
 
 
 class EmployeeDelete(UserPassesTestMixin, DeleteView):
@@ -123,8 +124,9 @@ class EmployeeDelete(UserPassesTestMixin, DeleteView):
     def test_func(self):
         if self.request.user.is_admin or self.request.user.is_superuser:
             return True
-        else:
-            raise Http404("You are not authorized to delete employees")  # todo promjeni response
+        elif self.request.user.is_authenticated:
+            raise PermissionDenied("You are not authorized to delete employees")
+        raise
 
 
 class Profile(DetailView):
@@ -161,16 +163,16 @@ class PasswordChange(PasswordChangeView):
 
 
 def error_500(request, exception=None):
-    return render(request, "errors/500.html", {})
+    return render(request, "errors/500.html", {'error_message': exception})
 
 
 def error_404(request, exception):
-    return render(request, "errors/404.html", {})
+    return render(request, "errors/404.html", {'error_message': exception})
 
 
 def error_403(request, exception=None):
-    return render(request, "errors/403.html", {})
+    return render(request, "errors/403.html", {'error_message': exception})
 
 
 def error_400(request, exception=None):
-    return render(request, "errors/400.html", {})
+    return render(request, "errors/400.html", {'error_message': exception})
