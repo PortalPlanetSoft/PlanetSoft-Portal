@@ -3,6 +3,7 @@
 {% block body %}
 <div class="ov-container-center-content">
     <form class="ov-form" method="POST">
+        {% csrf_token %}
         {{ form.as_p }}
         <div>
             <button class="ov-form__btn" type="submit">Potvrdi</button>

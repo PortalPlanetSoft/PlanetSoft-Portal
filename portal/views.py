@@ -128,12 +128,14 @@ class EmployeeDelete(UserPassesTestMixin, DeleteView):
         raise
 
 
-class Profile(DetailView, FormView):
+class Profile(UpdateView, FormView):
     template_name = 'portal/templates/authentication/profile.html'
     form_class = ProfileForm
+    model = User
+    success_url = '/profile/'
 
     def get_object(self, queryset=None):
-        return User.objects.filter(pk=self.request.user.id)
+        return User.objects.filter(pk=self.request.user.id).first()
 
 
 class Preview(DetailView):
