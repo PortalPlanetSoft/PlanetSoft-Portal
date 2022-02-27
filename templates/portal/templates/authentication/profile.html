@@ -1,5 +1,12 @@
 {% extends 'portal/base.html' %}
 
 {% block body %}
-{{ form.as_p }}
+<div class="ov-container-center-content">
+    <form class="ov-form" method="POST">
+        {{ form.as_p }}
+        <div>
+            <button class="ov-form__btn" type="submit">Potvrdi</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

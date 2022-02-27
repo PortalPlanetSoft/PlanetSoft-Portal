@@ -106,6 +106,10 @@
     display: block;
     width: 90%;
   }
+  .ov-form input[type="date"],
+  .ov-form input[type="file"] {
+    font-size: 2rem;
+  }
   .ov-form option{
     font-size: 1rem;
   }
