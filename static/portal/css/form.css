@@ -164,3 +164,7 @@
 .dv-profile-form .ov-form__btn {
   width: unset;
 }
+.dv-detail-button{
+  width: 90%;
+  margin: 1rem auto;
+}
