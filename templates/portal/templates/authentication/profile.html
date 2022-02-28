@@ -1,9 +1,9 @@
 {% extends 'portal/base.html' %}
 
 {% block body %}
-    <form method="post">
+    <form method="post" class="ov-form dv-profile-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Submit</button>
+    <a class="ov-form__btn" type="submit">Submit</a>
     </form>
 {% endblock %}

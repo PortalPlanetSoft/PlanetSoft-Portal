@@ -1,4 +1,8 @@
 @media only screen and (max-width: 1200px) {
+  input[type=radio], input[type=checkbox]{
+    height: 2rem;
+    width: 2rem;
+  }
   /* NAVIGATION */
   .ov-nav {
     flex-direction: column;
@@ -56,13 +60,43 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
+    font-size: 2rem;
   }
   .dk-search input {
     font-size: 2rem;
     padding: 1rem;
+    width: 90%;
   }
-  .dk-search a {
+  .dk-search input[type=radio]{
+    height: 2rem;
+    width: 2rem;
+  }
+  .dk-search select{
     font-size: 2rem;
+    width: 70%;
+    display: block;
+    outline: none;
+    padding: 0.25rem;
+    border: 1px solid var(--primary);
+    border-radius: 0.5rem;
+  }
+  .dk-search a{
+    font-size: 2rem;
+  }
+  .dv-input-container option{
+    font-size: 0.8rem;
+  }
+
+  .dv-input-container{
+    flex-direction: column;
+    gap: 2rem;
+    font-size: 2rem;
+  }
+  .dk-i > svg{
+    position: absolute;
+    bottom: 40%;
+    right: 10%;
   }
   /* CARDS */
   .dk-grid-container {
@@ -101,10 +135,16 @@
   .ov-form input[type='email'],
   .ov-form select,
   .ov-form input[type='submit'],
-  .ov-form button {
+  .ov-form button,
+  .ov-form input[type=date],
+  .ov-form input[type=file]{
     font-size: 3rem;
     display: block;
     width: 90%;
+  }
+  .ov-form a{
+    font-size: 3rem;
+    width: 84%;
   }
   .ov-form option{
     font-size: 1rem;

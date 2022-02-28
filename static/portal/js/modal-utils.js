@@ -84,7 +84,7 @@ function showUserEditModal(id) {
         },
     );
 };
-function sumbitEditUserForm(id){
+function submitEditUserForm(id){
      const mm = $("#edit-emp-form");
         $.ajax({
                  url: urlAddress + '/employees/' + id + '/',
@@ -120,7 +120,7 @@ function showUserDeleteModal(id) {
     );
 }
 
-function sumbitUserDeleteForm(id){
+function submitUserDeleteForm(id){
     const mm = $("#delete-emp-form");
         $.ajax({
                 url: urlAddress + '/employees/delete/' + id + '/',
@@ -225,4 +225,8 @@ function pageReload() {
 
 function log(obj) {
     console.log(obj);
+}
+
+function submitFilterForm(){
+    document.forms["userFilterForm"].submit();
 }
