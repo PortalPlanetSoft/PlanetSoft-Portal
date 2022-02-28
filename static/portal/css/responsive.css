@@ -135,12 +135,14 @@
   .ov-form input[type='email'],
   .ov-form select,
   .ov-form input[type='submit'],
-  .ov-form button,
-  .ov-form input[type=date],
-  .ov-form input[type=file]{
+  .ov-form button {
     font-size: 3rem;
     display: block;
     width: 90%;
+  }
+  .ov-form input[type="date"],
+  .ov-form input[type="file"] {
+    font-size: 2rem;
   }
   .ov-form a{
     font-size: 3rem;
