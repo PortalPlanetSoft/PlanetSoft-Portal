@@ -82,35 +82,32 @@ function showUserEditModal(id) {
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
-    ).then(res => {
-        $('a#submitForm').on('click', e => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('Link clicked')
-                const mm = $("#edit-emp-form");
-                $.ajax({
-                        url: urlAddress + '/employees/' + id + '/',
-                        type: 'post',
-                        dataType: 'html',
-                        data: mm.serialize(),
-                        success: function (data, textStatus, xhr) {
-                            sessionStorage.clear();
-                            sessionStorage.setItem("result", 1);
-                            closeFunction();
-                        },
-                        error: function (data, xhr, textStatus) {
-                            sessionStorage.clear();
-                            sessionStorage.setItem("result", 0);
-                            showToast(0);
-                            sessionStorage.clear();
-                        },
-                    },
-                );
-
-            },
-        );
-    });
+    );
+};
+function submitEditUserForm(id){
+     const mm = $("#edit-emp-form");
+        $.ajax({
+                 url: urlAddress + '/employees/' + id + '/',
+                type: 'post',
+                dataType: 'html',
+                data: mm.serialize(),
+                success: function (data, textStatus, xhr) {
+                    sessionStorage.clear();
+                    sessionStorage.setItem("result", 1);
+                    closeFunction();
+                },
+                error: function (data, xhr, textStatus) {
+                    sessionStorage.clear();
+                    sessionStorage.setItem("result", 0);
+                    showToast(0);
+                    sessionStorage.clear();
+                    modalContent.innerHTML = data.responseText;
+                },
+           },
+       );
 }
+
+
 
 //onclick function for user deleting modal
 function showUserDeleteModal(id) {
@@ -120,31 +117,31 @@ function showUserDeleteModal(id) {
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
-    ).then(res => {
-        $("a#submitForm").on("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation()
-            const mm = $("#delete-emp-form");
-            $.ajax({
-                    url: urlAddress + '/employees/delete/' + id + '/',
-                    type: 'POST',
-                    data: mm.serialize(),
-                    success: function (data, textStatus, xhr) {
-                        sessionStorage.clear();
-                        sessionStorage.setItem("result", 2);
-                        closeFunction();
-                        pageReload();
-                    },
-                    error: function (data, xhr, textStatus) {
-                        sessionStorage.clear();
-                        sessionStorage.setItem("result", 0);
-                        showToast(0);
-                        sessionStorage.clear();
-                    },
+    );
+}
+
+function submitUserDeleteForm(id){
+    const mm = $("#delete-emp-form");
+        $.ajax({
+                url: urlAddress + '/employees/delete/' + id + '/',
+                type: 'POST',
+                data: mm.serialize(),
+                success: function (data, textStatus, xhr) {
+                    sessionStorage.clear();
+                    sessionStorage.setItem("result", 2);
+                    closeFunction();
+                    pageReload();
                 },
-            );
-        })
-    });
+                error: function (data, xhr, textStatus) {
+                    sessionStorage.clear();
+                    sessionStorage.setItem("result", 0);
+                    showToast(0);
+                    sessionStorage.clear();
+                    x
+                },
+            },
+        );
+
 }
 
 
@@ -156,31 +153,34 @@ function showUserAddModal() {
         type: 'get',
         dataType: 'html',
         success: (data) => modalContent.innerHTML = data,
-    }).then(res => {
-        $("a#submitForm").on("click", (e) => {
-            e.preventDefault();
-            const mm = $("#create-emp-form");
-            $.ajax({
-                url: urlAddress + '/employees/create/',
-                type: 'post',
-                dataType: 'html',
-                data: mm.serialize(),
-                success: function (data, textStatus, xhr) {
-                    sessionStorage.clear();
-                    sessionStorage.setItem("result", 1);
-                    closeFunction();
-                    pageReload();
-                },
-                error: function (data, xhr, textStatus) {
-                    sessionStorage.clear();
-                    sessionStorage.setItem("result", 0);
-                    showToast(0);
-                    sessionStorage.clear();
-                },
-            });
-        })
-
     });
+
+
+}
+
+function submitCreateUserForm(){
+    const mm = $("#create-emp-form");
+        $.ajax({
+            url: urlAddress + '/employees/create/',
+            type: 'post',
+            dataType: 'html',
+            data: mm.serialize(),
+            success: function (data, textStatus, xhr) {
+                sessionStorage.clear();
+                sessionStorage.setItem("result", 1);
+                closeFunction();
+                pageReload();
+
+            },
+            error: function (data, xhr, textStatus) {
+                sessionStorage.clear();
+                sessionStorage.setItem("result", 0);
+                showToast(0);
+                sessionStorage.clear();
+                modalContent.innerHTML = data.responseText;
+            },
+        });
+
 }
 
 //toast message that is displayed every time a successful/unsuccessful change is made
@@ -225,4 +225,8 @@ function pageReload() {
 
 function log(obj) {
     console.log(obj);
+}
+
+function submitFilterForm(){
+    document.forms["userFilterForm"].submit();
 }

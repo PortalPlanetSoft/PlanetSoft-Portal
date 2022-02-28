@@ -68,6 +68,11 @@
   padding: 0.5rem 1.25rem;
   border-radius: 5px;
 }
+.ov-form a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .ov-form__btn--blue {
   background-color: var(--primary-light);
 }
@@ -151,4 +156,11 @@
 .ov-password-change div{
   padding: 1rem 2rem;
   color: var(--primary);
+}
+
+.dv-profile-form {
+  max-height: none;
+}
+.dv-profile-form .ov-form__btn {
+  width: unset;
 }

@@ -64,13 +64,12 @@ class AddEmployeeForm(forms.ModelForm):
     work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
 
     field_order = ['username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
-                   'work_location', 'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone',
-                   'profile_pic']
+                   'work_location', 'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone']
 
     class Meta:
         model = User
         fields = {'username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
-                  'work_location', 'is_admin', 'is_editor', 'profile_pic', 'birth_date', 'phone', 'business_phone'}
+                  'work_location', 'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone'}
         help_texts = {
             "username": None,
         }
@@ -107,12 +106,12 @@ class EditEmployeeForm(forms.ModelForm):
     gender.required = False
     work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
     field_order = ['username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
-                   'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone', 'profile_pic']
+                   'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone']
 
     class Meta:
         model = User
         fields = {'username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
-                  'is_admin', 'is_editor', 'profile_pic', 'birth_date', 'phone', 'business_phone'}
+                  'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone'}
 
         help_texts = {
             "username": None,
@@ -145,7 +144,6 @@ class EditEmployeeForm(forms.ModelForm):
             self.fields['work_location'].disabled = True
             self.fields['is_admin'].disabled = True
             self.fields['is_editor'].disabled = True
-            self.fields['profile_pic'].disabled = True
             self.fields['business_phone'].disabled = True
             self.fields['phone'].disabled = True
             self.fields['birth_date'].disabled = True

@@ -3,18 +3,22 @@
 
 
 {% block body %}
-    <form class="dk-search">
-        <div class="ov-input-container">
+    <form class="dk-search" name="userFilterForm">
+        <div class="dv-input-container">
+        <div>
             <input type="text" placeholder="PRETRAGA.." name="search">
-            <div class="dk-i">
+            <div class="dk-i" onclick="submitFilterForm()">
                 <i class="fas fa-search"></i>
             </div>
+        </div>
+        <div>
+             <input onchange="submitFilterForm()" type="radio" name="location" value="all" {% if location == None or location == 'all'  %}checked{% endif %} class="radio"> <label>Sve lokacije</label>
+             <input onchange="submitFilterForm()" type="radio" name="location" value="BL" {% if location == 'BL'  %}checked{% endif %} class="radio"> <label>Banja Luka</label>
+             <input onchange="submitFilterForm()" type="radio" name="location" value="BG" {% if location == 'BG'  %}checked{% endif %} class="radio"> <label>Beograd</label>
+        </div>
 
-               <input type="radio" name="location" value="all" {% if location == None or location == 'all'  %}checked{% endif %} class="radio"> <label>Sve lokacije</label>
-               <input type="radio" name="location" value="BL" {% if location == 'BL'  %}checked{% endif %} class="radio"> <label>Banja Luka</label>
-                <input type="radio" name="location" value="BG" {% if location == 'BG'  %}checked{% endif %} class="radio"> <label>Beograd</label>
 
-                <select name="position">
+                <select name="position" onchange="submitFilterForm()">
                 <option {% if selected == 'all' %} selected {% endif %}value="all">Sve pozicije</option>
                     {% for position in position_list %}
                         <option {% if selected == position.pk %} selected {% endif %}
@@ -24,7 +28,7 @@
 
 
 
-            <input type="submit" value="submit" />
+
         </div>
         {% if user.is_admin or user.is_superuser %}
             <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i

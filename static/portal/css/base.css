@@ -87,15 +87,15 @@ a:hover {
 
 .dk-search {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin-top: 2.5rem;
 }
 
 .dk-search input {
     padding: 0.5rem;
     font-size: 0.7rem;
     border: 1px solid var(--primary);
-    margin-top: 2.5rem;
-    margin-left: 11rem;
+
     border-radius: 0.5rem;
     width: 15rem;
     display: inline;
@@ -109,8 +109,6 @@ a:hover {
 }
 
 .dk-search a {
-    margin-top: 2.5rem;
-    margin-right: 11rem;
     border: none;
     font-size: 1.1rem;
     color: var(--primary);
@@ -261,4 +259,9 @@ a:hover {
 
 #toast-container.show {
     visibility: visible;
+}
+.dv-input-container{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
 }
