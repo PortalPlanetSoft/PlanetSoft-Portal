@@ -32,7 +32,7 @@ window.onload = function () {
 function showPasswordChangeModal() {
     modalContainer.style.display = "flex";
     $.ajax({
-            url: urlAddress + '/password-change/',
+            url: urlAddress + '/employees/password-change/',
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
@@ -43,7 +43,7 @@ function showPasswordChangeModal() {
             console.log('Link clicked');
             const mm = $("#password-change-form");
             $.ajax({
-                    url: urlAddress + '/password-change/',
+                    url: urlAddress + '/employees/password-change/',
                     type: 'POST',
                     data: mm.serialize(),
                     success: function (data, textStatus, xhr) {
@@ -67,7 +67,7 @@ function showPasswordChangeModal() {
 function showUserPreviewModal(id) {
     modalContainer.style.display = "flex";
     $.ajax({
-            url: urlAddress + '/employees/preview/' + id + '/',
+            url: urlAddress + '/employees/' + id + '/',
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
