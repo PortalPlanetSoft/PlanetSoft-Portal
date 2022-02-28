@@ -14,8 +14,8 @@ urlpatterns = [
     path('logout/',
          login_required(auth_views.LogoutView.as_view(template_name='users/authentication/logged_out.html')),
          name='logout'),
-
     path('employees/', include('users.urls')),
+    path('news/', include('news.urls')),
 ]
 
 if settings.DEBUG:
