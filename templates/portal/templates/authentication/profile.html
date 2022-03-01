@@ -1,13 +1,25 @@
 {% extends 'portal/base.html' %}
+{% load static %}
 
 {% block body %}
-<div class="ov-container-center-content">
-    <form class="ov-form dv-profile-form" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div>
-            <button class="ov-form__btn" type="submit">Potvrdi</button>
-        </div>
-    </form>
-</div>
+    <div class="ov-container-center-content">
+        <form class="ov-form dv-profile-form" enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <div class="dk-icon">
+                {% if object.profile_pic %}
+                    <img src={{ object.profile_pic.url }}>
+                {% else %}
+                    {% if object.gender == 'M' %}
+                        <img src='{% static 'img/1.png' %}' alt='man-profile'>
+                    {% else %}
+                        <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+                    {% endif %}
+                {% endif %}
+            </div>
+            {{ form.as_p }}
+            <div>
+                <button class="ov-form__btn" type="submit">Potvrdi</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
