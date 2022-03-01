@@ -125,6 +125,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  min-height: 95vh;
 }
 .ov-login__left {
   width: 40%;
@@ -133,6 +134,7 @@
   width: 50%;
   border: none;
   box-shadow: none;
+
 }
 .ov-login img {
   width: 50%;
