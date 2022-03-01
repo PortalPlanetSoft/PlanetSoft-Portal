@@ -7,7 +7,6 @@
   max-height: 70vh;
   overflow: unset;
   width: 40%;
-  
 }
 .ov-form__title {
   color: var(--primary);
@@ -28,7 +27,8 @@
 .ov-form label:not(:first-child) {
   display: inline;
 }
-.ov-form p, .ov-form div{
+.ov-form p,
+.ov-form div {
   margin: 0 2rem;
 }
 .ov-form input[type='text'],
@@ -50,9 +50,9 @@
   border-radius: 5px;
   outline: none;
   font-size: 1rem;
-  padding: .3rem;
+  padding: 0.3rem;
 }
-.ov-form input[type="date"] {
+.ov-form input[type='date'] {
   color: var(--primary);
   border: 1px solid var(--primary);
   border-radius: 5px;
@@ -60,6 +60,26 @@
   padding: 5px;
   background-color: var(--white);
 }
+.ov-form input[type="file"] {
+  visibility: hidden;
+ }
+ .ov-form label[for="id_profile_pic"] {
+   position: relative;
+ }
+ .ov-form label[for="id_profile_pic"]::after{
+   content: "Izaberite avatara";
+   position: absolute;
+   left: 0;
+   bottom: -50%;
+   font-size: 1rem;
+   background-color: var(--primary-light);
+   padding: .5rem;
+   border: 1px solid var(--primary);
+   border-radius: 5px;
+ }
+ .ov-form label[for="id_profile_pic"]:hover::after {
+   cursor: pointer;
+ }
 
 .ov-form__btn-container {
   display: flex;
@@ -102,7 +122,7 @@
   border-color: var(--alert-light);
 }
 
-.dv-btn-delete{
+.dv-btn-delete {
   border: 1px solid red;
   outline: none;
   background-color: #ecf4d4;
@@ -121,10 +141,12 @@
   justify-content: center;
   height: 90%;
 }
-.ov-form, .ov-password-change .ov-form{
+.ov-form,
+.ov-password-change .ov-form {
   width: 25%;
 }
-.ov-form__btn, .ov-password-change .ov-form__btn{
+.ov-form__btn,
+.ov-password-change .ov-form__btn {
   display: block;
   width: 100%;
   font-size: 1.25rem;
@@ -142,14 +164,13 @@
   width: 50%;
   border: none;
   box-shadow: none;
-
 }
 .ov-login img {
   width: 50%;
 }
 .ov-login button {
   width: unset;
-  padding: .5rem 3rem;
+  padding: 0.5rem 3rem;
 }
 .ov-logout a {
   background-color: var(--primary);
@@ -157,13 +178,13 @@
   padding: 1rem 3rem;
   margin: 1rem 0;
   border-radius: 5px;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 .ov-logout a:hover {
   background-color: var(--primary);
   filter: brightness(1.2);
 }
-.ov-password-change div{
+.ov-password-change div {
   padding: 1rem 2rem;
   color: var(--primary);
 }
@@ -174,7 +195,7 @@
 .dv-profile-form .ov-form__btn {
   width: unset;
 }
-.dv-detail-button{
+.dv-detail-button {
   width: 90%;
   margin: 1rem auto;
 }

@@ -151,6 +151,10 @@
   .ov-form input[type="file"] {
     font-size: 2rem;
   }
+
+  .ov-form label[for="id_profile_pic"]::after {
+    font-size: 2rem;
+  }
   .ov-form a{
     font-size: 3rem;
     width: 84%;
