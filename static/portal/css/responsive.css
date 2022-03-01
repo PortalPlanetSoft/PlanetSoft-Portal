@@ -181,9 +181,10 @@
   }
   .ov-login__left {
     width: 100%;
+    order: 1;
   }
-  .ov-login__right {
-    display: none;
+  .ov-login__right img{
+    width: 100%;
   }
 
   .ov-password-change .ov-form {
