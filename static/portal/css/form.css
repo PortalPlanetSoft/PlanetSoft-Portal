@@ -58,6 +58,7 @@
   border-radius: 5px;
   outline: none;
   padding: 5px;
+  background-color: var(--white);
 }
 
 .ov-form__btn-container {
