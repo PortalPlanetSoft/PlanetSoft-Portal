@@ -3,7 +3,7 @@ from django.contrib.auth.views import PasswordChangeView
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView, FormView
+from django.views.generic import CreateView, UpdateView, ListView, DeleteView, FormView
 
 from users.forms import AddEmployeeForm, EditEmployeeForm, ProfileForm
 from users.models import User, CompanyPosition
@@ -115,25 +115,6 @@ class EmployeeDelete(UserPassesTestMixin, DeleteView):
         elif self.request.user.is_authenticated:
             raise PermissionDenied("You are not authorized to delete employees")
         raise
-
-
-class Preview(DetailView):
-    template_name = 'users/employee/employee-edit.html'
-
-    def get_object(self, queryset=None):
-        return User.objects.filter(pk=self.kwargs['pk'])
-
-    def get_context_data(self, **kwargs):
-        context = super(Preview, self).get_context_data(**kwargs)
-        # todo pitaj ovo
-        ''' todo pitaj
-        base_fields = {}
-        for field in form.base_fields.items():
-            field[1].disabled = True
-            base_fields[field[0]] = field[1]
-        form.base_fields = base_fields'''
-        context['form_preview'] = EditEmployeeForm(instance=context['object'].get(), disable_fields=True)
-        return context
 
 
 class Profile(UpdateView, FormView):
