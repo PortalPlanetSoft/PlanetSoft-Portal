@@ -60,26 +60,32 @@
   padding: 5px;
   background-color: var(--white);
 }
+.ov-form input[type="file"]::file-selector-button {
+  display: none;
+}
 .ov-form input[type="file"] {
-  visibility: hidden;
- }
- .ov-form label[for="id_profile_pic"] {
-   position: relative;
- }
- .ov-form label[for="id_profile_pic"]::after{
-   content: "Izaberite avatara";
-   position: absolute;
-   left: 0;
-   bottom: -50%;
-   font-size: 1rem;
-   background-color: var(--primary-light);
-   padding: .5rem;
-   border: 1px solid var(--primary);
-   border-radius: 5px;
- }
- .ov-form label[for="id_profile_pic"]:hover::after {
-   cursor: pointer;
- }
+  width: 50%;
+  margin-left: 50%;
+  color: var(--primary);
+}
+.ov-form label[for="id_profile_pic"] {
+  position: relative;
+}
+.ov-form label[for="id_profile_pic"]::after{
+  content: "Izaberite avatara";
+  position: absolute;
+  left: 0;
+  bottom: -50%;
+  font-size: 1rem;
+  background-color: var(--primary-light);
+  padding: .5rem;
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+}
+.ov-form label[for="id_profile_pic"]:hover::after {
+  cursor: pointer;
+}
+
 
 .ov-form__btn-container {
   display: flex;
