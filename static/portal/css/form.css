@@ -52,6 +52,13 @@
   font-size: 1rem;
   padding: .3rem;
 }
+.ov-form input[type="date"] {
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  outline: none;
+  padding: 5px;
+}
 
 .ov-form__btn-container {
   display: flex;
