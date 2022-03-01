@@ -245,22 +245,28 @@ a:hover {
     visibility: hidden;
     min-width: 250px;
     margin-left: -125px;
-    background-color: #333;
-    color: #fff;
+    border: 1px solid var(--primary);
+    outline: none;
+    background-color: var(--accent-light);
+    color: var(--primary);
+    margin: 1rem 0.25rem;
+    font-size: 0.8rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 5px;
     text-align: center;
-    border-radius: 2px;
     padding: 16px;
     position: fixed;
     z-index: 1;
-    left: 50%;
-    bottom: 30px;
+    right: 0%;
+    bottom: 5px;
     font-size: 17px;
 }
 
 #toast-container.show {
     visibility: visible;
 }
-.dv-input-container{
+
+.dv-input-container {
     display: flex;
     gap: 2rem;
     align-items: center;
