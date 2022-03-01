@@ -65,7 +65,6 @@
 }
 .ov-form input[type="file"] {
   width: 50%;
-  margin-left: 50%;
   color: var(--primary);
 }
 .ov-form label[for="id_profile_pic"] {
@@ -73,14 +72,9 @@
 }
 .ov-form label[for="id_profile_pic"]::after{
   content: "Izaberite avatara";
-  position: absolute;
-  left: 0;
-  bottom: -50%;
+  display:block;
   font-size: 1rem;
-  background-color: var(--primary-light);
-  padding: .5rem;
-  border: 1px solid var(--primary);
-  border-radius: 5px;
+  margin-top: 1rem;
 }
 .ov-form label[for="id_profile_pic"]:hover::after {
   cursor: pointer;
