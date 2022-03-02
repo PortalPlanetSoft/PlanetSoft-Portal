@@ -1,8 +1,7 @@
 const modalContent = document.getElementById("modal-content");
-const genericForm = document.getElementById("generic-form");
 const modalContainer = document.getElementById("modal-container");
 const urlAddress = 'http://127.0.0.1:8000';
-let result = 3;
+let result = 6;
 
 //pageOnLoad function that fetches action result from sessionStorage so the toast alert can be shown
 $(function () {
@@ -17,18 +16,12 @@ $(function () {
         showToast(2);
         sessionStorage.clear();
     } else {
-        result = 3;
+        result = 6;
         sessionStorage.clear();
     }
 });
 
-//pageOnLoad function that creates timeout so edited data can be loaded
-window.onload = function () {
-    genericForm.onsubmit = setTimeout(function () {
-    }, 10);
-}
-
-//onclick function for password change modal
+//onclick function for opening of password change modal
 function showPasswordChangeModal() {
     modalContainer.style.display = "flex";
     $.ajax({
@@ -41,11 +34,11 @@ function showPasswordChangeModal() {
             e.preventDefault();
             e.stopPropagation();
             console.log('Link clicked');
-            let formSerialized = $("#password-change-form");
+            let form = $("#password-change-form");
             $.ajax({
                     url: urlAddress + '/password-change/',
                     type: 'POST',
-                    data: formSerialized.serialize(),
+                    data: form.serialize(),
                     success: function (data, textStatus, xhr) {
                         sessionStorage.clear();
                         sessionStorage.setItem("result", 1);
@@ -63,7 +56,7 @@ function showPasswordChangeModal() {
     });
 }
 
-//onclick function for user preview modal
+//onclick function for opening of user preview modal
 function showUserPreviewModal(id) {
     modalContainer.style.display = "flex";
     $.ajax({
@@ -74,7 +67,7 @@ function showUserPreviewModal(id) {
     );
 }
 
-//onclick function for user editing modal
+//onclick function for opening of user edit modal
 function showUserEditModal(id) {
     modalContainer.style.display = "flex";
     $.ajax({
@@ -83,14 +76,22 @@ function showUserEditModal(id) {
             success: (data) => modalContent.innerHTML = data,
         },
     );
-};
-function submitEditUserForm(id){
-     let formSerialized = $("#edit-emp-form");
+}
+
+//function that submits user's edited data
+function submitEditUserForm(id) {
+    let form = $("#edit-emp-form");
+    let phoneNumber = document.getElementById("id_phone");
+    let emailAddress = document.getElementById("id_email");
+
+    let returnResult = validatorFunction(phoneNumber, emailAddress);
+
+    if (returnResult == 11) {
         $.ajax({
-                 url: urlAddress + '/employees/' + id + '/',
+                url: urlAddress + '/employees/' + id + '/',
                 type: 'post',
                 dataType: 'html',
-                data: formSerialized.serialize(),
+                data: form.serialize(),
                 success: function (data, textStatus, xhr) {
                     sessionStorage.clear();
                     sessionStorage.setItem("result", 1);
@@ -103,13 +104,43 @@ function submitEditUserForm(id){
                     sessionStorage.clear();
                     modalContent.innerHTML = data.responseText;
                 },
-           },
-       );
+            },
+        );
+    } else {
+        if (returnResult == 1) {
+            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
+            showToast(3);
+        } else if (returnResult == 10) {
+            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
+            showToast(4);
+        } else {
+            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
+            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
+            showToast(5);
+        }
+    }
 }
 
+//function used for validation of email address and phone number
+function validatorFunction(phoneNumber, emailAddress) {
+    let regexNumber = /\+{0,1}\d{9,13}/;
+    let regexMail = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let emailValid = emailAddress.value.match(regexMail);
+    let phoneValid = phoneNumber.value.match(regexNumber);
+    let returnResult;
+    if (emailValid && phoneValid) {
+        returnResult = 11;
+    } else if (emailValid && phoneValid == null) {
+        returnResult = 10;
+    } else if (emailValid == null && phoneValid) {
+        returnResult = 1;
+    } else {
+        returnResult = 0;
+    }
+    return returnResult;
+}
 
-
-//onclick function for user deleting modal
+//onclick function for opening of user delete modal
 function showUserDeleteModal(id) {
     modalContainer.style.display = "flex";
     $.ajax({
@@ -120,32 +151,31 @@ function showUserDeleteModal(id) {
     );
 }
 
-function submitUserDeleteForm(id){
-    let formSerialized = $("#delete-emp-form");
-        $.ajax({
-                url: urlAddress + '/employees/delete/' + id + '/',
-                type: 'POST',
-                data: formSerialized.serialize(),
-                success: function (data, textStatus, xhr) {
-                    sessionStorage.clear();
-                    sessionStorage.setItem("result", 2);
-                    closeFunction();
-                    pageReload();
-                },
-                error: function (data, xhr, textStatus) {
-                    sessionStorage.clear();
-                    sessionStorage.setItem("result", 0);
-                    showToast(0);
-                    sessionStorage.clear();
-                    x
-                },
+//function that deletes user's data
+function submitUserDeleteForm(id) {
+    let form = $("#delete-emp-form");
+    $.ajax({
+            url: urlAddress + '/employees/delete/' + id + '/',
+            type: 'POST',
+            data: form.serialize(),
+            success: function (data, textStatus, xhr) {
+                sessionStorage.clear();
+                sessionStorage.setItem("result", 2);
+                closeFunction();
+                pageReload();
             },
-        );
-
+            error: function (data, xhr, textStatus) {
+                sessionStorage.clear();
+                sessionStorage.setItem("result", 0);
+                showToast(0);
+                sessionStorage.clear();
+                x
+            },
+        },
+    );
 }
 
-
-//onclick function for user adding modal
+//onclick function for opening of user add modal
 function showUserAddModal() {
     modalContainer.style.display = "flex";
     $.ajax({
@@ -154,32 +184,31 @@ function showUserAddModal() {
         dataType: 'html',
         success: (data) => modalContent.innerHTML = data,
     });
-
-
 }
 
-function submitCreateUserForm(){
-    let formSerialized = $("#create-emp-form");
-        $.ajax({
-            url: urlAddress + '/employees/create/',
-            type: 'post',
-            dataType: 'html',
-            data: formSerialized.serialize(),
-            success: function (data, textStatus, xhr) {
-                sessionStorage.clear();
-                sessionStorage.setItem("result", 1);
-                closeFunction();
-                pageReload();
+//function that submits newly created user's data
+function submitCreateUserForm() {
+    let form = $("#create-emp-form");
+    $.ajax({
+        url: urlAddress + '/employees/create/',
+        type: 'post',
+        dataType: 'html',
+        data: form.serialize(),
+        success: function (data, textStatus, xhr) {
+            sessionStorage.clear();
+            sessionStorage.setItem("result", 1);
+            closeFunction();
+            pageReload();
 
-            },
-            error: function (data, xhr, textStatus) {
-                sessionStorage.clear();
-                sessionStorage.setItem("result", 0);
-                showToast(0);
-                sessionStorage.clear();
-                modalContent.innerHTML = data.responseText;
-            },
-        });
+        },
+        error: function (data, xhr, textStatus) {
+            sessionStorage.clear();
+            sessionStorage.setItem("result", 0);
+            showToast(0);
+            sessionStorage.clear();
+            modalContent.innerHTML = data.responseText;
+        },
+    });
 
 }
 
@@ -194,7 +223,17 @@ function showToast(result) {
         toastMessage.innerHTML = "Neuspješno!";
     } else if (result == 2) {
         toastMessage.innerHTML = "Uspješno obrisano!";
+    } else if (result == 3) {
+        toastContainer.style.backgroundColor = "var(--alert-light)";
+        toastMessage.innerHTML = "Molimo vas unesite ispravan format e-mail adrese!";
+    } else if (result == 4) {
+        toastContainer.style.backgroundColor = "var(--alert-light)";
+        toastMessage.innerHTML = "Molimo vas unesite ispravan format broja telefona!";
+    } else if (result == 5) {
+        toastContainer.style.backgroundColor = "var(--alert-light)";
+        toastMessage.innerHTML = "Molimo vas unesite ispravan format e-mail adrese i broja telefona!";
     }
+
     toastContainer.className = "show";
     setTimeout(function () {
         toastContainer.className = toastContainer.className.replace("show", "");
@@ -225,6 +264,6 @@ function log(obj) {
     console.log(obj);
 }
 
-function submitFilterForm(){
+function submitFilterForm() {
     document.forms["userFilterForm"].submit();
 }
