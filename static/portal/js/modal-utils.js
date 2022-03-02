@@ -29,31 +29,29 @@ function showPasswordChangeModal() {
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
-    ).then(res => {
-        $('#password-change-form').on('submit', e => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Link clicked');
-            let form = $("#password-change-form");
-            $.ajax({
-                    url: urlAddress + '/password-change/',
-                    type: 'POST',
-                    data: form.serialize(),
-                    success: function (data, textStatus, xhr) {
-                        sessionStorage.clear();
-                        sessionStorage.setItem("result", 1);
-                        closeFunction();
-                    },
-                    error: function (data, xhr, textStatus) {
-                        sessionStorage.clear();
-                        sessionStorage.setItem("result", 0);
-                        showToast(0);
-                        sessionStorage.clear();
-                    },
-                },
-            );
-        });
-    });
+    );
+}
+
+//function that submits user's password change request
+function submitPasswordChangeForm() {
+    let form = $("#password-change-form");
+    $.ajax({
+            url: urlAddress + '/password-change/',
+            type: 'POST',
+            data: form.serialize(),
+            success: function (data, textStatus, xhr) {
+                sessionStorage.clear();
+                sessionStorage.setItem("result", 1);
+                closeFunction();
+            },
+            error: function (data, xhr, textStatus) {
+                sessionStorage.clear();
+                sessionStorage.setItem("result", 0);
+                showToast(0);
+                sessionStorage.clear();
+            },
+        },
+    );
 }
 
 //onclick function for opening of user preview modal
