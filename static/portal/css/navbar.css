@@ -5,6 +5,7 @@
   align-items: center;
   border-bottom: 1px solid var(--accent);
   padding-left: 2rem;
+  margin-bottom: 2rem;
   position: sticky;
   top: 0;
   width: 100%;
