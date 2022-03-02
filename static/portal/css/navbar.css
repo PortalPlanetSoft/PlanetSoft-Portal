@@ -5,7 +5,11 @@
   align-items: center;
   border-bottom: 1px solid var(--accent);
   padding-left: 2rem;
-  position: relative;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+  background-color: var(--white);
 }
 .ov-nav__left {
   display: flex;
