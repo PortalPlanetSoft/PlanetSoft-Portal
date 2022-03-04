@@ -77,6 +77,12 @@
 .headline a{
     grid-column-start: 8;
     color: var(--primary);
+    font-size: 1.1rem;
+    text-align:right ;
+
+}
+.headline p{
+    font-size: 1.1rem;
 }
 
 
@@ -87,8 +93,15 @@
 .name-author{
     padding: 1rem;
     color: var(--primary);
-}
 
+}
+.name-author p{
+    font-size: 1.1rem;
+}
 .dk-pagination{
     padding-top:1rem ;
+}
+@media only screen and (max-width: 1200px) {
+
+
 }

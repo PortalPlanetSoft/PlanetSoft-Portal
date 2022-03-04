@@ -1,7 +1,8 @@
 {% extends 'portal/base.html' %}
 
 {% block body %}
-          <form class="dk-grid" name="userFilterForm">
+          <form name="userFilterForm">
+          <div class="dk-grid">
           <div class="search">
                 <div class="dv-mobile-fullw">
                     <input type="text" placeholder="PRETRAGA..." name="search">
@@ -11,25 +12,24 @@
                         </div>
                 </div>
             <div class="choose_author">
-                <label>Izaberite autora:
-                <select name="author" onchange="submitFilterForm()">
+                <select name="author" class="dk-author-filter-select" onchange="submitFilterForm()">
                         <option {% if selected == author.pk %} selected {% endif %} value="all">Svi autori</option>
                     {% for author in author_list %}
                         <option {% if selected == author.pk %} selected {% endif %}
                                 value="{{ author.pk }}">{{ author.first_name }} {{ author.last_name }}</option>
                     {% endfor %}
                 </select>
-                </label>
             </div>
           <div class="create_news">
           <a href="{% url 'news-create' %}">Dodajte vijest
               <i class="fa-solid fa-circle-plus fa-xl"></i></a>
               </div>
+          </div>
           </form>
 
 
         <div class="grid-news">
-<!-- SREDITI PRIKAZ VIJESTI -->
+
     {% for article in object_list %}
         <div class="news">
         <div class="headline">
