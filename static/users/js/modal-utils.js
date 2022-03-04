@@ -41,11 +41,11 @@ function showPasswordChangeModal() {
             e.preventDefault();
             e.stopPropagation();
             console.log('Link clicked');
-            const mm = $("#password-change-form");
+            let formSerialized = $("#password-change-form");
             $.ajax({
                     url: urlAddress + '/employees/password-change/',
                     type: 'POST',
-                    data: mm.serialize(),
+                    data: formSerialized.serialize(),
                     success: function (data, textStatus, xhr) {
                         sessionStorage.clear();
                         sessionStorage.setItem("result", 1);
@@ -85,12 +85,12 @@ function showUserEditModal(id) {
     );
 };
 function submitEditUserForm(id){
-     const mm = $("#edit-emp-form");
+     let formSerialized = $("#edit-emp-form");
         $.ajax({
                  url: urlAddress + '/employees/' + id + '/',
                 type: 'post',
                 dataType: 'html',
-                data: mm.serialize(),
+                data: formSerialized.serialize(),
                 success: function (data, textStatus, xhr) {
                     sessionStorage.clear();
                     sessionStorage.setItem("result", 1);
@@ -121,11 +121,11 @@ function showUserDeleteModal(id) {
 }
 
 function submitUserDeleteForm(id){
-    const mm = $("#delete-emp-form");
+    let formSerialized = $("#delete-emp-form");
         $.ajax({
                 url: urlAddress + '/employees/delete/' + id + '/',
                 type: 'POST',
-                data: mm.serialize(),
+                data: formSerialized.serialize(),
                 success: function (data, textStatus, xhr) {
                     sessionStorage.clear();
                     sessionStorage.setItem("result", 2);
@@ -159,12 +159,12 @@ function showUserAddModal() {
 }
 
 function submitCreateUserForm(){
-    const mm = $("#create-emp-form");
+    let formSerialized = $("#create-emp-form");
         $.ajax({
             url: urlAddress + '/employees/create/',
             type: 'post',
             dataType: 'html',
-            data: mm.serialize(),
+            data: formSerialized.serialize(),
             success: function (data, textStatus, xhr) {
                 sessionStorage.clear();
                 sessionStorage.setItem("result", 1);
@@ -188,13 +188,11 @@ function showToast(result) {
     const toastContainer = document.getElementById("toast-container");
     const toastMessage = document.getElementById("toast-message");
     if (result == 1) {
-        toastContainer.style.backgroundColor = "green";
         toastMessage.innerHTML = "Uspješno sačuvano!";
     } else if (result == 0) {
-        toastContainer.style.backgroundColor = "red";
+        toastContainer.style.backgroundColor = "var(--alert-light)";
         toastMessage.innerHTML = "Neuspješno!";
     } else if (result == 2) {
-        toastContainer.style.backgroundColor = "green";
         toastMessage.innerHTML = "Uspješno obrisano!";
     }
     toastContainer.className = "show";
