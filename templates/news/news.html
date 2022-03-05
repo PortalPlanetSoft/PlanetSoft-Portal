@@ -23,6 +23,14 @@
         <!-- SREDITI PRIKAZ VIJESTI -->
             {% for article in object_list %}
                 <h1>{{ article.author.first_name }}</h1>
+                <form action="{% url 'like-article' article.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" name="article_like_id" value="{{ article.id }}">Like</button>
+                </form>
+                <form action="{% url 'dislike-article' article.pk %}" method="post">
+                {% csrf_token %}
+                 <button type="submit" name="article_dislike_id" value="{{ article.id }}">Dislike</button>
+                </form>
             {% endfor %}
         </div>
 
