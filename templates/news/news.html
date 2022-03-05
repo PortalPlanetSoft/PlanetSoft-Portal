@@ -1,30 +1,52 @@
 {% extends 'portal/base.html' %}
 
 {% block body %}
-          <form class="dk-search" name="userFilterForm">
+          <form name="userFilterForm">
+          <div class="dk-grid">
+          <div class="search">
                 <div class="dv-mobile-fullw">
                     <input type="text" placeholder="PRETRAGA..." name="search">
-                    <div class="dk-i" onclick="submitFilterForm()">
+                    <div class="news-i" onclick="submitFilterForm()">
                         <i class="fas fa-search"></i>
                     </div>
+                        </div>
                 </div>
-                <label>Choose author:</label>
-                <select name="author" onchange="submitFilterForm()">
-                        <option {% if selected == author.pk %} selected {% endif %} value="all">All authors</option>
+            <div class="choose_author">
+                <select name="author" class="dk-author-filter-select" onchange="submitFilterForm()">
+                        <option {% if selected == author.pk %} selected {% endif %} value="all">Svi autori</option>
                     {% for author in author_list %}
                         <option {% if selected == author.pk %} selected {% endif %}
                                 value="{{ author.pk }}">{{ author.first_name }} {{ author.last_name }}</option>
                     {% endfor %}
                 </select>
+            </div>
+          <div class="create_news">
+          <a href="{% url 'news-create' %}">Dodajte vijest
+              <i class="fa-solid fa-circle-plus fa-xl"></i></a>
+              </div>
+          </div>
           </form>
-        <a href="{% url 'news-create' %}">Create</a>
 
-        <div>
-        <!-- SREDITI PRIKAZ VIJESTI -->
-            {% for article in object_list %}
-                <h1>{{ article.author.first_name }}</h1>
-            {% endfor %}
+
+        <div class="grid-news">
+
+    {% for article in object_list %}
+        <div class="news">
+        <div class="headline">
+        <p>{{ article.creation_date }}</p>
+        <h4>{{ article.headline }}</h4>
+            <a href="{% url 'news-create' %}">Uredi
+            <i class="fa-regular fa-pen-to-square"></i></a></div>
+            <div class="content">
+        <p>{{ article.content }}</p>
+                </div>
+            <div class="name-author">
+        <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
+            </div>
         </div>
+    {% endfor %}
+</div>
+
 
 
         <div class="dk-pagination">
