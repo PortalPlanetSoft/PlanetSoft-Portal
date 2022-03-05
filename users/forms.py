@@ -1,16 +1,19 @@
+from datetime import date
+
 from django.contrib.auth.forms import UserCreationForm
 from users.models import User
 from django.utils.translation import gettext_lazy as _
 from django import forms
+import re
 
 from users.models import CompanyPosition
-
 
 HELP_MESSAGES = {
     'username': 'The username can contains letters, digits and @/./+/-/_.',
     'first_name': 'The first name',
 }
 
+REGEX_PHONE_NUMBER = "(\+387|00387|0)(66|65|61)[0-9]{6}"
 
 ERROR_MESSAGES = {
     'username': {
@@ -68,6 +71,25 @@ class AddEmployeeForm(forms.ModelForm):
     field_order = ['username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
                    'work_location', 'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone']
 
+    def clean_birth_date(self):
+        data = self.cleaned_data['birth_date']
+        current = date.today()
+        if data and data.year > current.year - 18:
+            raise forms.ValidationError('Date can\'t be newer than 18 years of current year')
+        return data
+
+    def clean_phone(self):
+        data = self.cleaned_data['phone']
+        if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
+            raise forms.ValidationError('Phone number format wrong!')
+        return data
+
+    def clean_business_phone(self):
+        data = self.cleaned_data['business_phone']
+        if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
+            raise forms.ValidationError('Phone number format wrong!')
+        return data
+
     class Meta:
         model = User
         fields = {'username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
@@ -110,6 +132,25 @@ class EditEmployeeForm(forms.ModelForm):
     field_order = ['username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
                    'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone']
 
+    def clean_birth_date(self):
+        data = self.cleaned_data['birth_date']
+        current = date.today()
+        if data and data.year > current.year - 18:
+            raise forms.ValidationError('Date can\'t be newer than 18 years of current year')
+        return data
+
+    def clean_phone(self):
+        data = self.cleaned_data['phone']
+        if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
+            raise forms.ValidationError('Phone number format wrong!')
+        return data
+
+    def clean_business_phone(self):
+        data = self.cleaned_data['business_phone']
+        if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
+            raise forms.ValidationError('Phone number format wrong!')
+        return data
+
     class Meta:
         model = User
         fields = {'username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
@@ -122,7 +163,8 @@ class EditEmployeeForm(forms.ModelForm):
         labels = LABEL_TEXT
 
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': 'Korisničko ime'}), #todo provjerite zasto ne radi labela za ime i prezime i pol
+            'username': forms.TextInput(attrs={'placeholder': 'Korisničko ime'}),
+            # todo provjerite zasto ne radi labela za ime i prezime i pol
             'first_name': forms.TextInput(attrs={'placeholder': 'Ime'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Prezime'}),
             'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
@@ -156,6 +198,25 @@ class ProfileForm(forms.ModelForm):
     first_name = forms.CharField(max_length=150, min_length=3)
     last_name = forms.CharField(max_length=150, min_length=3)
     field_order = ['first_name', 'last_name', 'email', 'birth_date', 'phone', 'business_phone', 'profile_pic']
+
+    def clean_birth_date(self):
+        data = self.cleaned_data['birth_date']
+        current = date.today()
+        if data and data.year > current.year - 18:
+            raise forms.ValidationError('Date can\'t be newer than 18 years of current year')
+        return data
+
+    def clean_phone(self):
+        data = self.cleaned_data['phone']
+        if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
+            raise forms.ValidationError('Phone number format wrong!')
+        return data
+
+    def clean_business_phone(self):
+        data = self.cleaned_data['business_phone']
+        if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
+            raise forms.ValidationError('Phone number format wrong!')
+        return data
 
     class Meta:
         model = User
