@@ -5,7 +5,6 @@ from django.db.models import Q, Count
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 
 from news.forms import AddNewsArticleForm
 from news.models import NewsArticle
@@ -15,11 +14,11 @@ from users.models import User
 class NewsList(ListView):
     template_name = 'news/news.html'
     model = NewsArticle
-    paginate_by = 1
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(NewsList, self).get_context_data(**kwargs)
-        page = self.request.GET.get('page', 10)
+        page = self.request.GET.get('page', 1)
         news = self.object_list.order_by('headline')
         paginator = self.paginator_class(news, self.paginate_by)
         news = paginator.page(page)
@@ -139,3 +138,6 @@ def likes_dislikes(request, pk):
     else:
         url = '/news/'
     return HttpResponseRedirect(url)
+
+
+
