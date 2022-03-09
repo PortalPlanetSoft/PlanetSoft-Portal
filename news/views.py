@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView
 from django.http import HttpResponseRedirect
@@ -15,11 +15,11 @@ from users.models import User
 class NewsList(ListView):
     template_name = 'news/news.html'
     model = NewsArticle
-    paginate_by = 10
+    paginate_by = 1
 
     def get_context_data(self, **kwargs):
         context = super(NewsList, self).get_context_data(**kwargs)
-        page = self.request.GET.get('page', 1)
+        page = self.request.GET.get('page', 10)
         news = self.object_list.order_by('headline')
         paginator = self.paginator_class(news, self.paginate_by)
         news = paginator.page(page)
@@ -43,7 +43,8 @@ class NewsList(ListView):
         return context
 
     def get_queryset(self, *args, **kwargs):
-        query_set = super().get_queryset()
+        # query_set = super().get_queryset()
+        query_set = NewsArticle.objects.annotate(Count('likes'), Count('dislikes'))
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
         if search:
@@ -86,8 +87,7 @@ class NewsUpdate(UserPassesTestMixin, UpdateView):
     model = NewsArticle
     template_name = 'news/news-edit.html'
     success_url = '/news/'
-
-    # form_class = EditNewsArticleForm
+    form_class = AddNewsArticleForm
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
@@ -124,4 +124,18 @@ def likes_dislikes(request, pk):
         if article.likes.filter(newsarticle__likes__username=request.user.username):
             article.likes.remove(request.user)
         article.dislikes.add(request.user)
-    return HttpResponseRedirect(reverse('news'))
+
+    search = request.GET.get('search')
+    author = request.GET.get('author')
+    page = request.GET.get('page')
+    if search or author or page:
+        url = '/news/?'
+        if search:
+            url += 'search=' + search + '&'
+        if author:
+            url += 'author=' + author + '&'
+        if page:
+            url += 'page=' + page
+    else:
+        url = '/news/'
+    return HttpResponseRedirect(url)

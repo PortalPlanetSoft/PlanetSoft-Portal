@@ -11,7 +11,6 @@ class AddNewsArticleForm(forms.ModelForm):
     class Meta:
         model = NewsArticle
         fields = {'headline', 'content', 'image'}
-
         error_messages = ERROR_MESSAGES
 
         widgets = {
