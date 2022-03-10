@@ -7,16 +7,17 @@
 
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
-    <script src="{% static 'portal/js/jquery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'portal/../../static/users/js/jquery/jquery-3.6.0.min.js' %}"></script>
 
 
-    <link href="{% static 'portal/css/animations.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'portal/css/base.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'portal/css/navbar.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'portal/css/form.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'portal/css/modal.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'portal/css/footer.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'portal/css/responsive.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/../../static/users/css/animations.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/../../static/users/css/base.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/../../static/users/css/navbar.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/../../static/users/css/form.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/../../static/users/css/modal.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/../../static/users/css/footer.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/../../static/users/css/news.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'portal/../../static/users/css/responsive.css' %}" rel="stylesheet" type="text/css">
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
 
@@ -25,13 +26,13 @@
 <div class="ov-content">
     <nav class="ov-nav">
         <div class="ov-nav__left">
-            <img src="{% static 'portal/images/logo_green.png' %}" alt="Planet Soft Logo" class="ov-nav__logo">
+            <img src="{% static 'portal/../../static/users/images/logo_green.png' %}" alt="Planet Soft Logo" class="ov-nav__logo">
             <h1 class="ov-nav__title">PLANET SOFT</h1>
         </div>
         <div class="ov-nav__right">
             <div class="ov-nav__navigation" id="ov-navigation">
                 {% if user.is_authenticated %}
-                    <a href="#" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
+                    <a href="{% url 'news' %}" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
                     <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
                     <a href="#" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
                     <a href="{% url 'profile' %}" class="ov-nav__item ov-nav__item--dropdown-toggle ov-nav__item--icon-only"><i
@@ -90,9 +91,9 @@
     </div>
 </footer>
 
-<script src="{% static 'portal/js/base.js' %}"></script>
+<script src="{% static 'portal/../../static/users/js/base.js' %}"></script>
 
-<script src="{% static 'portal/js/modal-utils.js' %}"></script>
+<script src="{% static 'portal/../../static/users/js/modal-utils.js' %}"></script>
 
 
 </body>

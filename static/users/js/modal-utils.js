@@ -33,7 +33,7 @@ $(function () {
 function showPasswordChangeModal() {
     modalContainer.style.display = "flex";
     $.ajax({
-            url: urlAddress + '/password-change/',
+            url: urlAddress + '/employees/password-change/',
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
@@ -66,7 +66,7 @@ function submitPasswordChangeForm() {
 function showUserPreviewModal(id) {
     modalContainer.style.display = "flex";
     $.ajax({
-            url: urlAddress + '/employees/preview/' + id + '/',
+            url: urlAddress + '/employees/' + id + '/',
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },

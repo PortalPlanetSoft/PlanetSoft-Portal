@@ -1,0 +1,84 @@
+{% extends 'portal/base.html' %}
+
+{% block body %}
+          <form name="userFilterForm">
+          <div class="dk-grid">
+          <div class="search">
+                <div class="dv-mobile-fullw">
+                    <input type="text" placeholder="PRETRAGA..." name="search">
+                    <div class="news-i" onclick="submitFilterForm()">
+                        <i class="fas fa-search"></i>
+                    </div>
+                        </div>
+                </div>
+            <div class="choose_author">
+                <select name="author" class="dk-author-filter-select" onchange="submitFilterForm()">
+                        <option {% if selected == author.pk %} selected {% endif %} value="all">Svi autori</option>
+                    {% for author in author_list %}
+                        <option {% if selected == author.pk %} selected {% endif %}
+                                value="{{ author.pk }}">{{ author.first_name }} {{ author.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+          <div class="create_news">
+          <a href="{% url 'news-create' %}">Dodajte vijest
+              <i class="fa-solid fa-circle-plus fa-xl"></i></a>
+              </div>
+          </div>
+          </form>
+
+
+        <div class="grid-news">
+
+    {% for article in object_list %}
+        <div class="news">
+            <div class="headline">
+                <p>{{ article.creation_date }}</p>
+                <h4>{{ article.headline }}</h4>
+                <a href="{% url 'news-edit' pk=article.id %}">Uredi<i class="fa-regular fa-pen-to-square"></i></a>
+            </div>
+            <div class="content">
+                <p>{{ article.content }}</p>
+            </div>
+            <div class="name-author">
+                <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
+            </div>
+            <div>
+                <p>Likes: {{ article.likes__count}}</p>
+                <p>Dislikes: {{ article.dislikes__count }}</p>
+            </div>
+            <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}" method="post">
+                {% csrf_token %}
+                <button type="submit" name="article_like_id" value="{{ article.id }}">Like</button>
+            </form>
+            <form action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}" method="post">
+                {% csrf_token %}
+                <button type="submit" name="article_dislike_id" value="{{ article.id }}">Dislike</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+        <div class="dk-pagination">
+        {% if page_obj.has_previous %}
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.previous_page_number }}">&lt;</a>
+        {% else %}
+            <span class="bk-noNextPage">&lt;</span>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+                <span class="bk-currentPage">{{ i }}</span>
+            {% else %}
+                <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ i }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.next_page_number }}">&gt;</a>
+        {% else %}
+            <span class="bk-noNextPage">&gt;</span>
+        {% endif %}
+
+    </div>
+{% endblock %}
