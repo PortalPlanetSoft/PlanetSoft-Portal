@@ -121,7 +121,7 @@ class Profile(UpdateView, FormView):
     template_name = 'users/employee/profile.html'
     form_class = ProfileForm
     model = User
-    success_url = '/profile/'
+    success_url = '/employees/profile/'
 
     def get_object(self, queryset=None):
         return User.objects.filter(pk=self.request.user.id).first()

@@ -116,11 +116,11 @@ class NewsDelete(UserPassesTestMixin, DeleteView):
 def likes_dislikes(request, pk):
     article = get_object_or_404(NewsArticle, id=pk)
     if request.POST.get('article_like_id'):
-        if article.dislikes.filter(newsarticle__dislikes__username=request.user.username):
+        if article.dislikes.filter(id=request.user.pk):
             article.dislikes.remove(request.user)
         article.likes.add(request.user)
     else:
-        if article.likes.filter(newsarticle__likes__username=request.user.username):
+        if article.likes.filter(id=request.user.pk):
             article.likes.remove(request.user)
         article.dislikes.add(request.user)
 
