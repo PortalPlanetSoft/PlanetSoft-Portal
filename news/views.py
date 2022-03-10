@@ -1,7 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
-from django.db.models import Q
+from django.db.models import Q, Count
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView
+from django.http import HttpResponseRedirect
 
 from news.forms import AddNewsArticleForm
 from news.models import NewsArticle
@@ -39,13 +42,15 @@ class NewsList(ListView):
         return context
 
     def get_queryset(self, *args, **kwargs):
-        query_set = super().get_queryset()
+        # query_set = super().get_queryset()
+        query_set = NewsArticle.objects.annotate(Count('likes'), Count('dislikes'))
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
         if search:
             filtered_query = query_set.filter(Q(headline__icontains=search))
             if len(filtered_query) == 0:
-                query_set = query_set.filter(Q(author__first_name__icontains=search) | Q(author__last_name__icontains=search))
+                query_set = query_set.filter(
+                    Q(author__first_name__icontains=search) | Q(author__last_name__icontains=search))
             else:
                 query_set = filtered_query
 
@@ -60,6 +65,10 @@ class NewsCreate(UserPassesTestMixin, CreateView):
     template_name = 'news/news-create.html'
     success_url = '/news/'
     form_class = AddNewsArticleForm
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
@@ -77,7 +86,7 @@ class NewsUpdate(UserPassesTestMixin, UpdateView):
     model = NewsArticle
     template_name = 'news/news-edit.html'
     success_url = '/news/'
-    # form_class = EditNewsArticleForm
+    form_class = AddNewsArticleForm
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
@@ -101,5 +110,34 @@ class NewsDelete(UserPassesTestMixin, DeleteView):
             return True
         elif self.request.user.is_authenticated:
             raise PermissionDenied("You are not authorized to delete employees")
+
+
+@login_required
+def likes_dislikes(request, pk):
+    article = get_object_or_404(NewsArticle, id=pk)
+    if request.POST.get('article_like_id'):
+        if article.dislikes.filter(newsarticle__dislikes__username=request.user.username):
+            article.dislikes.remove(request.user)
+        article.likes.add(request.user)
+    else:
+        if article.likes.filter(newsarticle__likes__username=request.user.username):
+            article.likes.remove(request.user)
+        article.dislikes.add(request.user)
+
+    search = request.GET.get('search')
+    author = request.GET.get('author')
+    page = request.GET.get('page')
+    if search or author or page:
+        url = '/news/?'
+        if search:
+            url += 'search=' + search + '&'
+        if author:
+            url += 'author=' + author + '&'
+        if page:
+            url += 'page=' + page
+    else:
+        url = '/news/'
+    return HttpResponseRedirect(url)
+
 
 

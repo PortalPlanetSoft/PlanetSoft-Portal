@@ -7,12 +7,12 @@
             {% csrf_token %}
             <div class="dk-icon">
                 {% if object.profile_pic %}
-                    <img src={{ object.profile_pic.url }}>
+                    <img id="image-thumbnail" src={{ object.profile_pic.url }}>
                 {% else %}
                     {% if object.gender == 'M' %}
-                        <img src='{% static 'img/1.png' %}' alt='man-profile'>
+                        <img id="image-thumbnail" src='{% static 'img/1.png' %}' alt='man-profile'>
                     {% else %}
-                        <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+                        <img id="image-thumbnail" src='{% static 'img/2.png' %}' alt='woman-profile'>
                     {% endif %}
                 {% endif %}
             </div>
@@ -23,4 +23,27 @@
             </div>
         </form>
     </div>
+    <script>
+    function changeThumbnail(){
+        document.getElementById('id_profile_pic').addEventListener("change", function(e){
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                console.log(e.target.result)
+                document.getElementById('image-thumbnail').src = e.target.result;
+                console.log(document.getElementById('image-thumbnail').src)
+            };
+            reader.readAsDataURL(this.files[0]);
+        })
+    }
+
+    function  docReady(fn){
+        if(document.readyState === "complete" || document==="interactive"){
+            setTimeout(fn,1);
+        }else{
+            document.addEventListener("DOMContentLoaded",fn);
+        }
+    }
+
+    docReady(changeThumbnail);
+    </script>
 {% endblock %}

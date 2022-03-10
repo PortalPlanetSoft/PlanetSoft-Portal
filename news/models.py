@@ -9,6 +9,9 @@ class NewsArticle(models.Model):
     creation_date = models.DateField(auto_now_add=True)
     edited_date = models.DateField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(null=True, blank=True,)
+    likes = models.ManyToManyField(User, related_name='likes')
+    dislikes = models.ManyToManyField(User, related_name='dislikes')
 
 
 class Comment(models.Model):
