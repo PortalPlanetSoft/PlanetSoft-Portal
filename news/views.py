@@ -79,7 +79,7 @@ class NewsCreate(UserPassesTestMixin, CreateView):
         if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
             return True
         else:
-            raise PermissionDenied("You are not authorized to add new employees")
+            raise PermissionDenied("You are not authorized to add new news articles")
 
 
 class NewsUpdate(UserPassesTestMixin, UpdateView):
@@ -97,7 +97,7 @@ class NewsUpdate(UserPassesTestMixin, UpdateView):
         if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
             return True
         elif self.request.user.is_authenticated:
-            raise PermissionDenied("You are not authorized to delete employees")
+            raise PermissionDenied("You are not authorized to edit news articles")
 
 
 class NewsDelete(UserPassesTestMixin, DeleteView):
@@ -109,7 +109,7 @@ class NewsDelete(UserPassesTestMixin, DeleteView):
         if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
             return True
         elif self.request.user.is_authenticated:
-            raise PermissionDenied("You are not authorized to delete employees")
+            raise PermissionDenied("You are not authorized to delete news articles")
 
 
 @login_required

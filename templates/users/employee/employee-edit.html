@@ -2,20 +2,19 @@
 <form id="edit-emp-form" enctype="multipart/form-data" class="ov-form">
 
     <h3 class="ov-form__title">Uređivanje postojećeg korisnika</h3>
-
-    {% if form %}
-        {% csrf_token %}
-        <div class="dk-icon">
-            {% if object.profile_pic %}
-                <img src={{ object.profile_pic.url }}>
+    {% csrf_token %}
+    <div class="dk-icon">
+        {% if object.profile_pic %}
+            <img src={{ object.profile_pic.url }}>
+        {% else %}
+            {% if object.gender == 'M' %}
+                <img src='{% static 'img/1.png' %}' alt='man-profile'>
             {% else %}
-                {% if object.gender == 'M' %}
-                    <img src='{% static 'img/1.png' %}' alt='man-profile'>
-                {% else %}
-                    <img src='{% static 'img/2.png' %}' alt='woman-profile'>
-                {% endif %}
+                <img src='{% static 'img/2.png' %}' alt='woman-profile'>
             {% endif %}
-        </div>
+        {% endif %}
+    </div>
+    {% if not form_preview %}
         {% for error in form.non_field_errors %}
             <div>
                 {{ error }}
