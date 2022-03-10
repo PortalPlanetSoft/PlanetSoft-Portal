@@ -1,22 +1,30 @@
 const modalContent = document.getElementById("modal-content");
 const modalContainer = document.getElementById("modal-container");
 const urlAddress = 'http://127.0.0.1:8000';
-let result = 6;
+
+const DEFAULT_TOAST = 6;
+const ERROR_ACTION = 0;
+const SUCCESSFUL_ACTION = 1;
+const DELETE_SUCCESSFUL = 2;
+// const INVALID_EMAIL_ERROR = ;
+// const INVALID_PHONE_ERROR = ;
+
+let result = DEFAULT_TOAST;
 
 //pageOnLoad function that fetches action result from sessionStorage so the toast alert can be shown
 $(function () {
     result = sessionStorage.getItem("result");
-    if (result == 1) {
+    if (result == SUCCESSFUL_ACTION) {
         showToast(1);
         sessionStorage.clear();
-    } else if (result == 0) {
+    } else if (result == ERROR_ACTION) {
         showToast(0);
         sessionStorage.clear();
-    } else if (result == 2) {
+    } else if (result == DELETE_SUCCESSFUL) {
         showToast(2);
         sessionStorage.clear();
     } else {
-        result = 6;
+        result = DEFAULT_TOAST;
         sessionStorage.clear();
     }
 });
@@ -71,7 +79,13 @@ function showUserEditModal(id) {
     $.ajax({
             url: urlAddress + '/employees/' + id + '/',
             type: 'get',
-            success: (data) => modalContent.innerHTML = data,
+            success: (data) => {
+                console.log(data);
+                modalContent.innerHTML = data
+            },
+            error : () => {
+                console.log("neradi");
+            }
         },
     );
 }

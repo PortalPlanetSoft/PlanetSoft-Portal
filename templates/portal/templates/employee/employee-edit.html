@@ -1,34 +1,53 @@
+{% load static %}
 <form id="edit-emp-form" enctype="multipart/form-data" class="ov-form">
+
     <h3 class="ov-form__title">Uređivanje postojećeg korisnika</h3>
 
-{% if form %}
-    {% csrf_token %}
-    {% for error in form.non_field_errors %}
+    {% if form %}
+        {% csrf_token %}
+        <div class="dk-icon">
+            {% if object.profile_pic %}
+                <img src={{ object.profile_pic.url }}>
+            {% else %}
+                {% if object.gender == 'M' %}
+                    <img src='{% static 'img/1.png' %}' alt='man-profile'>
+                {% else %}
+                    <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+                {% endif %}
+            {% endif %}
+        </div>
+        {% for error in form.non_field_errors %}
             <div>
                 {{ error }}
             </div>
         {% endfor %}
         {% for field in form %}
             <div>
-            <label>{{ field.label }}</label>
+                <label>{{ field.label }}</label>
 
                 {{ field }}
             </div>
             {% if field.errors %}
-            <div>
-            {{ field.errors }}
-            </div>
+                <div>
+                    {{ field.errors }}
+                </div>
             {% endif %}
-        {%  endfor %}
-    <div class="ov-form__btn-container">
-    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red" onclick="showUserDeleteModal({{ object.id }})">Izbrisi korisnika</button>
-    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">Odbaci</button>
-        <a id="submitForm" class="ov-form__btn" value="Potvrdi" onclick="submitEditUserForm({{ object.id }})">Submit</a>
+        {% endfor %}
+        <div class="ov-form__btn-container">
+            <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red"
+                    onclick="showUserDeleteModal({{ object.id }})">Izbrisi korisnika
+            </button>
+            <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">
+                Odbaci
+            </button>
+            <a id="submitForm" class="ov-form__btn" value="Potvrdi"
+               onclick="submitEditUserForm({{ object.id }})">Submit</a>
 
         </div>
     {% else %}
         {{ form_preview.as_p }}
-        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue dv-detail-button" onclick="closeFunction()">
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue dv-detail-button"
+                onclick="closeFunction()">
             Zatvori
         </button>
     {% endif %}
