@@ -25,12 +25,14 @@ function toggleAnimation(element, firstAnimName, secondAnimName) {
 }
 
 //function for showing chosen image preview on user settings page (/profile)
+
 function changeThumbnail() {
     document.getElementById('id_profile_pic').addEventListener("change", function (e) {
         const reader = new FileReader();
         reader.onload = function (e) {
+            document.getElementById('photo-preview').src = e.target.result;
+
             console.log(e.target.result)
-            document.getElementById('image-thumbnail').src = e.target.result;
             console.log(document.getElementById('image-thumbnail').src)
         };
         reader.readAsDataURL(this.files[0]);
