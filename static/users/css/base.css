@@ -272,4 +272,6 @@ a:hover {
     gap: 2rem;
     align-items: center;
 }
-
+.dv-photo-preview{
+    max-width: 100%;
+}
