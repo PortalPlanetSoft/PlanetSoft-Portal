@@ -2,7 +2,6 @@
 <form id="edit-emp-form" enctype="multipart/form-data" class="ov-form">
 
     <h3 class="ov-form__title">Uređivanje postojećeg korisnika</h3>
-    {% csrf_token %}
     <div class="dk-icon">
         {% if object.profile_pic %}
             <img src={{ object.profile_pic.url }}>
@@ -15,6 +14,7 @@
         {% endif %}
     </div>
     {% if not form_preview %}
+        {% csrf_token %}
         {% for error in form.non_field_errors %}
             <div>
                 {{ error }}
@@ -36,7 +36,7 @@
             <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red"
                     onclick="showUserDeleteModal({{ object.id }})">Izbrisi korisnika
             </button>
-            <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">
+            <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">
                 Odbaci
             </button>
             <a id="submitForm" class="ov-form__btn" value="Potvrdi"
@@ -46,7 +46,7 @@
     {% else %}
         {{ form_preview.as_p }}
         <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue dv-detail-button"
-                onclick="closeFunction()">
+                onclick="modalClose()">
             Zatvori
         </button>
     {% endif %}

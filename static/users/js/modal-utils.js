@@ -2,12 +2,20 @@ const modalContent = document.getElementById("modal-content");
 const modalContainer = document.getElementById("modal-container");
 const urlAddress = 'http://127.0.0.1:8000';
 
-const DEFAULT_TOAST = 6;
+const DEFAULT_TOAST = 200;
 const ERROR_ACTION = 0;
 const SUCCESSFUL_ACTION = 1;
 const DELETE_SUCCESSFUL = 2;
-// const INVALID_EMAIL_ERROR = ;
-// const INVALID_PHONE_ERROR = ;
+const INVALID_EMAIL_ERROR = 3;
+const INVALID_PHONE_ERROR = 4;
+const INVALID_VPN_ERROR = 5;
+const INVALID_EMAIL_PHONE_VPN_ERROR = 6;
+
+const VALIDATION_SUCCESS = 111;
+const PHONE_INVALID = 101;
+const VPN_INVALID = 110;
+const EMAIL_INVALID = 11;
+const VALIDATION_FAIL = 0;
 
 let result = DEFAULT_TOAST;
 
@@ -15,13 +23,13 @@ let result = DEFAULT_TOAST;
 $(function () {
     result = sessionStorage.getItem("result");
     if (result == SUCCESSFUL_ACTION) {
-        showToast(1);
+        showToast(result);
         sessionStorage.clear();
     } else if (result == ERROR_ACTION) {
-        showToast(0);
+        showToast(result);
         sessionStorage.clear();
     } else if (result == DELETE_SUCCESSFUL) {
-        showToast(2);
+        showToast(result);
         sessionStorage.clear();
     } else {
         result = DEFAULT_TOAST;
@@ -66,7 +74,7 @@ function submitPasswordChangeForm() {
 function showUserPreviewModal(id) {
     modalContainer.style.display = "flex";
     $.ajax({
-            url: urlAddress + '/employees/' + id + '/',
+            url: urlAddress + '/employees/preview/' + id + '/',
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
@@ -79,13 +87,7 @@ function showUserEditModal(id) {
     $.ajax({
             url: urlAddress + '/employees/' + id + '/',
             type: 'get',
-            success: (data) => {
-                console.log(data);
-                modalContent.innerHTML = data
-            },
-            error : () => {
-                console.log("neradi");
-            }
+            success: (data) => modalContent.innerHTML = data,
         },
     );
 }
@@ -93,61 +95,97 @@ function showUserEditModal(id) {
 //function that submits user's edited data
 function submitEditUserForm(id) {
     let form = $("#edit-emp-form");
-    let phoneNumber = document.getElementById("id_phone");
     let emailAddress = document.getElementById("id_email");
+    let phoneNumber = document.getElementById("id_phone");
+    let vpnNumber = document.getElementById("id_business_phone");
 
-    let returnResult = validatorFunction(phoneNumber, emailAddress);
-
-    if (returnResult == 11) {
-        $.ajax({
-                url: urlAddress + '/employees/' + id + '/',
-                type: 'post',
-                dataType: 'html',
-                data: form.serialize(),
-                success: function (data, textStatus, xhr) {
-                    sessionStorage.clear();
-                    sessionStorage.setItem("result", 1);
-                    closeFunction();
-                },
-                error: function (data, xhr, textStatus) {
-                    sessionStorage.clear();
-                    sessionStorage.setItem("result", 0);
-                    showToast(0);
-                    sessionStorage.clear();
-                    modalContent.innerHTML = data.responseText;
-                },
+    $.ajax({
+            url: urlAddress + '/employees/' + id + '/',
+            type: 'POST',
+            dataType: 'html',
+            data: form.serialize(),
+            success: function (data, textStatus, xhr) {
+                sessionStorage.clear();
+                sessionStorage.setItem("result", SUCCESSFUL_ACTION);
+                closeFunction();
             },
-        );
-    } else {
-        if (returnResult == 1) {
-            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
-            showToast(3);
-        } else if (returnResult == 10) {
-            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
-            showToast(4);
-        } else {
-            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
-            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
-            showToast(5);
-        }
-    }
+            error: function (data, xhr, textStatus) {
+                console.log(data);
+                sessionStorage.clear();
+                sessionStorage.setItem("result", ERROR_ACTION);
+                showToast(ERROR_ACTION);
+                sessionStorage.clear();
+                modalContent.innerHTML = data.responseText;
+            },
+        },
+    );
+
+    // const returnResult = validatorFunction(emailAddress, phoneNumber, vpnNumber);
+    // if (returnResult === VALIDATION_SUCCESS) {
+    //     $.ajax({
+    //             url: urlAddress + '/employees/' + id + '/',
+    //             type: 'POST',
+    //             dataType: 'html',
+    //             data: form.serialize(),
+    //             success: function (data, textStatus, xhr) {
+    //                 sessionStorage.clear();
+    //                 sessionStorage.setItem("result", SUCCESSFUL_ACTION);
+    //                 closeFunction();
+    //             },
+    //             error: function (data, xhr, textStatus) {
+    //                 console.log(data);
+    //                 sessionStorage.clear();
+    //                 sessionStorage.setItem("result", ERROR_ACTION);
+    //                 showToast(ERROR_ACTION);
+    //                 sessionStorage.clear();
+    //                 modalContent.innerHTML = data.responseText;
+    //             },
+    //         },
+    //     );
+    // } else {
+    //     if (returnResult === 1) {
+    //         emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
+    //         showToast(INVALID_EMAIL_ERROR);
+    //     } else if (returnResult === PHONE_INVALID) {
+    //         phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
+    //         showToast(INVALID_PHONE_ERROR);
+    //     } else if (returnResult === VPN_INVALID) {
+    //         vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid VPN number.</li></ul>");
+    //         showToast(INVALID_VPN_ERROR);
+    //     } else if (returnResult === VALIDATION_FAIL) {
+    //         emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
+    //         phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
+    //         vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid VPN number.</li></ul>");
+    //         showToast(INVALID_EMAIL_PHONE_VPN_ERROR);
+    //     }
+    // }
 }
 
 //function used for validation of email address and phone number
-function validatorFunction(phoneNumber, emailAddress) {
-    let regexNumber = /\+{0,1}\d{9,13}/;
+function validatorFunction(emailAddress, phoneNumber, vpnNumber) {
     let regexMail = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let regexNumber = /\+{0,1}\d{9,13}/;
+    let regexVpnNumber = /\+{0,1}\d{1,13}/;
     let emailValid = emailAddress.value.match(regexMail);
     let phoneValid = phoneNumber.value.match(regexNumber);
+    let vpnValid = vpnNumber.value.match(regexVpnNumber);
     let returnResult;
-    if (emailValid && phoneValid) {
-        returnResult = 11;
-    } else if (emailValid && phoneValid == null) {
-        returnResult = 10;
-    } else if (emailValid == null && phoneValid) {
-        returnResult = 1;
+
+    if (emailValid && phoneValid && vpnValid) {
+        returnResult = VALIDATION_SUCCESS;
+        alert("top");
+    } else if (emailValid == null && phoneValid && vpnValid) {
+        returnResult = EMAIL_INVALID;
+        alert("mail");
+    } else if (emailValid && phoneValid == null && vpnValid) {
+        returnResult = PHONE_INVALID;
+        alert("tel");
+    } else if (emailValid && phoneValid && vpnValid == null) {
+        returnResult = VPN_INVALID;
+        alert("vpn");
     } else {
-        returnResult = 0;
+        returnResult = VALIDATION_FAIL;
+        alert("sve");
     }
     return returnResult;
 }
@@ -163,7 +201,7 @@ function showUserDeleteModal(id) {
     );
 }
 
-//function that deletes user's data
+//function that deletes the user
 function submitUserDeleteForm(id) {
     let form = $("#delete-emp-form");
     $.ajax({
@@ -181,7 +219,7 @@ function submitUserDeleteForm(id) {
                 sessionStorage.setItem("result", 0);
                 showToast(0);
                 sessionStorage.clear();
-                x
+                modalContent.innerHTML = data.responseText;
             },
         },
     );
@@ -211,7 +249,6 @@ function submitCreateUserForm() {
             sessionStorage.setItem("result", 1);
             closeFunction();
             pageReload();
-
         },
         error: function (data, xhr, textStatus) {
             sessionStorage.clear();
@@ -221,31 +258,32 @@ function submitCreateUserForm() {
             modalContent.innerHTML = data.responseText;
         },
     });
-
 }
 
 //toast message that is displayed every time a successful/unsuccessful change is made
 function showToast(result) {
     const toastContainer = document.getElementById("toast-container");
     const toastMessage = document.getElementById("toast-message");
-    if (result == 1) {
+    if (result == SUCCESSFUL_ACTION) {
         toastMessage.innerHTML = "Uspješno sačuvano!";
-    } else if (result == 0) {
+    } else if (result == ERROR_ACTION) {
         toastContainer.style.backgroundColor = "var(--alert-light)";
         toastMessage.innerHTML = "Neuspješno!";
-    } else if (result == 2) {
+    } else if (result == DELETE_SUCCESSFUL) {
         toastMessage.innerHTML = "Uspješno obrisano!";
-    } else if (result == 3) {
+    } else if (result == INVALID_EMAIL_ERROR) {
         toastContainer.style.backgroundColor = "var(--alert-light)";
         toastMessage.innerHTML = "Molimo vas unesite ispravan format e-mail adrese!";
-    } else if (result == 4) {
+    } else if (result == INVALID_PHONE_ERROR) {
         toastContainer.style.backgroundColor = "var(--alert-light)";
         toastMessage.innerHTML = "Molimo vas unesite ispravan format broja telefona!";
-    } else if (result == 5) {
+    } else if (result == INVALID_VPN_ERROR) {
         toastContainer.style.backgroundColor = "var(--alert-light)";
-        toastMessage.innerHTML = "Molimo vas unesite ispravan format e-mail adrese i broja telefona!";
+        toastMessage.innerHTML = "Molimo vas unesite ispravan format VPN telefona!";
+    } else if (result == INVALID_EMAIL_PHONE_VPN_ERROR) {
+        toastContainer.style.backgroundColor = "var(--alert-light)";
+        toastMessage.innerHTML = "Molimo vas unesite ispravan format e-mail adrese kao i privatnog i VPN broja telefona!";
     }
-
     toastContainer.className = "show";
     setTimeout(function () {
         toastContainer.className = toastContainer.className.replace("show", "");
@@ -264,6 +302,10 @@ window.onclick = function (event) {
 function closeFunction() {
     modalContainer.style.display = "none";
     window.location.reload();
+}
+
+function modalClose() {
+    modalContainer.style.display = "none";
 }
 
 

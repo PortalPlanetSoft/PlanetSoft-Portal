@@ -23,27 +23,4 @@
             </div>
         </form>
     </div>
-    <script>
-    function changeThumbnail(){
-        document.getElementById('id_profile_pic').addEventListener("change", function(e){
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                console.log(e.target.result)
-                document.getElementById('image-thumbnail').src = e.target.result;
-                console.log(document.getElementById('image-thumbnail').src)
-            };
-            reader.readAsDataURL(this.files[0]);
-        })
-    }
-
-    function  docReady(fn){
-        if(document.readyState === "complete" || document==="interactive"){
-            setTimeout(fn,1);
-        }else{
-            document.addEventListener("DOMContentLoaded",fn);
-        }
-    }
-
-    docReady(changeThumbnail);
-    </script>
 {% endblock %}
