@@ -1,1 +1,14 @@
-{% extends 'portal/base.html' %}
+<form id="delete-news-form" class="ov-form">
+    <h3 class="ov-form__title">Brisanje vijesti</h3>
+    <div class="ov-delete-modal">
+        {% csrf_token %}
+        <p class="ov-delete-modal__question">Jeste li sigurni da želite da izbrišete vijest: {{ object.headline }}?</p>
+        <div class="ov-form__btn-container">
+            <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Ne
+            </button>
+            <button type="button" id="submitForm" class="ov-form__btn"
+                    onclick="submitNewsDeleteForm({{ object.id }})">Da
+            </button>
+        </div>
+    </div>
+</form>

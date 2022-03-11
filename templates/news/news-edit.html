@@ -1,9 +1,8 @@
-{% extends 'portal/base.html' %}
-
-{% block body %}
-    <form method="post" enctype="multipart/form-data">
+<form id="edit-news-form" class="ov-form" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-        {{ form.as_p }}
-    <button type="submit">Submit</button>
-    </form>
-{% endblock %}
+    {{ form.as_p }}
+    <button type="button" id="submitForm" class="ov-form__btn" onclick="submitNewsEditForm({{ object.id }})">Submit</button>
+    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">
+        Odbaci
+    </button>
+</form>
