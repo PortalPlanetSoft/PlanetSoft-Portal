@@ -2,6 +2,8 @@ const modalContent = document.getElementById("modal-content");
 const modalContainer = document.getElementById("modal-container");
 const urlAddress = 'http://127.0.0.1:8000';
 
+let xhr;
+
 // error codes for displaying required fields and toast messages
 const DEFAULT_TOAST = 200; // default message in the toast (empty - neutral)
 const ERROR_ACTION = 0; // action not completed successfully
@@ -59,7 +61,7 @@ function showPasswordChangeModal() {
 }
 
 // function that submits user's password change request
-function submitPasswordChangeForm(id) {
+function submitPasswordChangeForm() {
     let form = $("#password-change-form");
     //let currentPassword = document.getElementById("id_old_password");
     let newPassword = document.getElementById("id_new_password1").value;
@@ -67,33 +69,53 @@ function submitPasswordChangeForm(id) {
 
     let validationResult = passwordChangeValidation(newPassword, newPasswordCompare);
 
-    if (validationResult === VALIDATION_SUCCESS) {
-        $.ajax({
-                url: urlAddress + '/password-change/',
-                type: 'POST',
-                data: form.serialize(),
-                success: function (data, textStatus, xhr) {
-                    sessionStorage.clear();
-                    sessionStorage.setItem("result", SUCCESSFUL_ACTION);
-                    //closeFunction();
-                },
-                error: function (data, xhr, textStatus) {
-                    sessionStorage.clear();
-                    sessionStorage.setItem("result", ERROR_ACTION);
-                    showToast(ERROR_ACTION);
-                    sessionStorage.clear();
-                },
+    $.ajax({
+            url: urlAddress + '/password-change/',
+            type: 'POST',
+            data: form.serialize(),
+            success: function (data, textStatus, xhr) {
+                sessionStorage.clear();
+                sessionStorage.setItem("result", SUCCESSFUL_ACTION);
+                window.open("http://127.0.0.1:8000/logout/");
+                //closeFunction();
             },
-        );
-    } else if (validationResult === PASSWORD_VALIDATION_FAIL) {
-        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Password does not meet required format.</li></ul>");
-        showToast(PASSWORD_VALIDATION_FAIL);// password not matching format
-    } else {
-        //newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
-        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
-        showToast(PASSWORDS_MATCHING_ERROR);// first and second entry of new password not matching
-    }
-
+            error: function (data, xhr, textStatus) {
+                sessionStorage.clear();
+                sessionStorage.setItem("result", ERROR_ACTION);
+                showToast(ERROR_ACTION);
+                sessionStorage.clear();
+            },
+        },
+    );
+    /*
+        if (validationResult === VALIDATION_SUCCESS) {
+            $.ajax({
+                    url: urlAddress + '/password-change/',
+                    type: 'POST',
+                    data: form.serialize(),
+                    success: function (data, textStatus, xhr) {
+                        sessionStorage.clear();
+                        sessionStorage.setItem("result", SUCCESSFUL_ACTION);
+                        window.location.href(urlAddress + "/logout/");
+                        //closeFunction();
+                    },
+                    error: function (data, xhr, textStatus) {
+                        sessionStorage.clear();
+                        sessionStorage.setItem("result", ERROR_ACTION);
+                        showToast(ERROR_ACTION);
+                        sessionStorage.clear();
+                    },
+                },
+            );
+        } else if (validationResult === PASSWORD_VALIDATION_FAIL) {
+            newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Password does not meet required format.</li></ul>");
+            showToast(PASSWORD_VALIDATION_FAIL);// password not matching format
+        } else {
+            //newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
+            newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
+            showToast(PASSWORDS_MATCHING_ERROR);// first and second entry of new password not matching
+        }
+    */
 }
 
 function passwordChangeValidation(newPassword, newPasswordCompare) {
@@ -114,7 +136,7 @@ function passwordChangeValidation(newPassword, newPasswordCompare) {
 function showUserPreviewModal(id) {
     modalContainer.style.display = "flex";
     $.ajax({
-            url: urlAddress + '/employees/preview/' + id + '/',
+            url: urlAddress + '/employees/' + id + '/',
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
@@ -292,12 +314,14 @@ function submitCreateUserForm() {
 }
 
 function showNewsAddModal() {
-    modalContainer.style.display = "flex";
     $.ajax({
         url: urlAddress + '/news/create/',
         type: 'get',
         dataType: 'html',
-        success: (data) => modalContainer.innerHTML = data,
+        success: (data) => {
+            modalContent.innerHTML = data;
+            modalContainer.style.display = "flex";
+        },
     });
 }
 
@@ -325,11 +349,13 @@ function submitNewsAddForm() {
 }
 
 function showNewsEditModal(id) {
-    modalContainer.style.display = "flex";
     $.ajax({
             url: urlAddress + '/news/' + id + '/',
             type: 'get',
-            success: (data) => modalContent.innerHTML = data,
+            success: (data) => {
+                modalContent.innerHTML = data;
+                modalContainer.style.display = "flex";
+            },
         },
     );
 }
@@ -358,11 +384,13 @@ function submitNewsEditForm(id) {
 }
 
 function showNewsDeleteModal(id) {
-    modalContainer.style.display = "flex";
     $.ajax({
             url: urlAddress + '/news/delete/' + id + '/',
             type: 'get',
-            success: (data) => modalContent.innerHTML = data,
+            success: (data) => {
+                modalContent.innerHTML = data;
+                modalContainer.style.display = "flex";
+            },
         },
     );
 }
@@ -438,6 +466,7 @@ function showToast(result) {
 window.onclick = function (event) {
     if (event.target == modalContainer) {
         modalContainer.style.display = "none";
+        modalContent.innerHTML = "";
     }
 }
 
