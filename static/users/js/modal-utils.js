@@ -68,54 +68,34 @@ function submitPasswordChangeForm() {
     let newPasswordCompare = document.getElementById("id_new_password2").value;
 
     let validationResult = passwordChangeValidation(newPassword, newPasswordCompare);
+    alert(newPassword + " " + newPasswordCompare);
 
-    $.ajax({
-            url: urlAddress + '/password-change/',
-            type: 'POST',
-            data: form.serialize(),
-            success: function (data, textStatus, xhr) {
-                sessionStorage.clear();
-                sessionStorage.setItem("result", SUCCESSFUL_ACTION);
-                window.open("http://127.0.0.1:8000/logout/");
-                //closeFunction();
-            },
-            error: function (data, xhr, textStatus) {
-                sessionStorage.clear();
-                sessionStorage.setItem("result", ERROR_ACTION);
-                showToast(ERROR_ACTION);
-                sessionStorage.clear();
-            },
-        },
-    );
-    /*
-        if (validationResult === VALIDATION_SUCCESS) {
-            $.ajax({
-                    url: urlAddress + '/password-change/',
-                    type: 'POST',
-                    data: form.serialize(),
-                    success: function (data, textStatus, xhr) {
-                        sessionStorage.clear();
-                        sessionStorage.setItem("result", SUCCESSFUL_ACTION);
-                        window.location.href(urlAddress + "/logout/");
-                        //closeFunction();
-                    },
-                    error: function (data, xhr, textStatus) {
-                        sessionStorage.clear();
-                        sessionStorage.setItem("result", ERROR_ACTION);
-                        showToast(ERROR_ACTION);
-                        sessionStorage.clear();
-                    },
+    if (validationResult === VALIDATION_SUCCESS) {
+        $.ajax({
+                url: urlAddress + '/employees/password-change/',
+                type: 'POST',
+                data: form.serialize(),
+                success: function (data, textStatus, xhr) {
+                    sessionStorage.clear();
+                    sessionStorage.setItem("result", SUCCESSFUL_ACTION);
+                    closeFunction();
                 },
-            );
-        } else if (validationResult === PASSWORD_VALIDATION_FAIL) {
-            newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Password does not meet required format.</li></ul>");
-            showToast(PASSWORD_VALIDATION_FAIL);// password not matching format
-        } else {
-            //newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
-            newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
-            showToast(PASSWORDS_MATCHING_ERROR);// first and second entry of new password not matching
-        }
-    */
+                error: function (data, xhr, textStatus) {
+                    sessionStorage.clear();
+                    sessionStorage.setItem("result", ERROR_ACTION);
+                    showToast(ERROR_ACTION);
+                    sessionStorage.clear();
+                },
+            },
+        );
+    } else if (validationResult === PASSWORD_VALIDATION_FAIL) {
+        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Password does not meet required format.</li></ul>");
+        showToast(PASSWORD_VALIDATION_FAIL);// password not matching format
+    } else {
+        //newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
+        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
+        showToast(PASSWORDS_MATCHING_ERROR);// first and second entry of new password not matching
+    }
 }
 
 function passwordChangeValidation(newPassword, newPasswordCompare) {
