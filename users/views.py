@@ -92,10 +92,11 @@ class EmployeeUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeUpdate, self).get_context_data(**kwargs)
         context["object_id"] = self.kwargs["pk"]
-        if self.request.user.is_superuser or self.request.user.is_admin:
-            context['form'] = EditEmployeeForm(instance=context['object'])
-        else:
-            context['form_preview'] = EditEmployeeForm(instance=context['object'], disable_fields=True)
+        if not self.request.POST:
+            if self.request.user.is_superuser or self.request.user.is_admin:
+                context['form'] = EditEmployeeForm(instance=context['object'])
+            else:
+                context['form_preview'] = EditEmployeeForm(instance=context['object'], disable_fields=True)
         return context
 
     def form_invalid(self, form):
@@ -128,7 +129,7 @@ class Profile(UpdateView, FormView):
 
 
 class PasswordChange(PasswordChangeView):
-    success_url = reverse_lazy('logout')
+    success_url = '/logout/'
 
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form), status=401)
