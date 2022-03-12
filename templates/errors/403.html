@@ -1,5 +1,10 @@
 {% extends 'portal/base.html' %}
+{% load static %}
 
 {% block body %}
-<h1>{{ error_message }}</h1>
+<div class="ov-container-center-content">
+    <img src='{% static 'img/error403.png' %}' alt="">
+    <h4 class="error-msg">Nemate pristup ovoj stranici</h4>
+</div>
+
 {% endblock %}
