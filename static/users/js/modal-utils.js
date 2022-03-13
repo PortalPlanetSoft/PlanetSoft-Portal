@@ -26,6 +26,8 @@ const PHONE_VPN_INVALID = 14; // phone and vpn number format not correct
 const PASSWORD_VALIDATION_FAIL = 15; // error that is triggered when new input password does not meet required format
 const PASSWORDS_MATCHING_ERROR = 16; // error that is triggered if the new password is not the same in both fields
 const FIELDS_EMPTY = 17; // error that is triggered if both new password fields are empty
+const FIRST_FIELD_EMPTY = 18;
+const SECOND_FIELD_EMPTY = 19;
 const VALIDATION_FAIL = 0; // validation of all elements unsuccessful
 
 let result = DEFAULT_TOAST;
@@ -63,15 +65,23 @@ function showPasswordChangeModal() {
 function submitPasswordChangeForm() {
     let form = $("#password-change-form");
 
+    let oldPassword = document.getElementById("id_old_password");
     let newPassword = document.getElementById("id_new_password1");
     let newPasswordCompare = document.getElementById("id_new_password2");
 
-    let validationResult = passwordChangeValidation(newPassword, newPasswordCompare);
+    let validationResult = passwordChangeValidation(oldPassword, newPassword, newPasswordCompare);
 
     if (validationResult == FIELDS_EMPTY) {
+        oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These fields cannot be empty.</li></ul>");
         newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These fields cannot be empty.</li></ul>");
         newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These fields cannot be empty.</li></ul>");
         showToast(FIELDS_EMPTY);
+    } else if (validationResult == FIRST_FIELD_EMPTY) {
+        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>This field cannot be empty.</li></ul>");
+        showToast(FIRST_FIELD_EMPTY);
+    } else if (validationResult == SECOND_FIELD_EMPTY) {
+        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>This field cannot be empty.</li></ul>");
+        showToast(SECOND_FIELD_EMPTY);
     } else if (validationResult == VALIDATION_SUCCESS) {
         $.ajax({
                 url: urlAddress + '/employees/password-change/',
@@ -85,6 +95,7 @@ function submitPasswordChangeForm() {
                 error: function (data, xhr, textStatus) {
                     sessionStorage.clear();
                     sessionStorage.setItem("result", ERROR_ACTION);
+                    oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Current password is not correct.</li></ul>");
                     showToast(ERROR_ACTION);
                     sessionStorage.clear();
                 },
@@ -100,10 +111,14 @@ function submitPasswordChangeForm() {
 }
 
 // function that validates the new password
-function passwordChangeValidation(newPassword, newPasswordCompare) {
+function passwordChangeValidation(oldPassword, newPassword, newPasswordCompare) {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // minimum eight characters, at least one letter and one number
-    if (newPassword.value == "" && newPasswordCompare.value == "") {
+    if (newPassword.value == "" && newPasswordCompare.value == "" && oldPassword.value == "") {
         return FIELDS_EMPTY;
+    } else if (newPassword.value == "" && newPasswordCompare.value) {
+        return FIRST_FIELD_EMPTY;
+    } else if (newPassword.value && newPasswordCompare.value == "") {
+        return SECOND_FIELD_EMPTY;
     } else {
         if (newPassword.value == newPasswordCompare.value) {
             let passwordValid = newPassword.value.match(passwordRegex);
@@ -450,6 +465,12 @@ function showToast(result) {
     } else if (result == FIELDS_EMPTY) {
         toastContainer.style.backgroundColor = "var(--alert-light)";
         toastMessage.innerHTML = "Polja ne mogu biti prazna!";
+    } else if (result == FIRST_FIELD_EMPTY) {
+        toastContainer.style.backgroundColor = "var(--alert-light)";
+        toastMessage.innerHTML = "Polje ne moze biti prazno!";
+    } else if (result == SECOND_FIELD_EMPTY) {
+        toastContainer.style.backgroundColor = "var(--alert-light)";
+        toastMessage.innerHTML = "Polje ne moze biti prazno!";
     }
     toastContainer.className = "show";
     setTimeout(function () {
