@@ -197,6 +197,7 @@ class ProfileForm(forms.ModelForm):
     use_required_attribute = False
     first_name = forms.CharField(max_length=150, min_length=3)
     last_name = forms.CharField(max_length=150, min_length=3)
+    profile_pic = forms.ImageField(label=_('Avatar'), required=False, widget=forms.FileInput)
     field_order = ['first_name', 'last_name', 'email', 'birth_date', 'phone', 'business_phone', 'profile_pic']
 
     def clean_birth_date(self):
