@@ -93,7 +93,11 @@
 .ov-form__btn-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 2rem;
+}
+.ov-form__btn-contrainer--col {
+  flex-direction: column;
 }
 .ov-form__btn {
   border: 1px solid var(--primary);
@@ -117,6 +121,10 @@
   background-color: var(--alert-light);
   color: var(--alert);
   border: 1px solid var(--alert);
+}
+.ov-form__btn-text-only {
+  background-color: unset;
+  border: none;
 }
 .ov-form__btn:hover {
   cursor: pointer;

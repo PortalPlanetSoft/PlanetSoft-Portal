@@ -35,10 +35,10 @@
                 <div class="headline">
                     <p>{{ article.creation_date }}</p>
                     <h4>{{ article.headline }}</h4>
-                    <div class="ov-form__btn-container">
+                    <div class="ov-form__btn-container ov-form__btn-contrainer--col">
                         <a onclick="showNewsEditModal({{ article.id }})">Uredi<i
                                 class="fa-regular fa-pen-to-square"></i></a>
-                        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red"
+                        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red ov-form__btn-text-only"
                                 onclick="showNewsDeleteModal({{ article.id }})">Izbrisi vijest
                         </button>
                     </div>

@@ -65,14 +65,16 @@
 }
 .headline{
     display: grid;
-    grid-template-columns:repeat(8, 1fr);
+    grid-template-columns:2fr 5fr 3fr;
     color: var(--primary);
-    padding: 1rem;
+    grid-template-areas: 
+    "date title buttons";
 }
 .headline h4{
-    grid-column-start: 4;
-    grid-column-end: 6;
     font-size: 1.3rem;
+    grid-area: title;
+    justify-self: center;
+    align-self: center;
 }
 .headline a{
     grid-column-start: 8;
@@ -83,6 +85,12 @@
 }
 .headline p{
     font-size: 1.1rem;
+    grid-area: date;
+}
+
+.headline div {
+    grid-area: buttons;
+    justify-self: end;
 }
 
 
