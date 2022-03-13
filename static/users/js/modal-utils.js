@@ -25,6 +25,9 @@ const EMAIL_VPN_INVALID = 13; // email and vpn number format not correct
 const PHONE_VPN_INVALID = 14; // phone and vpn number format not correct
 const PASSWORD_VALIDATION_FAIL = 15; // error that is triggered when new input password does not meet required format
 const PASSWORDS_MATCHING_ERROR = 16; // error that is triggered if the new password is not the same in both fields
+const FIELDS_EMPTY = 17; // error that is triggered if both new password fields are empty
+const FIRST_FIELD_EMPTY = 18;
+const SECOND_FIELD_EMPTY = 19;
 const VALIDATION_FAIL = 0; // validation of all elements unsuccessful
 
 let result = DEFAULT_TOAST;
@@ -59,54 +62,74 @@ function showPasswordChangeModal() {
 }
 
 // function that submits user's password change request
-function submitPasswordChangeForm(id) {
+function submitPasswordChangeForm() {
     let form = $("#password-change-form");
-    //let currentPassword = document.getElementById("id_old_password");
-    let newPassword = document.getElementById("id_new_password1").value;
-    let newPasswordCompare = document.getElementById("id_new_password2").value;
 
-    let validationResult = passwordChangeValidation(newPassword, newPasswordCompare);
+    let oldPassword = document.getElementById("id_old_password");
+    let newPassword = document.getElementById("id_new_password1");
+    let newPasswordCompare = document.getElementById("id_new_password2");
 
-    if (validationResult === VALIDATION_SUCCESS) {
+    let validationResult = passwordChangeValidation(oldPassword, newPassword, newPasswordCompare);
+
+    if (validationResult == FIELDS_EMPTY) {
+        oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These fields cannot be empty.</li></ul>");
+        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These fields cannot be empty.</li></ul>");
+        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These fields cannot be empty.</li></ul>");
+        showToast(FIELDS_EMPTY);
+    } else if (validationResult == FIRST_FIELD_EMPTY) {
+        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>This field cannot be empty.</li></ul>");
+        showToast(FIRST_FIELD_EMPTY);
+    } else if (validationResult == SECOND_FIELD_EMPTY) {
+        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>This field cannot be empty.</li></ul>");
+        showToast(SECOND_FIELD_EMPTY);
+    } else if (validationResult == VALIDATION_SUCCESS) {
         $.ajax({
-                url: urlAddress + '/password-change/',
+                url: urlAddress + '/employees/password-change/',
                 type: 'POST',
                 data: form.serialize(),
                 success: function (data, textStatus, xhr) {
                     sessionStorage.clear();
                     sessionStorage.setItem("result", SUCCESSFUL_ACTION);
-                    //closeFunction();
+                    closeFunction();
                 },
                 error: function (data, xhr, textStatus) {
                     sessionStorage.clear();
                     sessionStorage.setItem("result", ERROR_ACTION);
+                    oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Current password is not correct.</li></ul>");
                     showToast(ERROR_ACTION);
                     sessionStorage.clear();
                 },
             },
         );
-    } else if (validationResult === PASSWORD_VALIDATION_FAIL) {
+    } else if (validationResult == PASSWORD_VALIDATION_FAIL) {
         newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Password does not meet required format.</li></ul>");
         showToast(PASSWORD_VALIDATION_FAIL);// password not matching format
-    } else {
-        //newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
+    } else if (validationResult == PASSWORDS_MATCHING_ERROR) {
         newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
         showToast(PASSWORDS_MATCHING_ERROR);// first and second entry of new password not matching
     }
-
 }
 
-function passwordChangeValidation(newPassword, newPasswordCompare) {
+// function that validates the new password
+function passwordChangeValidation(oldPassword, newPassword, newPasswordCompare) {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // minimum eight characters, at least one letter and one number
-    if (newPassword === newPasswordCompare) {
-        let passwordValid = newPassword.match(passwordRegex);
-        if (passwordValid) {
-            return VALIDATION_SUCCESS;
-        } else {
-            return PASSWORD_VALIDATION_FAIL;
-        }
+    if (newPassword.value == "" && newPasswordCompare.value == "" && oldPassword.value == "") {
+        return FIELDS_EMPTY;
+    } else if (newPassword.value == "" && newPasswordCompare.value) {
+        return FIRST_FIELD_EMPTY;
+    } else if (newPassword.value && newPasswordCompare.value == "") {
+        return SECOND_FIELD_EMPTY;
     } else {
-        return PASSWORDS_MATCHING_ERROR;
+        if (newPassword.value == newPasswordCompare.value) {
+            let passwordValid = newPassword.value.match(passwordRegex);
+            if (passwordValid) {
+                return VALIDATION_SUCCESS;
+            } else {
+                return PASSWORD_VALIDATION_FAIL;
+            }
+        } else {
+            return PASSWORDS_MATCHING_ERROR;
+        }
     }
 }
 
@@ -114,7 +137,7 @@ function passwordChangeValidation(newPassword, newPasswordCompare) {
 function showUserPreviewModal(id) {
     modalContainer.style.display = "flex";
     $.ajax({
-            url: urlAddress + '/employees/preview/' + id + '/',
+            url: urlAddress + '/employees/' + id + '/',
             type: 'get',
             success: (data) => modalContent.innerHTML = data,
         },
@@ -132,7 +155,7 @@ function showUserEditModal(id) {
     );
 }
 
-// function that submits user's edited data
+// function that submits user's edited data and displays error messages
 function submitEditUserForm(id) {
     let form = $("#edit-emp-form");
     let emailAddress = document.getElementById("id_email");
@@ -140,7 +163,7 @@ function submitEditUserForm(id) {
     let vpnNumber = document.getElementById("id_business_phone");
 
     const returnResult = validatorFunction(emailAddress, phoneNumber, vpnNumber);
-    if (returnResult === VALIDATION_SUCCESS) {
+    if (returnResult == VALIDATION_SUCCESS) {
         $.ajax({
                 url: urlAddress + '/employees/' + id + '/',
                 type: 'POST',
@@ -161,28 +184,28 @@ function submitEditUserForm(id) {
             },
         );
     } else {
-        if (returnResult === EMAIL_INVALID) {
+        if (returnResult == EMAIL_INVALID) {
             emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
             showToast(INVALID_EMAIL_ERROR);
-        } else if (returnResult === PHONE_INVALID) {
+        } else if (returnResult == PHONE_INVALID) {
             phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
             showToast(INVALID_PHONE_ERROR);
-        } else if (returnResult === VPN_INVALID) {
+        } else if (returnResult == VPN_INVALID) {
             vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid VPN number.</li></ul>");
             showToast(INVALID_VPN_ERROR);
-        } else if (returnResult === EMAIL_PHONE_INVALID) {
+        } else if (returnResult == EMAIL_PHONE_INVALID) {
             emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
             phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
             showToast(INVALID_EMAILANDPHONE_ERROR);
-        } else if (returnResult === EMAIL_VPN_INVALID) {
+        } else if (returnResult == EMAIL_VPN_INVALID) {
             emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
             vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid VPN number.</li></ul>");
             showToast(INVALID_EMAILANDVPN_ERROR);
-        } else if (returnResult === PHONE_VPN_INVALID) {
+        } else if (returnResult == PHONE_VPN_INVALID) {
             phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
             vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid VPN number.</li></ul>");
             showToast(INVALID_PHONEANDVPN_ERROR);
-        } else if (returnResult === VALIDATION_FAIL) {
+        } else if (returnResult == VALIDATION_FAIL) {
             emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
             phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
             vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid VPN number.</li></ul>");
@@ -291,16 +314,20 @@ function submitCreateUserForm() {
     });
 }
 
+// function for opening news add modal
 function showNewsAddModal() {
-    modalContainer.style.display = "flex";
     $.ajax({
         url: urlAddress + '/news/create/',
         type: 'get',
         dataType: 'html',
-        success: (data) => modalContainer.innerHTML = data,
+        success: (data) => {
+            modalContent.innerHTML = data;
+            modalContainer.style.display = "flex";
+        },
     });
 }
 
+// function that submits newly created news article
 function submitNewsAddForm() {
     let formData = new FormData($("#create-news-form")[0]);
     $.ajax({
@@ -324,16 +351,20 @@ function submitNewsAddForm() {
     });
 }
 
+// onclick function for opening of news edit modal
 function showNewsEditModal(id) {
-    modalContainer.style.display = "flex";
     $.ajax({
             url: urlAddress + '/news/' + id + '/',
             type: 'get',
-            success: (data) => modalContent.innerHTML = data,
+            success: (data) => {
+                modalContent.innerHTML = data;
+                modalContainer.style.display = "flex";
+            },
         },
     );
 }
 
+// function that submits edited article data
 function submitNewsEditForm(id) {
     let formData = new FormData($("#edit-news-form")[0]);
     $.ajax({
@@ -357,16 +388,20 @@ function submitNewsEditForm(id) {
     });
 }
 
+// onclick function for opening of news delete modal
 function showNewsDeleteModal(id) {
-    modalContainer.style.display = "flex";
     $.ajax({
             url: urlAddress + '/news/delete/' + id + '/',
             type: 'get',
-            success: (data) => modalContent.innerHTML = data,
+            success: (data) => {
+                modalContent.innerHTML = data;
+                modalContainer.style.display = "flex";
+            },
         },
     );
 }
 
+// function that deletes selected article
 function submitNewsDeleteForm(id) {
     let form = $("#delete-news-form");
     $.ajax({
@@ -427,6 +462,15 @@ function showToast(result) {
     } else if (result == PASSWORDS_MATCHING_ERROR) {
         toastContainer.style.backgroundColor = "var(--alert-light)";
         toastMessage.innerHTML = "Molimo vas unesite istu šifru u oba polja!";
+    } else if (result == FIELDS_EMPTY) {
+        toastContainer.style.backgroundColor = "var(--alert-light)";
+        toastMessage.innerHTML = "Polja ne mogu biti prazna!";
+    } else if (result == FIRST_FIELD_EMPTY) {
+        toastContainer.style.backgroundColor = "var(--alert-light)";
+        toastMessage.innerHTML = "Polje ne moze biti prazno!";
+    } else if (result == SECOND_FIELD_EMPTY) {
+        toastContainer.style.backgroundColor = "var(--alert-light)";
+        toastMessage.innerHTML = "Polje ne moze biti prazno!";
     }
     toastContainer.className = "show";
     setTimeout(function () {
@@ -438,6 +482,7 @@ function showToast(result) {
 window.onclick = function (event) {
     if (event.target == modalContainer) {
         modalContainer.style.display = "none";
+        modalContent.innerHTML = "";
     }
 }
 

@@ -13,7 +13,7 @@ HELP_MESSAGES = {
     'first_name': 'The first name',
 }
 
-REGEX_PHONE_NUMBER = "(\+387|00387|0)(66|65|61)[0-9]{6}"
+REGEX_PHONE_NUMBER = "(\+387|00387|0)(66|65|61)[0-9]{6}$"
 
 ERROR_MESSAGES = {
     'username': {

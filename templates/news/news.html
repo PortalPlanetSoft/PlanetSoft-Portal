@@ -68,6 +68,14 @@
                     {% csrf_token %}
                     <button type="submit" name="article_dislike_id" value="{{ article.id }}">Dislike</button>
                 </form>
+                <form action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                      method="post">
+                    {% csrf_token %}
+                    <label>Komentar
+                        <textarea name="content" placeholder="Komentar"></textarea>
+                    </label>
+                    <button type="submit" name="article_dislike_id">Submit</button>
+                </form>
             </div>
         {% endfor %}
     </div>

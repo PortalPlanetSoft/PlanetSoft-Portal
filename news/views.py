@@ -7,8 +7,9 @@ from django.views.generic import ListView, UpdateView, DeleteView, CreateView
 from django.http import HttpResponseRedirect
 
 from news.forms import AddNewsArticleForm
-from news.models import NewsArticle
+from news.models import NewsArticle, Comment
 from users.models import User
+from news.util import get_redirect_URL
 
 
 class NewsList(ListView):
@@ -124,20 +125,30 @@ def likes_dislikes(request, pk):
             article.likes.remove(request.user)
         article.dislikes.add(request.user)
 
-    search = request.GET.get('search')
-    author = request.GET.get('author')
-    page = request.GET.get('page')
-    if search or author or page:
-        url = '/news/?'
-        if search:
-            url += 'search=' + search + '&'
-        if author:
-            url += 'author=' + author + '&'
-        if page:
-            url += 'page=' + page
-    else:
-        url = '/news/'
+    url = get_redirect_URL(request)
     return HttpResponseRedirect(url)
 
 
+@login_required
+def add_comment(request, pk):
+    if request.POST and request.POST.get('content'):
+        comment = Comment(content=request.POST.get('content'), author=request.user,
+                          article=NewsArticle.objects.get(pk=pk))
+        comment.save()
+    url = get_redirect_URL(request)
+    return HttpResponseRedirect(url)
 
+
+class AllComments(ListView):
+    template_name = 'news/article-comments.html'
+    model = Comment
+    context_object_name = 'comments'
+
+    def get_queryset(self, *args, **kwargs):
+        query_set = super().get_queryset().filter(article=self.kwargs['pk'])
+        return query_set
+
+    def get_context_data(self, **kwargs):
+        context = super(AllComments, self).get_context_data(**kwargs)
+        context['article'] = NewsArticle.objects.annotate(Count('likes'), Count('dislikes')).get(id=self.kwargs['pk'])
+        return context
