@@ -54,28 +54,25 @@
                 <div class="name-author">
                     <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
                 </div>
-                <div>
-                    <p>Likes: {{ article.likes__count }}</p>
-                    <p>Dislikes: {{ article.dislikes__count }}</p>
+                <div class="comment-like-section">
+                    <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                          method="post" class="news-like">
+                        {% csrf_token %}
+                        <button type="submit" name="article_like_id" value="{{ article.id }}"><i class="fa-solid fa-thumbs-up"></i></button><span>{{ article.likes__count }}</span>
+                    </form>
+                    <form action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                          method="post" class="news-dislike">
+                        {% csrf_token %}
+                        <button type="submit" name="article_dislike_id" value="{{ article.id }}"><i class="fa-solid fa-thumbs-down"></i></button> <span>{{ article.dislikes__count }}</span>
+                    </form>
+                    <form action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                          method="post" class="news-comment">
+                        {% csrf_token %}
+                            <textarea name="content" placeholder="Dodaj komentar..."></textarea>
+                        <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
+                    </form>
                 </div>
-                <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                      method="post">
-                    {% csrf_token %}
-                    <button type="submit" name="article_like_id" value="{{ article.id }}">Like</button>
-                </form>
-                <form action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                      method="post">
-                    {% csrf_token %}
-                    <button type="submit" name="article_dislike_id" value="{{ article.id }}">Dislike</button>
-                </form>
-                <form action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                      method="post">
-                    {% csrf_token %}
-                    <label>Komentar
-                        <textarea name="content" placeholder="Komentar"></textarea>
-                    </label>
-                    <button type="submit" name="article_dislike_id">Submit</button>
-                </form>
+
             </div>
         {% endfor %}
     </div>

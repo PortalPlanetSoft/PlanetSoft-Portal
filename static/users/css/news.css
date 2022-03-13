@@ -70,25 +70,26 @@
     grid-template-areas: 
     "date title buttons";
 }
-.headline h4{
+.headline > h4{
     font-size: 1.3rem;
     grid-area: title;
     justify-self: center;
     align-self: center;
+    grid-area: title;
 }
-.headline a{
+.headline > a{
     grid-column-start: 8;
     color: var(--primary);
     font-size: 1.1rem;
     text-align:right ;
 
 }
-.headline p{
+.headline > p{
     font-size: 1.1rem;
     grid-area: date;
 }
 
-.headline div {
+.headline > div {
     grid-area: buttons;
     justify-self: end;
 }
@@ -106,10 +107,57 @@
 .name-author p{
     font-size: 1.1rem;
 }
+.comment-like-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 10fr;
+    grid-template-areas: 
+    "like dislike comment";
+    width: 50%;
+    margin: 0 auto;
+}
+.comment-like-section button {
+    border: none;
+    background-color: unset;
+    color: var(--primary);
+}
+.comment-like-section button:hover {
+    cursor: pointer;
+}
+.comment-like-section span {
+    color: var(--primary);
+}
+.comment-like-section .news-like {
+    grid-area: like;
+    align-self: center;
+    justify-self: center;
+}
+.comment-like-section .news-dislike {
+    grid-area: dislike;
+    align-self: center;
+    justify-self: center;
+}
+.comment-like-section .news-comment {
+    grid-area: comment;
+    border: 1px solid red;
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.comment-like-section .news-comment textarea {
+    resize: none;
+    border: none;
+    outline: none;
+    width: 90%;
+    color: var(--primary);
+}
+.comment-like-section .news-comment textarea::placeholder {
+    color: var(--primary);
+}
+.comment-like-section .news-comment button{
+    color: var(--primary);
+}
 .dk-pagination{
     padding-top:1rem ;
-}
-@media only screen and (max-width: 1200px) {
-
-
 }

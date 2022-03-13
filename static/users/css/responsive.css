@@ -223,14 +223,43 @@
 
   /* NEWS */
   .headline {
-        display: block;
-        padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
     }
     .content{
-        padding: 1rem;;
+        padding: 1rem;
     }
-    .headline a{
-        font-size: 2rem;
+    .headline > p {
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 1rem;
+    }
+    .headline > h4 {
+      font-size: 3rem;
+      padding: 1rem;
+    }
+    .headline > div > a {
+      font-size: 2rem;
+    }
+    .headline > div > button {
+      font-size: 2rem;
+    }
+    .comment-like-section {
+      width: 100%;
+      grid-template-columns: 1fr 1fr 5fr;
+    }
+    .comment-like-section .news-like, .comment-like-section .news-dislike{
+      display: flex;
+    }
+    .comment-like-section .news-comment {
+      margin-left: 1rem;
+    }
+    .comment-like-section button, .comment-like-section span{
+      font-size: 2rem;
+    }
+    .comment-like-section textarea {
+      font-size: 2rem;
     }
     .dk-grid {
         font-size: 1.5rem;
