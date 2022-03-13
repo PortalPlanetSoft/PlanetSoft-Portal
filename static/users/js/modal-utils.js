@@ -316,14 +316,12 @@ function submitCreateUserForm() {
 
 // function for opening news add modal
 function showNewsAddModal() {
+    modalContainer.style.display = "flex";
     $.ajax({
         url: urlAddress + '/news/create/',
         type: 'get',
         dataType: 'html',
-        success: (data) => {
-            modalContent.innerHTML = data;
-            modalContainer.style.display = "flex";
-        },
+        success: (data) => modalContent.innerHTML = data,     
     });
 }
 
