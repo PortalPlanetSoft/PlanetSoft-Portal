@@ -274,9 +274,15 @@ a:hover {
 }
 .dv-photo-preview{
     max-width: 100%;
+
+}
+.dv-newscard-photo{
+    display: flex;
+    justify-content: center;
 }
 .dv-newscard-photo >img {
-    max-width: 100%;
+    max-width: 50%;
+
 }
 .dv-newsdetails-photo>img{
     max-width: 50%;
