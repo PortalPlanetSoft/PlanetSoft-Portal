@@ -1,0 +1,10 @@
+<form id="create-news-form" class="ov-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        {{ form.as_p }}
+    <div class="ov-form__btn-container">
+        <button type="button" class="ov-form__btn" onclick="submitNewsAddForm()">Submit</button>
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">
+            Odbaci
+        </button>
+    </div>
+</form>

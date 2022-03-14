@@ -36,7 +36,8 @@
 }
 .ov-form input[type='text'],
 .ov-form input[type='password'],
-.ov-form input[type='email'] {
+.ov-form input[type='email'],
+.ov-form textarea {
   display: block;
   border: none;
   outline: 0;
@@ -45,6 +46,11 @@
   margin-bottom: 0.5rem;
   font-size: 1rem;
   color: var(--primary);
+}
+.ov-form textarea {
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  resize: none;
 }
 
 .ov-form select {
@@ -87,7 +93,11 @@
 .ov-form__btn-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 2rem;
+}
+.ov-form__btn-contrainer--col {
+  flex-direction: column;
 }
 .ov-form__btn {
   border: 1px solid var(--primary);
@@ -111,6 +121,10 @@
   background-color: var(--alert-light);
   color: var(--alert);
   border: 1px solid var(--alert);
+}
+.ov-form__btn-text-only {
+  background-color: unset;
+  border: none;
 }
 .ov-form__btn:hover {
   cursor: pointer;
@@ -142,7 +156,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 90%;
 }
 .ov-form,
 .ov-password-change .ov-form {

@@ -1,0 +1,106 @@
+{% extends 'portal/base.html' %}
+
+{% block body %}
+    <form name="userFilterForm">
+        <div class="dk-grid">
+            <div class="search">
+                <div class="dv-mobile-fullw">
+                    <input type="text" placeholder="PRETRAGA..." name="search">
+                    <div class="news-i" onclick="submitFilterForm()">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="choose_author">
+                <select name="author" class="dk-author-filter-select" onchange="submitFilterForm()">
+                    <option {% if selected == author.pk %} selected {% endif %} value="all">Svi autori</option>
+                    {% for author in author_list %}
+                        <option {% if selected == author.pk %} selected {% endif %}
+                                                               value="{{ author.pk }}">{{ author.first_name }} {{ author.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="create_news">
+                <a onclick="showNewsAddModal()">Dodajte vijest
+                    <i class="fa-solid fa-circle-plus fa-xl"></i></a>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="grid-news">
+
+        {% for article in object_list %}
+
+            <div class="news">
+                <div class="headline">
+                    <p>{{ article.creation_date }}</p>
+
+                    <h4><a href="http://127.0.0.1:8000/news/article/{{ article.id }}">{{ article.headline }} </a></h4>
+
+                    <div class="ov-form__btn-container ov-form__btn-contrainer--col">
+                        <a onclick="showNewsEditModal({{ article.id }})">Uredi<i
+                                class="fa-regular fa-pen-to-square"></i></a>
+                        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red ov-form__btn-text-only"
+                                onclick="showNewsDeleteModal({{ article.id }})">Izbrisi vijest
+                        </button>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>{{ article.content }}</p>
+                    <div class="dv-newscard-photo">
+                        {% if article.image %}
+                            <img src={{ article.image.url }}>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="name-author">
+                    <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
+                </div>
+                <div class="comment-like-section">
+                    <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                          method="post" class="news-like">
+                        {% csrf_token %}
+                        <button type="submit" name="article_like_id" value="{{ article.id }}"><i class="fa-solid fa-thumbs-up"></i></button><span>{{ article.likes__count }}</span>
+                    </form>
+                    <form action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                          method="post" class="news-dislike">
+                        {% csrf_token %}
+                        <button type="submit" name="article_dislike_id" value="{{ article.id }}"><i class="fa-solid fa-thumbs-down"></i></button> <span>{{ article.dislikes__count }}</span>
+                    </form>
+                    <form action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                          method="post" class="news-comment">
+                        {% csrf_token %}
+                            <textarea name="content" placeholder="Dodaj komentar..."></textarea>
+                        <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
+                    </form>
+                </div>
+
+            </div>
+
+        {% endfor %}
+    </div>
+
+
+
+    <div class="dk-pagination">
+        {% if page_obj.has_previous %}
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.previous_page_number }}">&lt;</a>
+        {% else %}
+            <span class="bk-noNextPage">&lt;</span>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+                <span class="bk-currentPage">{{ i }}</span>
+            {% else %}
+                <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ i }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.next_page_number }}">&gt;</a>
+        {% else %}
+            <span class="bk-noNextPage">&gt;</span>
+        {% endif %}
+
+    </div>
+{% endblock %}
