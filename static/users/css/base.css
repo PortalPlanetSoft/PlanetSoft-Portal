@@ -275,7 +275,12 @@ a:hover {
 .dv-photo-preview{
     max-width: 100%;
 }
-
+.dv-newscard-photo >img {
+    max-width: 100%;
+}
+.dv-newsdetails-photo>img{
+    max-width: 50%;
+}
 .error-msg {
     color: var(--primary);
     padding: 1rem;

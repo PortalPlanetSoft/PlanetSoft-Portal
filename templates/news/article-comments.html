@@ -1,6 +1,9 @@
+           {% extends 'portal/base.html' %}
+
+{% block body %}
             <div class="content">
                 <p>{{ article.content }}</p>
-                    <div class="dk-icon">
+                    <div class="dv-newsdetails-photo">
                         {% if article.image %}
                             <img src={{ article.image.url }}>
                         {% endif %}
@@ -36,3 +39,5 @@
 {% for comment in comments %}
  <h1>{{ comment.content }}</h1>
 {% endfor %}
+
+{% endblock %}
