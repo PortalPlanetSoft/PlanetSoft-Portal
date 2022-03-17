@@ -193,7 +193,7 @@ class EditEmployeeForm(forms.ModelForm):
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': 'Korisničko ime'}),
             # todo provjerite zasto ne radi labela za ime i prezime i pol
-            'first_name': forms.TextInput(attrs={'placeholder': 'Ime', 'label': 'OVO JE LABEL ZA IME'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Ime'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Prezime'}),
             'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
             'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
