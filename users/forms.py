@@ -58,6 +58,29 @@ LABEL_TEXT = {
     'phone': _('Broj telefona'),
     'business_phone': _('Poslovni broj telefona'),
 }
+EMPLOYEE_LABEL_TEXT = {
+    'username': _('Korisničko ime'),
+    'first_name': _('Ime'),
+    'last_name': _('Prezime'),
+    'gender': _('Pol'),
+    'email': _('Email adresa'),
+    'company_position': _('Pozicija u kompaniji'),
+    'work_location': _('Radno mjesto'),
+    'is_admin': _('Admin'),
+    'is_editor': _('Editor'),
+    'birth_date': _('Datum rođenja'),
+    'phone': _('Broj telefona'),
+    'business_phone': _('Poslovni broj telefona'),
+}
+PROFILE_LABEL_TEXT = {
+    'first_name': _('Ime'),
+    'last_name': _('Prezime'),
+    'email': _('Email adresa'),
+    'profile_pic': _('Avatar'),
+    'birth_date': _('Datum rođenja'),
+    'phone': _('Broj telefona'),
+    'business_phone': _('Poslovni broj telefona'),
+}
 
 
 class AddEmployeeForm(forms.ModelForm):
@@ -120,6 +143,11 @@ class AddEmployeeForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for key, value in EMPLOYEE_LABEL_TEXT.items():
+                self.fields[key].label = value
+        self.fields['first_name'].placeholder = "Ime"
 
 
 class EditEmployeeForm(forms.ModelForm):
@@ -165,7 +193,7 @@ class EditEmployeeForm(forms.ModelForm):
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': 'Korisničko ime'}),
             # todo provjerite zasto ne radi labela za ime i prezime i pol
-            'first_name': forms.TextInput(attrs={'placeholder': 'Ime'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Ime', 'label': 'OVO JE LABEL ZA IME'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Prezime'}),
             'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
             'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
@@ -178,6 +206,8 @@ class EditEmployeeForm(forms.ModelForm):
 
     def __init__(self, disable_fields=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        for key, value in EMPLOYEE_LABEL_TEXT.items():
+                self.fields[key].label = value
         if disable_fields:
             self.fields['username'].disabled = True
             self.fields['first_name'].disabled = True
@@ -239,6 +269,10 @@ class ProfileForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'placeholder': 'Broj telefona'}),
             'business_phone': forms.TextInput(attrs={'placeholder': 'Poslovni broj telefona'})
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for key, value in PROFILE_LABEL_TEXT.items():
+                self.fields[key].label = value
 
 
 class CustomCreationForm(UserCreationForm):
