@@ -31,9 +31,6 @@ function changeThumbnail() {
         const reader = new FileReader();
         reader.onload = function (e) {
             document.getElementById('photo-preview').src = e.target.result;
-
-            console.log(e.target.result)
-            console.log(document.getElementById('image-thumbnail').src)
         };
         reader.readAsDataURL(this.files[0]);
     })
