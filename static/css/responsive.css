@@ -303,4 +303,32 @@
     .dk-author-filter-select option{
       font-size: 0.8rem;
     }
+    .headline-news{
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+    .content{
+        padding: 1rem;
+    }
+    .headline-news > div > p {
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 1rem;
+    }
+    .headline-news > div > h4 {
+      text-align: center;
+      font-size: 2rem;
+      padding: 1rem;
+    }
+    .edit-news {
+      text-align: center;
+    }
+    .edit-news a{
+      font-size: 1.5rem;
+    }
+    .profile-img-comment img{
+      width: 5.5rem;
+      height: 5.5rem;
+    }
 }
