@@ -11,8 +11,8 @@ class CompanyPosition(models.Model):
 
 class User(AbstractUser):
     GENDER_CHOICES = [
-        ('F', 'Female'),
-        ('M', 'Male')
+        ('F', 'Zensko'),
+        ('M', 'Musko')
     ]
     WORK_LOCATION = [
         ('BL', 'Banja Luka'),
