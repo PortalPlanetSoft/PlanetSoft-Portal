@@ -1,5 +1,17 @@
 const navToggleBtn = document.querySelector('#ov-nav-toggle');
 const navigation = document.querySelector('#ov-navigation');
+const newsCommentInput = document.querySelector("#news-comment-input");
+const commentIcon = document.querySelector("#comment-icon");
+
+if(newsCommentInput!== undefined) {
+    newsCommentInput.addEventListener('input', () => {
+        newsCommentInput.value.length > 0 ?
+        commentIcon.style.visibility = "visible": 
+        commentIcon.style.visibility = "hidden"; 
+        newsCommentInput.style.height = "16px";
+        newsCommentInput.style.height = (newsCommentInput.scrollHeight) + "px";
+    })
+}
 
 // Navigation hamburger menu
 navToggleBtn.addEventListener('click', (e) => {
