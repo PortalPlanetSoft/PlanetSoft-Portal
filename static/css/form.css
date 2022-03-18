@@ -24,7 +24,7 @@
   padding: 1rem 0;
   font-weight: bold;
 }
-.ov-form label:not(:first-child) {
+.ov-form label:not(:first-child){
   display: inline;
 }
 .ov-form p,
@@ -33,6 +33,9 @@
 }
 .ov-form div[id^="id"], .ov-form div[id^="id"] > div{
   margin: 0;
+}
+.ov-form div[id^="id"] > div{
+  display: inline-block;
 }
 .ov-form input[type='text'],
 .ov-form input[type='password'],
