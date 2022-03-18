@@ -2,17 +2,17 @@
 {% load static %}
 
 {% block body %}
-    <div class="content">
-        <div class="headline-news">
-            <div class="creation-date"><p>{{ article.creation_date }}</p></div>
-            <div class="author">
+    <div class="dk-news-details">
+        <div class="header-news-details">
+            <div class="creation-date-news"><p>{{ article.creation_date }}</p></div>
+            <div class="article-author-news">
                 <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
             </div>
-            <div class="article-headline"><h4>{{ article.headline }}</h4></div>
+            <div class="article-headline-news"><h4>{{ article.headline }}</h4></div>
             <div class="edit-news"><a onclick="showNewsEditModal({{ article.id }})">Uredi<i
                     class="fa-regular fa-pen-to-square"></i></a></div>
         </div>
-        <div class="content-news">
+        <div class="content-news-details">
             <p>{{ article.content }}</p>
             <div class="dv-newsdetails-photo">
                 {% if article.image %}
@@ -45,20 +45,22 @@
     </div>
 
     {% for comment in comments %}
-        <div class="comment-content">
-            <div class="profile-img-comment">
-                {% if object.profile_pic %}
-                    <img src={{ object.profile_pic.url }}>
-                {% else %}
-                    {% if article.author.gender == 'M' %}
-                        <img src='{% static 'img/1.png' %}' alt='man-profile'>
+        <div class="news-comment-content">
+            <div class="comment-content">
+                <div class="profile-img-comment">
+                    {% if object.profile_pic %}
+                        <img src={{ object.profile_pic.url }}>
                     {% else %}
-                        <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+                        {% if article.author.gender == 'M' %}
+                            <img src='{% static 'img/1.png' %}' alt='man-profile'>
+                        {% else %}
+                            <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
+                </div>
+                <h4>{{ article.author.first_name }} {{ article.author.last_name }}</h4>
+                <p>{{ comment.content }}</p>
             </div>
-            <h4>{{ article.author.first_name }} {{ article.author.last_name }}</h4>
-            <p>{{ comment.content }}</p>
         </div>
     {% endfor %}
 

@@ -303,32 +303,41 @@
     .dk-author-filter-select option{
       font-size: 0.8rem;
     }
-    .headline-news{
+    .header-news-details{
       display: flex;
       flex-direction: column;
       padding: 1rem;
     }
-    .content{
+    .dk-news-details{
         padding: 1rem;
     }
-    .headline-news > div > p {
+    .header-news-details > div > p {
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 2.1rem;
       padding: 1rem;
     }
-    .headline-news > div > h4 {
+    .header-news-details > div > h4 {
       text-align: center;
-      font-size: 2rem;
+      font-size: 3.2rem;
       padding: 1rem;
     }
     .edit-news {
       text-align: center;
     }
     .edit-news a{
-      font-size: 1.5rem;
+      font-size: 2.1rem;
     }
     .profile-img-comment img{
       width: 5.5rem;
       height: 5.5rem;
+    }
+    .comment-content h4{
+      font-size: 0.9rem;
+    }
+    .comment-content p{
+      font-size: 0.8rem;
+    }
+    .comment-content{
+      grid-column: 1/18;
     }
 }
