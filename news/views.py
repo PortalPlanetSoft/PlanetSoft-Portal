@@ -1,13 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
-from django.db.models import Q, Count
+from django.db.models import Q, Count, Value, BooleanField, When, Case
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
+from news.constants import ARTICLES_PER_PAGE
 from news.forms import AddNewsArticleForm
-from news.models import NewsArticle, Comment
+from news.models import NewsArticle, Comment, LikeDislike
+from praksaPlanetSoft.constants import FIRST_PAGE, HTTP_STATUS_400, HTTP_STATUS_200
 from users.models import User
 from news.util import get_redirect_URL
 
@@ -15,11 +17,11 @@ from news.util import get_redirect_URL
 class NewsList(ListView):
     template_name = 'news/news.html'
     model = NewsArticle
-    paginate_by = 10
+    paginate_by = ARTICLES_PER_PAGE
 
     def get_context_data(self, **kwargs):
         context = super(NewsList, self).get_context_data(**kwargs)
-        page = self.request.GET.get('page', 1)
+        page = self.request.GET.get('page', FIRST_PAGE)
         news = self.object_list.order_by('headline')
         paginator = self.paginator_class(news, self.paginate_by)
         news = paginator.page(page)
@@ -37,14 +39,15 @@ class NewsList(ListView):
         if self.request.GET.get('author'):
             context['author'] = self.request.GET.get('author')
 
+        context['liked_articles'] = LikeDislike.objects.filter(user_id=self.request.user)
         context['object_list'] = news
-        context['author_list'] = User.objects.filter((Q(is_editor=True) | Q(is_admin=True) | Q(is_superuser=True)),
-                                                     is_active=True)
+        context['author_list'] = User.objects.filter(Q(is_editor=True) | Q(is_admin=True), is_active=True)
         return context
 
     def get_queryset(self, *args, **kwargs):
-        # query_set = super().get_queryset()
-        query_set = NewsArticle.objects.annotate(Count('likes'), Count('dislikes'))
+        query_set = NewsArticle.objects.all().annotate(
+            likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
+            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)))
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
         if search:
@@ -73,7 +76,7 @@ class NewsCreate(UserPassesTestMixin, CreateView):
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
-        response.status_code = 400
+        response.status_code = HTTP_STATUS_400
         return response
 
     def test_func(self):
@@ -91,7 +94,7 @@ class NewsUpdate(UserPassesTestMixin, UpdateView):
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
-        response.status_code = 400
+        response.status_code = HTTP_STATUS_400
         return response
 
     def test_func(self):
@@ -115,16 +118,26 @@ class NewsDelete(UserPassesTestMixin, DeleteView):
 
 @login_required
 def likes_dislikes(request, pk):
-    article = get_object_or_404(NewsArticle, id=pk)
-    if request.POST.get('article_like_id'):
-        if article.dislikes.filter(id=request.user.pk):
-            article.dislikes.remove(request.user)
-        article.likes.add(request.user)
-    else:
-        if article.likes.filter(id=request.user.pk):
-            article.likes.remove(request.user)
-        article.dislikes.add(request.user)
+    liked_disliked_article = None
+    if LikeDislike.objects.filter(user_id=request.user.pk, article_id=pk).exists():
+        liked_disliked_article = LikeDislike.objects.filter(user_id=request.user.pk, article_id=pk).get()
 
+    if request.POST.get('article_like_id'):
+        if liked_disliked_article is not None and liked_disliked_article.type:
+            liked_disliked_article.delete()
+        elif liked_disliked_article is not None and not liked_disliked_article.type:
+            liked_disliked_article.type = True
+            liked_disliked_article.save()
+        else:
+            LikeDislike.objects.create(user_id=request.user.pk, article_id=pk, type=True)
+    else:
+        if liked_disliked_article is not None and not liked_disliked_article.type:
+            liked_disliked_article.delete()
+        elif liked_disliked_article is not None and liked_disliked_article.type:
+            liked_disliked_article.type = False
+            liked_disliked_article.save()
+        else:
+            LikeDislike.objects.create(user_id=request.user.pk, article_id=pk, type=False)
     url = get_redirect_URL(request)
     return HttpResponseRedirect(url)
 
@@ -132,6 +145,7 @@ def likes_dislikes(request, pk):
 @login_required
 def add_comment(request, pk):
     if request.POST and request.POST.get('content'):
+        # todo ako ima pk od komentara na koji odg onda sacuvaj parent comment
         comment = Comment(content=request.POST.get('content'), author=request.user,
                           article=NewsArticle.objects.get(pk=pk))
         comment.save()
