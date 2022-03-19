@@ -13,8 +13,8 @@
                     <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
                 </div>
                 <div>
-                    <p>Likes: {{ article.likes__count }}</p>
-                    <p>Dislikes: {{ article.dislikes__count }}</p>
+                    <p>Likes: {{ article.likes_count }}</p>
+                    <p>Dislikes: {{ article.dislikes_count }}</p>
                 </div>
                 <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
                       method="post">
@@ -34,8 +34,6 @@
                     </label>
                     <button type="submit" name="article_dislike_id">Submit</button>
                 </form>
-
-<!-- ZA UREDITI -->
 {% for comment in comments %}
  <h1>{{ comment.content }}</h1>
 {% endfor %}

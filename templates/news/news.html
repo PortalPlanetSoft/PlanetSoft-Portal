@@ -68,7 +68,8 @@
                     <form action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
                           method="post" class="news-dislike">
                         {% csrf_token %}
-                        <button type="submit" name="article_dislike_id" value="{{ article.id }}"><i class="fa-solid fa-thumbs-down"></i></button><span>{{ article.dislikes_count }}</span>
+                        <button type="submit" name="article_dislike_id" value="{{ article.id }}">
+                          <i class="fa-solid fa-thumbs-down"></i></button><span>{{ article.dislikes_count }}</span>
                     </form>
                     <form action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
                           method="post" class="news-comment">

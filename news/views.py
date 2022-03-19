@@ -1,17 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
-from django.db.models import Q, Count, Value, BooleanField, When, Case
-from django.shortcuts import get_object_or_404
+from django.db.models import Q, Count, Value, When, Case
+from django.http import HttpResponse
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView
-from django.http import HttpResponseRedirect, HttpResponse
 
 from news.constants import ARTICLES_PER_PAGE
 from news.forms import AddNewsArticleForm
 from news.models import NewsArticle, Comment, LikeDislike
 from praksaPlanetSoft.constants import FIRST_PAGE, HTTP_STATUS_400, HTTP_STATUS_200
 from users.models import User
-from news.util import get_redirect_URL
 
 
 class NewsList(ListView):
@@ -39,7 +37,7 @@ class NewsList(ListView):
         if self.request.GET.get('author'):
             context['author'] = self.request.GET.get('author')
 
-        context['liked_articles'] = LikeDislike.objects.filter(user_id=self.request.user)
+        context['liked_articles'] = LikeDislike.objects.filter(user_id=self.request.user).all()
         context['object_list'] = news
         context['author_list'] = User.objects.filter(Q(is_editor=True) | Q(is_admin=True), is_active=True)
         return context
@@ -138,8 +136,7 @@ def likes_dislikes(request, pk):
             liked_disliked_article.save()
         else:
             LikeDislike.objects.create(user_id=request.user.pk, article_id=pk, type=False)
-    url = get_redirect_URL(request)
-    return HttpResponseRedirect(url)
+    return HttpResponse(status=HTTP_STATUS_200)
 
 
 @login_required
@@ -149,8 +146,7 @@ def add_comment(request, pk):
         comment = Comment(content=request.POST.get('content'), author=request.user,
                           article=NewsArticle.objects.get(pk=pk))
         comment.save()
-    url = get_redirect_URL(request)
-    return HttpResponseRedirect(url)
+    return HttpResponse(status=HTTP_STATUS_200)
 
 
 class AllComments(ListView):
@@ -164,5 +160,7 @@ class AllComments(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(AllComments, self).get_context_data(**kwargs)
-        context['article'] = NewsArticle.objects.annotate(Count('likes'), Count('dislikes')).get(id=self.kwargs['pk'])
+        context['article'] = NewsArticle.objects.annotate(
+            likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
+            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False))).get(id=self.kwargs['pk'])
         return context
