@@ -2,7 +2,12 @@
     {% csrf_token %}
     {{ form.as_p }}
     <div class="ov-form__btn-container">
-        <button type="button" id="submitForm" class="ov-form__btn" onclick="submitNewsEditForm({{ object.id }})">Submit</button>
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red ov-form__btn-text-only"
+                onclick="showNewsDeleteModal({{ object.id }})">Izbrisi vijest
+        </button>
+        <button type="button" id="submitForm" class="ov-form__btn" onclick="submitNewsEditForm({{ object.id }})">
+            Submit
+        </button>
         <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">
             Odbaci
         </button>

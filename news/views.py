@@ -140,7 +140,7 @@ def add_comment(request, pk):
 
 
 class AllComments(ListView):
-    template_name = 'news/article-comments.html'
+    template_name = 'news/news-comments.html'
     model = Comment
     context_object_name = 'comments'
 
