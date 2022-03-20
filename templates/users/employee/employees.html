@@ -22,7 +22,7 @@
             </div>
 
 
-            <select name="position" onchange="submitFilterForm()">
+            <select class="ov-form-position" name="position" onchange="submitFilterForm()">
                 <option {% if selected == 'all' %} selected {% endif %}value="all">Sve pozicije</option>
                 {% for position in position_list %}
                     <option {% if selected == position.pk %} selected {% endif %}

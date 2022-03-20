@@ -42,7 +42,7 @@
                         <a onclick="showNewsEditModal({{ article.id }})">Uredi<i
                                 class="fa-regular fa-pen-to-square"></i></a>
                         <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red ov-form__btn-text-only"
-                                onclick="showNewsDeleteModal({{ article.id }})">Izbrisi vijest
+                                onclick="showNewsDeleteModal({{ article.id }})">Izbriši vijest
                         </button>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="name-author">
-                    <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
+                    <p>Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p>
                 </div>
                 <div class="comment-like-section">
                     <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"

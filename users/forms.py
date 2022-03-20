@@ -9,37 +9,37 @@ import re
 from users.models import CompanyPosition
 
 HELP_MESSAGES = {
-    'username': 'The username can contains letters, digits and @/./+/-/_.',
-    'first_name': 'The first name',
+    'username': 'Korisničko ime može sadržati slova, cifre i znakove @/./+/-/_.',
+    'first_name': 'Ime',
 }
 
 REGEX_PHONE_NUMBER = "(\+387|00387|0)(66|65|61)[0-9]{6}$"
 
 ERROR_MESSAGES = {
     'username': {
-        'unique': "This username is already taken.",
-        'invalid': "The username can contain letters, digits and @/./+/-/_ only.",
-        'max_length': "This username is too long.",
-        'required': "This field is required.",
+        'unique': "Korisničko ime je već u upotrebi.",
+        'invalid': "Korisničko ime može sadržati slova, cifre i znakove @/./+/-/_.",
+        'max_length': "Korisničko ime je predugačko.",
+        'required': "Polje je obavezno.",
     },
     'first_name': {
-        'max_length': "This first name is too long.",
-        'min_length': "This first name is too short.",
-        'required': "This field is required.",
+        'max_length': "Ime je predugačko.",
+        'min_length': "Ime je prekratko.",
+        'required': "Polje je obavezno.",
     },
     'last_name': {
-        'max_length': "This last name is too long.",
-        'min_length': "This last name is too short.",
-        'required': "This field is required.",
+        'max_length': "Prezime je predugačko.",
+        'min_length': "Prezime je prekratko.",
+        'required': "Polje je obavezno.",
     },
     'email': {
-        'invalid': "Please enter a valid email address.",
-        'unique': "This email address is already used.",
-        'required': "This field is required.",
+        'invalid': "Molimo unesite validnu e-mail adresu.",
+        'unique': "Ova e-mail adresa je povezana sa drugim nalogom.",
+        'required': "Polje je obavezno.",
     },
     'company_position': {
-        'max_length': "This first name is too long.",
-        'required': "This field is required.",
+        'max_length': "Naziv pozicije je predugačak.",
+        'required': "Polje je obavezno.",
     },
 }
 
@@ -48,29 +48,29 @@ LABEL_TEXT = {
     'first_name': _('Ime'),
     'last_name': _('Prezime'),
     'gender': _('Pol'),
-    'email': _('Email adresa'),
-    'company_position': _('Pozicija u kompaniji'),
-    'work_location': _('Radno mjesto'),
-    'is_admin': _('Admin'),
-    'is_editor': _('Editor'),
+    'email': _('E-mail'),
+    'company_position': _('Lokacija'),
+    'work_location': _('Pozicija'),
+    'is_admin': _('Administrator'),
+    'is_editor': _('Urednik sajta'),
     'profile_pic': _('Avatar'),
     'birth_date': _('Datum rođenja'),
     'phone': _('Broj telefona'),
-    'business_phone': _('Poslovni broj telefona'),
+    'business_phone': _('VPN broj'),
 }
 EMPLOYEE_LABEL_TEXT = {
     'username': _('Korisničko ime'),
     'first_name': _('Ime'),
     'last_name': _('Prezime'),
     'gender': _('Pol'),
-    'email': _('Email adresa'),
-    'company_position': _('Pozicija u kompaniji'),
-    'work_location': _('Radno mjesto'),
-    'is_admin': _('Admin'),
-    'is_editor': _('Editor'),
+    'email': _('E-mail'),
+    'company_position': _('Lokacija'),
+    'work_location': _('Pozicija'),
+    'is_admin': _('Administrator'),
+    'is_editor': _('Urednik sajta'),
     'birth_date': _('Datum rođenja'),
     'phone': _('Broj telefona'),
-    'business_phone': _('Poslovni broj telefona'),
+    'business_phone': _('VPN broj'),
 }
 PROFILE_LABEL_TEXT = {
     'first_name': _('Ime'),
@@ -79,7 +79,7 @@ PROFILE_LABEL_TEXT = {
     'profile_pic': _('Avatar'),
     'birth_date': _('Datum rođenja'),
     'phone': _('Broj telefona'),
-    'business_phone': _('Poslovni broj telefona'),
+    'business_phone': _('VPN broj'),
 }
 
 
@@ -98,19 +98,19 @@ class AddEmployeeForm(forms.ModelForm):
         data = self.cleaned_data['birth_date']
         current = date.today()
         if data and data.year > current.year - 18:
-            raise forms.ValidationError('Date can\'t be newer than 18 years of current year')
+            raise forms.ValidationError('Lice mora biti punoljetno.')
         return data
 
     def clean_phone(self):
         data = self.cleaned_data['phone']
         if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Format broja nije validan!')
         return data
 
     def clean_business_phone(self):
         data = self.cleaned_data['business_phone']
         if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Format broja nije validan!')
         return data
 
     class Meta:
@@ -130,11 +130,11 @@ class AddEmployeeForm(forms.ModelForm):
             'last_name': forms.TextInput(attrs={'placeholder': 'Prezime'}),
             'email': forms.TextInput(attrs={'placeholder': 'Email adresa'}),
             'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
-            'is_admin': forms.CheckboxInput(attrs={'label': 'Admin'}),
-            'is_editor': forms.CheckboxInput(attrs={'label': 'Editor'}),
+            'is_admin': forms.CheckboxInput(attrs={'label': 'Administrator'}),
+            'is_editor': forms.CheckboxInput(attrs={'label': 'Urednik sajta'}),
             'birth_date': forms.DateInput(attrs={'placeholder': 'Datum rođenja', 'type': 'date'}),
             'phone': forms.TextInput(attrs={'placeholder': 'Broj telefona'}),
-            'business_phone': forms.TextInput(attrs={'placeholder': 'Poslovni broj telefona'})
+            'business_phone': forms.TextInput(attrs={'placeholder': 'VPN broj'})
         }
 
     def save(self, commit=True):
@@ -164,19 +164,19 @@ class EditEmployeeForm(forms.ModelForm):
         data = self.cleaned_data['birth_date']
         current = date.today()
         if data and data.year > current.year - 18:
-            raise forms.ValidationError('Date can\'t be newer than 18 years of current year')
+            raise forms.ValidationError('Lice mora biti punoljetno.')
         return data
 
     def clean_phone(self):
         data = self.cleaned_data['phone']
         if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Format broja nije validan!')
         return data
 
     def clean_business_phone(self):
         data = self.cleaned_data['business_phone']
         if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Format broja nije validan!')
         return data
 
     class Meta:
@@ -197,11 +197,11 @@ class EditEmployeeForm(forms.ModelForm):
             'last_name': forms.TextInput(attrs={'placeholder': 'Prezime'}),
             'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
             'company_position': forms.Select(choices=(CompanyPosition.objects.all())),
-            'is_admin': forms.CheckboxInput(attrs={'label': 'Admin'}),
-            'is_editor': forms.CheckboxInput(attrs={'label': 'Editor'}),
+            'is_admin': forms.CheckboxInput(attrs={'label': 'Administrator'}),
+            'is_editor': forms.CheckboxInput(attrs={'label': 'Urednik sajta'}),
             'birth_date': forms.DateInput(attrs={'placeholder': 'Datum rođenja', 'type': 'date'}),
             'phone': forms.TextInput(attrs={'placeholder': 'Broj telefona'}),
-            'business_phone': forms.TextInput(attrs={'placeholder': 'Poslovni broj telefona'})
+            'business_phone': forms.TextInput(attrs={'placeholder': 'VPN broj'})
         }
 
     def __init__(self, disable_fields=False, *args, **kwargs):
@@ -234,19 +234,19 @@ class ProfileForm(forms.ModelForm):
         data = self.cleaned_data['birth_date']
         current = date.today()
         if data and data.year > current.year - 18:
-            raise forms.ValidationError('Date can\'t be newer than 18 years of current year')
+            raise forms.ValidationError('Lice mora biti punoljetno.')
         return data
 
     def clean_phone(self):
         data = self.cleaned_data['phone']
         if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Format broja nije validan.')
         return data
 
     def clean_business_phone(self):
         data = self.cleaned_data['business_phone']
         if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Format broja nije validan.')
         return data
 
     class Meta:
@@ -258,7 +258,7 @@ class ProfileForm(forms.ModelForm):
             'profile_pic': _('Avatar'),
             'birth_date': _('Datum rođenja'),
             'phone': _('Broj telefona'),
-            'business_phone': _('Poslovni broj telefona'),
+            'business_phone': _('VPN broj'),
         }
 
         widgets = {
@@ -267,7 +267,7 @@ class ProfileForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
             'birth_date': forms.DateInput(attrs={'placeholder': 'Datum rođenja', 'type': 'date'}),
             'phone': forms.TextInput(attrs={'placeholder': 'Broj telefona'}),
-            'business_phone': forms.TextInput(attrs={'placeholder': 'Poslovni broj telefona'})
+            'business_phone': forms.TextInput(attrs={'placeholder': 'VPN broj'})
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

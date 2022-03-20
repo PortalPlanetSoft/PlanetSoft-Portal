@@ -1,43 +1,50 @@
-           {% extends '../base.html' %}
-
-{% block body %}
-            <div class="content">
-                <p>{{ article.content }}</p>
-                    <div class="dv-newsdetails-photo">
-                        {% if article.image %}
-                            <img src={{ article.image.url }}>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="name-author">
-                    <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
-                </div>
-                <div>
-                    <p>Likes: {{ article.likes__count }}</p>
-                    <p>Dislikes: {{ article.dislikes__count }}</p>
-                </div>
-                <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                      method="post">
-                    {% csrf_token %}
-                    <button type="submit" name="article_like_id" value="{{ article.id }}">Like</button>
-                </form>
-                <form action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                      method="post">
-                    {% csrf_token %}
-                    <button type="submit" name="article_dislike_id" value="{{ article.id }}">Dislike</button>
-                </form>
-                <form action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                      method="post">
-                    {% csrf_token %}
-                    <label>Komentar
-                        <textarea name="content" placeholder="Komentar"></textarea>
-                    </label>
-                    <button type="submit" name="article_dislike_id">Submit</button>
-                </form>
+{% extends '../base.html' %} {% block body %}
+<div class="content">
+  <p>{{ article.content }}</p>
+  <div class="dv-newsdetails-photo">
+    {% if article.image %}
+    <img src="{{ article.image.url }} " />
+    {% endif %}
+  </div>
+</div>
+<div class="name-author">
+  <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
+</div>
+<div>
+  <p>Likes: {{ article.likes__count }}</p>
+  <p>Dislikes: {{ article.dislikes__count }}</p>
+</div>
+<form
+  action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+  method="post"
+>
+  {% csrf_token %}
+  <button type="submit" name="article_like_id" value="{{ article.id }}">
+    Sviđa mi se
+  </button>
+</form>
+<form
+  action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+  method="post"
+>
+  {% csrf_token %}
+  <button type="submit" name="article_dislike_id" value="{{ article.id }}">
+    Ne sviđa mi se
+  </button>
+</form>
+<form
+  action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+  method="post"
+>
+  {% csrf_token %}
+  <label
+    >Komentar
+    <textarea name="content" placeholder="Komentar"></textarea>
+  </label>
+  <button type="submit" name="article_dislike_id">Objavi</button>
+</form>
 
 <!-- ZA UREDITI -->
 {% for comment in comments %}
- <h1>{{ comment.content }}</h1>
-{% endfor %}
-
-{% endblock %}
+<h1>{{ comment.content }}</h1>
+{% endfor %} {% endblock %}

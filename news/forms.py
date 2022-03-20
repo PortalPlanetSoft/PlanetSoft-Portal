@@ -6,7 +6,7 @@ ERROR_MESSAGES = {
 }
 
 LABEL_TEXT = {
-    "headline": _("Nasalov"),
+    "headline": _("Naslov"),
     "content": _("Sadržaj"),
     "image": _("Slika")
 }

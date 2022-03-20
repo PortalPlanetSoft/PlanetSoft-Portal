@@ -31,12 +31,13 @@
 .ov-form div {
   margin: 0 2rem;
 }
-.ov-form div[id^="id"], .ov-form div[id^="id"] > div{
+.ov-form div[id^="id"],
+.ov-form div[id^="id"] > div {
   margin: 0;
 }
-.ov-form input[type='text'],
-.ov-form input[type='password'],
-.ov-form input[type='email'],
+.ov-form input[type="text"],
+.ov-form input[type="password"],
+.ov-form input[type="email"],
 .ov-form textarea {
   display: block;
   border: none;
@@ -53,7 +54,8 @@
   resize: none;
 }
 
-.ov-form select {
+.ov-form select,
+.ov-form-position {
   color: var(--primary);
   border: 1px solid var(--primary);
   border-radius: 5px;
@@ -61,7 +63,7 @@
   font-size: 1rem;
   padding: 0.3rem;
 }
-.ov-form input[type='date'] {
+.ov-form input[type="date"] {
   color: var(--primary);
   border: 1px solid var(--primary);
   border-radius: 5px;
@@ -79,16 +81,15 @@
 .ov-form label[for="id_profile_pic"] {
   position: relative;
 }
-.ov-form label[for="id_profile_pic"]::after{
+.ov-form label[for="id_profile_pic"]::after {
   content: "Izaberite avatara";
-  display:block;
+  display: block;
   font-size: 1rem;
   margin-top: 1rem;
 }
 .ov-form label[for="id_profile_pic"]:hover::after {
   cursor: pointer;
 }
-
 
 .ov-form__btn-container {
   display: flex;
