@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
-from django.db.models import Q, Count, Value, When, Case
+from django.db.models import Q, Count, OuterRef, Subquery
 from django.http import HttpResponse
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView
 
@@ -43,23 +43,27 @@ class NewsList(ListView):
         return context
 
     def get_queryset(self, *args, **kwargs):
-        query_set = NewsArticle.objects.all().annotate(
+        has_reacted = LikeDislike.objects.filter(article_id=OuterRef('pk'), user_id=self.request.user.pk)
+        queryset = NewsArticle.objects.annotate(
             likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
-            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)))
+            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
+            liked=Subquery(has_reacted.values('type')))
+
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
+
         if search:
-            filtered_query = query_set.filter(Q(headline__icontains=search))
+            filtered_query = queryset.filter(Q(headline__icontains=search))
             if len(filtered_query) == 0:
-                query_set = query_set.filter(
+                queryset = queryset.filter(
                     Q(author__first_name__icontains=search) | Q(author__last_name__icontains=search))
             else:
-                query_set = filtered_query
+                queryset = filtered_query
 
         if author and author != 'all':
-            query_set = query_set.filter(Q(author__exact=author))
+            queryset = queryset.filter(Q(author__exact=author))
 
-        return query_set
+        return queryset
 
 
 class NewsCreate(UserPassesTestMixin, CreateView):
@@ -142,9 +146,12 @@ def likes_dislikes(request, pk):
 @login_required
 def add_comment(request, pk):
     if request.POST and request.POST.get('content'):
-        # todo ako ima pk od komentara na koji odg onda sacuvaj parent comment
-        comment = Comment(content=request.POST.get('content'), author=request.user,
-                          article=NewsArticle.objects.get(pk=pk))
+        if request.POST.get('comment'):
+            comment = Comment(content=request.POST.get('content'), author=request.user,
+                              article=NewsArticle.objects.get(pk=pk), parent_comment=request.POST.get('comment'))
+        else:
+            comment = Comment(content=request.POST.get('content'), author=request.user,
+                              article=NewsArticle.objects.get(pk=pk))
         comment.save()
     return HttpResponse(status=HTTP_STATUS_200)
 

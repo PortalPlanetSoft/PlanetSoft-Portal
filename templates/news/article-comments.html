@@ -16,12 +16,12 @@
                     <p>Likes: {{ article.likes_count }}</p>
                     <p>Dislikes: {{ article.dislikes_count }}</p>
                 </div>
-                <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
                       method="post">
                     {% csrf_token %}
                     <button type="submit" name="article_like_id" value="{{ article.id }}">Like</button>
                 </form>
-                <form action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
                       method="post">
                     {% csrf_token %}
                     <button type="submit" name="article_dislike_id" value="{{ article.id }}">Dislike</button>
