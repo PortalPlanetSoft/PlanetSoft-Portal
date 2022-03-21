@@ -38,6 +38,7 @@
 
                     <h4><a href="http://127.0.0.1:8000/news/article/{{ article.id }}">{{ article.headline }} </a></h4>
 
+                    {% if user.is_admin or user.is_superuser or user.is_editor %}
                     <div class="ov-form__btn-container ov-form__btn-contrainer--col">
                         <a onclick="showNewsEditModal({{ article.id }})">Uredi<i
                                 class="fa-regular fa-pen-to-square"></i></a>
@@ -45,6 +46,7 @@
                                 onclick="showNewsDeleteModal({{ article.id }})">Izbrisi vijest
                         </button>
                     </div>
+                    {% endif %}
                 </div>
                 <div class="content">
                     <p>{{ article.content }}</p>
@@ -55,21 +57,19 @@
                     </div>
                 </div>
                 <div class="name-author">
-                    <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
+                    <p>Autor {{ article.author.first_name }} {{ article.author.last_name }}</p>
                 </div>
                 <div class="comment-like-section">
-                    <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                          method="post" class="news-like">
+                    <form action="{% url 'like-dislike' article.pk %}" method="post" class="news-like">
                         {% csrf_token %}
-                        <button type="submit" name="article_like_id" value="{{ article.id }}"><i class="fa-solid fa-thumbs-up"></i></button><span>{{ article.likes__count }}</span>
+                        <button type="submit" name="article_like_id" value="{{ article.id }}">{% if article.liked %}<i class="fa-solid fa-thumbs-up"></i> {% else %}<i class="fa-regular fa-thumbs-up"></i>{% endif %}</button><span>{{ article.likes_count }}</span>
                     </form>
-                    <form action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                          method="post" class="news-dislike">
+                    <form action="{% url 'like-dislike' article.pk %}" method="post" class="news-dislike">
                         {% csrf_token %}
-                        <button type="submit" name="article_dislike_id" value="{{ article.id }}"><i class="fa-solid fa-thumbs-down"></i></button> <span>{{ article.dislikes__count }}</span>
+                        <button type="submit" name="article_dislike_id" value="{{ article.id }}" >
+                          {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}<i class="fa-regular fa-thumbs-down"></i>{% endif %}</button><span>{{ article.dislikes_count }}</span>
                     </form>
-                    <form action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                          method="post" class="news-comment">
+                    <form action="{% url 'comment-on-news'  article.pk %}" method="post" class="news-comment">
                         {% csrf_token %}
                             <textarea name="content" placeholder="Dodaj komentar..."></textarea>
                         <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
