@@ -1,0 +1,71 @@
+{% load static %}
+<form class="ov-form">
+    <div>
+        <div class="content">
+            <h3 class="ov-form__title">{{ article.headline }}</h3>
+            <p>{{ article.content }}</p>
+            <div class="dv-newsdetails-photo">
+                {% if article.image %}
+                    <img src={{ article.image.url }}>
+                {% endif %}
+            </div>
+        </div>
+        <div class="name-author">
+            <a onclick="showUserPreviewModal({{ article.author.id }})"><p>
+                Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
+        </div>
+        <div>
+            <p>Likes: {{ article.likes__count }}</p>
+            <p>Dislikes: {{ article.dislikes__count }}</p>
+        </div>
+        <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+              method="post">
+            {% csrf_token %}
+            <button type="submit" name="article_like_id" value="{{ article.id }}">Like</button>
+        </form>
+        <form action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+              method="post">
+            {% csrf_token %}
+            <button type="submit" name="article_dislike_id" value="{{ article.id }}">Dislike</button>
+        </form>
+        <form action="{% url 'comment-on-news' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+              method="post">
+            {% csrf_token %}
+            <label>Komentar
+                <textarea name="content" placeholder="Komentar"></textarea>
+            </label>
+            <button type="submit" class="ov-form__btn" name="article_dislike_id">Submit</button>
+        </form>
+
+        <!-- ZA UREDITI -->
+        {% for comment in comments %}
+            <div class="news-comment-content" style="width: 100%">
+                <div class="comment-content" style="width: 100%">
+                    <div class="profile-img-comment">
+                        {% if object.profile_pic %}
+                            <img src={{ object.profile_pic.url }}>
+                        {% else %}
+                            {% if article.author.gender == 'M' %}
+                                <img src='{% static 'img/1.png' %}' alt='man-profile'>
+                            {% else %}
+                                <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div>
+                        <a onclick="showUserPreviewModal({{ article.author.id }})">
+                            <h4>{{ article.author.first_name }} {{ article.author.last_name }}</h4></a>
+                    </div>
+                    <div>
+                        <p>{{ comment.content }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue dv-detail-button"
+                onclick="modalClose()">
+            Zatvori
+        </button>
+    </div>
+</form>
+

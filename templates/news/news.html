@@ -1,5 +1,5 @@
 {% extends '../base.html' %}
-
+{% load static %}
 {% block body %}
     <form name="userFilterForm">
         <div class="dk-grid">
@@ -80,8 +80,29 @@
                         <textarea name="content" placeholder="Dodaj komentar..."></textarea>
                         <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
                     </form>
+                    {% for comment in article.comments %}
+                        <div class="news-comment-content">
+                            <div class="comment-content">
+                                <div class="profile-img-comment">
+                                    {% if object.id.profile_pic %}
+                                        <img src={{ object.profile_pic.url }}>
+                                    {% else %}
+                                        {% if article.id.author.gender == 'M' %}
+                                            <img src='{% static 'img/1.png' %}' alt='man-profile'>
+                                        {% else %}
+                                            <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <a onclick="showUserPreviewModal({{ article.id.author.id }})">
+                                    <h4>{{ article.id.author.first_name }} {{ article.id.author.last_name }}</h4></a>
+                                <p>{{ comment.content }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
+
         {% endfor %}
     </div>
 
