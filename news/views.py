@@ -162,12 +162,14 @@ class AllComments(ListView):
     context_object_name = 'comments'
 
     def get_queryset(self, *args, **kwargs):
-        query_set = super().get_queryset().filter(article=self.kwargs['pk'])
-        return query_set
+        queryset = super().get_queryset().filter(article=self.kwargs['pk'])
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super(AllComments, self).get_context_data(**kwargs)
+        has_reacted = LikeDislike.objects.filter(article_id=OuterRef('pk'), user_id=self.request.user.pk)
         context['article'] = NewsArticle.objects.annotate(
             likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
-            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False))).get(id=self.kwargs['pk'])
+            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
+            liked=Subquery(has_reacted.values('type'))).get(id=self.kwargs['pk'])
         return context
