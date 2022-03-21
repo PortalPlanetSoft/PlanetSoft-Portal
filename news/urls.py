@@ -10,5 +10,5 @@ urlpatterns = [
     path('delete/<int:pk>/', login_required(NewsDelete.as_view()), name='news-delete'),
     path('react/<int:pk>/', likes_dislikes, name='like-dislike'),
     path('comment/<int:pk>', add_comment, name='comment-on-news'),
-    path('article/<int:pk>', login_required(AllComments.as_view()), name='article-comments'),
+    path('article/<int:pk>', login_required(AllComments.as_view()), name='news-comments'),
 ]
