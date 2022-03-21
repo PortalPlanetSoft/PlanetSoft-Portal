@@ -1,95 +1,22 @@
 from datetime import date
-
 from django.contrib.auth.forms import UserCreationForm
+
+from users.constants import GENDER_CHOICES, WORK_LOCATION, REGEX_PHONE_NUMBER, ERROR_MESSAGES, \
+    REGEX_BUSINESS_PHONE_NUMBER, PROFILE_LABEL_TEXT, LABEL_TEXT_USER
 from users.models import User
-from django.utils.translation import gettext_lazy as _
 from django import forms
 import re
 
 from users.models import CompanyPosition
-
-HELP_MESSAGES = {
-    'username': 'The username can contains letters, digits and @/./+/-/_.',
-    'first_name': 'The first name',
-}
-
-REGEX_PHONE_NUMBER = "(\+387|00387|0)(66|65|61)[0-9]{6}$"
-
-ERROR_MESSAGES = {
-    'username': {
-        'unique': "This username is already taken.",
-        'invalid': "The username can contain letters, digits and @/./+/-/_ only.",
-        'max_length': "This username is too long.",
-        'required': "This field is required.",
-    },
-    'first_name': {
-        'max_length': "This first name is too long.",
-        'min_length': "This first name is too short.",
-        'required': "This field is required.",
-    },
-    'last_name': {
-        'max_length': "This last name is too long.",
-        'min_length': "This last name is too short.",
-        'required': "This field is required.",
-    },
-    'email': {
-        'invalid': "Please enter a valid email address.",
-        'unique': "This email address is already used.",
-        'required': "This field is required.",
-    },
-    'company_position': {
-        'max_length': "This first name is too long.",
-        'required': "This field is required.",
-    },
-}
-
-LABEL_TEXT = {
-    'username': _('Korisničko ime'),
-    'first_name': _('Ime'),
-    'last_name': _('Prezime'),
-    'gender': _('Pol'),
-    'email': _('Email adresa'),
-    'company_position': _('Pozicija u kompaniji'),
-    'work_location': _('Radno mjesto'),
-    'is_admin': _('Admin'),
-    'is_editor': _('Editor'),
-    'profile_pic': _('Avatar'),
-    'birth_date': _('Datum rođenja'),
-    'phone': _('Broj telefona'),
-    'business_phone': _('Poslovni broj telefona'),
-}
-EMPLOYEE_LABEL_TEXT = {
-    'username': _('Korisničko ime'),
-    'first_name': _('Ime'),
-    'last_name': _('Prezime'),
-    'gender': _('Pol'),
-    'email': _('Email adresa'),
-    'company_position': _('Pozicija u kompaniji'),
-    'work_location': _('Radno mjesto'),
-    'is_admin': _('Admin'),
-    'is_editor': _('Editor'),
-    'birth_date': _('Datum rođenja'),
-    'phone': _('Broj telefona'),
-    'business_phone': _('Poslovni broj telefona'),
-}
-PROFILE_LABEL_TEXT = {
-    'first_name': _('Ime'),
-    'last_name': _('Prezime'),
-    'email': _('Email adresa'),
-    'profile_pic': _('Avatar'),
-    'birth_date': _('Datum rođenja'),
-    'phone': _('Broj telefona'),
-    'business_phone': _('Poslovni broj telefona'),
-}
 
 
 class AddEmployeeForm(forms.ModelForm):
     use_required_attribute = False
     first_name = forms.CharField(max_length=150, min_length=3)
     last_name = forms.CharField(max_length=150, min_length=3)
-    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=User.GENDER_CHOICES)
+    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=GENDER_CHOICES)
     gender.required = False
-    work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
+    work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=WORK_LOCATION)
 
     field_order = ['username', 'password', 'first_name', 'last_name', 'email', 'gender', 'company_position',
                    'work_location', 'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone']
@@ -109,7 +36,7 @@ class AddEmployeeForm(forms.ModelForm):
 
     def clean_business_phone(self):
         data = self.cleaned_data['business_phone']
-        if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
+        if data and not bool(re.match(REGEX_BUSINESS_PHONE_NUMBER, data)):
             raise forms.ValidationError('Phone number format wrong!')
         return data
 
@@ -121,7 +48,7 @@ class AddEmployeeForm(forms.ModelForm):
             "username": None,
         }
         error_messages = ERROR_MESSAGES
-        labels = LABEL_TEXT
+        labels = LABEL_TEXT_USER
 
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': 'Korisničko ime'}),
@@ -143,10 +70,11 @@ class AddEmployeeForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for key, value in EMPLOYEE_LABEL_TEXT.items():
-                self.fields[key].label = value
+        for key, value in LABEL_TEXT_USER.items():
+            self.fields[key].label = value
         self.fields['first_name'].placeholder = "Ime"
 
 
@@ -154,9 +82,9 @@ class EditEmployeeForm(forms.ModelForm):
     use_required_attribute = False
     first_name = forms.CharField(max_length=150, min_length=3)
     last_name = forms.CharField(max_length=150, min_length=3)
-    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=User.GENDER_CHOICES)
+    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=GENDER_CHOICES)
     gender.required = False
-    work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=User.WORK_LOCATION)
+    work_location = forms.ChoiceField(widget=forms.RadioSelect, choices=WORK_LOCATION)
     field_order = ['username', 'first_name', 'last_name', 'email', 'gender', 'company_position', 'work_location',
                    'is_admin', 'is_editor', 'birth_date', 'phone', 'business_phone']
 
@@ -175,7 +103,7 @@ class EditEmployeeForm(forms.ModelForm):
 
     def clean_business_phone(self):
         data = self.cleaned_data['business_phone']
-        if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
+        if data and not bool(re.match(REGEX_BUSINESS_PHONE_NUMBER, data)):
             raise forms.ValidationError('Phone number format wrong!')
         return data
 
@@ -188,11 +116,10 @@ class EditEmployeeForm(forms.ModelForm):
             "username": None,
         }
         error_messages = ERROR_MESSAGES
-        labels = LABEL_TEXT
+        labels = LABEL_TEXT_USER
 
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': 'Korisničko ime'}),
-            # todo provjerite zasto ne radi labela za ime i prezime i pol
             'first_name': forms.TextInput(attrs={'placeholder': 'Ime'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Prezime'}),
             'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
@@ -206,8 +133,8 @@ class EditEmployeeForm(forms.ModelForm):
 
     def __init__(self, disable_fields=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for key, value in EMPLOYEE_LABEL_TEXT.items():
-                self.fields[key].label = value
+        for key, value in LABEL_TEXT_USER.items():
+            self.fields[key].label = value
         if disable_fields:
             self.fields['username'].disabled = True
             self.fields['first_name'].disabled = True
@@ -227,7 +154,7 @@ class ProfileForm(forms.ModelForm):
     use_required_attribute = False
     first_name = forms.CharField(max_length=150, min_length=3)
     last_name = forms.CharField(max_length=150, min_length=3)
-    profile_pic = forms.ImageField(label=_('Avatar'), required=False, widget=forms.FileInput)
+    profile_pic = forms.ImageField(required=False, widget=forms.FileInput)
     field_order = ['first_name', 'last_name', 'email', 'birth_date', 'phone', 'business_phone', 'profile_pic']
 
     def clean_birth_date(self):
@@ -245,7 +172,7 @@ class ProfileForm(forms.ModelForm):
 
     def clean_business_phone(self):
         data = self.cleaned_data['business_phone']
-        if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
+        if data and not bool(re.match(REGEX_BUSINESS_PHONE_NUMBER, data)):
             raise forms.ValidationError('Phone number format wrong!')
         return data
 
@@ -254,12 +181,7 @@ class ProfileForm(forms.ModelForm):
         fields = {'first_name', 'last_name', 'email', 'profile_pic', 'birth_date', 'phone', 'business_phone'}
         error_messages = ERROR_MESSAGES
 
-        labels = {
-            'profile_pic': _('Avatar'),
-            'birth_date': _('Datum rođenja'),
-            'phone': _('Broj telefona'),
-            'business_phone': _('Poslovni broj telefona'),
-        }
+        labels = PROFILE_LABEL_TEXT
 
         widgets = {
             'first_name': forms.TextInput(attrs={'placeholder': 'Ime'}),
@@ -269,10 +191,11 @@ class ProfileForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'placeholder': 'Broj telefona'}),
             'business_phone': forms.TextInput(attrs={'placeholder': 'Poslovni broj telefona'})
         }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for key, value in PROFILE_LABEL_TEXT.items():
-                self.fields[key].label = value
+            self.fields[key].label = value
 
 
 class CustomCreationForm(UserCreationForm):
