@@ -2,3 +2,9 @@ INSERT INTO users_companyposition (`id`, `position_name`) VALUES ('1', 'Junior B
 INSERT INTO users_companyposition (`id`, `position_name`) VALUES ('2', 'Senior Backend Dev');
 INSERT INTO users_companyposition (`id`, `position_name`) VALUES ('3', 'Junior Frontend Dev');
 INSERT INTO users_companyposition (`id`, `position_name`) VALUES ('4', 'Senior Frontend Dev');
+INSERT INTO users_companyposition (`id`, `position_name`) VALUES ('5', 'DevOps');
+INSERT INTO users_companyposition (`id`, `position_name`) VALUES ('6', 'Designer');
+INSERT INTO users_companyposition (`id`, `position_name`) VALUES ('7', 'Marketing Associate');
+INSERT INTO users_companyposition (`id`, `position_name`) VALUES ('8', 'Sales Associate');
+INSERT INTO users_companyposition (`id`, `position_name`) VALUES ('9', 'Network Admin');
+INSERT INTO users_companyposition (`id`, `position_name`) VALUES ('10', 'QA');
