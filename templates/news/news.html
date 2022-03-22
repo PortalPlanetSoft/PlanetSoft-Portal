@@ -41,6 +41,10 @@
                         {% if user.is_admin or user.is_superuser or user.is_editor %}
                             <a onclick="showNewsEditModal({{ article.id }})">Uredi<i
                                     class="fa-regular fa-pen-to-square"></i></a>
+                            <a id="button-user-edit" class="button"
+                               onclick="showNewsPreviewModal({{ article.id }})">
+                            Detalji
+                            <i class="fa-regular fa-address-card"></i>
                         {% else %}
                             <a id="button-user-edit" class="button"
                                onclick="showNewsPreviewModal({{ article.id }})">

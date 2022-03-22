@@ -1,285 +1,122 @@
+"use strict"
+
 // function for displaying generic modal
 function displayModal(targetUrlAddress) {
     modalContainer.style.display = "flex";
     $.ajax({
             url: targetUrlAddress,
             type: 'get',
-            success: (data) => modalContent.innerHTML = data,
+            success: (data) => {
+                modalContent.innerHTML = data;
+            },
         },
     );
 }
 
 // onclick function for opening of password change modal
 function showPasswordChangeModal() {
-    displayModal(passwordChangeUrl);
+    displayModal(PASSWORD_CHANGE_URL);
 }
 
 // onclick function for opening of user preview modal
 function showUserPreviewModal(id) {
-    displayModal(viewUserUrl + id + '/');
+    displayModal(VIEW_USER_URL + id + '/');
 }
 
 // onclick function for opening of user edit modal
 function showUserEditModal(id) {
-    displayModal(viewUserUrl + id + '/');
+    displayModal(VIEW_USER_URL + id + '/');
 }
 
 // onclick function for opening of user delete modal
 function showUserDeleteModal(id) {
-    displayModal(deleteUserUrl + id + '/');
+    displayModal(DELETE_USER_URL + id + '/');
 }
 
 // onclick function for opening of user add modal
 function showUserAddModal() {
-    displayModal(addUserUrl);
+    displayModal(ADD_USER_URL);
 }
 
 // onclick function for opening of news delete modal
 function showNewsDeleteModal(id) {
-    displayModal(deleteNewsUrl + id + '/');
+    displayModal(DELETE_NEWS_URL + id + '/');
 }
 
 // function for opening news add modal
 function showNewsAddModal() {
-    displayModal(addNewsUrl);
+    displayModal(ADD_NEWS_URL);
 }
 
 // onclick function for opening of news edit modal
 function showNewsEditModal(id) {
-    displayModal(editNewsUrl + id + '/');
+    displayModal(EDIT_NEWS_URL + id + '/');
 }
 
 // onclick function for opening news preview modal
 function showNewsPreviewModal(id) {
-    displayModal(viewNewsUrl + id);
+    displayModal(VIEW_NEWS_URL + id);
+}
+
+function showAvatarDeleteModal() {
+    displayModal(DELETE_AVATAR_URL);
 }
 
 // function that submits user's password change request
 function submitPasswordChangeForm() {
-    let form = $("#password-change-form");
-
-    let oldPassword = document.getElementById("id_old_password");
-    let newPassword = document.getElementById("id_new_password1");
-    let newPasswordCompare = document.getElementById("id_new_password2");
-
-    let validationResult = passwordChangeValidation(oldPassword, newPassword, newPasswordCompare);
-
-    switch (validationResult) {
-        case FIELDS_EMPTY:
-            oldPasswordValidationError(oldPassword);
-            newPasswordValidationError(newPassword);
-            newPasswordCompareValidationError(newPasswordCompare);
-            showToast(FIELDS_EMPTY);
-            break;
-        case FIRST_FIELD_EMPTY:
-            newPasswordValidationError(newPassword);
-            showToast(FIRST_FIELD_EMPTY);
-            break;
-        case SECOND_FIELD_EMPTY:
-            newPasswordCompareValidationError(newPasswordCompare);
-            showToast(SECOND_FIELD_EMPTY);
-            break;
-        case PASSWORD_VALIDATION_FAIL:
-            newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Šifra ne odgovara zahtijevanom formatu (najmanje 8 znakova, velika i mala slova, kao i brojevi.</li></ul>");
-            showToast(PASSWORD_VALIDATION_FAIL);// password not matching format
-            break;
-        case PASSWORDS_MATCHING_ERROR:
-            newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Lozinke moraju biti jednake.</li></ul>");
-            showToast(PASSWORDS_MATCHING_ERROR);// first and second entry of new password not matching
-            break;
-        default:
-            $.ajax({
-                    url: urlAddress + '/employees/password-change/',
-                    type: 'POST',
-                    data: form.serialize(),
-                    success: function (data, textStatus, xhr) {
-                        sessionStorage.clear();
-                        sessionStorage.setItem("result", SUCCESSFUL_ACTION);
-                        closeFunction();
-                    },
-                    error: function (data, xhr, textStatus) {
-                        requestUnsuccessful();
-                        oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Trenutka lozinka nije ispravna.</li></ul>");
-                    },
-                },
-            );
-            break;
+    let formErrors = passwordChangeValidation("id_old_password", "id_new_password1", "id_new_password2");
+    if (formErrors) {
+        genericValidationError(formErrors)
+    } else {
+        genericSubmitForm("password-change-form", PASSWORD_CHANGE_URL, SUCCESSFUL_ACTION)
     }
 }
 
 // function that validates the new password
-function passwordChangeValidation(oldPassword, newPassword, newPasswordCompare) {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // minimum eight characters, at least one letter and one number
-    if (newPassword.value === "" && newPasswordCompare.value === "" && oldPassword.value === "") {
-        return FIELDS_EMPTY;
-    } else if (newPassword.value === "" && newPasswordCompare.value) {
-        return FIRST_FIELD_EMPTY;
-    } else if (newPassword.value && newPasswordCompare.value === "") {
-        return SECOND_FIELD_EMPTY;
-    } else {
-        if (newPassword.value === newPasswordCompare.value) {
-            let passwordValid = newPassword.value.match(passwordRegex);
-            if (passwordValid) {
-                return VALIDATION_SUCCESS;
-            } else {
-                return PASSWORD_VALIDATION_FAIL;
-            }
-        } else {
-            return PASSWORDS_MATCHING_ERROR;
-        }
+function passwordChangeValidation(oldPassword_id, newPassword_id, newPasswordCompare_id) {
+    let oldPassword = document.getElementById(oldPassword_id).value;
+    let newPassword = document.getElementById(newPassword_id).value;
+    let newPasswordCompare = document.getElementById(newPasswordCompare_id).value;
+    let errors = {};
+
+    if (!oldPassword) {
+        errors[oldPassword_id] = FIRST_FIELD_EMPTY
     }
+    if (!newPassword) {
+        errors[newPassword_id] = FIRST_FIELD_EMPTY
+    } else if (!newPassword.match(PASSWORD_REGEX)) {
+        errors[newPassword_id] = PASSWORD_VALIDATION_FAIL
+    }
+    if (newPasswordCompare !== newPassword) {
+        errors[newPasswordCompare_id] = PASSWORDS_MATCHING_ERROR
+    }
+    if (jQuery.isEmptyObject(errors)) {
+        return 0;
+    }
+    return errors;
 }
 
 // function that submits user's edited data and displays error messages
 function submitEditUserForm(id) {
-    let form = $("#edit-emp-form");
-
-    let emailAddress = document.getElementById("id_email");
-    let phoneNumber = document.getElementById("id_phone");
-    let vpnNumber = document.getElementById("id_business_phone");
-
-    let returnResult = validatorFunction(emailAddress, phoneNumber, vpnNumber);
-
-    switch (returnResult) {
-        case EMAIL_INVALID:
-            emailValidationInvalidError(emailAddress);
-            showToast(INVALID_EMAIL_ERROR);
-            break;
-        case PHONE_INVALID:
-            phoneValidationInvalidError(phoneNumber);
-            showToast(INVALID_PHONE_ERROR);
-            break;
-        case VPN_INVALID:
-            vpnPhoneValidationInvalidError(vpnNumber);
-            showToast(INVALID_VPN_ERROR);
-            break;
-        case EMAIL_PHONE_INVALID:
-            emailValidationInvalidError(emailAddress);
-            phoneValidationInvalidError(phoneNumber);
-            showToast(INVALID_EMAILANDPHONE_ERROR);
-            break;
-        case EMAIL_VPN_INVALID:
-            emailValidationInvalidError(emailAddress);
-            vpnPhoneValidationInvalidError(vpnNumber);
-            showToast(INVALID_EMAILANDVPN_ERROR);
-            break;
-        case PHONE_VPN_INVALID:
-            phoneValidationInvalidError(phoneNumber);
-            vpnPhoneValidationInvalidError(vpnNumber);
-            showToast(INVALID_PHONEANDVPN_ERROR);
-            break;
-        case VALIDATION_FAIL:
-            emailValidationInvalidError(emailAddress);
-            phoneValidationInvalidError(phoneNumber);
-            vpnPhoneValidationInvalidError(vpnNumber);
-            showToast(INVALID_EMAIL_PHONE_VPN_ERROR);
-            break;
-        default:
-            $.ajax({
-                    url: urlAddress + '/employees/' + id + '/',
-                    type: 'POST',
-                    dataType: 'html',
-                    data: form.serialize(),
-                    success: function (data, textStatus, xhr) {
-                        sessionStorage.clear();
-                        sessionStorage.setItem("result", SUCCESSFUL_ACTION);
-                        closeFunction();
-                    },
-                    error: function (data, xhr, textStatus) {
-                        requestUnsuccessful();
-                        modalContent.innerHTML = data.responseText;
-                    },
-                },
-            );
-            break;
-    }
-}
-
-function emailValidationInvalidError(emailAddress) {
-    emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo Vas da unesete odgovarajuću email adresu.</li></ul>");
-}
-
-function phoneValidationInvalidError(phoneNumber) {
-    phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo Vas unesite ispravan broj telefona.</li></ul>");
-}
-
-function vpnPhoneValidationInvalidError(vpnNumber) {
-    vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo Vas unesite ispravan broj VPN telefona.</li></ul>");
-}
-
-function oldPasswordValidationError(oldPassword) {
-    oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
-}
-
-function newPasswordValidationError(newPassword) {
-    newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
-}
-
-function newPasswordCompareValidationError(newPasswordCompare) {
-    newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
-}
-
-// function used for validation of email address and phone number
-function validatorFunction(emailAddress, phoneNumber, vpnNumber) {
-    let regexMail = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let regexNumber = /^(\+387|00387|0)(66|65|61)[0-9]{6}$/;
-    let regexVpnNumber = /^[0-9]{3}$/;
-    let emailValid = emailAddress.value.match(regexMail);
-    let phoneValid = phoneNumber.value.match(regexNumber);
-    let vpnValid = vpnNumber.value.match(regexVpnNumber);
-    let returnResult;
-
-    if (emailValid && phoneValid && vpnValid) {
-        returnResult = VALIDATION_SUCCESS;
-    } else if (emailValid == null && phoneValid && vpnValid) {
-        returnResult = EMAIL_INVALID;
-    } else if (emailValid && phoneValid == null && vpnValid) {
-        returnResult = PHONE_INVALID;
-    } else if (emailValid && phoneValid && vpnValid == null) {
-        returnResult = VPN_INVALID;
-    } else if (emailValid == null && phoneValid == null && vpnValid) {
-        returnResult = EMAIL_PHONE_INVALID;
-    } else if (emailValid == null && phoneValid && vpnValid == null) {
-        returnResult = EMAIL_VPN_INVALID;
-    } else if (emailValid && phoneValid == null && vpnValid == null) {
-        returnResult = PHONE_VPN_INVALID;
+    let formErrors = validatorFunction("id_email", "id_phone", "id_business_phone");
+    if (formErrors) {
+        genericValidationError(formErrors)
     } else {
-        returnResult = VALIDATION_FAIL;
+        genericSubmitForm("edit-emp-form", VIEW_USER_URL + id + '/', SUCCESSFUL_ACTION)
     }
-    return returnResult;
 }
 
-// function that deletes the user
-function submitUserDeleteForm(id) {
-    let form = $("#delete-emp-form");
+function genericSubmitForm(form_id, submit_url, success_message) {
+    let form = $(`#${form_id}`);
     $.ajax({
-            url: urlAddress + '/employees/delete/' + id + '/',
-            type: 'POST',
-            data: form.serialize(),
-            success: function (data, textStatus, xhr) {
-                sessionStorage.clear();
-                sessionStorage.setItem("result", DELETE_SUCCESSFUL);
-                closeFunction();
-                pageReload();
-            },
-            error: function (data, xhr, textStatus) {
-                requestUnsuccessful();
-                modalContent.innerHTML = data.responseText;
-            },
-        },
-    );
-}
-
-// function that submits newly created user's data
-function submitCreateUserForm() {
-    let form = $("#create-emp-form");
-    $.ajax({
-        url: urlAddress + '/employees/create/',
-        type: 'post',
+        url: submit_url,
+        type: 'POST',
         dataType: 'html',
         data: form.serialize(),
         success: function (data, textStatus, xhr) {
-            requestSuccessful();
+            sessionStorage.clear();
+            sessionStorage.setItem("message", success_message);
+            closeFunction();
         },
         error: function (data, xhr, textStatus) {
             requestUnsuccessful();
@@ -288,7 +125,24 @@ function submitCreateUserForm() {
     });
 }
 
-function submitFormMultimediaData(targetUrlAddress, formData) {
+function genericValidationError(errors) {
+    for (const [errorLocation, message] of Object.entries(errors)) {
+        document.getElementById(errorLocation).insertAdjacentHTML("afterend", `<ul class=\"errorlist\"><li>${message}</li></ul>`);
+    }
+}
+
+// function that deletes the user
+function submitUserDeleteForm(id) {
+    genericSubmitForm("delete-emp-form", DELETE_USER_URL + id + '/', DELETE_SUCCESSFUL);
+}
+
+// function that submits newly created user's data
+function submitCreateUserForm() {
+    genericSubmitForm("create-emp-form", ADD_USER_URL, SUCCESSFUL_ACTION);
+}
+
+function submitFormMultimediaData(targetUrlAddress, formData_id) {
+    let formData = new FormData($(formData_id)[0]);
     $.ajax({
         url: targetUrlAddress,
         type: 'POST',
@@ -306,47 +160,50 @@ function submitFormMultimediaData(targetUrlAddress, formData) {
 
 // function that submits newly created news article
 function submitNewsAddForm() {
-    let formData = new FormData($("#create-news-form")[0]);
-    submitFormMultimediaData(addNewsUrl, formData);
+    submitFormMultimediaData(ADD_NEWS_URL, "#create-news-form");
 }
 
 // function that submits edited article data
 function submitNewsEditForm(id) {
-    let formData = new FormData($("#edit-news-form")[0]);
-    submitFormMultimediaData(editNewsUrl + id + '/', formData);
+    submitFormMultimediaData(EDIT_NEWS_URL + id + '/', "#edit-news-form");
 }
 
 // function that deletes selected article
 function submitNewsDeleteForm(id) {
-    let form = $("#delete-news-form");
-    $.ajax({
-            url: urlAddress + '/news/delete/' + id + '/',
-            type: 'POST',
-            data: form.serialize(),
-            success: function (data, textStatus, xhr) {
-                sessionStorage.clear();
-                sessionStorage.setItem("result", DELETE_SUCCESSFUL);
-                closeFunction();
-                pageReload();
-            },
-            error: function (data, xhr, textStatus) {
-                requestUnsuccessful();
-            },
-        },
-    );
+    genericSubmitForm("delete-news-form", DELETE_NEWS_URL + id + '/', DELETE_SUCCESSFUL)
+}
+
+// function used for validation of email address and phone number
+function validatorFunction(emailAddress, phoneNumber, vpnNumber) {
+    let emailValid = document.getElementById(emailAddress).value.match(REGEX_MAIL);
+    let phoneValid = document.getElementById(phoneNumber).value.match(REGEX_NUMBER);
+    let vpnValid = document.getElementById(vpnNumber).value.match(REGEX_VPN_NUMBER);
+    let errors = {};
+    if (!emailValid) {
+        errors[emailAddress] = INVALID_EMAIL_ERROR
+    }
+    if (!phoneValid) {
+        errors[phoneNumber] = INVALID_PHONE_ERROR
+    }
+    if (!vpnValid) {
+        errors[vpnNumber] = INVALID_VPN_ERROR
+    }
+    if (jQuery.isEmptyObject(errors)) {
+        return 0;
+    }
+    return errors;
 }
 
 function requestSuccessful() {
     sessionStorage.clear();
-    sessionStorage.setItem("result", SUCCESSFUL_ACTION);
+    sessionStorage.setItem("message", SUCCESSFUL_ACTION);
     closeFunction();
-    pageReload();
 }
 
 function requestUnsuccessful() {
     sessionStorage.clear();
-    sessionStorage.setItem("result", ERROR_ACTION);
-    showToast(ERROR_ACTION);
+    sessionStorage.setItem("message", ERROR_ACTION);
+    showToast(ERROR_ACTION, ERROR_ACTION);
     sessionStorage.clear();
 }
 

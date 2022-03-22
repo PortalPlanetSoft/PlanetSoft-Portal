@@ -1,21 +1,26 @@
+"use strict"
+
 const navToggleBtn = document.querySelector('#ov-nav-toggle');
 const navigation = document.querySelector('#ov-navigation');
 
 // pageOnLoad function that fetches action result from sessionStorage so the toast alert can be shown
 $(function () {
-    result = parseInt(sessionStorage.getItem("result"));
-    if (result === SUCCESSFUL_ACTION) {
-        showToast(result);
-        sessionStorage.clear();
-    } else if (result === ERROR_ACTION) {
-        showToast(result);
-        sessionStorage.clear();
-    } else if (result === DELETE_SUCCESSFUL) {
-        showToast(result);
-        sessionStorage.clear();
-    } else {
-        result = DEFAULT_TOAST;
-        sessionStorage.clear();
+    let resultMessage;
+    resultMessage = sessionStorage.getItem("message");
+    switch (resultMessage) {
+        case SUCCESSFUL_ACTION:
+            sessionToastToggle(resultMessage, SUCCESSFUL_ACTION);
+            break;
+        case ERROR_ACTION:
+            sessionToastToggle(resultMessage, ERROR_ACTION);
+            break;
+        case DELETE_SUCCESSFUL:
+            sessionToastToggle(resultMessage, DELETE_SUCCESSFUL);
+            break;
+        default:
+            resultMessage = DEFAULT_TOAST;
+            sessionStorage.clear();
+            break;
     }
 
     const todaysDate = new Date();
@@ -29,9 +34,14 @@ $(function () {
     if (day < 10)
         day = '0' + day.toString();
 
-    var maxDate = year + '-' + month + '-' + day;
+    let maxDate = year + '-' + month + '-' + day;
     $('#id_birth_date').attr('max', maxDate);
 });
+
+function sessionToastToggle(resultMessage, action) {
+    showToast(resultMessage, action);
+    sessionStorage.clear();
+}
 
 // Navigation hamburger menu
 navToggleBtn.addEventListener('click', (e) => {
@@ -87,9 +97,11 @@ function submitFilterForm() {
 }
 
 function imageRemove() {
+    let form = $("#avatar-delete-form");
     $.ajax({
             url: urlAddress + '/employees/remove-avatar/',
-            type: 'GET',
+            type: 'POST',
+            data: form.serialize(),
             success: function (data, textStatus, xhr) {
                 requestSuccessful();
             },
