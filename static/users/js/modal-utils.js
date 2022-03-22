@@ -66,17 +66,17 @@ function submitPasswordChangeForm() {
 
     switch (validationResult) {
         case FIELDS_EMPTY:
-            oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
-            newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
-            newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
+            oldPasswordValidationError(oldPassword);
+            newPasswordValidationError(newPassword);
+            newPasswordCompareValidationError(newPasswordCompare);
             showToast(FIELDS_EMPTY);
             break;
         case FIRST_FIELD_EMPTY:
-            newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
+            newPasswordValidationError(newPassword);
             showToast(FIRST_FIELD_EMPTY);
             break;
         case SECOND_FIELD_EMPTY:
-            newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
+            newPasswordCompareValidationError(newPasswordCompare);
             showToast(SECOND_FIELD_EMPTY);
             break;
         case PASSWORD_VALIDATION_FAIL:
@@ -195,23 +195,35 @@ function submitEditUserForm(id) {
     }
 }
 
-function emailValidationInvalidError(emailAddress){
+function emailValidationInvalidError(emailAddress) {
     emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo Vas da unesete odgovarajuću email adresu.</li></ul>");
 }
 
-function phoneValidationInvalidError(phoneNumber){
+function phoneValidationInvalidError(phoneNumber) {
     phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo Vas unesite ispravan broj telefona.</li></ul>");
 }
 
-function vpnPhoneValidationInvalidError(vpnNumber){
+function vpnPhoneValidationInvalidError(vpnNumber) {
     vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo Vas unesite ispravan broj VPN telefona.</li></ul>");
+}
+
+function oldPasswordValidationError(oldPassword) {
+    oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
+}
+
+function newPasswordValidationError(newPassword) {
+    newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
+}
+
+function newPasswordCompareValidationError(newPasswordCompare) {
+    newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Ovo polje ne može biti prazno.</li></ul>");
 }
 
 // function used for validation of email address and phone number
 function validatorFunction(emailAddress, phoneNumber, vpnNumber) {
     let regexMail = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let regexNumber = /^(\+387|00387|0)(66|65|61)[0-9]{6}$/;
-    let regexVpnNumber = /^(\+387|00387|0)(66|65|61)[0-9]{6}$/;
+    let regexVpnNumber = /^[0-9]{3}$/;
     let emailValid = emailAddress.value.match(regexMail);
     let phoneValid = phoneNumber.value.match(regexNumber);
     let vpnValid = vpnNumber.value.match(regexVpnNumber);
@@ -312,7 +324,10 @@ function submitNewsDeleteForm(id) {
             type: 'POST',
             data: form.serialize(),
             success: function (data, textStatus, xhr) {
-                requestSuccessful();
+                sessionStorage.clear();
+                sessionStorage.setItem("result", DELETE_SUCCESSFUL);
+                closeFunction();
+                pageReload();
             },
             error: function (data, xhr, textStatus) {
                 requestUnsuccessful();

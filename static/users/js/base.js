@@ -3,14 +3,14 @@ const navigation = document.querySelector('#ov-navigation');
 
 // pageOnLoad function that fetches action result from sessionStorage so the toast alert can be shown
 $(function () {
-    result = sessionStorage.getItem("result");
-    if (result == SUCCESSFUL_ACTION) {
+    result = parseInt(sessionStorage.getItem("result"));
+    if (result === SUCCESSFUL_ACTION) {
         showToast(result);
         sessionStorage.clear();
-    } else if (result == ERROR_ACTION) {
+    } else if (result === ERROR_ACTION) {
         showToast(result);
         sessionStorage.clear();
-    } else if (result == DELETE_SUCCESSFUL) {
+    } else if (result === DELETE_SUCCESSFUL) {
         showToast(result);
         sessionStorage.clear();
     } else {
@@ -24,9 +24,9 @@ $(function () {
     let day = todaysDate.getDate();
     let year = todaysDate.getFullYear();
 
-    if(month < 10)
+    if (month < 10)
         month = '0' + month.toString();
-    if(day < 10)
+    if (day < 10)
         day = '0' + day.toString();
 
     var maxDate = year + '-' + month + '-' + day;
@@ -56,8 +56,7 @@ function toggleAnimation(element, firstAnimName, secondAnimName) {
     element.style.animationName = secondAnimName;
 }
 
-//function for showing chosen image preview on user settings page (/profile)
-
+// function for showing chosen image preview on user settings page (/profile)
 function changeThumbnail() {
     document.getElementById('id_profile_pic').addEventListener("change", function (e) {
         const reader = new FileReader();
@@ -83,14 +82,20 @@ function pageReload() {
     window.location.reload();
 }
 
-function log(obj) {
-    console.log(obj);
-}
-
 function submitFilterForm() {
     document.forms["userFilterForm"].submit();
 }
 
-function imageRemove(){
-
+function imageRemove() {
+    $.ajax({
+            url: urlAddress + '/employees/remove-avatar/',
+            type: 'GET',
+            success: function (data, textStatus, xhr) {
+                requestSuccessful();
+            },
+            error: function (data, textStatus, xhr) {
+                requestSuccessful();
+            },
+        },
+    );
 }

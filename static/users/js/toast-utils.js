@@ -2,7 +2,6 @@
 function showToast(result) {
     const toastContainer = document.getElementById("toast-container");
     const toastMessage = document.getElementById("toast-message");
-
     switch (result) {
         case ERROR_ACTION:
             toastContainer.style.backgroundColor = "var(--alert-light)";

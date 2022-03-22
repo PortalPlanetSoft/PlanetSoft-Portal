@@ -1,66 +1,68 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% block body %}
-    <div class="dk-news-details">
-        <div class="header-news-details">
-            <div class="creation-date-news"><p>{{ article.creation_date }}</p></div>
-            <div class="article-author-news">
-                <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
+<form class="ov-form">
+    <div>
+        <div class="dk-news-details">
+            <div class="header-news-details">
+                <div class="creation-date-news"><p>{{ article.creation_date }}</p></div>
+                <div class="article-author-news">
+                    <a onclick="showUserPreviewModal({{ article.author.id }})"><p>
+                        Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
+                </div>
+                <div class="article-headline-news"><h4>{{ article.headline }}</h4></div>
             </div>
-            <div class="article-headline-news"><h4>{{ article.headline }}</h4></div>
-            <div class="edit-news"><a onclick="showNewsEditModal({{ article.id }})">Uredi<i
-                    class="fa-regular fa-pen-to-square"></i></a></div>
-        </div>
-        <div class="content-news-details">
-            <p>{{ article.content }}</p>
-            <div class="dv-newsdetails-photo">
-                {% if article.image %}
-                    <img src={{ article.image.url }}>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <div class="comment-like-section">
-        <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-              method="post" class="news-like">
-            {% csrf_token %}
-            <button type="submit" name="article_like_id" value="{{ article.id }}">{% if article.liked %}<i class="fa-solid fa-thumbs-up"></i> {% else %}<i class="fa-regular fa-thumbs-up"></i>{% endif %}
-            </button>
-            <span>{{ article.likes_count }}</span>
-        </form>
-        <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-              method="post" class="news-dislike">
-            {% csrf_token %}
-            <button type="submit" name="article_dislike_id" value="{{ article.id }}">{% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}<i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
-            <span>{{ article.dislikes_count }}</span>
-        </form>
-        <form action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-              method="post" class="news-comment">
-            {% csrf_token %}
-            <textarea name="content" placeholder="Dodaj komentar..."></textarea>
-            <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
-        </form>
-    </div>
-
-    {% for comment in comments %}
-        <div class="news-comment-content">
-            <div class="comment-content">
-                <div class="profile-img-comment">
-                    {% if comment.author.profile_pic %}
-                        <img src={{ comment.author.profile_pic.url }}>
-                    {% else %}
-                        {% if comment.author.gender == 'M' %}
-                            <img src='{% static 'img/1.png' %}' alt='man-profile'>
-                        {% else %}
-                            <img src='{% static 'img/2.png' %}' alt='woman-profile'>
-                        {% endif %}
+            <div class="content-news-details">
+                <p>{{ article.content }}</p>
+                <div class="dv-newsdetails-photo">
+                    {% if article.image %}
+                        <img src={{ article.image.url }}>
                     {% endif %}
                 </div>
-                <h4>{{ comment.author.first_name }} {{ comment.author.last_name  }}</h4>
-                <p>{{ comment.content }}</p>
             </div>
         </div>
-    {% endfor %}
+        <div class="comment-like-section">
+            <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                  method="post" class="news-like">
+                {% csrf_token %}
+                <button type="submit" name="article_like_id" value="{{ article.id }}">{% if article.liked %}
+                    <i class="fa-solid fa-thumbs-up"></i> {% else %}<i class="fa-regular fa-thumbs-up"></i>{% endif %}
+                </button>
+                <span>{{ article.likes_count }}</span>
+            </form>
+            <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                  method="post" class="news-dislike">
+                {% csrf_token %}
+                <button type="submit" name="article_dislike_id" value="{{ article.id }}">{% if article.liked == False %}
+                    <i class="fa-solid fa-thumbs-down"></i> {% else %}
+                    <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
+                <span>{{ article.dislikes_count }}</span>
+            </form>
+            <form action="{% url 'comment-on-news' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+                  method="post" class="news-comment">
+                {% csrf_token %}
+                <textarea name="content" placeholder="Dodaj komentar..."></textarea>
+                <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
+            </form>
+        </div>
 
-{% endblock %}
+        {% for comment in comments %}
+            <div class="news-comment-content">
+                <div class="comment-content">
+                    <div class="profile-img-comment">
+                        {% if comment.author.profile_pic %}
+                            <img src={{ comment.author.profile_pic.url }}>
+                        {% else %}
+                            {% if comment.author.gender == 'M' %}
+                                <img src='{% static 'img/1.png' %}' alt='man-profile'>
+                            {% else %}
+                                <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <a onclick="showUserPreviewModal({{ comment.author.id }})">
+                        <h4>{{ comment.author.first_name }} {{ comment.author.last_name }}</h4></a>
+                    <p>{{ comment.content }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</form>
