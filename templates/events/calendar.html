@@ -1,5 +1,16 @@
-{% extends 'portal/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block body %}
+    <a href="{% url 'event-create' %}">Kreraij novi dogadjaj</a>
+    <div>
+    <a href="{% url 'specific-month-calendar' previous_year month %}"><</a>
+    <h1>{{ year }}</h1>
+    <a href="{% url 'specific-month-calendar' next_year month %}">></a>
+    </div>
+    <div>
+    <a href="{% url 'specific-month-calendar' year previous_month %}"><</a>
+    <h1>{{ selected_month }}</h1>
+    <a href="{% url 'specific-month-calendar' year next_month %}">></a>
+    </div>
     {{ calendar }}
 {% endblock %}

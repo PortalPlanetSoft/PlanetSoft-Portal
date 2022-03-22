@@ -1,14 +1,7 @@
 from django import forms
-from django.utils.translation import gettext_lazy as _
 
-from news.constants import ERROR_MESSAGES
+from news.constants import ERROR_MESSAGES, LABEL_TEXT
 from news.models import NewsArticle
-
-LABEL_TEXT = {
-    "headline": _("Nasalov"),
-    "content": _("Sadržaj"),
-    "image": _("Slika")
-}
 
 
 class AddNewsArticleForm(forms.ModelForm):
@@ -23,6 +16,7 @@ class AddNewsArticleForm(forms.ModelForm):
             'headline': forms.TextInput(attrs={'placeholder': 'Naslov'}),
             'content': forms.Textarea(attrs={'placeholder': 'Sadržaj'}),
         }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for key, value in LABEL_TEXT.items():

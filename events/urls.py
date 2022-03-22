@@ -4,7 +4,8 @@ from django.urls import path
 from events.views import EventCreate, EventUpdate, EventDelete, DayDetails, CalendarView
 
 urlpatterns = [
-    path('<int:year>/<int:month>', login_required(CalendarView.as_view()), name='calendar'),
+    path('', login_required(CalendarView.as_view()), name='calendar'),
+    path('<int:year>/<int:month>', login_required(CalendarView.as_view()), name='specific-month-calendar'),
     path('create/', login_required(EventCreate.as_view()), name='event-create'),
     path('<int:pk>/', login_required(EventUpdate.as_view()), name='event-edit'),
     path('delete/<int:pk>/', login_required(EventDelete.as_view()), name='event-delete'),

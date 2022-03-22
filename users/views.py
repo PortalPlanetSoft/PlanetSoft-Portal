@@ -139,6 +139,5 @@ class PasswordChange(PasswordChangeView):
 
 @login_required
 def remove_avatar(request):
-
-        User.objects.filter(id=request.user.id).first().profile_pic.delete(save=True)
-        return HTTP_STATUS_200
+    User.objects.filter(id=request.user.id).first().profile_pic.delete(save=True)
+    return HTTP_STATUS_200
