@@ -114,7 +114,6 @@ function imageRemove() {
 
 function submitLikeButton(id) {
     let form = $("#news-like-form");
-    alert("radi");
     $.ajax({
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
@@ -132,9 +131,6 @@ function submitLikeButton(id) {
 
 function submitDislikeButton(id) {
     let form = $("#news-dislike-form");
-
-
-    /*
     $.ajax({
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
@@ -146,5 +142,5 @@ function submitDislikeButton(id) {
                 requestUnsuccessful();
             },
         },
-    );*/
+    );
 }

@@ -25,10 +25,10 @@
         </div>
     </div>
     <div class="comment-like-section">
-        <form action="{% url 'like-dislike' article.pk %}"
+        <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
               method="post" class="news-like">
             {% csrf_token %}
-            <button type="submit" name="article_like_id" value="{{ article.id }}" onsubmit="submitLikeButton({{ article.id }})">{% if article.liked %}
+            <button type="submit" name="article_like_id" value="{{ article.id }}">{% if article.liked %}
                 <i class="fa-solid fa-thumbs-up"></i> {% else %}<i class="fa-regular fa-thumbs-up"></i>{% endif %}
             </button>
             <span>{{ article.likes_count }}</span>
@@ -36,7 +36,7 @@
         <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
               method="post" class="news-dislike">
             {% csrf_token %}
-            <button type="submit" name="article_dislike_id" value="{{ article.id }}" onclick="submitDislikeButton({{ article.id }})">{% if article.liked == False %}
+            <button type="submit" name="article_dislike_id" value="{{ article.id }}">{% if article.liked == False %}
                 <i class="fa-solid fa-thumbs-down"></i> {% else %}<i class="fa-regular fa-thumbs-down"></i>{% endif %}
             </button>
             <span>{{ article.dislikes_count }}</span>
