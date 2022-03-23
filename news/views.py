@@ -2,13 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q, Count, OuterRef, Subquery
-from django.http import HttpResponseRedirect
-from django.views.generic import ListView, UpdateView, DeleteView, CreateView
+from django.http import HttpResponseRedirect, HttpResponse
+from django.views.generic import ListView, UpdateView, DeleteView, CreateView, TemplateView, DetailView
 
 from news.constants import ARTICLES_PER_PAGE
 from news.forms import AddNewsArticleForm
 from news.models import NewsArticle, Comment, LikeDislike
-from praksaPlanetSoft.constants import FIRST_PAGE, HTTP_STATUS_400
+from praksaPlanetSoft.constants import FIRST_PAGE, HTTP_STATUS_400, HTTP_STATUS_200
 from users.models import User
 
 
@@ -106,6 +106,24 @@ class NewsUpdate(UserPassesTestMixin, UpdateView):
             raise PermissionDenied("You are not authorized to edit news articles")
 
 
+class NewsPreview(DetailView):
+    model = NewsArticle
+    template_name = 'news/news-preview.html'
+    success_url = '/news/'
+
+    def get_context_data(self, **kwargs):
+        context = super(NewsPreview, self).get_context_data(**kwargs)
+        has_reacted = LikeDislike.objects.filter(article_id=OuterRef('pk'), user_id=self.request.user.pk)
+        context['article'] = NewsArticle.objects.annotate(
+            likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
+            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
+            liked=Subquery(has_reacted.values('type'))).get(id=self.kwargs['pk'])
+        context['comments'] = Comment.objects.filter(
+            article_id=self.kwargs['pk']
+        )
+        return context
+
+
 class NewsDelete(UserPassesTestMixin, DeleteView):
     model = NewsArticle
     success_url = '/news/'
@@ -140,6 +158,8 @@ def likes_dislikes(request, pk):
             liked_disliked_article.save()
         else:
             LikeDislike.objects.create(user_id=request.user.pk, article_id=pk, type=False)
+
+    #return HttpResponse(status=HTTP_STATUS_200)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -153,7 +173,7 @@ def add_comment(request, pk):
             comment = Comment(content=request.POST.get('content'), author=request.user,
                               article=NewsArticle.objects.get(pk=pk))
         comment.save()
-    # return HttpResponse(status=HTTP_STATUS_200)
+    #return HttpResponse(status=HTTP_STATUS_200)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
