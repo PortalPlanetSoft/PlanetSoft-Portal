@@ -111,3 +111,40 @@ function imageRemove() {
         },
     );
 }
+
+function submitLikeButton(id) {
+    let form = $("#news-like-form");
+    alert("radi");
+    $.ajax({
+            url: urlAddress + '/news/react/' + id + '/',
+            type: 'POST',
+            data: form.serialize(),
+            success: function (data, textStatus, xhr) {
+                $("#comment-like-section").load(location.href + "#comment-like-section");
+                requestSuccessful();
+            },
+            error: function (data, textStatus, xhr) {
+                requestUnsuccessful();
+            },
+        },
+    );
+}
+
+function submitDislikeButton(id) {
+    let form = $("#news-dislike-form");
+
+
+    /*
+    $.ajax({
+            url: urlAddress + '/news/react/' + id + '/',
+            type: 'POST',
+            data: form.serialize(),
+            success: function (data, textStatus, xhr) {
+                requestSuccessful();
+            },
+            error: function (data, textStatus, xhr) {
+                requestUnsuccessful();
+            },
+        },
+    );*/
+}

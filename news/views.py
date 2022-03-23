@@ -158,6 +158,7 @@ def likes_dislikes(request, pk):
             liked_disliked_article.save()
         else:
             LikeDislike.objects.create(user_id=request.user.pk, article_id=pk, type=False)
+
     return HttpResponse(status=HTTP_STATUS_200)
     #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

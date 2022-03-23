@@ -67,16 +67,17 @@
                         Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
                 </div>
                 <div class="comment-like-section">
-                    <form action="{% url 'like-dislike' article.pk %}" method="post" class="news-like">
+                    <form id="news-like-form" class="news-like" method="post">
                         {% csrf_token %}
-                        <button type="submit" name="article_like_id" value="{{ article.id }}">{% if article.liked %}
-                            <i class="fa-solid fa-thumbs-up"></i> {% else %}
-                            <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
+                        <button type="submit" name="article_like_id" value="{{ article.id }}" onclick="submitLikeButton({{ article.id }})">
+                            {% if article.liked %}
+                                <i class="fa-solid fa-thumbs-up"></i> {% else %}
+                                <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
                         <span>{{ article.likes_count }}</span>
                     </form>
-                    <form action="{% url 'like-dislike' article.pk %}" method="post" class="news-dislike">
+                    <form id="news-dislike-form" class="news-dislike">
                         {% csrf_token %}
-                        <button type="submit" name="article_dislike_id" value="{{ article.id }}">
+                        <button type="submit" name="article_dislike_id" value="{{ article.id }}" onclick="submitDislikeButton({{ article.id }})">
                             {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
                                 <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                         <span>{{ article.dislikes_count }}</span>
