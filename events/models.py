@@ -7,7 +7,7 @@ class Event(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     creation_date = models.DateField(auto_now_add=True)
     edited_date = models.DateField(auto_now=True)
-    shared = models.ManyToManyField(to=User, related_name='shared')
+    shared = models.ManyToManyField(to=User, related_name='shared', blank=True)
     title = models.CharField(max_length=48)
     details = models.CharField(max_length=256, null=True, blank=True)
     start_time = models.DateTimeField()

@@ -1,0 +1,11 @@
+<form id="delete-news-form" class="ov-form" action="{% url 'event-delete' event.pk %}" method="post">
+    <h3 class="ov-form__title">Brisanje događajа</h3>
+    <div class="ov-delete-modal">
+        {% csrf_token %}
+        <p class="ov-delete-modal__question">Jeste li sigurni da želite da izbrišete događaj: {{ object.title }}?</p>
+        <div class="ov-form__btn-container">
+            <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Ne</button>
+            <button type="submit" id="submitForm" class="ov-form__btn"><!--onclick="submitNewsDeleteForm({ object.id }})"-->Da</button>
+        </div>
+    </div>
+</form>
