@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.template.response import TemplateResponse
 from django.views.generic import CreateView, UpdateView, ListView, DeleteView, FormView
 
 from praksaPlanetSoft.constants import FIRST_PAGE, HTTP_STATUS_400, HTTP_STATUS_401, HTTP_STATUS_200
@@ -139,6 +140,9 @@ class PasswordChange(PasswordChangeView):
 
 @login_required
 def remove_avatar(request):
-
+    if request.POST:
         User.objects.filter(id=request.user.id).first().profile_pic.delete(save=True)
         return HTTP_STATUS_200
+    else:
+        response = TemplateResponse(request, 'users/employee/avatar-confirm-deletion.html', {})
+        return response
