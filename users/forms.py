@@ -183,12 +183,12 @@ class ProfileForm(forms.ModelForm):
         labels = PROFILE_LABEL_TEXT
 
         widgets = {
-            'first_name': forms.TextInput(attrs={'placeholder': ''}),
-            'last_name': forms.TextInput(attrs={'placeholder': ''}),
-            'email': forms.TextInput(attrs={'placeholder': ''}),
-            'birth_date': forms.DateInput(attrs={'placeholder': ' ', 'type': 'date'}),
-            'phone': forms.TextInput(attrs={'placeholder': ''}),
-            'business_phone': forms.TextInput(attrs={'placeholder': ''})
+            'first_name': forms.TextInput(attrs={'placeholder': 'Ime'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Prezime'}),
+            'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
+            'birth_date': forms.DateInput(attrs={'placeholder': 'Datum rođenja', 'type': 'date'}),
+            'phone': forms.TextInput(attrs={'placeholder': 'Telefon'}),
+            'business_phone': forms.TextInput(attrs={'placeholder': 'VPN broj'})
         }
 
     def __init__(self, *args, **kwargs):
