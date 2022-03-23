@@ -1,5 +1,5 @@
 <form id="create-emp-form" class="ov-form">
-    <h3 class="ov-form__title">Dodavanje novog korisnika</h3>
+    <h3 class="ov-form__title">Dodavanje zaposlenog</h3>
     {% csrf_token %}
     {% for error in form.non_field_errors %}
         <div>
@@ -18,9 +18,9 @@
         {% endif %}
     {% endfor %}
     <div class="ov-form__btn-container">
-        <a class="ov-form__btn" id="submitForm" onclick="submitCreateUserForm()">Potvrdi</a>
+        <a class="ov-form__btn" id="submitForm" onclick="submitCreateUserForm()">Sačuvaj</a>
         <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">
-            Odbaci
+            Odustani
         </button>
     </div>
 </form>

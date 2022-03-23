@@ -53,7 +53,7 @@
   resize: none;
 }
 
-.ov-form select {
+.ov-form select, .ov-form-position {
   color: var(--primary);
   border: 1px solid var(--primary);
   border-radius: 5px;

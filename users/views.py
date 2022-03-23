@@ -80,7 +80,7 @@ class EmployeeCreate(UserPassesTestMixin, CreateView):
         if self.request.user.is_admin or self.request.user.is_superuser:
             return True
         else:
-            raise PermissionDenied("You are not authorized to add new employees")
+            raise PermissionDenied("Niste ovlašteni da dodajete zaposlene")
 
 
 # acts like UpdateView when user is admin or superuser
@@ -116,7 +116,7 @@ class EmployeeDelete(UserPassesTestMixin, DeleteView):
         if self.request.user.is_admin or self.request.user.is_superuser:
             return True
         elif self.request.user.is_authenticated:
-            raise PermissionDenied("You are not authorized to delete employees")
+            raise PermissionDenied("Niste ovlašteni da brišete zaposlene")
         raise
 
 

@@ -72,15 +72,15 @@ function submitPasswordChangeForm() {
     let validationResult = passwordChangeValidation(oldPassword, newPassword, newPasswordCompare);
 
     if (validationResult == FIELDS_EMPTY) {
-        oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These fields cannot be empty.</li></ul>");
-        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These fields cannot be empty.</li></ul>");
-        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These fields cannot be empty.</li></ul>");
+        oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Polje je obavezno</li></ul>");
+        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Polje je obavezno</li></ul>");
+        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Polje je obavezno</li></ul>");
         showToast(FIELDS_EMPTY);
     } else if (validationResult == FIRST_FIELD_EMPTY) {
-        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>This field cannot be empty.</li></ul>");
+        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Polje je obavezno</li></ul>");
         showToast(FIRST_FIELD_EMPTY);
     } else if (validationResult == SECOND_FIELD_EMPTY) {
-        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>This field cannot be empty.</li></ul>");
+        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Polje je obavezno</li></ul>");
         showToast(SECOND_FIELD_EMPTY);
     } else if (validationResult == VALIDATION_SUCCESS) {
         $.ajax({
@@ -95,17 +95,17 @@ function submitPasswordChangeForm() {
                 error: function (data, xhr, textStatus) {
                     sessionStorage.clear();
                     sessionStorage.setItem("result", ERROR_ACTION);
-                    oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Current password is not correct.</li></ul>");
+                    oldPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Pogrešna lozinka</li></ul>");
                     showToast(ERROR_ACTION);
                     sessionStorage.clear();
                 },
             },
         );
     } else if (validationResult == PASSWORD_VALIDATION_FAIL) {
-        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Password does not meet required format.</li></ul>");
+        newPassword.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Lozinka nije dozvoljenog formata</li></ul>");
         showToast(PASSWORD_VALIDATION_FAIL);// password not matching format
     } else if (validationResult == PASSWORDS_MATCHING_ERROR) {
-        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>These passwords must match.</li></ul>");
+        newPasswordCompare.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Lozinke se ne podudaraju</li></ul>");
         showToast(PASSWORDS_MATCHING_ERROR);// first and second entry of new password not matching
     }
 }
@@ -185,30 +185,30 @@ function submitEditUserForm(id) {
         );
     } else {
         if (returnResult == EMAIL_INVALID) {
-            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
+            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validnu e-mail adresu</li></ul>");
             showToast(INVALID_EMAIL_ERROR);
         } else if (returnResult == PHONE_INVALID) {
-            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
+            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validan broj telefona</li></ul>");
             showToast(INVALID_PHONE_ERROR);
         } else if (returnResult == VPN_INVALID) {
-            vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid VPN number.</li></ul>");
+            vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validan VPN broj</li></ul>");
             showToast(INVALID_VPN_ERROR);
         } else if (returnResult == EMAIL_PHONE_INVALID) {
-            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
-            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
+            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validnu e-mail adresu</li></ul>");
+            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validan broj telefona</li></ul>");
             showToast(INVALID_EMAILANDPHONE_ERROR);
         } else if (returnResult == EMAIL_VPN_INVALID) {
-            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
-            vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid VPN number.</li></ul>");
+            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validnu e-mail adresu</li></ul>");
+            vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validan VPN broj</li></ul>");
             showToast(INVALID_EMAILANDVPN_ERROR);
         } else if (returnResult == PHONE_VPN_INVALID) {
-            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
-            vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid VPN number.</li></ul>");
+            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validan broj telefona</li></ul>");
+            vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validan VPN broj</li></ul>");
             showToast(INVALID_PHONEANDVPN_ERROR);
         } else if (returnResult == VALIDATION_FAIL) {
-            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid email address.</li></ul>");
-            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid phone number.</li></ul>");
-            vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Please enter a valid VPN number.</li></ul>");
+            emailAddress.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validnu e-mail adresu</li></ul>");
+            phoneNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validan broj telefona</li></ul>");
+            vpnNumber.insertAdjacentHTML("afterend", "<ul class=\"errorlist\"><li>Molimo unesite validan VPN broj</li></ul>");
             showToast(INVALID_EMAIL_PHONE_VPN_ERROR);
         }
     }

@@ -25,19 +25,19 @@ class AddEmployeeForm(forms.ModelForm):
         data = self.cleaned_data['birth_date']
         current = date.today()
         if data and data.year > current.year - 18:
-            raise forms.ValidationError('Date can\'t be newer than 18 years of current year')
+            raise forms.ValidationError('Lice mora biti punoljetno')
         return data
 
     def clean_phone(self):
         data = self.cleaned_data['phone']
         if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Pogrešan format broja')
         return data
 
     def clean_business_phone(self):
         data = self.cleaned_data['business_phone']
         if data and not bool(re.match(REGEX_BUSINESS_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Pogrešan format broja')
         return data
 
     class Meta:
@@ -92,19 +92,19 @@ class EditEmployeeForm(forms.ModelForm):
         data = self.cleaned_data['birth_date']
         current = date.today()
         if data and data.year > current.year - 18:
-            raise forms.ValidationError('Date can\'t be newer than 18 years of current year')
+            raise forms.ValidationError('Lice mora biti punoljetno')
         return data
 
     def clean_phone(self):
         data = self.cleaned_data['phone']
         if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Pogrešan format broja')
         return data
 
     def clean_business_phone(self):
         data = self.cleaned_data['business_phone']
         if data and not bool(re.match(REGEX_BUSINESS_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Pogrešan format broja')
         return data
 
     class Meta:
@@ -141,7 +141,6 @@ class EditEmployeeForm(forms.ModelForm):
             self.fields['last_name'].disabled = True
             self.fields['email'].disabled = True
             self.fields['gender'].disabled = True
-            self.fields['company_position'].disabled = True
             self.fields['work_location'].disabled = True
             self.fields['is_admin'].disabled = True
             self.fields['is_editor'].disabled = True
@@ -161,19 +160,19 @@ class ProfileForm(forms.ModelForm):
         data = self.cleaned_data['birth_date']
         current = date.today()
         if data and data.year > current.year - 18:
-            raise forms.ValidationError('Date can\'t be newer than 18 years of current year')
+            raise forms.ValidationError('Lice mora biti punoljetno')
         return data
 
     def clean_phone(self):
         data = self.cleaned_data['phone']
         if data and not bool(re.match(REGEX_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Pogrešan format broja')
         return data
 
     def clean_business_phone(self):
         data = self.cleaned_data['business_phone']
         if data and not bool(re.match(REGEX_BUSINESS_PHONE_NUMBER, data)):
-            raise forms.ValidationError('Phone number format wrong!')
+            raise forms.ValidationError('Pogrešan format broja')
         return data
 
     class Meta:
@@ -184,12 +183,12 @@ class ProfileForm(forms.ModelForm):
         labels = PROFILE_LABEL_TEXT
 
         widgets = {
-            'first_name': forms.TextInput(attrs={'placeholder': 'Ime'}),
-            'last_name': forms.TextInput(attrs={'placeholder': 'Prezime'}),
-            'email': forms.TextInput(attrs={'placeholder': 'E-mail'}),
-            'birth_date': forms.DateInput(attrs={'placeholder': 'Datum rođenja', 'type': 'date'}),
-            'phone': forms.TextInput(attrs={'placeholder': 'Broj telefona'}),
-            'business_phone': forms.TextInput(attrs={'placeholder': 'Poslovni broj telefona'})
+            'first_name': forms.TextInput(attrs={'placeholder': ''}),
+            'last_name': forms.TextInput(attrs={'placeholder': ''}),
+            'email': forms.TextInput(attrs={'placeholder': ''}),
+            'birth_date': forms.DateInput(attrs={'placeholder': ' ', 'type': 'date'}),
+            'phone': forms.TextInput(attrs={'placeholder': ''}),
+            'business_phone': forms.TextInput(attrs={'placeholder': ''})
         }
 
     def __init__(self, *args, **kwargs):

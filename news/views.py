@@ -85,7 +85,7 @@ class NewsCreate(UserPassesTestMixin, CreateView):
         if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
             return True
         else:
-            raise PermissionDenied("You are not authorized to add new news articles")
+            raise PermissionDenied("Niste ovlašteni da vršite izmjene vijesti")
 
 
 class NewsUpdate(UserPassesTestMixin, UpdateView):
@@ -103,7 +103,7 @@ class NewsUpdate(UserPassesTestMixin, UpdateView):
         if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
             return True
         elif self.request.user.is_authenticated:
-            raise PermissionDenied("You are not authorized to edit news articles")
+            raise PermissionDenied("Niste ovlašteni da vršite izmjene vijesti")
 
 
 class NewsDelete(UserPassesTestMixin, DeleteView):
@@ -115,7 +115,7 @@ class NewsDelete(UserPassesTestMixin, DeleteView):
         if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
             return True
         elif self.request.user.is_authenticated:
-            raise PermissionDenied("You are not authorized to delete news articles")
+            raise PermissionDenied("Niste ovlašteni da vršite izmjene vijesti")
 
 
 @login_required

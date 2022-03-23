@@ -5,7 +5,7 @@ from news.constants import ERROR_MESSAGES
 from news.models import NewsArticle
 
 LABEL_TEXT = {
-    "headline": _("Nasalov"),
+    "headline": _("Naslov"),
     "content": _("Sadržaj"),
     "image": _("Slika")
 }
