@@ -30,12 +30,19 @@
 .ov-form p,
 .ov-form div {
   margin: 0 2rem;
+  position: relative;
 }
 .ov-form div[id^="id"], .ov-form div[id^="id"] > div{
   margin: 0;
 }
 .ov-form div[id^="id"] > div{
   display: inline-block;
+}
+
+.ov-form #id_is_admin, .ov-form #id_is_editor {
+  position: absolute;
+  top: 30%;
+  left: 10%;
 }
 .ov-form input[type='text'],
 .ov-form input[type='password'],
