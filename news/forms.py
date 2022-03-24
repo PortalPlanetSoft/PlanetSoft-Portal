@@ -3,6 +3,12 @@ from django import forms
 from news.constants import ERROR_MESSAGES, LABEL_TEXT
 from news.models import NewsArticle
 
+LABEL_TEXT = {
+    "headline": "Naslov",
+    "content": "Sadržaj",
+    "image": "Slika"
+}
+
 
 class AddNewsArticleForm(forms.ModelForm):
     use_required_attribute = False

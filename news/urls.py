@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import path
 
-from news.views import NewsList, NewsCreate, NewsUpdate, NewsDelete, likes_dislikes, add_comment, AllComments
+from news.views import NewsList, NewsCreate, NewsUpdate, NewsDelete, likes_dislikes, add_comment, AllComments, \
+    NewsPreview
 
 urlpatterns = [
     path('', login_required(NewsList.as_view()), name='news'),
@@ -11,4 +12,5 @@ urlpatterns = [
     path('react/<int:pk>/', likes_dislikes, name='like-dislike'),
     path('comment/<int:pk>', add_comment, name='comment-on-news'),
     path('article/<int:pk>', login_required(AllComments.as_view()), name='news-comments'),
+    path('article/preview/<int:pk>', login_required(NewsPreview.as_view()), name='news-preview'),
 ]

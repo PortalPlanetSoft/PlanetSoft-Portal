@@ -6,11 +6,14 @@
         <div class="header-news-details">
             <div class="creation-date-news"><p>{{ article.creation_date }}</p></div>
             <div class="article-author-news">
-                <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
+                <a onclick="showUserPreviewModal({{ article.author.id }})"><p>
+                    Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
             </div>
             <div class="article-headline-news"><h4>{{ article.headline }}</h4></div>
-            <div class="edit-news"><a onclick="showNewsEditModal({{ article.id }})">Uredi<i
-                    class="fa-regular fa-pen-to-square"></i></a></div>
+            {% if user.is_admin or user.is_superuser or user.is_editor %}
+                <div class="edit-news"><a onclick="showNewsEditModal({{ article.id }})">Uredi<i
+                        class="fa-regular fa-pen-to-square"></i></a></div>
+            {% endif %}
         </div>
         <div class="content-news-details">
             <p>{{ article.content }}</p>
@@ -25,17 +28,20 @@
         <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
               method="post" class="news-like">
             {% csrf_token %}
-            <button type="submit" name="article_like_id" value="{{ article.id }}">{% if article.liked %}<i class="fa-solid fa-thumbs-up"></i> {% else %}<i class="fa-regular fa-thumbs-up"></i>{% endif %}
+            <button type="submit" name="article_like_id" value="{{ article.id }}">{% if article.liked %}
+                <i class="fa-solid fa-thumbs-up"></i> {% else %}<i class="fa-regular fa-thumbs-up"></i>{% endif %}
             </button>
             <span>{{ article.likes_count }}</span>
         </form>
         <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
               method="post" class="news-dislike">
             {% csrf_token %}
-            <button type="submit" name="article_dislike_id" value="{{ article.id }}">{% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}<i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
+            <button type="submit" name="article_dislike_id" value="{{ article.id }}">{% if article.liked == False %}
+                <i class="fa-solid fa-thumbs-down"></i> {% else %}<i class="fa-regular fa-thumbs-down"></i>{% endif %}
+            </button>
             <span>{{ article.dislikes_count }}</span>
         </form>
-        <form action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
+        <form action="{% url 'comment-on-news' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
               method="post" class="news-comment">
             {% csrf_token %}
             <textarea name="content" placeholder="Dodaj komentar..."></textarea>
@@ -57,7 +63,8 @@
                         {% endif %}
                     {% endif %}
                 </div>
-                <h4>{{ comment.author.first_name }} {{ comment.author.last_name  }}</h4>
+                <a onclick="showUserPreviewModal({{ comment.author.id }})">
+                    <h4>{{ comment.author.first_name }} {{ comment.author.last_name }}</h4></a>
                 <p>{{ comment.content }}</p>
             </div>
         </div>
