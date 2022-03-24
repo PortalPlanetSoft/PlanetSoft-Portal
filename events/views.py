@@ -5,7 +5,7 @@ from django.core.exceptions import PermissionDenied
 from django.utils.safestring import mark_safe
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView, DetailView
 
-from events.constants import MONTHS
+from events.constants import MONTHS, JANUARY, DECEMBER, PREVIOUS, NEXT
 from events.forms import CreateEvent
 from events.models import Event
 from events.utils import Calendar
@@ -32,13 +32,22 @@ class CalendarView(ListView):
         # Call the formatmonth method, which returns our calendar as a table
         html_cal = cal.format_month()
         context['year'] = d.year
+        context['next_year'] = d.year + NEXT
+        context['previous_year'] = d.year - PREVIOUS
+        #todo rijesiti logiku
         context['month'] = d.month
-        context['next_year'] = d.year + 1
-        context['next_month'] = d.month + 1
-        context['previous_year'] = d.year - 1
-        context['previous_month'] = d.month - 1
+        if d.month == JANUARY:
+            context['next_month'] = d.month + NEXT
+            context['previous_month'] = DECEMBER
+        elif d.month == DECEMBER:
+            context['next_month'] = JANUARY
+            context['previous_month'] = d.month + PREVIOUS
+        else:
+            context['next_month'] = d.month + NEXT
+            context['previous_month'] = d.month - PREVIOUS
+
         context['months'] = MONTHS
-        context['selected_month'] = MONTHS[d.month]
+        context['selected_month'] = MONTHS[0]
         context['calendar'] = mark_safe(html_cal)
         return context
 
@@ -79,6 +88,7 @@ class EventUpdate(UpdateView):
 class EventPreview(DetailView):
     model = Event
     template_name = 'events/event-preview.html'
+
 
 class EventDelete(UserPassesTestMixin, DeleteView):
     model = Event

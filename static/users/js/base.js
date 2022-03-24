@@ -118,7 +118,7 @@ function submitLikeButton(id) {
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
-            headers: { 'flag': true },
+            headers: { 'flag': 'like' },
             success: function (data, textStatus, xhr) {
                 //$("#comment-like-section").load(location.href + "#comment-like-section");
                 //requestSuccessful();
@@ -136,9 +136,8 @@ function submitDislikeButton(id) {
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
-            headers: {'flag':false},
+            headers: {'flag': ''},
             success: function (data, textStatus, xhr) {
-                alert("udje");
                 $("#comment-like-section").load(location.href + "#comment-like-section");
                 //requestSuccessful();
             },
