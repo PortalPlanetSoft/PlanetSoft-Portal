@@ -19,7 +19,7 @@ class Calendar(HTMLCalendar):
             d += f'<li> {event.title} </li>'
 
         if day != 0:
-            return f"<td><span class='date'><a href='{EVENTS_URL_ADDRESS}{self.year}/{self.month}/{day}'>{day}<a/>" \
+            return f"<td><span class='date'><a onclick='showDateEventPreviewModal(\"{self.year}/{self.month}/{day}\")'>{day}<a/>" \
                    f"</span><ul> {d} </ul></td>"
         return '<td></td>'
 

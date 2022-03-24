@@ -9,6 +9,22 @@ async function displayModal(targetUrlAddress) {
             success: (data) => {
                 modalContent.innerHTML = data;
             },
+            error: (data) => {
+                modalContent.innerHTML = data;
+                alert("puklo error");
+            },
+        },
+    )
+}
+
+function displayModalTest(targetUrlAddress) {
+    modalContainer.style.display = "flex";
+    $.ajax({
+            url: targetUrlAddress,
+            type: 'GET',
+            success: (data) => {
+                modalContent.innerHTML = data;
+            },
         },
     )
 }
@@ -49,30 +65,32 @@ function showNewsAddModal() {
 }
 
 function showCreateEventModal() {
-    displayModal(CREATE_EVENT_URL);
+    displayModalTest(CREATE_EVENT_URL);
 }
 
 function showEditEventModal(id) {
-    displayModal(EDIT_EVENT_URL + id + '/');
+    displayModalTest(EDIT_EVENT_URL + id + '/');
 }
 
 function showDeleteEventModal(id) {
-    displayModal(DELETE_EVENT_URL + id + '/');
+    displayModalTest(DELETE_EVENT_URL + id + '/');
 }
 
 function submitEventCreateForm() {
-    genericSubmitForm("delete-event-form", CREATE_EVENT_URL, SUCCESSFUL_ACTION);
+    genericSubmitForm("create-event-form", CREATE_EVENT_URL, SUCCESSFUL_ACTION);
 }
 
 function submitEventEditForm(id) {
-    genericSubmitForm("edit-event-form", EDIT_EVENT_URL + id + '/', SUCCESSFUL_ACTION);
+    genericSubmitForm("create-event-form", EDIT_EVENT_URL + id + '/', SUCCESSFUL_ACTION);
 }
 
 function submitEventDeleteForm(id) {
     genericSubmitForm("delete-event-form", DELETE_EVENT_URL + id + '/', DELETE_SUCCESSFUL);
 }
 
-
+function showDateEventPreviewModal(id){
+    displayModalTest(CALENDAR_EVENTS_URL + id);
+}
 
 // onclick function for opening of news edit modal
 async function showNewsEditModal(id) {

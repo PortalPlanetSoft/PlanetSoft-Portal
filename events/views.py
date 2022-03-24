@@ -3,7 +3,7 @@ from datetime import date, datetime
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils.safestring import mark_safe
-from django.views.generic import ListView, UpdateView, CreateView, DeleteView
+from django.views.generic import ListView, UpdateView, CreateView, DeleteView, DetailView
 
 from events.constants import MONTHS
 from events.forms import CreateEvent
@@ -75,6 +75,10 @@ class EventUpdate(UpdateView):
         response.status_code = HTTP_STATUS_400
         return response
 
+
+class EventPreview(DetailView):
+    model = Event
+    template_name = 'events/event-preview.html'
 
 class EventDelete(UserPassesTestMixin, DeleteView):
     model = Event

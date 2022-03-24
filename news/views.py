@@ -142,7 +142,7 @@ def likes_dislikes(request, pk):
     if LikeDislike.objects.filter(user_id=request.user.pk, article_id=pk).exists():
         liked_disliked_article = LikeDislike.objects.filter(user_id=request.user.pk, article_id=pk).get()
 
-    if request.POST.get('article_like_id'):
+    if request.headers['flag']:
         if liked_disliked_article is not None and liked_disliked_article.type:
             liked_disliked_article.delete()
         elif liked_disliked_article is not None and not liked_disliked_article.type:

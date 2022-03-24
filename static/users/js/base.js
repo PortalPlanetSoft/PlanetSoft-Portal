@@ -118,9 +118,10 @@ function submitLikeButton(id) {
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
+            headers: { 'flag': true },
             success: function (data, textStatus, xhr) {
-                $("#comment-like-section").load(location.href + "#comment-like-section");
-                requestSuccessful();
+                //$("#comment-like-section").load(location.href + "#comment-like-section");
+                //requestSuccessful();
             },
             error: function (data, textStatus, xhr) {
                 requestUnsuccessful();
@@ -135,8 +136,11 @@ function submitDislikeButton(id) {
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
+            headers: {'flag':false},
             success: function (data, textStatus, xhr) {
-                requestSuccessful();
+                alert("udje");
+                $("#comment-like-section").load(location.href + "#comment-like-section");
+                //requestSuccessful();
             },
             error: function (data, textStatus, xhr) {
                 requestUnsuccessful();
