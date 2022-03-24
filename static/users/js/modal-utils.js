@@ -3,13 +3,11 @@
 // function for displaying generic modal
 async function displayModal(targetUrlAddress) {
     modalContainer.style.display = "flex";
-    let nesto = false;
     await $.ajax({
             url: targetUrlAddress,
             type: 'get',
             success: (data) => {
                 modalContent.innerHTML = data;
-                nesto=true
             },
         },
     )
