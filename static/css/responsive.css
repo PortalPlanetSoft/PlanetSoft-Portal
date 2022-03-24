@@ -303,4 +303,9 @@
     .dk-author-filter-select option{
       font-size: 0.8rem;
     }
+
+    /* COMMENT AREA */
+    .comment-like-section .news-comment textarea {
+      height: 2.5rem;
+    }
 }
