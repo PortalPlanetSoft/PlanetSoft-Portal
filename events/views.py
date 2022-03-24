@@ -80,6 +80,7 @@ class EventPreview(DetailView):
     model = Event
     template_name = 'events/event-preview.html'
 
+
 class EventDelete(UserPassesTestMixin, DeleteView):
     model = Event
     success_url = '/calendar/'

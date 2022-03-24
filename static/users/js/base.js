@@ -118,10 +118,20 @@ function submitLikeButton(id) {
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
-            headers: { 'flag': true },
+            headers: {'flag': 'true'},
             success: function (data, textStatus, xhr) {
-                //$("#comment-like-section").load(location.href + "#comment-like-section");
-                //requestSuccessful();
+                $.ajax({
+                    url: window.location.href,
+                    type: 'GET',
+                    data: {
+                        txtsearch: $('.grid-news').val()
+                    },
+                    dataType: 'html',
+                    success: function (data) {
+                        let result = $('.grid-news').append(data).find('.grid-news').html();
+                        $('.grid-news').html(result);
+                    },
+                });
             },
             error: function (data, textStatus, xhr) {
                 requestUnsuccessful();
@@ -136,10 +146,7 @@ function submitDislikeButton(id) {
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
-            headers: {'flag':false},
             success: function (data, textStatus, xhr) {
-                alert("udje");
-                $("#comment-like-section").load(location.href + "#comment-like-section");
                 //requestSuccessful();
             },
             error: function (data, textStatus, xhr) {

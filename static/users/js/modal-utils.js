@@ -65,15 +65,15 @@ function showNewsAddModal() {
 }
 
 function showCreateEventModal() {
-    displayModalTest(CREATE_EVENT_URL);
+    displayModal(CREATE_EVENT_URL);
 }
 
 function showEditEventModal(id) {
-    displayModalTest(EDIT_EVENT_URL + id + '/');
+    displayModal(EDIT_EVENT_URL + id + '/');
 }
 
 function showDeleteEventModal(id) {
-    displayModalTest(DELETE_EVENT_URL + id + '/');
+    displayModal(DELETE_EVENT_URL + id + '/');
 }
 
 function submitEventCreateForm() {
@@ -89,7 +89,7 @@ function submitEventDeleteForm(id) {
 }
 
 function showDateEventPreviewModal(id){
-    displayModalTest(CALENDAR_EVENTS_URL + id);
+    displayModal(CALENDAR_EVENTS_URL + id);
 }
 
 // onclick function for opening of news edit modal

@@ -159,8 +159,8 @@ def likes_dislikes(request, pk):
         else:
             LikeDislike.objects.create(user_id=request.user.pk, article_id=pk, type=False)
 
-    #return HttpResponse(status=HTTP_STATUS_200)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponse(status=HTTP_STATUS_200)
+    #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
