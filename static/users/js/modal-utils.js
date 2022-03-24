@@ -1,16 +1,16 @@
 "use strict"
 
 // function for displaying generic modal
-function displayModal(targetUrlAddress) {
+async function displayModal(targetUrlAddress) {
     modalContainer.style.display = "flex";
-    $.ajax({
+    await $.ajax({
             url: targetUrlAddress,
             type: 'get',
             success: (data) => {
                 modalContent.innerHTML = data;
             },
         },
-    );
+    )
 }
 
 // onclick function for opening of password change modal
@@ -49,8 +49,19 @@ function showNewsAddModal() {
 }
 
 // onclick function for opening of news edit modal
-function showNewsEditModal(id) {
-    displayModal(EDIT_NEWS_URL + id + '/');
+async function showNewsEditModal(id) {
+    await displayModal(EDIT_NEWS_URL + id + '/').then(
+        res=>{
+            document.getElementById('id_image').addEventListener("change", function (e) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('photo-preview').src = e.target.result;
+                };
+                reader.readAsDataURL(this.files[0]);
+            })
+        }
+    );
+
 }
 
 // onclick function for opening news preview modal

@@ -1,16 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-    <a href="{% url 'event-create' %}">Kreraij novi dogadjaj</a>
-    <div>
-    <a href="{% url 'specific-month-calendar' previous_year month %}"><</a>
-    <h1>{{ year }}</h1>
-    <a href="{% url 'specific-month-calendar' next_year month %}">></a>
+    <div class="create-new-event">
+        <a href="{% url 'event-create' %}">Novi događaj <i class="fa-solid fa-circle-plus fa-xl"></i></a>
     </div>
-    <div>
-    <a href="{% url 'specific-month-calendar' year previous_month %}"><</a>
-    <h1>{{ selected_month }}</h1>
-    <a href="{% url 'specific-month-calendar' year next_month %}">></a>
+    <div class="dk-calendar">
+        <div class="dk-create-calendar">
+            <div class="year-month-calendar">
+                <div class="dk-year-calendar">
+                    <h1> {{ year }}</h1>
+                </div>
+                <div class="up-down-year">
+                    <a href="{% url 'specific-month-calendar' previous_year month %}"><i
+                            class="fa-solid fa-angle-up"></i></a>
+                    <a href="{% url 'specific-month-calendar' next_year month %}"><i class="fa-solid fa-angle-down"></i></a>
+                </div>
+                <div class="dk-month-calendar">
+                    <h1>{{ selected_month }}</h1>
+                </div>
+                <div class="up-down-month">
+                    <a href="{% url 'specific-month-calendar' year previous_month %}"><i
+                            class="fa-solid fa-angle-up"></i></a>
+                    <a href="{% url 'specific-month-calendar' year next_month %}"><i class="fa-solid fa-angle-down"></i></a>
+                </div>
+            </div>
+            {{ calendar }}
+        </div>
     </div>
-    {{ calendar }}
 {% endblock %}

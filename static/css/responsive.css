@@ -340,4 +340,42 @@
     .comment-content{
       grid-column: 1/18;
     }
+    /* CALENDAR */
+    .create-new-event a{
+      grid-column: 1/4;
+      font-size: 1.8rem;
+    }
+
+    .dk-create-calendar{
+      width: 60rem;
+    }
+
+    .calendar {
+      width: 60rem;
+    }
+
+    .calendar a {
+      font-size: 1.8rem;
+    }
+
+    .calendar th{
+      font-size: 1.5rem;
+    }
+
+    .calendar li{
+      font-size: 1.4rem;
+    }
+    .header-news-preview{
+      grid-template-columns: 1fr;
+    }
+    .article-headline-news-preview h4{
+      padding: 0.5rem ;
+    }
+    .creation-date-news-preview p{
+      padding: 0.5rem ;
+    }
+
+    .article-author-news-preview p{
+        padding: 0.5rem ;
+    }
 }
