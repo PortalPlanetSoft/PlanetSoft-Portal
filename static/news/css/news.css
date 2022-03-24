@@ -207,11 +207,13 @@
     border-radius: 1rem;
 }
 .news-comment-content{
+    width: 100%;
     padding: 1rem;
     display: grid;
     grid-template-columns: repeat(18,1fr);
 }
 .comment-content{
+    width: 100%;
     background: #E3EBF1;
     border-radius: 0.5rem;
     grid-column: 2/10;
