@@ -16,6 +16,7 @@ urlpatterns = [
          name='logout'),
     path('employees/', include('users.urls')),
     path('news/', include('news.urls')),
+    path('calendar/', include('events.urls')),
 ]
 
 if settings.DEBUG:
