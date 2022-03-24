@@ -118,7 +118,7 @@ function submitLikeButton(id) {
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
-            headers: {'flag': 'true'},
+            headers: { 'flag': 'like' },
             success: function (data, textStatus, xhr) {
                 $.ajax({
                     url: window.location.href,
@@ -146,6 +146,7 @@ function submitDislikeButton(id) {
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
+            headers: {'flag': ''},
             success: function (data, textStatus, xhr) {
                 //requestSuccessful();
             },
