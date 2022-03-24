@@ -365,4 +365,17 @@
     .calendar li{
       font-size: 1.4rem;
     }
+    .header-news-preview{
+      grid-template-columns: 1fr;
+    }
+    .article-headline-news-preview h4{
+      padding: 0.5rem ;
+    }
+    .creation-date-news-preview p{
+      padding: 0.5rem ;
+    }
+
+    .article-author-news-preview p{
+        padding: 0.5rem ;
+    }
 }
