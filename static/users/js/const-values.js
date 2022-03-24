@@ -32,3 +32,7 @@ const DELETE_NEWS_URL = urlAddress + '/news/delete/';
 const VIEW_NEWS_URL = urlAddress + '/news/article/preview/';
 const DELETE_AVATAR_URL = urlAddress + '/employees/remove-avatar/';
 
+const CREATE_EVENT_URL = urlAddress + '/calendar/create/';
+const DELETE_EVENT_URL = urlAddress + '/calendar/delete/';
+const EDIT_EVENT_URL = urlAddress + '/calendar/';
+

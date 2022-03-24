@@ -1,0 +1,5 @@
+<form id="create-event-form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="button" onclick="submitEventCreateForm()">Potvrdi</button>
+</form>

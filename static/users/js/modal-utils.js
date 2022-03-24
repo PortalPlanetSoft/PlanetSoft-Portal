@@ -48,6 +48,32 @@ function showNewsAddModal() {
     displayModal(ADD_NEWS_URL);
 }
 
+function showCreateEventModal() {
+    displayModal(CREATE_EVENT_URL);
+}
+
+function showEditEventModal(id) {
+    displayModal(EDIT_EVENT_URL + id + '/');
+}
+
+function showDeleteEventModal(id) {
+    displayModal(DELETE_EVENT_URL + id + '/');
+}
+
+function submitEventCreateForm() {
+    genericSubmitForm("delete-event-form", CREATE_EVENT_URL, SUCCESSFUL_ACTION);
+}
+
+function submitEventEditForm(id) {
+    genericSubmitForm("edit-event-form", EDIT_EVENT_URL + id + '/', SUCCESSFUL_ACTION);
+}
+
+function submitEventDeleteForm(id) {
+    genericSubmitForm("delete-event-form", DELETE_EVENT_URL + id + '/', DELETE_SUCCESSFUL);
+}
+
+
+
 // onclick function for opening of news edit modal
 async function showNewsEditModal(id) {
     await displayModal(EDIT_NEWS_URL + id + '/').then(
