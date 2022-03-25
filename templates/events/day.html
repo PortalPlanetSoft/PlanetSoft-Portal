@@ -1,0 +1,8 @@
+
+
+<h1>Too</h1>
+
+{% for event in event_list %}
+    <a href="{% url 'event-edit' event.id %}">{{ event.title }}</a>
+    <a href="{% url 'event-delete' event.id %}">Izbrisi</a>
+{% endfor %}

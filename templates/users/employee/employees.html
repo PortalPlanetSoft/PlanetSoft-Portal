@@ -6,7 +6,7 @@
     <form class="dk-search" name="userFilterForm">
         <div class="dv-input-container">
             <div class="dv-mobile-fullw">
-                <input type="text" placeholder="PRETRAGA.." name="search">
+                <input type="text" placeholder="PRETRAGA..." name="search">
                 <div class="dk-i" onclick="submitFilterForm()">
                     <i class="fas fa-search"></i>
                 </div>
@@ -22,7 +22,7 @@
             </div>
 
 
-            <select name="position" onchange="submitFilterForm()">
+            <select class="ov-form-position" name="position" onchange="submitFilterForm()">
                 <option {% if selected == 'all' %} selected {% endif %}value="all">Sve pozicije</option>
                 {% for position in position_list %}
                     <option {% if selected == position.pk %} selected {% endif %}

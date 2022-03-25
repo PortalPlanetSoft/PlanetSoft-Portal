@@ -10,14 +10,14 @@
     <script src="{% static 'users/js/jquery/jquery-3.6.0.min.js' %}"></script>
 
 
-    <link href="{% static '../static/css/animations.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '../static/css/base.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '../static/css/navbar.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '../static/css/form.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '../static/css/modal.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '../static/css/footer.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '../static/news/css/news.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '../static/css/responsive.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/animations.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/navbar.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/form.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/modal.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/footer.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'news/css/news.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet" type="text/css">
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
 
 
@@ -34,8 +34,9 @@
                 {% if user.is_authenticated %}
                     <a href="{% url 'news' %}" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
                     <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
-                    <a href="#" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
-                    <a href="{% url 'profile' %}" class="ov-nav__item ov-nav__item--dropdown-toggle ov-nav__item--icon-only"><i
+                    <a href="{% url 'calendar' %}" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
+                    <a href="{% url 'profile' %}"
+                       class="ov-nav__item ov-nav__item--dropdown-toggle ov-nav__item--icon-only"><i
                             class="fas fa-user"></i></a>
                     <!-- <a href="{% url 'logout' %}" class="ov-nav__item"><i class="fa-solid fa-arrow-right-from-bracket"></i> ODJAVA</a> -->
                     <div class="ov-nav__navigation-dropdown">
@@ -92,9 +93,9 @@
 </footer>
 
 <script src="{% static '/../static/users/js/base.js' %}"></script>
-
 <script src="{% static '/../static/users/js/modal-utils.js' %}"></script>
-
+<script src="{% static '/../static/users/js/toast-utils.js' %}"></script>
+<script src="{% static '/../static/users/js/const-values.js' %}"></script>
 
 </body>
 </html>
