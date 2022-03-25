@@ -1,3 +1,5 @@
+from datetime import datetime, date
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
@@ -5,6 +7,7 @@ from django.db.models import Q, Count, OuterRef, Subquery
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView
 
+from events.models import Event
 from news.constants import ARTICLES_PER_PAGE
 from news.forms import AddNewsArticleForm
 from news.models import NewsArticle, Comment, LikeDislike
@@ -40,6 +43,7 @@ class NewsList(ListView):
         context['liked_articles'] = LikeDislike.objects.filter(user_id=self.request.user).all()
         context['object_list'] = news
         context['author_list'] = User.objects.filter(Q(is_editor=True) | Q(is_admin=True), is_active=True)
+        #context['today_events'] = Event.objects.filter(Q(start_time=date.now()))
         return context
 
     def get_queryset(self, *args, **kwargs):

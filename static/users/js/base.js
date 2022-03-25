@@ -120,7 +120,7 @@ function genericLikeDislikeFunction(form_id, id, flag){
             data: form.serialize(),
             headers: flag,
             success: function (data, textStatus, xhr) {
-                loadLikeContainer();
+                loadLikeContainer(id);
             },
             error: function (data, textStatus, xhr) {
                 requestUnsuccessful();
@@ -154,17 +154,17 @@ function submitDislikeButton(id) {
     genericLikeDislikeFunction("#news-dislike-form", id, {'flag': ''});
 }
 
-function loadLikeContainer() {
+function loadLikeContainer(id) {
     $.ajax({
         url: window.location.href,
         type: 'GET',
         data: {
-            txtsearch: $('.grid-news').val()
+            txtsearch: $('#comment-like-section'+id).val()
         },
         dataType: 'html',
         success: function (data) {
-            let result = $('.grid-news').append(data).find('.grid-news').html();
-            $('.grid-news').html(result);
+            let result = $('#comment-like-section'+id).append(data).find('#comment-like-section'+id).html();
+            $('#comment-like-section'+id).html(result);
         },
     });
 }

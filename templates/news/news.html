@@ -67,7 +67,7 @@
                     <a onclick="showUserPreviewModal({{ article.author.id }})"><p>
                         Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
                 </div>
-                <div class="comment-like-section">
+                <div id="comment-like-section{{ article.id }}" class="comment-like-section">
                     <form id="news-like-form" class="news-like"
                           method="post">
                         {% csrf_token %}
