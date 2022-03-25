@@ -118,7 +118,7 @@ function submitLikeButton(id) {
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
-            headers: { 'flag': 'like' },
+            headers: {'flag': 'like'},
             success: function (data, textStatus, xhr) {
                 $.ajax({
                     url: window.location.href,
@@ -148,7 +148,52 @@ function submitDislikeButton(id) {
             data: form.serialize(),
             headers: {'flag': ''},
             success: function (data, textStatus, xhr) {
-                //requestSuccessful();
+                $.ajax({
+                    url: window.location.href,
+                    type: 'GET',
+                    data: {
+                        txtsearch: $('.grid-news').val()
+                    },
+                    dataType: 'html',
+                    success: function (data) {
+                        let result = $('.grid-news').append(data).find('.grid-news').html();
+                        $('.grid-news').html(result);
+                    },
+                });
+            },
+            error: function (data, textStatus, xhr) {
+                requestUnsuccessful();
+            },
+        },
+    );
+}
+
+function submitNewPageLikeButton(id) {
+    let form = $("#news-like-form");
+    $.ajax({
+            url: urlAddress + '/news/react/' + id + '/',
+            type: 'POST',
+            data: form.serialize(),
+            headers: {'flag': 'like'},
+            success: function (data, textStatus, xhr) {
+                requestSuccessful();
+            },
+            error: function (data, textStatus, xhr) {
+                requestUnsuccessful();
+            },
+        },
+    );
+}
+
+function submitNewPageDislikeButton(id) {
+    let form = $("#news-dislike-form");
+    $.ajax({
+            url: urlAddress + '/news/react/' + id + '/',
+            type: 'POST',
+            data: form.serialize(),
+            headers: {'flag': ''},
+            success: function (data, textStatus, xhr) {
+                requestSuccessful();
             },
             error: function (data, textStatus, xhr) {
                 requestUnsuccessful();

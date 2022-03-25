@@ -16,7 +16,7 @@ class Calendar(HTMLCalendar):
         events_per_day = events.filter(start_time__day=day)
         d = ''
         for event in events_per_day:
-            d += f'<li> {event.title} </li>'
+            d += f"<a onclick='showEventPreviewModal({event.id})'><li> {event.title} </li></a>"
 
         if day != 0:
             return f"<td><span class='date'><a onclick='showDateEventPreviewModal(\"{self.year}/{self.month}/{day}\")'>{day}<a/>" \

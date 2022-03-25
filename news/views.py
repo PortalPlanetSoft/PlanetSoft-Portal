@@ -2,13 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q, Count, OuterRef, Subquery
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView
 
 from news.constants import ARTICLES_PER_PAGE
 from news.forms import AddNewsArticleForm
 from news.models import NewsArticle, Comment, LikeDislike
-from praksaPlanetSoft.constants import FIRST_PAGE, HTTP_STATUS_400
+from praksaPlanetSoft.constants import FIRST_PAGE, HTTP_STATUS_400, HTTP_STATUS_200
 from users.models import User
 
 

@@ -36,3 +36,4 @@ const CREATE_EVENT_URL = urlAddress + '/calendar/create/';
 const DELETE_EVENT_URL = urlAddress + '/calendar/delete/';
 const EDIT_EVENT_URL = urlAddress + '/calendar/';
 const CALENDAR_EVENTS_URL = urlAddress + '/calendar/events/';
+const EVENT_PREVIEW_URL = urlAddress + '/calendar/preview/';

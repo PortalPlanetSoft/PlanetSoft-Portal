@@ -17,18 +17,6 @@ async function displayModal(targetUrlAddress) {
     )
 }
 
-function displayModalTest(targetUrlAddress) {
-    modalContainer.style.display = "flex";
-    $.ajax({
-            url: targetUrlAddress,
-            type: 'GET',
-            success: (data) => {
-                modalContent.innerHTML = data;
-            },
-        },
-    )
-}
-
 // onclick function for opening of password change modal
 function showPasswordChangeModal() {
     displayModal(PASSWORD_CHANGE_URL);
@@ -88,14 +76,18 @@ function submitEventDeleteForm(id) {
     genericSubmitForm("delete-event-form", DELETE_EVENT_URL + id + '/', DELETE_SUCCESSFUL);
 }
 
-function showDateEventPreviewModal(id){
+function showDateEventPreviewModal(id) {
     displayModal(CALENDAR_EVENTS_URL + id);
+}
+
+function showEventPreviewModal(id) {
+    displayModal(EVENT_PREVIEW_URL + id + '/');
 }
 
 // onclick function for opening of news edit modal
 async function showNewsEditModal(id) {
     await displayModal(EDIT_NEWS_URL + id + '/').then(
-        res=>{
+        res => {
             document.getElementById('id_image').addEventListener("change", function (e) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
