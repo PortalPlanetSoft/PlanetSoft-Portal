@@ -91,3 +91,35 @@ li {
 .dk-calendar {
     padding-bottom: 6rem;
 }
+
+/* OGI */
+.calendar td {
+    position: relative;
+}
+.calendar span {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.calendar ul {
+    position: absolute;
+    left: 0;
+    top: 5%;
+    width: 100%;
+    overflow-y: auto;
+    max-height: 80%;
+}
+.calendar ul a li {
+    margin: 0;
+    padding: .5rem .25rem;
+}
+.calendar ul a:nth-child(odd) li {
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+.calendar ul a:nth-child(even) li{
+    color: var(--primary);
+    background-color: var(--accent-light);
+}
+
+/* OGI */
