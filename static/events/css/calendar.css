@@ -122,4 +122,38 @@ li {
     background-color: var(--accent-light);
 }
 
+.events-sidebar {
+    width: 35%;
+    margin: 1rem auto;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    background-color: var(--white);
+}
+.ov-calendar-event-details {
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--primary);
+    color: var(--primary);
+
+}
+.ov-calendar-event-details a {
+    padding: 1rem;
+
+
+}
+.ov-calendar-event-details h4 {
+    width: 100%;
+}
+.events-sidebar-new-event {
+    color: var(--primary);
+    display: block;
+    width: 25%;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
 /* OGI */

@@ -33,9 +33,10 @@
         {% for event in event_list %}
             {% if event.start_time %}
                 <form class="ov-form ov-calendar-event-details">
-                    <a onclick="showEventPreviewModal({{ event.id }})"><h4>{{ event.title }}</h4></a>
+                    <p>{{ event.title }}</p> <a onclick="showEditEventModal({{ event.id }})"><i class="fa-solid fa-pen-to-square"></i></a>
                 </form>
             {% endif %}
         {% endfor %}
+            <a class="events-sidebar-new-event" onclick="showCreateEventModal()">Novi događaj <i class="fa-solid fa-circle-plus fa-xl"></i></a>
     </div>
 {% endblock %}
