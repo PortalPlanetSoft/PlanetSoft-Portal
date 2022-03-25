@@ -29,6 +29,25 @@
         </div>
     </form>
 
+      <div class="events-sidebar">
+        <div class="todays-events">
+            <label>Današnji događaji</label>
+            {% for event in today_events %}
+                    <form class="ov-form">
+                        <a onclick="showEventPreviewModal({{ event.id }})"><h4>{{ event.title }}</h4></a>
+                    </form>
+            {% endfor %}
+        </div>
+        <div class="tommorows-events">
+            <label>Sutrašnji događaji</label>
+            {% for event in tommorow_events %}
+                    <form class="ov-form">
+                        <a onclick="showEventPreviewModal({{ event.id }})"><h4>{{ event.title }}</h4></a>
+                    </form>
+            {% endfor %}
+        </div>
+    </div>
+
 
 
     <div class="grid-news">
