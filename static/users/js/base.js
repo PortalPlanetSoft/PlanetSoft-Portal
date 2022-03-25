@@ -112,92 +112,82 @@ function imageRemove() {
     );
 }
 
-function submitLikeButton(id) {
-    let form = $("#news-like-form");
+function genericLikeDislikeFunction(form_id, id, flag){
+    let form = $(form_id);
     $.ajax({
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
-            headers: {'flag': 'like'},
+            headers: flag,
             success: function (data, textStatus, xhr) {
-                $.ajax({
-                    url: window.location.href,
-                    type: 'GET',
-                    data: {
-                        txtsearch: $('.grid-news').val()
-                    },
-                    dataType: 'html',
-                    success: function (data) {
-                        let result = $('.grid-news').append(data).find('.grid-news').html();
-                        $('.grid-news').html(result);
-                    },
-                });
+                loadLikeContainer();
             },
             error: function (data, textStatus, xhr) {
                 requestUnsuccessful();
             },
         },
     );
+}
+
+function genericLikeDislikeOnPageFunction(form_id, id, flag){
+    let form = $(form_id);
+    $.ajax({
+            url: urlAddress + '/news/react/' + id + '/',
+            type: 'POST',
+            data: form.serialize(),
+            headers: flag,
+            success: function (data, textStatus, xhr) {
+                loadLikeOnPageContainer();
+            },
+            error: function (data, textStatus, xhr) {
+                requestUnsuccessful();
+            },
+        },
+    );
+}
+
+function submitLikeButton(id) {
+    genericLikeDislikeFunction("#news-like-form", id, {'flag': 'like'});
 }
 
 function submitDislikeButton(id) {
-    let form = $("#news-dislike-form");
+    genericLikeDislikeFunction("#news-dislike-form", id, {'flag': ''});
+}
+
+function loadLikeContainer() {
     $.ajax({
-            url: urlAddress + '/news/react/' + id + '/',
-            type: 'POST',
-            data: form.serialize(),
-            headers: {'flag': ''},
-            success: function (data, textStatus, xhr) {
-                $.ajax({
-                    url: window.location.href,
-                    type: 'GET',
-                    data: {
-                        txtsearch: $('.grid-news').val()
-                    },
-                    dataType: 'html',
-                    success: function (data) {
-                        let result = $('.grid-news').append(data).find('.grid-news').html();
-                        $('.grid-news').html(result);
-                    },
-                });
-            },
-            error: function (data, textStatus, xhr) {
-                requestUnsuccessful();
-            },
+        url: window.location.href,
+        type: 'GET',
+        data: {
+            txtsearch: $('.grid-news').val()
         },
-    );
+        dataType: 'html',
+        success: function (data) {
+            let result = $('.grid-news').append(data).find('.grid-news').html();
+            $('.grid-news').html(result);
+        },
+    });
+}
+
+function loadLikeOnPageContainer() {
+    $.ajax({
+        url: window.location.href,
+        type: 'GET',
+        data: {
+            txtsearch: $('.comment-like-section').val()
+        },
+        dataType: 'html',
+        success: function (data) {
+            let result = $('.comment-like-section').append(data).find('.comment-like-section').html();
+            $('.comment-like-section').html(result);
+        },
+    });
 }
 
 function submitNewPageLikeButton(id) {
-    let form = $("#news-like-form");
-    $.ajax({
-            url: urlAddress + '/news/react/' + id + '/',
-            type: 'POST',
-            data: form.serialize(),
-            headers: {'flag': 'like'},
-            success: function (data, textStatus, xhr) {
-                requestSuccessful();
-            },
-            error: function (data, textStatus, xhr) {
-                requestUnsuccessful();
-            },
-        },
-    );
+    genericLikeDislikeOnPageFunction("#news-like-form", id, {'flag': 'like'});
 }
 
 function submitNewPageDislikeButton(id) {
-    let form = $("#news-dislike-form");
-    $.ajax({
-            url: urlAddress + '/news/react/' + id + '/',
-            type: 'POST',
-            data: form.serialize(),
-            headers: {'flag': ''},
-            success: function (data, textStatus, xhr) {
-                requestSuccessful();
-            },
-            error: function (data, textStatus, xhr) {
-                requestUnsuccessful();
-            },
-        },
-    );
+    genericLikeDislikeOnPageFunction("#news-dislike-form", id, {'flag': ''});
 }

@@ -11,7 +11,6 @@ async function displayModal(targetUrlAddress) {
             },
             error: (data) => {
                 modalContent.innerHTML = data;
-                alert("puklo error");
             },
         },
     )

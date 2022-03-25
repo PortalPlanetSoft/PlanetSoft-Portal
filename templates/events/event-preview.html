@@ -1,4 +1,9 @@
 <form id="edit-event-form" class="ov-form">
-    <h4>{{event.title}}</h4>
-    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori</button>
+    <h4>{{ event.title }}</h4>
+    {% if user.is_admin or user.is_superuser or user.is_editor %}
+        <button type="button" onclick="showEditEventModal({{ event.id }})">Uredi</button>
+        <button type="button" onclick="showDeleteEventModal({{ event.id }})">Izbrisi</button>
+    {% endif %}
+    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori
+    </button>
 </form>

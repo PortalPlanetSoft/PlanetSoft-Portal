@@ -29,4 +29,13 @@
             {{ calendar }}
         </div>
     </div>
+    <div class="events-sidebar">
+        {% for event in event_list %}
+            {% if event.start_time %}
+                <form class="ov-form">
+                    <a onclick="showEventPreviewModal({{ event.id }})"><h4>{{ event.title }}</h4></a>
+                </form>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
