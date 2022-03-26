@@ -21,9 +21,16 @@
                     <h1>{{ selected_month }}</h1>
                 </div>
                 <div class="up-down-month">
-                    <a href="{% url 'specific-month-calendar' year previous_month %}"><i
-                            class="fa-solid fa-angle-up"></i></a>
-                    <a href="{% url 'specific-month-calendar' year next_month %}"><i class="fa-solid fa-angle-down"></i></a>
+                    {% if previous_month != 12 %}
+                        <a href="{% url 'specific-month-calendar' year previous_month %}"><i class="fa-solid fa-angle-up"></i></a>
+                    {% else %}
+                        <a href="{% url 'specific-month-calendar' previous_year previous_month %}"><i class="fa-solid fa-angle-up"></i></a>
+                    {% endif %}
+                    {% if next_month != 1 %}
+                        <a href="{% url 'specific-month-calendar' year next_month %}"><i class="fa-solid fa-angle-down"></i></a>
+                    {% else %}
+                        <a href="{% url 'specific-month-calendar' next_year next_month %}"><i class="fa-solid fa-angle-down"></i></a>
+                    {% endif %}
                 </div>
             </div>
             {{ calendar }}

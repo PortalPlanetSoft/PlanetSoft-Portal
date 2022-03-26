@@ -34,20 +34,20 @@ class CalendarView(ListView):
         context['year'] = d.year
         context['next_year'] = d.year + NEXT
         context['previous_year'] = d.year - PREVIOUS
-        #todo rijesiti logiku
         context['month'] = d.month
+
         if d.month == JANUARY:
             context['next_month'] = d.month + NEXT
             context['previous_month'] = DECEMBER
         elif d.month == DECEMBER:
             context['next_month'] = JANUARY
-            context['previous_month'] = d.month + PREVIOUS
+            context['previous_month'] = d.month - PREVIOUS
         else:
             context['next_month'] = d.month + NEXT
             context['previous_month'] = d.month - PREVIOUS
 
         context['months'] = MONTHS
-        context['selected_month'] = MONTHS[0]
+        context['selected_month'] = MONTHS[d.month - PREVIOUS]
         context['calendar'] = mark_safe(html_cal)
         return context
 
@@ -75,7 +75,7 @@ class EventCreate(CreateView):
 
 class EventUpdate(UpdateView):
     model = Event
-    template_name = 'events/event.html'
+    template_name = 'events/event-edit.html'
     success_url = '/calendar/'
     form_class = CreateEvent
 
