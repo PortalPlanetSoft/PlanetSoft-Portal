@@ -112,15 +112,15 @@ function imageRemove() {
     );
 }
 
-function submitLikeButton(id) {
-    let form = $("#news-like-form");
+function genericLikeDislikeFunction(form_id, id, flag){
+    let form = $(form_id);
     $.ajax({
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
+            headers: flag,
             success: function (data, textStatus, xhr) {
-                $("#comment-like-section").load(location.href + "#comment-like-section");
-                requestSuccessful();
+                loadLikeContainer(id);
             },
             error: function (data, textStatus, xhr) {
                 requestUnsuccessful();
@@ -129,18 +129,65 @@ function submitLikeButton(id) {
     );
 }
 
-function submitDislikeButton(id) {
-    let form = $("#news-dislike-form");
+function genericLikeDislikeOnPageFunction(form_id, id, flag){
+    let form = $(form_id);
     $.ajax({
             url: urlAddress + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
+            headers: flag,
             success: function (data, textStatus, xhr) {
-                requestSuccessful();
+                loadLikeOnPageContainer();
             },
             error: function (data, textStatus, xhr) {
                 requestUnsuccessful();
             },
         },
     );
+}
+
+function submitLikeButton(id) {
+    genericLikeDislikeFunction("#news-like-form", id, {'flag': 'like'});
+}
+
+function submitDislikeButton(id) {
+    genericLikeDislikeFunction("#news-dislike-form", id, {'flag': ''});
+}
+
+function loadLikeContainer(id) {
+    $.ajax({
+        url: window.location.href,
+        type: 'GET',
+        data: {
+            txtsearch: $('#comment-like-section'+id).val()
+        },
+        dataType: 'html',
+        success: function (data) {
+            let result = $('#comment-like-section'+id).append(data).find('#comment-like-section'+id).html();
+            $('#comment-like-section'+id).html(result);
+        },
+    });
+}
+
+function loadLikeOnPageContainer() {
+    $.ajax({
+        url: window.location.href,
+        type: 'GET',
+        data: {
+            txtsearch: $('.comment-like-section').val()
+        },
+        dataType: 'html',
+        success: function (data) {
+            let result = $('.comment-like-section').append(data).find('.comment-like-section').html();
+            $('.comment-like-section').html(result);
+        },
+    });
+}
+
+function submitNewPageLikeButton(id) {
+    genericLikeDislikeOnPageFunction("#news-like-form", id, {'flag': 'like'});
+}
+
+function submitNewPageDislikeButton(id) {
+    genericLikeDislikeOnPageFunction("#news-dislike-form", id, {'flag': ''});
 }

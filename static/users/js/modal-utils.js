@@ -9,6 +9,9 @@ async function displayModal(targetUrlAddress) {
             success: (data) => {
                 modalContent.innerHTML = data;
             },
+            error: (data) => {
+                modalContent.innerHTML = data;
+            },
         },
     )
 }
@@ -48,10 +51,42 @@ function showNewsAddModal() {
     displayModal(ADD_NEWS_URL);
 }
 
+function showCreateEventModal() {
+    displayModal(CREATE_EVENT_URL);
+}
+
+function showEditEventModal(id) {
+    displayModal(EDIT_EVENT_URL + id + '/');
+}
+
+function showDeleteEventModal(id) {
+    displayModal(DELETE_EVENT_URL + id + '/');
+}
+
+function submitEventCreateForm() {
+    genericSubmitForm("create-event-form", CREATE_EVENT_URL, SUCCESSFUL_ACTION);
+}
+
+function submitEventEditForm(id) {
+    genericSubmitForm("create-event-form", EDIT_EVENT_URL + id + '/', SUCCESSFUL_ACTION);
+}
+
+function submitEventDeleteForm(id) {
+    genericSubmitForm("delete-event-form", DELETE_EVENT_URL + id + '/', DELETE_SUCCESSFUL);
+}
+
+function showDateEventPreviewModal(id) {
+    displayModal(CALENDAR_EVENTS_URL + id);
+}
+
+function showEventPreviewModal(id) {
+    displayModal(EVENT_PREVIEW_URL + id + '/');
+}
+
 // onclick function for opening of news edit modal
 async function showNewsEditModal(id) {
     await displayModal(EDIT_NEWS_URL + id + '/').then(
-        res=>{
+        res => {
             document.getElementById('id_image').addEventListener("change", function (e) {
                 const reader = new FileReader();
                 reader.onload = function (e) {

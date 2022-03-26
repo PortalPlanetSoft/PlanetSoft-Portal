@@ -1,9 +1,5 @@
-{% extends 'base.html' %}
-
-{% block body %}
-<form action="{% url 'event-create' %}" method="post">
+<form id="create-event-form" class="ov-form" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit" />
+    <button type="button" onclick="submitEventCreateForm()">Potvrdi</button>
 </form>
-{% endblock %}

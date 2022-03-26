@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-    <div class="create-new-event">
-        <a href="{% url 'event-create' %}">Novi događaj <i class="fa-solid fa-circle-plus fa-xl"></i></a>
-    </div>
+    {% if user.is_admin or user.is_superuser or user.is_editor %}
+        <div class="create-new-event">
+            <a onclick="showCreateEventModal()">Novi događaj <i class="fa-solid fa-circle-plus fa-xl"></i></a>
+        </div>
+    {% endif %}
     <div class="dk-calendar">
         <div class="dk-create-calendar">
             <div class="year-month-calendar">
@@ -27,4 +29,6 @@
             {{ calendar }}
         </div>
     </div>
+
+
 {% endblock %}
