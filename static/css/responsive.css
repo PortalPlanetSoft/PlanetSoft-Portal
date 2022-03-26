@@ -158,7 +158,7 @@
 
   
  .ov-form #id_is_admin, .ov-form #id_is_editor {
-   left: 25%;
+   left: 55%;
  }
  .ov-form a {
     font-size: 3rem;
@@ -312,6 +312,7 @@
     /* COMMENT AREA */
     .comment-like-section .news-comment textarea {
       height: 2.5rem;
+    }
     .header-news-details{
       display: flex;
       flex-direction: column;

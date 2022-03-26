@@ -42,7 +42,7 @@
 .ov-form #id_is_admin, .ov-form #id_is_editor {
   position: absolute;
   top: 30%;
-  left: 10%;
+  left: 25%;
 }
 .ov-form input[type='text'],
 .ov-form input[type='password'],
