@@ -29,7 +29,24 @@
         </div>
     </form>
 
-
+    <div class="events-sidebar">
+        <form class="ov-form">
+            <div class="todays-events">
+                <label>Današnji događaji</label>
+                {% for event in today_events %}
+                        <a onclick="showEventPreviewModal({{ event.id }})"><h4>{{ event.title }}</h4></a>
+                {% endfor %}
+            </div>
+        </form>
+        <form class="ov-form">
+            <div class="tommorows-events">
+                <label>Sutrašnji događaji</label>
+                {% for event in tommorow_events %}
+                        <a onclick="showEventPreviewModal({{ event.id }})"><h4>{{ event.title }}</h4></a>
+                {% endfor %}
+            </div>
+        </form>
+    </div>
 
     <div class="grid-news">
 
@@ -67,7 +84,7 @@
                     <a onclick="showUserPreviewModal({{ article.author.id }})"><p>
                         Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
                 </div>
-                <div class="comment-like-section">
+                <div id="comment-like-section{{ article.id }}" class="comment-like-section">
                     <form id="news-like-form" class="news-like"
                           method="post">
                         {% csrf_token %}
@@ -94,7 +111,6 @@
             </div>
         {% endfor %}
     </div>
-
 
     <div class="dk-pagination">
         {% if page_obj.has_previous %}

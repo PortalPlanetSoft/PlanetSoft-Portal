@@ -1,3 +1,7 @@
+from datetime import datetime, date
+
+from datetime import datetime, timedelta
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
@@ -5,7 +9,9 @@ from django.db.models import Q, Count, OuterRef, Subquery
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView
 
-from news.constants import ARTICLES_PER_PAGE
+from events.models import Event
+from events.models import Event
+from news.constants import ARTICLES_PER_PAGE, TOMORROW
 from news.forms import AddNewsArticleForm
 from news.models import NewsArticle, Comment, LikeDislike
 from praksaPlanetSoft.constants import FIRST_PAGE, HTTP_STATUS_400, HTTP_STATUS_200
@@ -36,6 +42,19 @@ class NewsList(ListView):
         # parametar autora za GET request
         if self.request.GET.get('author'):
             context['author'] = self.request.GET.get('author')
+        today = datetime.today()
+        tommorow = datetime.today() + timedelta(TOMORROW)
+        after_tommorow = tommorow + timedelta(TOMORROW)
+
+        context['today_events'] = Event.objects.filter(Q(start_time__gt=today),
+                                                       Q(author__id=self.request.user.pk) |
+                                                       Q(shared=self.request.user.pk),
+                                                       Q(start_time__lt=tommorow.date()))
+
+        context['tommorow_events'] = Event.objects.filter(Q(start_time__gt=tommorow),
+                                                          Q(author__id=self.request.user.pk) |
+                                                          Q(shared=self.request.user.pk),
+                                                          Q(start_time__lt=after_tommorow.date()))
 
         context['liked_articles'] = LikeDislike.objects.filter(user_id=self.request.user).all()
         context['object_list'] = news
