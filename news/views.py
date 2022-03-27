@@ -47,7 +47,7 @@ class NewsList(ListView):
                                                        Q(shared=self.request.user.pk),
                                                        Q(start_time__lt=tommorow.date()))
 
-        context['tommorow_events'] = Event.objects.filter(Q(start_time__gt=tommorow.date()),
+        context['tommorow_events'] = Event.objects.filter(Q(start_time__gte=tommorow.date()),
                                                           Q(author__id=self.request.user.pk) |
                                                           Q(shared=self.request.user.pk),
                                                           Q(start_time__lt=after_tommorow.date()))

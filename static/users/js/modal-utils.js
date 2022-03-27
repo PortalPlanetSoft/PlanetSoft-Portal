@@ -8,6 +8,7 @@ async function displayModal(targetUrlAddress) {
             type: 'get',
             success: (data) => {
                 modalContent.innerHTML = data;
+                $('#id_birth_date').attr('max', maxDate);
             },
             error: (data) => {
                 modalContent.innerHTML = data;

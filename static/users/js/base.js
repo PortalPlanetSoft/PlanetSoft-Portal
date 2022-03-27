@@ -3,6 +3,8 @@
 const navToggleBtn = document.querySelector('#ov-nav-toggle');
 const navigation = document.querySelector('#ov-navigation');
 
+let maxDate;
+
 // pageOnLoad function that fetches action result from sessionStorage so the toast alert can be shown
 $(function () {
     let resultMessage;
@@ -34,7 +36,7 @@ $(function () {
     if (day < 10)
         day = '0' + day.toString();
 
-    let maxDate = year + '-' + month + '-' + day;
+    maxDate = year + '-' + month + '-' + day;
     $('#id_birth_date').attr('max', maxDate);
 });
 
