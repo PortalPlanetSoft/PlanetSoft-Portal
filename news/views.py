@@ -1,7 +1,4 @@
-from datetime import datetime, date
-
 from datetime import datetime, timedelta
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
@@ -9,7 +6,6 @@ from django.db.models import Q, Count, OuterRef, Subquery
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView
 
-from events.models import Event
 from events.models import Event
 from news.constants import ARTICLES_PER_PAGE, TOMORROW
 from news.forms import AddNewsArticleForm
@@ -51,7 +47,7 @@ class NewsList(ListView):
                                                        Q(shared=self.request.user.pk),
                                                        Q(start_time__lt=tommorow.date()))
 
-        context['tommorow_events'] = Event.objects.filter(Q(start_time__gt=tommorow),
+        context['tommorow_events'] = Event.objects.filter(Q(start_time__gte=tommorow.date()),
                                                           Q(author__id=self.request.user.pk) |
                                                           Q(shared=self.request.user.pk),
                                                           Q(start_time__lt=after_tommorow.date()))

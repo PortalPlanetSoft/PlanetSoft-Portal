@@ -1,6 +1,6 @@
 from calendar import HTMLCalendar
 
-from .constants import EVENTS_URL_ADDRESS
+from django.db.models import Q
 from .models import Event
 
 
@@ -16,7 +16,11 @@ class Calendar(HTMLCalendar):
         events_per_day = events.filter(start_time__day=day)
         d = ''
         for event in events_per_day:
-            d += f"<a onclick='showEventPreviewModal({event.id})'><li> {event.title} </li></a>"
+            if event.type == 'Birthday':
+                d += f"<a onclick='showEventPreviewModal({event.id})'><li> {event.title} " \
+                     f"<i class='fa-solid fa-cake-candles'></i> </li></a>"
+            else:
+                d += f"<a onclick='showEventPreviewModal({event.id})'><li> {event.title} </li></a>"
 
         if day != 0:
             return f"<td><span class='date'><a onclick='showDateEventPreviewModal(\"{self.year}/{self.month}/{day}\")'>{day}<a/>" \
@@ -32,8 +36,9 @@ class Calendar(HTMLCalendar):
 
     # formats a month as a table
     # filter events by year and month
-    def format_month(self):
-        events = Event.objects.filter(start_time__year=self.year, start_time__month=self.month)
+    def format_month(self, user):
+        events = Event.objects.filter(Q(author=user) | Q(shared=user), start_time__year=self.year,
+                                      start_time__month=self.month).distinct()
 
         cal = '<table class="calendar">\n'
         # cal += f'{self.formatmonthname(self.year, self.month, )}\n'
