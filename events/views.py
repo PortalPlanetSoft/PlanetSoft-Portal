@@ -100,7 +100,8 @@ class EventDelete(UserPassesTestMixin, DeleteView):
     template_name = 'events/event-confirm-deletion.html'
 
     def test_func(self):
-        if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
+        if self.request.user.is_admin or self.request.user.is_superuser or \
+                self.request.user == Event.objects.filter(id=self.kwargs['pk']).get().author:
             return True
         elif self.request.user.is_authenticated:
             raise PermissionDenied("You are not authorized to delete events ")
