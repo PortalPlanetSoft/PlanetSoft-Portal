@@ -1,11 +1,10 @@
 <form id="edit-event-form" class="ov-form event-form">
     <h3 class="ov-form__title">{{ event.title }}</h3>
     <div class="ov-form__btn-container">
-        {% if user.is_admin or user.is_superuser or user.is_editor %}
-        <button class="ov-form__btn" type="button" onclick="showEditEventModal({{ event.id }})">Uredi</button>
-        <button class="ov-form__btn ov-form__btn--blue" type="button" onclick="showDeleteEventModal({{ event.id }})">Izbrisi</button>
-    {% endif %}
-        <!-- <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori -->
+        {% if user.is_admin or user.is_superuser or event.author == request.user %}
+            <button class="ov-form__btn" type="button" onclick="showEditEventModal({{ event.id }})">Uredi</button>
+            <button class="ov-form__btn ov-form__btn--blue" type="button" onclick="showDeleteEventModal({{ event.id }})">Izbrisi</button>
+        {% endif %}
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori</button>
     </div>
-    </button>
 </form>
