@@ -2,6 +2,7 @@ from datetime import date, datetime
 
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.utils.safestring import mark_safe
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView, DetailView
 
@@ -10,6 +11,7 @@ from events.forms import CreateEvent
 from events.models import Event
 from events.utils import Calendar
 from praksaPlanetSoft.constants import HTTP_STATUS_400
+from users.models import User
 
 
 class CalendarView(ListView):
@@ -59,7 +61,7 @@ class EventCreate(CreateView):
 
     def get_form(self, *args, **kwargs):
         form = super().get_form(*args, **kwargs)
-        # form.fields['shared'].queryset = User.objects.exclude(id=self.request.user.id)
+        form.fields['shared'].queryset = User.objects.exclude(id=self.request.user.id)
         return form
 
     def form_valid(self, form):
@@ -77,6 +79,11 @@ class EventUpdate(UpdateView):
     template_name = 'events/event-edit.html'
     success_url = '/calendar/'
     form_class = CreateEvent
+
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.fields['shared'].queryset = User.objects.exclude(id=self.request.user.id)
+        return form
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -112,7 +119,8 @@ class DayDetails(ListView):
     model = Event
 
     def get_queryset(self, *args, **kwargs):
-        query_set = super().get_queryset().filter(start_time__year=self.kwargs['year'],
+        query_set = super().get_queryset().filter(Q(author=self.request.user) | Q(shared=self.request.user),
+                                                  start_time__year=self.kwargs['year'],
                                                   start_time__month=self.kwargs['month'],
-                                                  start_time__day=self.kwargs['day'])
+                                                  start_time__day=self.kwargs['day']).distinct()
         return query_set

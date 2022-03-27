@@ -27,8 +27,8 @@ LABEL_TEXT_EVENT = {
 }
 
 EVENT_TYPES = [
-    ('Birthday', 'Rođendan'),
-    ('Meeting', 'Sastanak'),
+    ('Rođendan', 'Rođendan'),
+    ('Sastanak', 'Sastanak'),
     ('Daily', 'Daily'),
-    ('Planning', 'Planiranje'),
+    ('Planiranje', 'Planiranje'),
 ]
