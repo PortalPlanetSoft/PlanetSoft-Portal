@@ -91,3 +91,70 @@ li {
 .dk-calendar {
     padding-bottom: 6rem;
 }
+
+/* OGI */
+.calendar td {
+    position: relative;
+}
+.calendar span {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.calendar ul {
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 100%;
+    overflow-y: auto;
+    max-height: 80%;
+}
+.calendar ul a li {
+    margin: 0;
+    padding: .5rem .25rem;
+}
+.calendar ul a:nth-child(odd) li {
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+.calendar ul a:nth-child(even) li{
+    color: var(--primary);
+    background-color: var(--accent-light);
+}
+
+.events-sidebar {
+    width: 35%;
+    margin: 1rem auto;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    background-color: var(--white);
+}
+.ov-calendar-event-details {
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--primary);
+    color: var(--primary);
+
+}
+.ov-calendar-event-details a {
+    padding: 1rem;
+
+
+}
+.ov-calendar-event-details h4 {
+    width: 100%;
+}
+.events-sidebar-new-event {
+    color: var(--primary);
+    display: block;
+    width: 25%;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+/* OGI */
