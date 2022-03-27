@@ -1,5 +1,8 @@
-<form id="create-event-form" class="ov-form" method="post">
+<form id="create-event-form" class="ov-form event-form" method="post">
+    <h3 class="ov-form__title">Dodavanje događaja</h3>
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="button" onclick="submitEventCreateForm()">Potvrdi</button>
+    <div class="ov-form__btn-container">
+        <button class="ov-form__btn" type="button" onclick="submitEventCreateForm()">Potvrdi</button>
+    </div>
 </form>

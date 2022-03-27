@@ -378,4 +378,24 @@
     .article-author-news-preview p{
         padding: 0.5rem ;
     }
+
+    /* OGI KALENDAR */
+    .events-sidebar {
+      width: 70%;
+    }
+    .ov-calendar-event-details p{
+      width: 80%;
+      font-size: 2rem;
+    }
+    .ov-calendar-event-details a {
+      font-size: 2rem;
+    }
+    .events-sidebar-new-event {
+      font-size: 2rem;
+      width: 40%;
+    }
+    .event-form option, .event-form input[type="number"] {
+      font-size: 2rem;
+    }
+    /* OGI KALENDAR */
 }
