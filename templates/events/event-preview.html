@@ -1,5 +1,5 @@
 <form id="edit-event-form" class="ov-form event-form">
-    <h3 class="ov-form__title">>{{ event.title }}</h3>
+    <h3 class="ov-form__title">{{ event.title }}</h3>
     <h5>{% if event.details %}{{ event.details }}{% else %}Nema detalja{% endif %}</h5>
     <h5>Početak u {{  event.start_time|date:'H:i' }} </h5>
     <h5>Završava u {% if event.end_time %}{{ event.end_time|date:'H:i'}}{% else %}nepoznato vrijeme{% endif %}</h5>
