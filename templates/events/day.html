@@ -1,0 +1,10 @@
+<form class="ov-form">
+    {% for event in event_list %}
+        <a onclick="showEventPreviewModal({{ event.id }})"><h4>{{ event.title }}</h4></a>
+        {% if user.is_admin or user.is_superuser or user.is_editor %}
+            <button type="button" onclick="showEditEventModal({{ event.id }})">Uredi</button>
+            <button type="button" onclick="showDeleteEventModal({{ event.id }})">Izbrisi</button>
+        {% endif %}
+    {% endfor %}
+    <!-- <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori</button> -->
+</form>

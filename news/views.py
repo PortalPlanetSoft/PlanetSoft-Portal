@@ -1,25 +1,31 @@
+from datetime import datetime, date
+
+from datetime import datetime, timedelta
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
-from django.db.models import Q, Count
-from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, UpdateView, DeleteView, CreateView
-from django.http import HttpResponseRedirect
+from django.db.models import Q, Count, OuterRef, Subquery
+from django.http import HttpResponseRedirect, HttpResponse
+from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView
 
+from events.models import Event
+from events.models import Event
+from news.constants import ARTICLES_PER_PAGE, TOMORROW
 from news.forms import AddNewsArticleForm
-from news.models import NewsArticle, Comment
+from news.models import NewsArticle, Comment, LikeDislike
+from praksaPlanetSoft.constants import FIRST_PAGE, HTTP_STATUS_400, HTTP_STATUS_200
 from users.models import User
-from news.util import get_redirect_URL
 
 
 class NewsList(ListView):
     template_name = 'news/news.html'
     model = NewsArticle
-    paginate_by = 10
+    paginate_by = ARTICLES_PER_PAGE
 
     def get_context_data(self, **kwargs):
         context = super(NewsList, self).get_context_data(**kwargs)
-        page = self.request.GET.get('page', 1)
+        page = self.request.GET.get('page', FIRST_PAGE)
         news = self.object_list.order_by('headline')
         paginator = self.paginator_class(news, self.paginate_by)
         news = paginator.page(page)
@@ -36,29 +42,47 @@ class NewsList(ListView):
         # parametar autora za GET request
         if self.request.GET.get('author'):
             context['author'] = self.request.GET.get('author')
+        today = datetime.today()
+        tommorow = datetime.today() + timedelta(TOMORROW)
+        after_tommorow = tommorow + timedelta(TOMORROW)
 
+        context['today_events'] = Event.objects.filter(Q(start_time__gt=today),
+                                                       Q(author__id=self.request.user.pk) |
+                                                       Q(shared=self.request.user.pk),
+                                                       Q(start_time__lt=tommorow.date()))
+
+        context['tommorow_events'] = Event.objects.filter(Q(start_time__gt=tommorow),
+                                                          Q(author__id=self.request.user.pk) |
+                                                          Q(shared=self.request.user.pk),
+                                                          Q(start_time__lt=after_tommorow.date()))
+
+        context['liked_articles'] = LikeDislike.objects.filter(user_id=self.request.user).all()
         context['object_list'] = news
-        context['author_list'] = User.objects.filter((Q(is_editor=True) | Q(is_admin=True) | Q(is_superuser=True)),
-                                                     is_active=True)
+        context['author_list'] = User.objects.filter(Q(is_editor=True) | Q(is_admin=True), is_active=True)
         return context
 
     def get_queryset(self, *args, **kwargs):
-        # query_set = super().get_queryset()
-        query_set = NewsArticle.objects.annotate(Count('likes'), Count('dislikes'))
+        has_reacted = LikeDislike.objects.filter(article_id=OuterRef('pk'), user_id=self.request.user.pk)
+        queryset = NewsArticle.objects.annotate(
+            likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
+            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
+            liked=Subquery(has_reacted.values('type')))
+
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
+
         if search:
-            filtered_query = query_set.filter(Q(headline__icontains=search))
+            filtered_query = queryset.filter(Q(headline__icontains=search))
             if len(filtered_query) == 0:
-                query_set = query_set.filter(
+                queryset = queryset.filter(
                     Q(author__first_name__icontains=search) | Q(author__last_name__icontains=search))
             else:
-                query_set = filtered_query
+                queryset = filtered_query
 
         if author and author != 'all':
-            query_set = query_set.filter(Q(author__exact=author))
+            queryset = queryset.filter(Q(author__exact=author))
 
-        return query_set
+        return queryset
 
 
 class NewsCreate(UserPassesTestMixin, CreateView):
@@ -73,14 +97,14 @@ class NewsCreate(UserPassesTestMixin, CreateView):
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
-        response.status_code = 400
+        response.status_code = HTTP_STATUS_400
         return response
 
     def test_func(self):
         if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
             return True
         else:
-            raise PermissionDenied("You are not authorized to add new news articles")
+            raise PermissionDenied("Niste ovlašteni da vršite izmjene vijesti")
 
 
 class NewsUpdate(UserPassesTestMixin, UpdateView):
@@ -91,14 +115,32 @@ class NewsUpdate(UserPassesTestMixin, UpdateView):
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
-        response.status_code = 400
+        response.status_code = HTTP_STATUS_400
         return response
 
     def test_func(self):
         if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
             return True
         elif self.request.user.is_authenticated:
-            raise PermissionDenied("You are not authorized to edit news articles")
+            raise PermissionDenied("Niste ovlašteni da vršite izmjene vijesti")
+
+
+class NewsPreview(DetailView):
+    model = NewsArticle
+    template_name = 'news/news-preview.html'
+    success_url = '/news/'
+
+    def get_context_data(self, **kwargs):
+        context = super(NewsPreview, self).get_context_data(**kwargs)
+        has_reacted = LikeDislike.objects.filter(article_id=OuterRef('pk'), user_id=self.request.user.pk)
+        context['article'] = NewsArticle.objects.annotate(
+            likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
+            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
+            liked=Subquery(has_reacted.values('type'))).get(id=self.kwargs['pk'])
+        context['comments'] = Comment.objects.filter(
+            article_id=self.kwargs['pk']
+        )
+        return context
 
 
 class NewsDelete(UserPassesTestMixin, DeleteView):
@@ -110,45 +152,64 @@ class NewsDelete(UserPassesTestMixin, DeleteView):
         if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
             return True
         elif self.request.user.is_authenticated:
-            raise PermissionDenied("You are not authorized to delete news articles")
+            raise PermissionDenied("Niste ovlašteni da vršite izmjene vijesti")
 
 
 @login_required
 def likes_dislikes(request, pk):
-    article = get_object_or_404(NewsArticle, id=pk)
-    if request.POST.get('article_like_id'):
-        if article.dislikes.filter(id=request.user.pk):
-            article.dislikes.remove(request.user)
-        article.likes.add(request.user)
-    else:
-        if article.likes.filter(id=request.user.pk):
-            article.likes.remove(request.user)
-        article.dislikes.add(request.user)
+    liked_disliked_article = None
+    if LikeDislike.objects.filter(user_id=request.user.pk, article_id=pk).exists():
+        liked_disliked_article = LikeDislike.objects.filter(user_id=request.user.pk, article_id=pk).get()
 
-    url = get_redirect_URL(request)
-    return HttpResponseRedirect(url)
+    if request.headers['flag']:
+        if liked_disliked_article is not None and liked_disliked_article.type:
+            liked_disliked_article.delete()
+        elif liked_disliked_article is not None and not liked_disliked_article.type:
+            liked_disliked_article.type = True
+            liked_disliked_article.save()
+        else:
+            LikeDislike.objects.create(user_id=request.user.pk, article_id=pk, type=True)
+    else:
+        if liked_disliked_article is not None and not liked_disliked_article.type:
+            liked_disliked_article.delete()
+        elif liked_disliked_article is not None and liked_disliked_article.type:
+            liked_disliked_article.type = False
+            liked_disliked_article.save()
+        else:
+            LikeDislike.objects.create(user_id=request.user.pk, article_id=pk, type=False)
+
+    return HttpResponse(status=HTTP_STATUS_200)
+    #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
 def add_comment(request, pk):
     if request.POST and request.POST.get('content'):
-        comment = Comment(content=request.POST.get('content'), author=request.user,
-                          article=NewsArticle.objects.get(pk=pk))
+        if request.POST.get('comment'):
+            comment = Comment(content=request.POST.get('content'), author=request.user,
+                              article=NewsArticle.objects.get(pk=pk), parent_comment=request.POST.get('comment'))
+        else:
+            comment = Comment(content=request.POST.get('content'), author=request.user,
+                              article=NewsArticle.objects.get(pk=pk))
         comment.save()
-    url = get_redirect_URL(request)
-    return HttpResponseRedirect(url)
+    #return HttpResponse(status=HTTP_STATUS_200)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 class AllComments(ListView):
-    template_name = 'news/article-comments.html'
+    template_name = 'news/news-comments.html'
     model = Comment
     context_object_name = 'comments'
 
     def get_queryset(self, *args, **kwargs):
-        query_set = super().get_queryset().filter(article=self.kwargs['pk'])
-        return query_set
+        queryset = super().get_queryset().filter(article=self.kwargs['pk'])
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super(AllComments, self).get_context_data(**kwargs)
-        context['article'] = NewsArticle.objects.annotate(Count('likes'), Count('dislikes')).get(id=self.kwargs['pk'])
+        has_reacted = LikeDislike.objects.filter(article_id=OuterRef('pk'), user_id=self.request.user.pk)
+        context['article'] = NewsArticle.objects.annotate(
+            likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
+            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
+            liked=Subquery(has_reacted.values('type'))).get(id=self.kwargs['pk'])
         return context

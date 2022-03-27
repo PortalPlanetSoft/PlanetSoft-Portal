@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    {% if user.is_admin or user.is_superuser or user.is_editor %}
+        <div class="create-new-event">
+            <a onclick="showCreateEventModal()">Novi događaj <i class="fa-solid fa-circle-plus fa-xl"></i></a>
+        </div>
+    {% endif %}
+    <div class="dk-calendar">
+        <div class="dk-create-calendar">
+            <div class="year-month-calendar">
+                <div class="dk-year-calendar">
+                    <h1> {{ year }}</h1>
+                </div>
+                <div class="up-down-year">
+                    <a href="{% url 'specific-month-calendar' previous_year month %}"><i
+                            class="fa-solid fa-angle-up"></i></a>
+                    <a href="{% url 'specific-month-calendar' next_year month %}"><i class="fa-solid fa-angle-down"></i></a>
+                </div>
+                <div class="dk-month-calendar">
+                    <h1>{{ selected_month }}</h1>
+                </div>
+                <div class="up-down-month">
+                    <a href="{% url 'specific-month-calendar' year previous_month %}"><i
+                            class="fa-solid fa-angle-up"></i></a>
+                    <a href="{% url 'specific-month-calendar' year next_month %}"><i class="fa-solid fa-angle-down"></i></a>
+                </div>
+            </div>
+            {{ calendar }}
+        </div>
+    </div>
+    <div class="events-sidebar">
+        {% for event in event_list %}
+            {% if event.start_time %}
+                <form class="ov-form ov-calendar-event-details">
+                    <p>{{ event.title }}</p> <a onclick="showEditEventModal({{ event.id }})"><i class="fa-solid fa-pen-to-square"></i></a>
+                </form>
+            {% endif %}
+        {% endfor %}
+            <a class="events-sidebar-new-event" onclick="showCreateEventModal()">Novi događaj <i class="fa-solid fa-circle-plus fa-xl"></i></a>
+    </div>
+{% endblock %}

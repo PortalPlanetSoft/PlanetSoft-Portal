@@ -1,7 +1,12 @@
-from news.models import NewsArticle
 from django import forms
 
-ERROR_MESSAGES = {
+from news.constants import ERROR_MESSAGES, LABEL_TEXT
+from news.models import NewsArticle
+
+LABEL_TEXT = {
+    "headline": "Naslov",
+    "content": "Sadržaj",
+    "image": "Slika"
 }
 
 
@@ -18,3 +23,7 @@ class AddNewsArticleForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'placeholder': 'Sadržaj'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for key, value in LABEL_TEXT.items():
+            self.fields[key].label = value

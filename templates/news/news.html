@@ -1,5 +1,5 @@
-{% extends 'portal/base.html' %}
-
+{% extends 'base.html' %}
+{% load static %}
 {% block body %}
     <form name="userFilterForm">
         <div class="dk-grid">
@@ -20,13 +20,33 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="create_news">
-                <a onclick="showNewsAddModal()">Dodajte vijest
-                    <i class="fa-solid fa-circle-plus fa-xl"></i></a>
-            </div>
+            {% if user.is_admin or user.is_superuser or user.is_editor %}
+                <div class="create_news">
+                    <a onclick="showNewsAddModal()">Dodajte vijest
+                        <i class="fa-solid fa-circle-plus fa-xl"></i></a>
+                </div>
+            {% endif %}
         </div>
     </form>
 
+    <div class="events-sidebar">
+        <form class="ov-form">
+            <div class="todays-events">
+                <label>Današnji događaji</label>
+                {% for event in today_events %}
+                        <a onclick="showEventPreviewModal({{ event.id }})"><h4>{{ event.title }}</h4></a>
+                {% endfor %}
+            </div>
+        </form>
+        <form class="ov-form">
+            <div class="tommorows-events">
+                <label>Sutrašnji događaji</label>
+                {% for event in tommorow_events %}
+                        <a onclick="showEventPreviewModal({{ event.id }})"><h4>{{ event.title }}</h4></a>
+                {% endfor %}
+            </div>
+        </form>
+    </div>
 
     <div class="grid-news">
 
@@ -35,16 +55,22 @@
             <div class="news">
                 <div class="headline">
                     <p>{{ article.creation_date }}</p>
-
-                    <h4><a href="http://127.0.0.1:8000/news/article/{{ article.id }}">{{ article.headline }} </a></h4>
-
                     <div class="ov-form__btn-container ov-form__btn-contrainer--col">
-                        <a onclick="showNewsEditModal({{ article.id }})">Uredi<i
-                                class="fa-regular fa-pen-to-square"></i></a>
-                        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red ov-form__btn-text-only"
-                                onclick="showNewsDeleteModal({{ article.id }})">Izbrisi vijest
-                        </button>
+                        {% if user.is_admin or user.is_superuser or user.is_editor %}
+                            <a onclick="showNewsEditModal({{ article.id }})">Uredi<i
+                                    class="fa-regular fa-pen-to-square"></i></a>
+                            <a id="button-user-edit" class="button"
+                               onclick="showNewsPreviewModal({{ article.id }})">
+                            Detalji
+                            <i class="fa-regular fa-address-card"></i>
+                        {% else %}
+                            <a id="button-user-edit" class="button"
+                               onclick="showNewsPreviewModal({{ article.id }})">
+                            Detalji
+                            <i class="fa-regular fa-address-card"></i>
+                        {% endif %}
                     </div>
+                    <h4><a href="http://127.0.0.1:8000/news/article/{{ article.id }}">{{ article.headline }} </a></h4>
                 </div>
                 <div class="content">
                     <p>{{ article.content }}</p>
@@ -55,33 +81,36 @@
                     </div>
                 </div>
                 <div class="name-author">
-                    <p>Objavio {{ article.author.first_name }} {{ article.author.last_name }}</p>
+                    <a onclick="showUserPreviewModal({{ article.author.id }})"><p>
+                        Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
                 </div>
-                <div class="comment-like-section">
-                    <form action="{% url 'like-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                          method="post" class="news-like">
+                <div id="comment-like-section{{ article.id }}" class="comment-like-section">
+                    <form id="news-like-form" class="news-like"
+                          method="post">
                         {% csrf_token %}
-                        <button type="submit" name="article_like_id" value="{{ article.id }}"><i class="fa-solid fa-thumbs-up"></i></button><span>{{ article.likes__count }}</span>
+                        <button type="button" name="article_like_id" onclick="submitLikeButton({{ article.id }})">
+                            {% if article.liked %}
+                                <i class="fa-solid fa-thumbs-up"></i> {% else %}
+                                <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
+                        <span>{{ article.likes_count }}</span>
                     </form>
-                    <form action="{% url 'dislike-article' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                          method="post" class="news-dislike">
+                    <form id="news-dislike-form" class="news-dislike"
+                          method="post">
                         {% csrf_token %}
-                        <button type="submit" name="article_dislike_id" value="{{ article.id }}"><i class="fa-solid fa-thumbs-down"></i></button> <span>{{ article.dislikes__count }}</span>
+                        <button type="button" name="article_dislike_id" onclick="submitDislikeButton({{ article.id }})">
+                            {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
+                                <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
+                        <span>{{ article.dislikes_count }}</span>
                     </form>
-                    <form action="{% url 'comment-on-news'  article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                          method="post" class="news-comment">
+                    <form action="{% url 'comment-on-news' article.pk %}" method="post" class="news-comment">
                         {% csrf_token %}
-                            <textarea name="content" placeholder="Dodaj komentar..."></textarea>
+                        <textarea name="content" placeholder="Dodaj komentar..."></textarea>
                         <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
                     </form>
                 </div>
-
             </div>
-
         {% endfor %}
     </div>
-
-
 
     <div class="dk-pagination">
         {% if page_obj.has_previous %}

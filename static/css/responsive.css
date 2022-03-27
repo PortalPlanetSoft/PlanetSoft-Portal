@@ -303,4 +303,99 @@
     .dk-author-filter-select option{
       font-size: 0.8rem;
     }
+    .header-news-details{
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+    .dk-news-details{
+        padding: 1rem;
+    }
+    .header-news-details > div > p {
+      text-align: center;
+      font-size: 2.1rem;
+      padding: 1rem;
+    }
+    .header-news-details > div > h4 {
+      text-align: center;
+      font-size: 3.2rem;
+      padding: 1rem;
+    }
+    .edit-news {
+      text-align: center;
+    }
+    .edit-news a{
+      font-size: 2.1rem;
+    }
+    .profile-img-comment img{
+      width: 5.5rem;
+      height: 5.5rem;
+    }
+    .comment-content h4{
+      font-size: 0.9rem;
+    }
+    .comment-content p{
+      font-size: 0.8rem;
+    }
+    .comment-content{
+      grid-column: 1/18;
+    }
+    /* CALENDAR */
+    .create-new-event a{
+      grid-column: 1/4;
+      font-size: 1.8rem;
+    }
+
+    .dk-create-calendar{
+      width: 60rem;
+    }
+
+    .calendar {
+      width: 60rem;
+    }
+
+    .calendar a {
+      font-size: 1.8rem;
+    }
+
+    .calendar th{
+      font-size: 1.5rem;
+    }
+
+    .calendar li{
+      font-size: 1.4rem;
+    }
+    .header-news-preview{
+      grid-template-columns: 1fr;
+    }
+    .article-headline-news-preview h4{
+      padding: 0.5rem ;
+    }
+    .creation-date-news-preview p{
+      padding: 0.5rem ;
+    }
+
+    .article-author-news-preview p{
+        padding: 0.5rem ;
+    }
+
+    /* OGI KALENDAR */
+    .events-sidebar {
+      width: 70%;
+    }
+    .ov-calendar-event-details p{
+      width: 80%;
+      font-size: 2rem;
+    }
+    .ov-calendar-event-details a {
+      font-size: 2rem;
+    }
+    .events-sidebar-new-event {
+      font-size: 2rem;
+      width: 40%;
+    }
+    .event-form option, .event-form input[type="number"] {
+      font-size: 2rem;
+    }
+    /* OGI KALENDAR */
 }
