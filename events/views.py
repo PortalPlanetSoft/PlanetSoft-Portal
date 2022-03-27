@@ -10,7 +10,7 @@ from events.forms import CreateEvent
 from events.models import Event
 from events.utils import Calendar
 from praksaPlanetSoft.constants import HTTP_STATUS_400
-from users.models import User
+
 
 
 class CalendarView(ListView):
@@ -83,10 +83,6 @@ class EventUpdate(UpdateView):
         context = super().get_context_data(**kwargs)
         context['form'] = CreateEvent(instance=context['object'])
         return context
-    '''def get_initial(self):
-        initial = super().get_initial()
-        initial['shared'] = User.objects.filter(id__in=Event.objects.filter(id=self.object.pk).values('shared'))
-        return initial'''
 
     def form_invalid(self, form):
         response = super().form_invalid(form)

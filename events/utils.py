@@ -1,6 +1,5 @@
 from calendar import HTMLCalendar
 
-from .constants import EVENTS_URL_ADDRESS
 from .models import Event
 
 

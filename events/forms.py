@@ -1,6 +1,6 @@
 from django import forms
-from django.db import transaction
 
+from events.constants import LABEL_TEXT_EVENT
 from events.models import Event
 from users.models import User
 
@@ -28,3 +28,5 @@ class CreateEvent(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        for key, value in LABEL_TEXT_EVENT.items():
+            self.fields[key].label = value
