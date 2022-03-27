@@ -10,7 +10,7 @@ from events.forms import CreateEvent
 from events.models import Event
 from events.utils import Calendar
 from praksaPlanetSoft.constants import HTTP_STATUS_400
-from users.models import User
+
 
 
 class CalendarView(ListView):
@@ -34,20 +34,20 @@ class CalendarView(ListView):
         context['year'] = d.year
         context['next_year'] = d.year + NEXT
         context['previous_year'] = d.year - PREVIOUS
-        #todo rijesiti logiku
         context['month'] = d.month
+
         if d.month == JANUARY:
             context['next_month'] = d.month + NEXT
             context['previous_month'] = DECEMBER
         elif d.month == DECEMBER:
             context['next_month'] = JANUARY
-            context['previous_month'] = d.month + PREVIOUS
+            context['previous_month'] = d.month - PREVIOUS
         else:
             context['next_month'] = d.month + NEXT
             context['previous_month'] = d.month - PREVIOUS
 
         context['months'] = MONTHS
-        context['selected_month'] = MONTHS[0]
+        context['selected_month'] = MONTHS[d.month - PREVIOUS]
         context['calendar'] = mark_safe(html_cal)
         return context
 
@@ -60,7 +60,7 @@ class EventCreate(CreateView):
 
     def get_form(self, *args, **kwargs):
         form = super().get_form(*args, **kwargs)
-        form.fields['shared'].queryset = User.objects.exclude(id=self.request.user.id)
+        # form.fields['shared'].queryset = User.objects.exclude(id=self.request.user.id)
         return form
 
     def form_valid(self, form):
@@ -75,9 +75,14 @@ class EventCreate(CreateView):
 
 class EventUpdate(UpdateView):
     model = Event
-    template_name = 'events/event.html'
+    template_name = 'events/event-edit.html'
     success_url = '/calendar/'
     form_class = CreateEvent
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CreateEvent(instance=context['object'])
+        return context
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
