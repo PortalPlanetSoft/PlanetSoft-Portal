@@ -12,7 +12,7 @@ class CreateEvent(forms.ModelForm):
 
     class Meta:
         model = Event
-        fields = {'title', 'details', 'shared', 'start_time', 'end_time', 'repeat_days', 'repeat_every_year'}
+        fields = {'title', 'details', 'shared', 'start_time', 'end_time', 'type', 'repeat_days', 'repeat_every_year'}
 
         widgets = {
             'start_time': forms.DateTimeInput(attrs={'placeholder': 'GGGG-MM-DD/SS:MM'}),

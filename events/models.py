@@ -1,5 +1,6 @@
 from django.db import models
 
+from events.constants import EVENT_TYPES
 from users.models import User
 
 
@@ -14,5 +15,5 @@ class Event(models.Model):
     end_time = models.DateTimeField(null=True, blank=True)
     repeat_days = models.IntegerField(default=0, null=True, blank=True)
     repeat_every_year = models.BooleanField(default=False)
-    type = models.CharField(max_length=20, null=True, blank=True)
+    type = models.CharField(max_length=20, null=True, blank=True, choices=EVENT_TYPES)
 

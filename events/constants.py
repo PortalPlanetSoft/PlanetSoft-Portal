@@ -23,5 +23,12 @@ LABEL_TEXT_EVENT = {
     'end_time': _('Datum i vrijeme kraja događaja'),
     'repeat_days': _('Ponoviće se za dana'),
     'repeat_every_year': _('Ponavlja se svake godine?'),
-    # 'type': _('Tip događaja'),
+    'type': _('Tip događaja'),
 }
+
+EVENT_TYPES = [
+    ('Birthday', 'Rođendan'),
+    ('Meeting', 'Sastanak'),
+    ('Daily', 'Daily'),
+    ('Planning', 'Planiranje'),
+]

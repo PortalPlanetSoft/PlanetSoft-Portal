@@ -1,5 +1,6 @@
 from calendar import HTMLCalendar
 
+from .constants import EVENT_TYPES
 from .models import Event
 
 
@@ -15,7 +16,11 @@ class Calendar(HTMLCalendar):
         events_per_day = events.filter(start_time__day=day)
         d = ''
         for event in events_per_day:
-            d += f"<a onclick='showEventPreviewModal({event.id})'><li> {event.title} </li></a>"
+            if event.type == 'Birthday':
+                d += f"<a onclick='showEventPreviewModal({event.id})'><li> {event.title} " \
+                     f"<i class='fa-solid fa-cake-candles'></i> </li></a>"
+            else:
+                d += f"<a onclick='showEventPreviewModal({event.id})'><li> {event.title} </li></a>"
 
         if day != 0:
             return f"<td><span class='date'><a onclick='showDateEventPreviewModal(\"{self.year}/{self.month}/{day}\")'>{day}<a/>" \
