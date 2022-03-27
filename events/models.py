@@ -14,4 +14,3 @@ class Event(models.Model):
     end_time = models.DateTimeField(null=True, blank=True)
     repeat_days = models.IntegerField(default=0, null=True, blank=True)
     repeat_every_year = models.BooleanField(default=False)
-

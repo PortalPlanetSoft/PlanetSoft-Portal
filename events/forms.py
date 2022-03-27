@@ -12,7 +12,7 @@ class CreateEvent(forms.ModelForm):
         fields = {'title', 'details',  'shared',  'start_time', 'end_time', 'repeat_days', 'repeat_every_year'}
 
         widgets = {
-            'start_time': forms.DateInput(attrs={'placeholder': 'Datum pocetka dogadjaja', 'type': 'date'})
+            'start_time': forms.DateInput(attrs={'placeholder': 'Datum početka događaja', 'type': 'date'})
         }
 
     def save(self, commit=True):
