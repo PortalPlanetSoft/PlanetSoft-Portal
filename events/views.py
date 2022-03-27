@@ -12,7 +12,6 @@ from events.utils import Calendar
 from praksaPlanetSoft.constants import HTTP_STATUS_400
 
 
-
 class CalendarView(ListView):
     model = Event
     template_name = 'events/calendar.html'
@@ -30,7 +29,7 @@ class CalendarView(ListView):
         cal = Calendar(d.year, d.month)
 
         # Call the formatmonth method, which returns our calendar as a table
-        html_cal = cal.format_month()
+        html_cal = cal.format_month(self.request.user)
         context['year'] = d.year
         context['next_year'] = d.year + NEXT
         context['previous_year'] = d.year - PREVIOUS

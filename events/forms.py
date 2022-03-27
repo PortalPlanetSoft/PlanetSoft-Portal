@@ -8,7 +8,8 @@ from users.models import User
 class CreateEvent(forms.ModelForm):
     use_required_attribute = False
     field_order = ['title', 'details', 'start_time', 'end_time', 'repeat_days', 'repeat_every_year']
-    shared = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=User.objects.all())
+    shared = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=User.objects.all(),
+                                            required=False)
 
     class Meta:
         model = Event
