@@ -114,7 +114,7 @@ function imageRemove() {
     );
 }
 
-function genericLikeDislikeFunction(form_id, id, flag){
+function genericLikeDislikeFunction(form_id, id, flag) {
     let form = $(form_id);
     $.ajax({
             url: urlAddress + '/news/react/' + id + '/',
@@ -131,7 +131,7 @@ function genericLikeDislikeFunction(form_id, id, flag){
     );
 }
 
-function genericLikeDislikeOnPageFunction(form_id, id, flag){
+function genericLikeDislikeOnPageFunction(form_id, id, flag) {
     let form = $(form_id);
     $.ajax({
             url: urlAddress + '/news/react/' + id + '/',
@@ -161,12 +161,12 @@ function loadLikeContainer(id) {
         url: window.location.href,
         type: 'GET',
         data: {
-            txtsearch: $('#comment-like-section'+id).val()
+            txtsearch: $('#comment-like-section' + id).val()
         },
         dataType: 'html',
         success: function (data) {
-            let result = $('#comment-like-section'+id).append(data).find('#comment-like-section'+id).html();
-            $('#comment-like-section'+id).html(result);
+            let result = $('#comment-like-section' + id).append(data).find('#comment-like-section' + id).html();
+            $('#comment-like-section' + id).html(result);
         },
     });
 }
@@ -192,4 +192,11 @@ function submitNewPageLikeButton(id) {
 
 function submitNewPageDislikeButton(id) {
     genericLikeDislikeOnPageFunction("#news-dislike-form", id, {'flag': ''});
+}
+
+function reveal(field_id) {
+    if (document.getElementById("box"+field_id).checked) {
+        document.getElementById(field_id).type = 'text';
+    } else
+        document.getElementById(field_id).type = 'password';
 }
