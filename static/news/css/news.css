@@ -138,7 +138,6 @@
 }
 .comment-like-section .news-comment {
     grid-area: comment;
-    border: 1px solid red;
     border: 2px solid var(--primary);
     border-radius: 5px;
     display: flex;
@@ -151,12 +150,17 @@
     outline: none;
     width: 90%;
     color: var(--primary);
+    height: 1rem;
+}
+.news-comment textarea {
+    padding: .5rem;
 }
 .comment-like-section .news-comment textarea::placeholder {
     color: var(--primary);
 }
 .comment-like-section .news-comment button{
     color: var(--primary);
+    visibility: hidden;
 }
 .dk-pagination{
     padding-top:1rem ;
