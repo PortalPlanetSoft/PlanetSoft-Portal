@@ -1,0 +1,160 @@
+.create-new-event {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.create-new-event a {
+    font-size: 1.1rem;
+    color: var(--primary);
+    grid-column: 7;
+    padding-bottom: 2rem;
+}
+
+.dk-create-calendar {
+    border: 1px solid var(--primary);
+    width: 70rem;
+    margin: auto;
+    background: #fff;
+}
+
+.calendar {
+    width: 70rem;
+    margin: auto;
+    border-spacing: inherit;
+}
+
+.calendar tr, .calendar td {
+    border: 1px solid var(--primary);
+}
+
+.calendar th {
+    color: var(--primary);
+    font-size: 1rem;
+    border: 1px solid var(--primary);
+    padding: 0.5rem;
+}
+
+.calendar td {
+    width: 16rem;
+    height: 6rem;
+    padding: 2.5rem 0 0 1rem;
+}
+
+.year-month-calendar {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    background: #E3EBF1;
+    padding: 0.2rem;
+}
+
+.dk-year-calendar {
+    grid-column: 8;
+}
+
+.dk-year-calendar h1 {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.up-down-year a {
+    color: var(--primary);
+}
+
+.dk-month-calendar {
+    grid-column: 11;
+}
+
+.dk-month-calendar h1 {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.up-down-month a {
+    color: var(--primary);
+}
+
+ul {
+    height: 100%;
+    padding-inline-start: 0px;
+}
+
+.date a {
+    color: var(--primary);
+}
+
+li {
+    color: var(--primary);
+    font-size: 1rem;
+    list-style-type: none;
+}
+
+.dk-calendar {
+    padding-bottom: 6rem;
+}
+
+/* OGI */
+.calendar td {
+    position: relative;
+}
+.calendar span {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.calendar ul {
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 100%;
+    overflow-y: auto;
+    max-height: 80%;
+}
+.calendar ul a li {
+    margin: 0;
+    padding: .5rem .25rem;
+}
+.calendar ul a:nth-child(odd) li {
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+.calendar ul a:nth-child(even) li{
+    color: var(--primary);
+    background-color: var(--accent-light);
+}
+
+.events-sidebar {
+    width: 35%;
+    margin: 1rem auto;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    background-color: var(--white);
+}
+.ov-calendar-event-details {
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--primary);
+    color: var(--primary);
+
+}
+.ov-calendar-event-details a {
+    padding: 1rem;
+
+
+}
+.ov-calendar-event-details h4 {
+    width: 100%;
+}
+.events-sidebar-new-event {
+    color: var(--primary);
+    display: block;
+    width: 25%;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+/* OGI */

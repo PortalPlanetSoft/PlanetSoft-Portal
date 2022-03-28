@@ -1,16 +1,16 @@
 {% load static %}
-<form class="ov-form">
-    <div>
-        <div class="dk-news-details">
-            <div class="header-news-details">
-                <div class="creation-date-news"><p>{{ article.creation_date }}</p></div>
-                <div class="article-author-news">
+<form class="news-preview">
+    <div >
+        <div class="dk-news-preview">
+            <div class="header-news-preview">
+                <div class="creation-date-news-preview"><p>{{ article.creation_date }}</p></div>
+                 <div class="article-headline-news-preview"><h4>{{ article.headline }}</h4></div>
+                <div class="article-author-news-preview">
                     <a onclick="showUserPreviewModal({{ article.author.id }})"><p>
                         Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
                 </div>
-                <div class="article-headline-news"><h4>{{ article.headline }}</h4></div>
             </div>
-            <div class="content-news-details">
+            <div class="content-news-preview">
                 <p>{{ object.content }}</p>
                 <div class="dv-newsdetails-photo">
                     {% if article.image %}
@@ -19,30 +19,30 @@
                 </div>
             </div>
         </div>
-        <div class="comment-like-section">
-            <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                  method="post" class="news-like">
-                {% csrf_token %}
-                <button type="submit" name="article_like_id" value="{{ article.id }}">{% if article.liked %}
-                    <i class="fa-solid fa-thumbs-up"></i> {% else %}<i class="fa-regular fa-thumbs-up"></i>{% endif %}
-                </button>
-                <span>{{ article.likes_count }}</span>
-            </form>
-            <form action="{% url 'like-dislike' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                  method="post" class="news-dislike">
-                {% csrf_token %}
-                <button type="submit" name="article_dislike_id" value="{{ article.id }}">{% if article.liked == False %}
-                    <i class="fa-solid fa-thumbs-down"></i> {% else %}
-                    <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
-                <span>{{ article.dislikes_count }}</span>
-            </form>
-            <form action="{% url 'comment-on-news' article.pk %}?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.number }}"
-                  method="post" class="news-comment">
-                {% csrf_token %}
-                <textarea name="content" placeholder="Dodaj komentar..."></textarea>
-                <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
-            </form>
-        </div>
+        <div id="comment-like-section{{ article.id }}" class="comment-like-section">
+                    <form id="news-like-form" class="news-like"
+                          method="post">
+                        {% csrf_token %}
+                        <button type="button" name="article_like_id" onclick="submitLikeButton({{ article.id }})">
+                            {% if article.liked %}
+                                <i class="fa-solid fa-thumbs-up"></i> {% else %}
+                                <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
+                        <span>{{ article.likes_count }}</span>
+                    </form>
+                    <form id="news-dislike-form" class="news-dislike"
+                          method="post">
+                        {% csrf_token %}
+                        <button type="button" name="article_dislike_id" onclick="submitDislikeButton({{ article.id }})">
+                            {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
+                                <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
+                        <span>{{ article.dislikes_count }}</span>
+                    </form>
+                    <form action="{% url 'comment-on-news' article.pk %}" method="post" class="news-comment">
+                        {% csrf_token %}
+                        <textarea name="content" placeholder="Dodaj komentar..."></textarea>
+                        <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
+                    </form>
+                </div>
 
         {% for comment in comments %}
             <div class="news-comment-content">
@@ -64,5 +64,6 @@
                 </div>
             </div>
         {% endfor %}
+    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori</button>
     </div>
 </form>

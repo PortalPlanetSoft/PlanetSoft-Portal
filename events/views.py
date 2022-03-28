@@ -2,10 +2,11 @@ from datetime import date, datetime
 
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 from django.utils.safestring import mark_safe
-from django.views.generic import ListView, UpdateView, CreateView, DeleteView
+from django.views.generic import ListView, UpdateView, CreateView, DeleteView, DetailView
 
-from events.constants import MONTHS
+from events.constants import MONTHS, JANUARY, DECEMBER, PREVIOUS, NEXT
 from events.forms import CreateEvent
 from events.models import Event
 from events.utils import Calendar
@@ -30,15 +31,24 @@ class CalendarView(ListView):
         cal = Calendar(d.year, d.month)
 
         # Call the formatmonth method, which returns our calendar as a table
-        html_cal = cal.format_month()
+        html_cal = cal.format_month(self.request.user)
         context['year'] = d.year
+        context['next_year'] = d.year + NEXT
+        context['previous_year'] = d.year - PREVIOUS
         context['month'] = d.month
-        context['next_year'] = d.year + 1
-        context['next_month'] = d.month + 1
-        context['previous_year'] = d.year - 1
-        context['previous_month'] = d.month - 1
+
+        if d.month == JANUARY:
+            context['next_month'] = d.month + NEXT
+            context['previous_month'] = DECEMBER
+        elif d.month == DECEMBER:
+            context['next_month'] = JANUARY
+            context['previous_month'] = d.month - PREVIOUS
+        else:
+            context['next_month'] = d.month + NEXT
+            context['previous_month'] = d.month - PREVIOUS
+
         context['months'] = MONTHS
-        context['selected_month'] = MONTHS[d.month]
+        context['selected_month'] = MONTHS[d.month - PREVIOUS]
         context['calendar'] = mark_safe(html_cal)
         return context
 
@@ -66,14 +76,29 @@ class EventCreate(CreateView):
 
 class EventUpdate(UpdateView):
     model = Event
-    template_name = 'events/event.html'
+    template_name = 'events/event-edit.html'
     success_url = '/calendar/'
     form_class = CreateEvent
+
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.fields['shared'].queryset = User.objects.exclude(id=self.request.user.id)
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CreateEvent(instance=context['object'])
+        return context
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
         response.status_code = HTTP_STATUS_400
         return response
+
+
+class EventPreview(DetailView):
+    model = Event
+    template_name = 'events/event-preview.html'
 
 
 class EventDelete(UserPassesTestMixin, DeleteView):
@@ -82,7 +107,8 @@ class EventDelete(UserPassesTestMixin, DeleteView):
     template_name = 'events/event-confirm-deletion.html'
 
     def test_func(self):
-        if self.request.user.is_admin or self.request.user.is_superuser or self.request.user.is_editor:
+        if self.request.user.is_admin or self.request.user.is_superuser or \
+                self.request.user == Event.objects.filter(id=self.kwargs['pk']).get().author:
             return True
         elif self.request.user.is_authenticated:
             raise PermissionDenied("You are not authorized to delete events ")
@@ -93,7 +119,8 @@ class DayDetails(ListView):
     model = Event
 
     def get_queryset(self, *args, **kwargs):
-        query_set = super().get_queryset().filter(start_time__year=self.kwargs['year'],
+        query_set = super().get_queryset().filter(Q(author=self.request.user) | Q(shared=self.request.user),
+                                                  start_time__year=self.kwargs['year'],
                                                   start_time__month=self.kwargs['month'],
-                                                  start_time__day=self.kwargs['day'])
+                                                  start_time__day=self.kwargs['day']).distinct()
         return query_set
