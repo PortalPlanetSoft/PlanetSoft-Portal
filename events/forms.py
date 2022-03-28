@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from django import forms
 
@@ -12,15 +12,14 @@ class CreateEvent(forms.ModelForm):
     field_order = ['title', 'details', 'start_time', 'end_time', 'repeat_days', 'repeat_every_year']
     shared = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=User.objects.all(),
                                             required=False)
+    start_time = forms.DateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
+                                                                      time_attrs={'type': 'time'}))
+    end_time = forms.DateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
+                                                                    time_attrs={'type': 'time'}))
 
     class Meta:
         model = Event
         fields = {'title', 'details', 'shared', 'start_time', 'end_time', 'type', 'repeat_days', 'repeat_every_year'}
-
-        widgets = {
-            'start_time': forms.DateTimeInput(attrs={'placeholder': 'GGGG-MM-DD/SS:MM'}),
-            'end_time': forms.DateTimeInput(attrs={'placeholder': 'GGGG-MM-DD/SS:MM'}),
-        }
 
     def clean_birth_date(self):
         data = self.cleaned_data['start_time']
