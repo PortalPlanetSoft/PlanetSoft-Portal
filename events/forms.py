@@ -1,3 +1,5 @@
+from datetime import date
+
 from django import forms
 
 from events.constants import LABEL_TEXT_EVENT
@@ -19,6 +21,12 @@ class CreateEvent(forms.ModelForm):
             'start_time': forms.DateTimeInput(attrs={'placeholder': 'GGGG-MM-DD/SS:MM'}),
             'end_time': forms.DateTimeInput(attrs={'placeholder': 'GGGG-MM-DD/SS:MM'}),
         }
+
+    def clean_birth_date(self):
+        data = self.cleaned_data['start_time']
+        if data and data < date.today():
+            raise forms.ValidationError('Ne možete kreirati događaj u prošlosti.')
+        return data
 
     def save(self, commit=True):
         event = super(CreateEvent, self).save(commit=True)
