@@ -104,8 +104,8 @@
                     </form>
                     <form action="{% url 'comment-on-news' article.pk %}" method="post" class="news-comment">
                         {% csrf_token %}
-                        <textarea name="content" placeholder="Dodaj komentar..."></textarea>
-                        <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
+                            <textarea id="news-comment-input" name="content" placeholder="Dodaj komentar..."></textarea>
+                        <button type="submit" id="comment-icon"><i class="fa-solid fa-plus"></i></button>
                     </form>
                 </div>
             </div>

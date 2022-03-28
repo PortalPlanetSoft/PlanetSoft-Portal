@@ -155,7 +155,12 @@
   .ov-form label[for="id_profile_pic"]::after {
     font-size: 2rem;
   }
-  .ov-form a{
+
+  
+ .ov-form #id_is_admin, .ov-form #id_is_editor {
+   left: 55%;
+ }
+ .ov-form a {
     font-size: 3rem;
     width: 84%;
   }
@@ -302,6 +307,11 @@
     }
     .dk-author-filter-select option{
       font-size: 0.8rem;
+    }
+
+    /* COMMENT AREA */
+    .comment-like-section .news-comment textarea {
+      height: 2.5rem;
     }
     .header-news-details{
       display: flex;
