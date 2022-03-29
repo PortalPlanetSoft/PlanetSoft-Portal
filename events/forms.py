@@ -1,5 +1,3 @@
-from datetime import date, datetime
-
 from django import forms
 
 from events.constants import LABEL_TEXT_EVENT
@@ -12,20 +10,15 @@ class CreateEvent(forms.ModelForm):
     field_order = ['title', 'details', 'start_time', 'end_time', 'repeat_days', 'repeat_every_year']
     shared = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=User.objects.all(),
                                             required=False)
-    start_time = forms.DateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
-                                                                      time_attrs={'type': 'time'}))
-    end_time = forms.DateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
-                                                                    time_attrs={'type': 'time'}))
+    start_time = forms.SplitDateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
+                                                                           time_attrs={'type': 'time'}))
+    end_time = forms.SplitDateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
+                                                                         time_attrs={'type': 'time'}))
+    end_time.required = False
 
     class Meta:
         model = Event
-        fields = {'title', 'details', 'shared', 'start_time', 'end_time', 'type', 'repeat_days', 'repeat_every_year'}
-
-    def clean_birth_date(self):
-        data = self.cleaned_data['start_time']
-        if data and data < date.today():
-            raise forms.ValidationError('Ne možete kreirati događaj u prošlosti.')
-        return data
+        fields = {'title', 'details', 'shared', 'type', 'repeat_days', 'repeat_every_year'}
 
     def save(self, commit=True):
         event = super(CreateEvent, self).save(commit=True)
