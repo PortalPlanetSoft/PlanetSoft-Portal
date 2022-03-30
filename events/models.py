@@ -1,14 +1,13 @@
 from django.db import models
 
 from events.constants import EVENT_TYPES
-from users.models import User
 
 
 class Event(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey('users.User', on_delete=models.CASCADE)
     creation_date = models.DateField(auto_now_add=True)
     edited_date = models.DateField(auto_now=True)
-    shared = models.ManyToManyField(to=User, related_name='shared')
+    shared = models.ManyToManyField(to='users.User', related_name='shared')
     title = models.CharField(max_length=48)
     details = models.CharField(max_length=256, null=True, blank=True)
     start_time = models.DateTimeField()
