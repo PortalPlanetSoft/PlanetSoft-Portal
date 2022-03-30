@@ -22,7 +22,7 @@ class CalendarView(ListView):
         context = super().get_context_data(**kwargs)
 
         # use today's date for the calendar if not provided
-        if ('year' and 'month' in self.kwargs) and (self.kwargs['month'] and self.kwargs['month'] > 0):
+        if ('year' and 'month' in self.kwargs) and (self.kwargs['month'] and self.kwargs['year']) > 0:
             d = date(self.kwargs['year'], self.kwargs['month'], day=1)
         else:
             d = datetime.today()
