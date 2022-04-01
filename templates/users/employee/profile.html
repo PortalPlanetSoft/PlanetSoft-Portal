@@ -5,7 +5,7 @@
     <div class="ov-container-center-content">
         <form class="ov-form dv-profile-form" enctype="multipart/form-data" method="POST">
             {% csrf_token %}
-            <div class="dk-icon">
+            <div class="dk-icon-edit">
                 {% if object.profile_pic %}
                     <img id="image-thumbnail" src={{ object.profile_pic.url }}>
                 {% else %}

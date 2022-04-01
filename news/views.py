@@ -41,6 +41,7 @@ class NewsList(ListView):
         today = datetime.today()
         tommorow = datetime.today() + timedelta(TOMORROW)
         after_tommorow = tommorow + timedelta(TOMORROW)
+        week = after_tommorow + timedelta(days=7)
 
         context['today_events'] = Event.objects.filter(Q(start_time__gt=today),
                                                        Q(author__id=self.request.user.pk) |
@@ -51,6 +52,11 @@ class NewsList(ListView):
                                                           Q(author__id=self.request.user.pk) |
                                                           Q(shared=self.request.user.pk),
                                                           Q(start_time__lt=after_tommorow.date()))
+
+        context['after_tommorow_events'] = Event.objects.filter(Q(start_time__gte=after_tommorow.date()),
+                                                          Q(author__id=self.request.user.pk) |
+                                                          Q(shared=self.request.user.pk),
+                                                          Q(start_time__lt=week.date()))
 
         context['liked_articles'] = LikeDislike.objects.filter(user_id=self.request.user).all()
         context['object_list'] = news

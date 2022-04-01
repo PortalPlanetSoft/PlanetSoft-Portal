@@ -253,6 +253,7 @@
     .comment-like-section {
       width: 100%;
       grid-template-columns: 1fr 1fr 5fr;
+      padding-bottom: 1rem;
     }
     .comment-like-section .news-like, .comment-like-section .news-dislike{
       display: flex;
@@ -261,10 +262,10 @@
       margin-left: 1rem;
     }
     .comment-like-section button, .comment-like-section span{
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
     .comment-like-section textarea {
-      font-size: 2rem;
+      font-size: 1.3rem;
     }
     .dk-grid {
         font-size: 1.5rem;
@@ -309,7 +310,22 @@
       font-size: 0.8rem;
     }
 
+    .news{
+        grid-column: 2/9;
+    }
+    .events-sidebar-news{
+        grid-column: 9/12;
+        top:7rem;
+    }
+    .commentlike-edit-section,
+    .edit-preview-button-news,
+    .commentlike-edit-preview{
+        grid-template-columns: 1fr;
+    }
+
+
     /* COMMENT AREA */
+    .comment-like-section-preview .news-comment textarea,
     .comment-like-section .news-comment textarea {
       height: 2.5rem;
     }
@@ -378,15 +394,53 @@
     .header-news-preview{
       grid-template-columns: 1fr;
     }
-    .article-headline-news-preview h4{
-      padding: 0.5rem ;
+    .article-headline-news-preview h4 a{
+        padding: 0.5rem ;
+        text-align: center;
+        font-size: 2rem;
+
     }
     .creation-date-news-preview p{
-      padding: 0.5rem ;
+        padding: 0.5rem ;
+        text-align: center;
+        font-size: 1.5rem;
     }
 
     .article-author-news-preview p{
         padding: 0.5rem ;
+        float: none;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    .content p{
+        font-size: 0.8rem;
+    }
+    .news-button{
+        height: auto;
+        width: 12rem;
+    }
+    .news-button a{
+        font-size: 1.5rem;
+    }
+    .article-author-news p{
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    .news-preview-button{
+        font-size: 1.5rem;
+        width: 9rem;
+        height: 3rem;
+    }
+    .todays-events h4,
+    .tommorows-events h4,
+    .upcoming-event h4{
+        font-size: 1.4rem;
+    }
+    .after-tommorow p,
+    .after-tommorow p,
+    .todays-events p,
+    .tommorows-events p{
+        font-size: 1.4rem;
     }
 
     /* OGI KALENDAR */

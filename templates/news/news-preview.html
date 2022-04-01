@@ -1,10 +1,10 @@
 {% load static %}
 <form class="news-preview">
-    <div >
+    <div>
         <div class="dk-news-preview">
             <div class="header-news-preview">
                 <div class="creation-date-news-preview"><p>{{ article.creation_date }}</p></div>
-                 <div class="article-headline-news-preview"><h4>{{ article.headline }}</h4></div>
+                <div class="article-headline-news-preview"><h4>{{ article.headline }}</h4></div>
                 <div class="article-author-news-preview">
                     <a onclick="showUserPreviewModal({{ article.author.id }})"><p>
                         Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
@@ -19,30 +19,33 @@
                 </div>
             </div>
         </div>
-        <div id="comment-like-section{{ article.id }}" class="comment-like-section">
-                    <form id="news-like-form" class="news-like"
-                          method="post">
-                        {% csrf_token %}
-                        <button type="button" name="article_like_id" onclick="submitLikeButton({{ article.id }})">
-                            {% if article.liked %}
-                                <i class="fa-solid fa-thumbs-up"></i> {% else %}
-                                <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
-                        <span>{{ article.likes_count }}</span>
-                    </form>
-                    <form id="news-dislike-form" class="news-dislike"
-                          method="post">
-                        {% csrf_token %}
-                        <button type="button" name="article_dislike_id" onclick="submitDislikeButton({{ article.id }})">
-                            {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
-                                <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
-                        <span>{{ article.dislikes_count }}</span>
-                    </form>
-                    <form action="{% url 'comment-on-news' article.pk %}" method="post" class="news-comment">
-                        {% csrf_token %}
-                        <textarea name="content" placeholder="Dodaj komentar..."></textarea>
-                        <button type="submit" name="article_dislike_id"><i class="fa-solid fa-plus"></i></button>
-                    </form>
-                </div>
+        <div class="commentlike-edit-preview">
+            <div id="comment-like-section{{ article.id }}" class="comment-like-section-preview">
+                        <form id="news-like-form" class="news-like"
+                              method="post">
+                            {% csrf_token %}
+                            <button type="button" name="article_like_id" onclick="submitLikeButton({{ article.id }})">
+                                {% if article.liked %}<i class="fa-solid fa-thumbs-up"></i> {% else %}
+                                    <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
+                            <span>{{ article.likes_count }}</span>
+                        </form>
+                <form id="news-dislike-form" class="news-dislike"
+                      method="post">
+                    {% csrf_token %}
+                    <button type="button" name="article_dislike_id" onclick="submitDislikeButton({{ article.id }})">
+                        {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
+                            <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
+                    <span>{{ article.dislikes_count }}</span>
+                </form>
+                <form action="{% url 'comment-on-news' article.pk %}" method="post" class="news-comment">
+                    {% csrf_token %}
+                    <textarea id="news-comment-input{{ article.id }}" name="content" placeholder="Dodaj komentar..." oninput="commentTyped({{ article.id }})"></textarea>
+                            <button type="submit" id="news-comment-icon{{ article.id }}"><i class="fa-solid fa-plus"></i></button>
+                </form>
+            </div>
+            <button type="button" id="close-button" class="news-preview-button" onclick="modalClose()">Nazad
+                <i class="fa-solid fa-circle-left"></i></button>
+        </div>
 
         {% for comment in comments %}
             <div class="news-comment-content">
@@ -64,6 +67,6 @@
                 </div>
             </div>
         {% endfor %}
-    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori</button>
+
     </div>
 </form>
