@@ -137,11 +137,10 @@
 }
 .comment-like-section-preview{
     display: flex;
-    grid-template-areas:
-    "like dislike comment";
     width: 100%;
     margin: 0 ;
     column-gap: 1rem;
+    align-items: center;
 }
 .comment-like-section-preview button,
 .comment-like-section button {

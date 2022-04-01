@@ -260,9 +260,11 @@
       .comment-like-section .news-comment {
         margin-left: 1rem;
       }
+      .comment-like-section-preview button,
       .comment-like-section button, .comment-like-section span{
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
+      .comment-like-section-preview textarea,
       .comment-like-section textarea {
         font-size: 2rem;
       }
@@ -308,7 +310,25 @@
       .dk-author-filter-select option{
         font-size: 0.8rem;
       }
-  
+      .article-author-news-preview p{
+          padding: 0.5rem ;
+          float: none;
+          text-align: center;
+          font-size: 1.5rem;
+        }
+      .content p{
+            font-size: 1rem;
+        }
+      .news{
+          grid-column: 2/12;
+      }
+      .events-sidebar-news{
+            display: none;
+        }
+      .article-author-news p{
+          text-align: center;
+          font-size: 1.5rem;
+      }
       /* COMMENT AREA */
       .comment-like-section .news-comment textarea {
         height: 2.5rem;
@@ -323,19 +343,19 @@
       }
       .header-news-details > div > p {
         text-align: center;
-        font-size: 2.1rem;
+        font-size: 1.5rem;
         padding: 1rem;
       }
       .header-news-details > div > h4 {
         text-align: center;
-        font-size: 3.2rem;
+        font-size: 2.2rem;
         padding: 1rem;
       }
       .edit-news {
         text-align: center;
       }
       .edit-news a{
-        font-size: 2.1rem;
+        font-size: 1.5rem;
       }
       .profile-img-comment img{
         width: 5.5rem;
@@ -350,6 +370,33 @@
       .comment-content{
         grid-column: 1/18;
       }
+      .commentlike-edit-preview,
+      .commentlike-edit-section{
+          grid-template-columns: 1fr;
+
+      }
+      .comment-like-section-preview,
+      .comment-like-section{
+          padding-bottom: 1rem;
+      }
+      .edit-preview-button-news{
+          display: flex;
+          padding:1rem;
+      }
+      .commentlike-edit-preview .news-preview-button,
+      .edit-preview-button-news .news-button{
+          width: 10rem;
+          height: 3rem;
+      }
+      .commentlike-edit-preview .news-preview-button ,
+      .edit-preview-button-news .news-button a{
+          font-size: 1.5rem;
+
+      }
+      .comment-like-section-preview .news-comment textarea{
+            height: 2.5rem;
+          font-size: 1.2rem;
+        }
       /* CALENDAR */
       .create-new-event a{
         grid-column: 1/4;
@@ -381,14 +428,16 @@
       .article-headline-news-preview h4{
         padding: 0.5rem ;
       }
+      .article-headline-news-preview a{
+          font-size: 2.3rem;
+      }
       .creation-date-news-preview p{
         padding: 0.5rem ;
+        text-align: center;
+          font-size: 1.5rem;
       }
   
-      .article-author-news-preview p{
-          padding: 0.5rem ;
-      }
-  
+
       /* OGI KALENDAR */
       .events-sidebar {
         width: 70%;

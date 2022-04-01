@@ -109,7 +109,15 @@
                 <div class="todays-events">
                     <h4>Danas</h4>
                     {% for event in today_events %}
-                        <a onclick="showEventPreviewModal({{ event.id }})"><p>{{ event.title }}</p></a>
+                        <div class="dk-event-name-and-flag">
+                            {% if event.type == "Rođendan" or event.type == "Sastanak" %}
+                                <div class="circle-mid bg-primary"></div>
+                            {% elif event.type == "Daily" or event.type == "Planiranje"%}
+                                <div class="circle-mid bg-accent"></div>
+
+                            {% endif %}
+                            <a onclick="showEventPreviewModal({{ event.id }})"><p>{{ event.title }}</p></a></div>
+
                     {% endfor %}
                 </div>
             </form>
@@ -117,7 +125,13 @@
                 <div class="tommorows-events">
                     <h4>Sutra</h4>
                     {% for event in tommorow_events %}
-                        <a onclick="showEventPreviewModal({{ event.id }})"><p>{{ event.title }}</p></a>
+                        <div class="dk-event-name-and-flag">
+                            {% if event.type == "Rođendan" or event.type == "Sastanak" %}
+                                <div class="circle-mid bg-primary"></div>
+                            {% elif event.type == "Daily" or event.type == "Planiranje"%}
+                                <div class="circle-mid bg-accent"></div>
+                            {% endif %}
+                            <a onclick="showEventPreviewModal({{ event.id }})"><p>{{ event.title }}</p></a></div>
                     {% endfor %}
                 </div>
             </form>

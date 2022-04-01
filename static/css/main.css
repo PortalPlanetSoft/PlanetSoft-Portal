@@ -10,6 +10,7 @@
 @import "./components/modal.css";
 @import "./components/news.css";
 @import "./components/calendar.css";
+@import "./components/sidebar.css";
 
 @import "./responsive/4k.css";
 @import "./responsive/laptop.css";

@@ -22,8 +22,8 @@
         <div class="commentlike-edit-preview">
             <div id="comment-like-section{{ article.id }}" class="comment-like-section-preview">
                         <form id="news-like-form" class="news-like"
-                              method="post">
-                            {% csrf_token %}
+                      method="post">
+                    {% csrf_token %}
                             <button type="button" name="article_like_id" onclick="submitLikeButton({{ article.id }})">
                                 {% if article.liked %}<i class="fa-solid fa-thumbs-up"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>

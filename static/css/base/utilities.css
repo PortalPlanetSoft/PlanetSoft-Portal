@@ -1,0 +1,9 @@
+.bg-primary{
+    background-color: var(--primary);
+}
+.bg-accent{
+    background-color: var(--accent);
+}
+.flex{
+    display: flex;
+}
