@@ -88,18 +88,19 @@ function showEventPreviewModal(id) {
 async function showNewsEditModal(id) {
     await displayModal(EDIT_NEWS_URL + id + '/').then(
         res => {
-            document.getElementById('id_image').addEventListener("change", function (e) {
+            addImagePreview("id_image", "photo-preview")
+        }
+    );
+}
+function addImagePreview(imageFeild_id, imagePreview_id){
+    document.getElementById(`${imageFeild_id}`).addEventListener("change", function (e) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
-                    document.getElementById('photo-preview').src = e.target.result;
+                    document.getElementById(`${imagePreview_id}`).src = e.target.result;
                 };
                 reader.readAsDataURL(this.files[0]);
             })
-        }
-    );
-
 }
-
 // onclick function for opening news preview modal
 function showNewsPreviewModal(id) {
     displayModal(VIEW_NEWS_URL + id);

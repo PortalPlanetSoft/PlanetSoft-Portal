@@ -1,0 +1,17 @@
+@import "./base/variables.css";
+@import "./base/animations.css";
+@import "./base/base.css";
+@import "./base/utilities.css";
+
+@import "./layout/navbar.css";
+@import "./layout/footer.css";
+
+@import "./components/form.css";
+@import "./components/modal.css";
+@import "./components/news.css";
+@import "./components/calendar.css";
+
+@import "./responsive/4k.css";
+@import "./responsive/laptop.css";
+@import "./responsive/tablet.css";
+@import "./responsive/mobile.css";

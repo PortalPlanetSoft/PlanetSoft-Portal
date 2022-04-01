@@ -1,7 +1,42 @@
 <form id="create-event-form" class="ov-form event-form" method="post">
     <h3 class="ov-form__title">Dodavanje događaja</h3>
     {% csrf_token %}
-    {{ form.as_p }}
+    <div>
+        <label>{{ form.title.label }}</label>
+
+        {{ form.title }}
+    </div>
+    <p>
+        <label>{{ form.details.label }}</label>
+
+        {{ form.details }}
+    </p>
+
+
+    <p>
+        <label>{{ form.start_time.label }}</label>
+
+        {{ form.start_time }}
+    </p><p>
+        <label>{{ form.end_time.label }}</label>
+
+        {{ form.end_time }}
+    </p>
+    <p>
+        <label>{{ form.repeat_days.label }}</label>
+
+        {{ form.repeat_days }}
+    </p>
+    <p>
+        <label>{{ form.repeat_every_year.label }}</label>
+
+        {{ form.repeat_every_year }}
+    </p>
+
+    <p>
+        <label>{{ form.shared.label }}</label>
+        {{ form.shared }}
+    </p>
     <div class="ov-form__btn-container">
         <button class="ov-form__btn" type="button" onclick="submitEventCreateForm()">Potvrdi</button>
     </div>

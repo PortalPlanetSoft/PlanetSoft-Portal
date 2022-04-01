@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from events.models import Event
 from users.constants import GENDER_CHOICES, WORK_LOCATION
 
 
@@ -12,7 +13,6 @@ class CompanyPosition(models.Model):
 
 
 class User(AbstractUser):
-
     is_admin = models.BooleanField(default=False)
     is_editor = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=True)
@@ -26,3 +26,16 @@ class User(AbstractUser):
     birth_date = models.DateField(null=True, default=None, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     business_phone = models.CharField(max_length=15, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        super(User, self).save(*args, **kwargs)
+        obj, created = Event.objects.update_or_create(
+            title="Rođendan "+self.first_name + ' ' + self.last_name,
+            type='Rođendan',
+            details="Rođendan "+self.first_name + ' ' + self.last_name + '(' + self.username + ')',
+            defaults={
+                'start_time': self.birth_date,
+                'author': self,
+            }
+        )
+        obj.shared.set(User.objects.all())

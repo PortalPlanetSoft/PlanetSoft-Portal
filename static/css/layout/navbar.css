@@ -1,0 +1,81 @@
+.ov-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--accent);
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+    background-color: var(--white);
+  }
+  .ov-nav__left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .ov-nav__logo {
+    padding-right: 3rem;
+    width: 5rem;
+  }
+  .ov-nav__title {
+    font-size: 1.5rem;
+    color: var(--primary);
+  }
+  .ov-nav__right {}
+  .ov-nav__navigation {
+    position: relative;
+    margin-right: 11rem;
+  }
+  .ov-nav__item {
+    padding:1rem;
+    display: inline-block;
+    font-size: 1rem;
+    color: var(--primary);
+    font-weight: bold;
+    border-bottom: 3px solid transparent;
+    transition: .3s ease;
+  }
+  .ov-nav__item--icon-only {
+    font-size: 1.5rem;
+  }
+  /* .ov-nav__item:last-child {
+    margin-left: 6rem;
+  } */
+  
+  .ov-nav__item:hover {
+    background-color: var(--primary-light);
+    border-bottom: 3px solid var(--accent);
+  }
+  
+  .ov-nav__hamburger-btn {
+    font-size: 5rem;
+    color: var(--primary);
+    position: absolute;
+    right: 4rem;
+    top: 1rem;
+    display: none;
+    z-index: 2;
+  }
+  
+  .ov-nav__item--dropdown-toggle:hover + .ov-nav__navigation-dropdown, .ov-nav__navigation-dropdown:hover{
+    display: block;
+  }
+  
+  .ov-nav__navigation-dropdown {
+    position: absolute;
+    right: 0;
+    background-color: var(--white);
+    display: none;
+    border: 1px solid var(--accent);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    z-index: 1;
+  }
+  
+  .ov-nav__navigation-dropdown-item {
+    display: block;
+  }
