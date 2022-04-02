@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from django import forms
+from django.forms import SelectMultiple
 
 from events.constants import LABEL_TEXT_EVENT
 from events.models import Event
@@ -8,17 +11,15 @@ from users.models import User
 class CreateEvent(forms.ModelForm):
     use_required_attribute = False
     field_order = ['title', 'details', 'start_time', 'end_time', 'repeat_days', 'repeat_every_year']
-    shared = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=User.objects.all(),
-                                            required=False)
+    shared = forms.ModelMultipleChoiceField(queryset=User.objects.all(), widget=SelectMultiple, required=False)
     start_time = forms.SplitDateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
                                                                            time_attrs={'type': 'time'}))
     end_time = forms.SplitDateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
-                                                                         time_attrs={'type': 'time'}))
-    end_time.required = False
+                                                                         time_attrs={'type': 'time'}), required=False)
 
     class Meta:
         model = Event
-        fields = {'title', 'details', 'shared', 'type', 'repeat_days', 'repeat_every_year'}
+        fields = {'title', 'details', 'shared', 'type', 'start_time', 'end_time', 'repeat_days', 'repeat_every_year'}
 
     def save(self, commit=True):
         event = super(CreateEvent, self).save(commit=True)
@@ -26,6 +27,12 @@ class CreateEvent(forms.ModelForm):
         if commit:
             event.save()
         return event
+
+    def clean_start_time(self):
+        data = self.cleaned_data['start_time']
+        if data and data.time() < datetime.now().time() or data.date() < datetime.now().date():
+            raise forms.ValidationError('Događaj ne može počinjati u prošlosti')
+        return data
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

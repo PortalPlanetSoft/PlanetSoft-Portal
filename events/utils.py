@@ -1,4 +1,5 @@
 from calendar import HTMLCalendar
+from datetime import datetime
 
 from django.db.models import Q
 from .models import Event
@@ -49,3 +50,9 @@ class Calendar(HTMLCalendar):
             cal += f'{self.format_week(week, events)}\n'
         cal += '</table>\n'
         return cal
+
+
+def str_2_date(date, time):
+    created_date = datetime.strptime(date, '%Y-%m-%d').date()
+    created_time = datetime.strptime(time, '%H:%M').time()
+    return datetime.combine(created_date, created_time)

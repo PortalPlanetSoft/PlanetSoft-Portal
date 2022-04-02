@@ -39,3 +39,6 @@ class User(AbstractUser):
             }
         )
         obj.shared.set(User.objects.all())
+
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name + '(' + self.username + ')'
