@@ -165,11 +165,21 @@ a:hover {
     padding: 0.5rem;
     border-radius: 20rem;
     display: inline-block;
-    margin: 0 5.5rem 0 5.5rem;
+    margin: 0 auto;
     position: relative;
+    top: -3rem;
     background-color: #fff;
 }
-
+.dk-icon-edit img{
+    width: 6rem;
+    height: 6rem;
+    border: 1px solid var(--primary);
+    padding: 0.5rem;
+    border-radius: 20rem;
+    display: block;
+    margin: auto;
+    background-color: #fff;
+}
 .dk-icon {
     text-align: center;
 }

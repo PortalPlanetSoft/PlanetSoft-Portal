@@ -5,6 +5,7 @@
     <div class="ov-container-center-content">
         <form class="ov-form dv-profile-form" enctype="multipart/form-data" method="POST">
             {% csrf_token %}
+            <div class="dk-icon-edit">
             {% for error in form.non_field_errors %}
             <div>
                 {{ error }}

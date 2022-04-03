@@ -12,13 +12,18 @@
                 </div>
             </div>
             <div>
-                <input onchange="submitFilterForm()" type="radio" name="location" value="all"
-                       {% if location == None or location == 'all' %}checked{% endif %} class="radio"> <label>Sve
-                lokacije</label>
-                <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
-                       {% if location == 'BL' %}checked{% endif %} class="radio"> <label>Banja Luka</label>
+            <label>Beograd</label>
                 <input onchange="submitFilterForm()" type="radio" name="location" value="BG"
-                       {% if location == 'BG' %}checked{% endif %} class="radio"> <label>Beograd</label>
+                       {% if location == 'BG' %}checked{% endif %} class="radio">
+            <label>Banja Luka</label>
+                <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
+                       {% if location == 'BL' %}checked{% endif %} class="radio">
+             <label>Sve
+                lokacije</label>
+                <input onchange="submitFilterForm()" type="radio" name="location" value="all"
+                       {% if location == None or location == 'all' %}checked{% endif %} class="radio">
+
+
             </div>
 
 

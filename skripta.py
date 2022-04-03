@@ -24,6 +24,7 @@ def add_data(file_name, table_name):
 
 # morate paziti da id-evi ne budu isti ako hocete jos pozicija dodati
 # zakomentarisete liniju ako hocete samo u jednu ili drugu tabelu dodati nove korisnike
-add_data("company_position.sql", "users_companyposition")
-add_data("users.sql", "users_user")
-add_data("news.sql", "news_newsarticle")
+#add_data("company_position.sql", "users_companyposition")
+#add_data("users.sql", "users_user")
+#add_data("news.sql", "news_newsarticle")
+add_data("events.sql", "events_event")
