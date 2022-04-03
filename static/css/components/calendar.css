@@ -128,12 +128,18 @@ li {
 .event-day-item {
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid var(--primary);
 }
 
 .event-day-item-title {
     color: var(--primary);
     font-size: 1.5rem;
     font-weight: 400;
+    padding: 1rem 0;
+}
+.event-day-item-title:hover {
+    cursor: pointer;
+    color: var(--black);
 }
 
 .event-day-item .ov-form__btn-container {
@@ -146,5 +152,11 @@ li {
     padding: 1rem;
     border: none;
     background-color: transparent;
+}
+
+/* Event overview */
+.event-form-content {
+    padding: 1rem;
+    color: var(--primary);
 }
 /* OGI */

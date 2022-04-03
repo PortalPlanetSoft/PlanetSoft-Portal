@@ -390,9 +390,6 @@
       }
   
       /* OGI KALENDAR */
-      .event-day-item {
-        padding: 1rem 0;
-      }
       .event-day-item-title {
         font-size: 3rem;
       }
