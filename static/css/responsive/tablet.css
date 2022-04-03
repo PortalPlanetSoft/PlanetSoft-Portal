@@ -439,22 +439,17 @@
   
 
       /* OGI KALENDAR */
-      .events-sidebar {
-        width: 70%;
+      .event-day-item-title {
+        font-size: 3rem;
       }
-      .ov-calendar-event-details p{
-        width: 80%;
-        font-size: 2rem;
+
+      .event-day-item .ov-form__btn-container {
+        flex-direction: row;
       }
-      .ov-calendar-event-details a {
-        font-size: 2rem;
-      }
-      .events-sidebar-new-event {
-        font-size: 2rem;
-        width: 40%;
-      }
-      .event-form option, .event-form input[type="number"] {
-        font-size: 2rem;
+
+      .event-form-content p {
+        font-size: 2.5rem;
+        text-align: center;
       }
       /* OGI KALENDAR */
   }

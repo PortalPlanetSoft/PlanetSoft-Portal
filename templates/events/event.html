@@ -1,42 +1,56 @@
 <form id="create-event-form" class="ov-form event-form" method="post">
     <h3 class="ov-form__title">Dodavanje događaja</h3>
     {% csrf_token %}
+    {% for error in form.non_field_errors %}
+        <div>
+            {{ error }}
+        </div>
+    {% endfor %}
     <div>
         <label>{{ form.title.label }}</label>
 
         {{ form.title }}
     </div>
-    <p>
+    {% if form.title.errors %}
+        <div>
+            {{ form.title.errors }}
+        </div>
+    {% endif %}
+    <div>
         <label>{{ form.details.label }}</label>
 
         {{ form.details }}
-    </p>
-
-
-    <p>
+    </div>
+    <div>
         <label>{{ form.start_time.label }}</label>
 
         {{ form.start_time }}
-    </p><p>
+    </div>
+        {% if form.start_time.errors %}
+        <div>
+            {{ form.start_time.errors }}
+        </div>
+    {% endif %}
+    <div>
         <label>{{ form.end_time.label }}</label>
 
         {{ form.end_time }}
-    </p>
-    <p>
+    </div>
+    <div>
         <label>{{ form.repeat_days.label }}</label>
 
         {{ form.repeat_days }}
-    </p>
-    <p>
+    </div>
+    <div>
         <label>{{ form.repeat_every_year.label }}</label>
 
         {{ form.repeat_every_year }}
-    </p>
+    </div>
 
-    <p>
+    <div>
         <label>{{ form.shared.label }}</label>
         {{ form.shared }}
-    </p>
+    </div>
     <div class="ov-form__btn-container">
         <button class="ov-form__btn" type="button" onclick="submitEventCreateForm()">Potvrdi</button>
     </div>
