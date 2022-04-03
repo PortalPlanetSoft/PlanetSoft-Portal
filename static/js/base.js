@@ -114,12 +114,18 @@ function imageRemove() {
     );
 }
 
-function imageRemoveNEWS(id) {
-    //let form = $("#photo-delete-form");
+let ident;
+
+function idKeeper(id) {
+    ident = id;
+}
+
+function imageRemoveNEWS() {
+    let form = $("#photo-delete-form");
     $.ajax({
-            url: urlAddress + '/news/remove-photo/'+id,
+            url: urlAddress + '/news/remove-photo/' + ident,
             type: 'POST',
-            //
+            data: form.serialize(),
             success: function (data, textStatus, xhr) {
                 requestSuccessful();
             },
@@ -212,8 +218,15 @@ function submitNewPageDislikeButton(id) {
 }
 
 function reveal(field_id) {
-    if (document.getElementById("box"+field_id).checked) {
+    if (document.getElementById("box" + field_id).checked) {
         document.getElementById(field_id).type = 'text';
     } else
         document.getElementById(field_id).type = 'password';
+}
+
+function dateSet() {
+    $.ajax({
+        url: urlAddress + '/employees/previous-login/',
+        type: 'GET',
+    });
 }

@@ -12,14 +12,14 @@
                 </div>
             </div>
             <div>
-            <label>Beograd</label>
+                <label>Beograd</label>
                 <input onchange="submitFilterForm()" type="radio" name="location" value="BG"
                        {% if location == 'BG' %}checked{% endif %} class="radio">
-            <label>Banja Luka</label>
+                <label>Banja Luka</label>
                 <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
                        {% if location == 'BL' %}checked{% endif %} class="radio">
-             <label>Sve
-                lokacije</label>
+                <label>Sve
+                    lokacije</label>
                 <input onchange="submitFilterForm()" type="radio" name="location" value="all"
                        {% if location == None or location == 'all' %}checked{% endif %} class="radio">
 
@@ -101,4 +101,15 @@
     </div>
 
 
+    {% if previous_login_date < current_date %}
+        <script src="{% static '/../static/js/base.js' %}"></script>
+        <script src="{% static '/../static/js/news/news.js' %}"></script>
+        <script src="{% static '/../static/js/modal-utils.js' %}"></script>
+        <script src="{% static '/../static/js/toast-utils.js' %}"></script>
+        <script src="{% static '/../static/js/const-values.js' %}"></script>
+        <script>
+            displayModal(urlAddress + '/employees/notification');
+            dateSet();
+        </script>
+    {% endif %}
 {% endblock %}
