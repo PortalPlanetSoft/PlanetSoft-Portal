@@ -45,6 +45,8 @@ class EmployeeList(ListView):
         if self.request.GET.get('location'):
             context['location'] = self.request.GET.get('location')
 
+        context['previous_login_date'] = self.request.user.previous_login.date()
+        context['current_date'] = datetime.now().date()
         context['position'] = self.request.GET.get('position')
         context['object_list'] = users
         context['position_list'] = CompanyPosition.objects.all()
