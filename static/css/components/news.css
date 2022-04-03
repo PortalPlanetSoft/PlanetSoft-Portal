@@ -19,15 +19,14 @@
 
 .news-i {
     display: inline-block;
-    right: 1.8rem;
     position: relative;
+    right: -0.5rem;
     cursor: pointer;
     color: var(--primary);
     padding: 0.5rem;
     border: 1px solid var(--primary);
     border-radius: 50%;
     box-shadow: 1px 1px var(--light-gray);
-    margin-left: 2rem;
 }
 .choose_author{
     grid-column-start: 4;
