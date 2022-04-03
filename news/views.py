@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q, Count, OuterRef, Subquery
 from django.http import HttpResponseRedirect, HttpResponse
+from django.template.response import TemplateResponse
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView
 
 from events.models import Event
@@ -220,3 +221,13 @@ class AllComments(ListView):
             dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
             liked=Subquery(has_reacted.values('type'))).get(id=self.kwargs['pk'])
         return context
+
+
+@login_required
+def remove_news_photo(request, pk):
+    if request.POST:
+        NewsArticle.objects.filter(id=pk).first().image.delete(save=True)
+        return HTTP_STATUS_200
+    else:
+        response = TemplateResponse(request, 'news/photo-confirm-deletion.html', {})
+        return response

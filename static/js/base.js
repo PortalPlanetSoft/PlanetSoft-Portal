@@ -114,6 +114,23 @@ function imageRemove() {
     );
 }
 
+function imageRemoveNEWS(id) {
+    //let form = $("#photo-delete-form");
+    $.ajax({
+            url: urlAddress + '/news/remove-photo/'+id,
+            type: 'POST',
+            //
+            success: function (data, textStatus, xhr) {
+                requestSuccessful();
+            },
+            error: function (data, textStatus, xhr) {
+                requestSuccessful();
+            },
+        },
+    );
+}
+
+
 function genericLikeDislikeFunction(form_id, id, flag) {
     let form = $(form_id);
     $.ajax({
