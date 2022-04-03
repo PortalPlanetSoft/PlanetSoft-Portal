@@ -159,4 +159,9 @@ li {
     padding: 1rem;
     color: var(--primary);
 }
+
+.event-form-content p {
+    font-size: 1.5rem;
+    padding: 1rem 0;
+}
 /* OGI */
