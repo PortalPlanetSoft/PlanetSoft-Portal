@@ -78,7 +78,7 @@
                         <form action="{% url 'comment-on-news' article.pk %}" method="post" class="news-comment">
                             {% csrf_token %}
                             <textarea id="news-comment-input{{ article.id }}" name="content" placeholder="Dodaj komentar..." oninput="commentTyped({{ article.id }})"></textarea>
-                            <button type="submit" id="news-comment-icon{{ article.id }}"><i class="fa-solid fa-plus"></i></button>
+                            <button type="submit" id="news-comment-icon{{ article.id }}"><i class="fa-solid fa-paper-plane"></i></button>
                         </form>
                     </div>
                     <div class="edit-preview-button-news">
