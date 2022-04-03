@@ -107,6 +107,11 @@
                             <textarea id="news-comment-input" name="content" placeholder="Dodaj komentar..."></textarea>
                         <button type="submit" id="comment-icon"><i class="fa-solid fa-plus"></i></button>
                     </form>
+                    <div>
+                        {% for comment in article.top_comments %}
+                            <span>{{ comment.author.first_name }} {{ comment.author.last_name }} {{ comment.content }}</span>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         {% endfor %}
