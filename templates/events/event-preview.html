@@ -1,17 +1,20 @@
 <form id="edit-event-form" class="ov-form event-form">
     <h3 class="ov-form__title">{{ event.title }}</h3>
-    <h5>{% if event.details %}{{ event.details }}{% else %}Nema detalja{% endif %}</h5>
-    <h5>Početak u {{  event.start_time|date:'H:i' }} </h5>
-    <h5>Završava u {% if event.end_time %}{{ event.end_time|date:'H:i'}}{% else %}nepoznato vrijeme{% endif %}</h5>
-    <h5>Tip {{ event.type }}</h5>
-    <h5>Autor {{ event.author }}</h5>
-    <h5>Kreiran {{ event.creation_date.day }}.{{ event.creation_date.month }}.{{ event.creation_date.year }}</h5>
-    <div class="ov-form__btn-container">
-    {% if user.is_admin or user.is_superuser or event.author == request.user %}
-        <button class="ov-form__btn" type="button" onclick="showEditEventModal({{ event.id }})">Uredi</button>
-        <button class="ov-form__btn ov-form__btn--blue" type="button" onclick="showDeleteEventModal({{ event.id }})">Izbriši</button>
-    {% endif %}
-    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori
-    </button>
+    <div class="event-form-content">
+        <p>{% if event.details %}{{ event.details }}{% else %}Nema detalja{% endif %}</p>
+        <p>Početak u {{  event.start_time|date:'H:i' }} </p>
+        <p>Završava u {% if event.end_time %}{{ event.end_time|date:'H:i'}}{% else %}nepoznato vrijeme{% endif %}</p>
+        <p>Tip {{ event.type }}</p>
+        <p>Autor {{ event.author }}</p>
+        <p>Kreiran {{ event.creation_date.day }}.{{ event.creation_date.month }}.{{ event.creation_date.year }}</p>
+        <div class="ov-form__btn-container">
+        {% if user.is_admin or user.is_superuser or event.author == request.user %}
+            <button class="ov-form__btn" type="button" onclick="showEditEventModal({{ event.id }})">Uredi</button>
+            <button class="ov-form__btn ov-form__btn--blue" type="button" onclick="showDeleteEventModal({{ event.id }})">Izbriši</button>
+        {% endif %}
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori
+        </button>
+        </div>
     </div>
+
 </form>

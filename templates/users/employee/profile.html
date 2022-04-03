@@ -5,6 +5,12 @@
     <div class="ov-container-center-content">
         <form class="ov-form dv-profile-form" enctype="multipart/form-data" method="POST">
             {% csrf_token %}
+            <div class="dk-icon-edit">
+            {% for error in form.non_field_errors %}
+            <div>
+                {{ error }}
+            </div>
+            {% endfor %}
             <div class="dk-icon">
                 {% if object.profile_pic %}
                     <img id="image-thumbnail" src={{ object.profile_pic.url }}>
@@ -16,31 +22,68 @@
                     {% endif %}
                 {% endif %}
             </div>
-            {% for field in form %}
-                <div>
-                    <label>{{ field.label }}</label>
-                    {% if field.name == "profile_pic" %}
-                        {% if object.profile_pic %}
-                            <img id="photo-preview" class="dv-photo-preview" src={{ object.profile_pic.url }}>
-                        {% else %}
-                            {% if object.gender == 'M' %}
-                                <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/1.png' %}'
-                                     alt='man-profile'>
-                            {% else %}
-                                <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/2.png' %}'
-                                     alt='woman-profile'>
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
 
-                    {{ field }}
-                </div>
-                {% if field.errors %}
-                    <div>
-                        {{ field.errors }}
-                    </div>
-                {% endif %}
-            {% endfor %}
+            <div>
+                <label>{{ form.password.label }}</label>
+
+                {{ form.password }}
+            </div>
+            {% if form.password.errors %}
+            <div>
+                {{ form.password.errors }}
+            </div>
+            {% endif %}
+            <div>
+            <label>{{ form.first_name.label }}</label>
+
+            {{ form.first_name }}
+            </div>
+            {% if form.first_name.errors %}
+            <div>
+                {{ form.first_name.errors }}
+            </div>
+            {% endif %}
+            <div>
+            <label>{{ form.last_name.label }}</label>
+
+            {{ form.last_name }}
+            </div>
+            {% if form.last_name.errors %}
+            <div>
+                {{ form.last_name.errors }}
+            </div>
+            {% endif %}
+            <div>
+            <label>{{ form.email.label }}</label>
+
+            {{ form.email }}
+            </div>
+            {% if form.email.errors %}
+            <div>
+                {{ form.email.errors }}
+            </div>
+            {% endif %}
+            <div>
+            <label>{{ form.phone.label }}</label>
+
+            {{ form.phone }}
+            </div>
+            {% if form.phone.errors %}
+            <div>
+                {{ form.phone.errors }}
+            </div>
+            {% endif %}
+            <div>
+            <label>{{ form.business_phone.label }}</label>
+
+            {{ form.business_phone }}
+            </div>
+            {% if form.business_phone.errors %}
+            <div>
+                {{ form.business_phone.errors }}
+            </div>
+            {% endif %}
+
             <button class="ov-form__btn" type="button" onclick="showAvatarDeleteModal()">Ukloni sliku</button>
             <div class="ov-form__btn-container">
                 <button class="ov-form__btn" type="submit">Potvrdi</button>

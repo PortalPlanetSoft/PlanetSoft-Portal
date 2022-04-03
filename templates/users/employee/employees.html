@@ -8,17 +8,22 @@
             <div class="dv-mobile-fullw">
                 <input type="text" placeholder="PRETRAGA..." name="search">
                 <div class="dk-i" onclick="submitFilterForm()">
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-search fa-lg"></i>
                 </div>
             </div>
             <div>
-                <input onchange="submitFilterForm()" type="radio" name="location" value="all"
-                       {% if location == None or location == 'all' %}checked{% endif %} class="radio"> <label>Sve
-                lokacije</label>
-                <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
-                       {% if location == 'BL' %}checked{% endif %} class="radio"> <label>Banja Luka</label>
+            <label>Beograd</label>
                 <input onchange="submitFilterForm()" type="radio" name="location" value="BG"
-                       {% if location == 'BG' %}checked{% endif %} class="radio"> <label>Beograd</label>
+                       {% if location == 'BG' %}checked{% endif %} class="radio">
+            <label>Banja Luka</label>
+                <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
+                       {% if location == 'BL' %}checked{% endif %} class="radio">
+             <label>Sve
+                lokacije</label>
+                <input onchange="submitFilterForm()" type="radio" name="location" value="all"
+                       {% if location == None or location == 'all' %}checked{% endif %} class="radio">
+
+
             </div>
 
 
