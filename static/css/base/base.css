@@ -82,9 +82,8 @@ a:hover {
 .dk-search input {
     padding: 0.5rem;
     font-size: 0.7rem;
-    border: 1px solid var(--primary);
-
-    border-radius: 0.5rem;
+    border: none;
+    border-bottom: 2px solid var(--primary);
     width: 15rem;
     display: inline;
 
@@ -93,8 +92,14 @@ a:hover {
 .dk-i {
     display: inline-block;
     right: 1.8rem;
+    color: var(--primary);
+    padding: 0.5rem;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    box-shadow: 1px 1px var(--light-gray);
     position: relative;
     cursor: pointer;
+    margin-left: 2rem;
 }
 
 .dk-search a {

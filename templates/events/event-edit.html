@@ -1,5 +1,54 @@
 <form id="create-event-form" class="ov-form" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for error in form.non_field_errors %}
+        <div>
+            {{ error }}
+        </div>
+        {% endfor %}
+    <div>
+        <label>{{ form.title.label }}</label>
+
+        {{ form.title }}
+    </div>
+    {% if form.title.errors %}
+        <div>
+            {{ form.title.errors }}
+        </div>
+    {% endif %}
+    <div>
+        <label>{{ form.details.label }}</label>
+
+        {{ form.details }}
+    </div>
+    <div>
+        <label>{{ form.start_time.label }}</label>
+
+        {{ form.start_time }}
+    </div>
+    {% if form.start_time.errors %}
+        <div>
+            {{ form.start_time.errors }}
+        </div>
+    {% endif %}
+    <div>
+        <label>{{ form.end_time.label }}</label>
+
+        {{ form.end_time }}
+    </div>
+    <div>
+        <label>{{ form.repeat_days.label }}</label>
+
+        {{ form.repeat_days }}
+    </div>
+    <div>
+        <label>{{ form.repeat_every_year.label }}</label>
+
+        {{ form.repeat_every_year }}
+    </div>
+
+    <div>
+        <label>{{ form.shared.label }}</label>
+        {{ form.shared }}
+    </div>
     <button type="button" onclick="submitEventEditForm({{ object.id }})">Potvrdi</button>
 </form>

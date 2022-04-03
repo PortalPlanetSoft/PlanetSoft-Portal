@@ -1,6 +1,35 @@
 <form id="create-news-form" class="ov-form" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-        {{ form.as_p }}
+    {% for error in form.non_field_errors %}
+        <div>
+            {{ error }}
+        </div>
+    {% endfor %}
+        <div>
+            <label>{{ form.headline.label }}</label>
+
+            {{ form.headline }}
+        </div>
+        {% if form.headline.errors %}
+            <div>
+                {{ form.headline.errors }}
+            </div>
+        {% endif %}
+        <div>
+            <label>{{ form.content.label }}</label>
+
+            {{form.content}}
+        </div>
+        {% if form.content.errors %}
+            <div>
+                {{ form.content.errors }}
+            </div>
+        {% endif %}
+        <div>
+            <label>{{ form.image.label }}</label>
+
+            {{form.image}}
+        </div>
     <div class="ov-form__btn-container">
         <button type="button" class="ov-form__btn" onclick="submitNewsAddForm()">Objavi</button>
         <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="closeFunction()">

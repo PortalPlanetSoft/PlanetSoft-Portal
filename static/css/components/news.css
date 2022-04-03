@@ -10,8 +10,8 @@
 .search input {
     padding: 0.5rem;
     font-size: 0.7rem;
-    border: 1px solid var(--primary);
-    border-radius: 0.5rem;
+    border: none;
+    border-bottom: 2px solid var(--primary);
     width: 15rem;
     display: inline;
 
@@ -23,6 +23,11 @@
     position: relative;
     cursor: pointer;
     color: var(--primary);
+    padding: 0.5rem;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    box-shadow: 1px 1px var(--light-gray);
+    margin-left: 2rem;
 }
 .choose_author{
     grid-column-start: 4;
@@ -31,9 +36,11 @@
     padding: 0.5rem;
 }
 .choose_author select{
-    border-radius: 0.5rem;
     color: var(--primary);
-    padding: 0.1rem;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 0.3rem;
 }
 .create_news{
     grid-column-start: 9;

@@ -1,21 +1,39 @@
 <form id="edit-news-form" class="ov-form" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {% for field in form %}
-                <div>
-                    <label>{{ field.label }}</label>
-                    {% if field.name == "image" %}
-                        {% if object.image %}
-                            <img id="photo-preview" class="dv-photo-preview" src={{ object.image.url }}>
-                        {% endif %}
-                    {% endif %}
-                    {{ field }}
-                </div>
-                {% if field.errors %}
-                    <div>
-                        {{ field.errors }}
-                    </div>
+    {% for error in form.non_field_errors %}
+        <div>
+            {{ error }}
+        </div>
+    {% endfor %}
+        <div>
+            <label>{{ form.headline.label }}</label>
+
+            {{ form.headline }}
+        </div>
+        {% if form.headline.errors %}
+            <div>
+                {{ form.headline.errors }}
+            </div>
+        {% endif %}
+        <div>
+            <label>{{ form.content.label }}</label>
+
+            {{form.content}}
+        </div>
+        {% if form.content.errors %}
+            <div>
+                {{ form.content.errors }}
+            </div>
+        {% endif %}
+        <div>
+            <label>{{ form.image.label }}</label>
+                {% if object.image %}
+                    <img id="photo-preview" class="dv-photo-preview" src={{ object.image.url }}>
                 {% endif %}
-            {% endfor %}
+
+            {{form.image}}
+        </div>
+
         <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red ov-form__btn-text-only"
                 onclick="showNewsDeleteModal({{ object.id }})">Izbriši vijest
         </button>
