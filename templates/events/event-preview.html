@@ -9,8 +9,8 @@
         <p>Kreiran {{ event.creation_date.day }}.{{ event.creation_date.month }}.{{ event.creation_date.year }}</p>
         <div class="ov-form__btn-container">
         {% if user.is_admin or user.is_superuser or event.author == request.user %}
-            <button class="ov-form__btn" type="button" onclick="showEditEventModal({{ event.id }})">Uredi</button>
-            <button class="ov-form__btn ov-form__btn--blue" type="button" onclick="showDeleteEventModal({{ event.id }})">Izbriši</button>
+            <button class="ov-form__btn" type="button" onclick="displayModal(EDIT_EVENT_URL+{{ event.id }})">Uredi</button>
+            <button class="ov-form__btn ov-form__btn--blue" type="button" onclick="displayModal(DELETE_EVENT_URL+{{ event.id }})">Izbriši</button>
         {% endif %}
         <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori
         </button>

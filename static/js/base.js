@@ -1,7 +1,7 @@
 "use strict"
 
-const navToggleBtn = document.querySelector('#ov-nav-toggle');
-const navigation = document.querySelector('#ov-navigation');
+const NAV_TOGGLE_BTN = document.querySelector('#ov-nav-toggle');
+const NAVIGATION = document.querySelector('#ov-navigation');
 
 let maxDate;
 
@@ -25,11 +25,11 @@ $(function () {
             break;
     }
 
-    const todaysDate = new Date();
+    const TODAYS_DATE = new Date();
 
-    let month = todaysDate.getMonth() + 1;
-    let day = todaysDate.getDate();
-    let year = todaysDate.getFullYear();
+    let month = TODAYS_DATE.getMonth() + 1;
+    let day = TODAYS_DATE.getDate();
+    let year = TODAYS_DATE.getFullYear();
 
     if (month < 10)
         month = '0' + month.toString();
@@ -37,8 +37,14 @@ $(function () {
         day = '0' + day.toString();
 
     maxDate = year + '-' + month + '-' + day;
-    $('#id_birth_date').attr('max', maxDate);
+    dateValidation();
 });
+
+function dateValidation(){
+    $('#id_birth_date').attr('max', maxDate);
+    $('#id_start_time_0').attr('min', maxDate);
+    $('#id_end_time_0').attr('min', maxDate);
+}
 
 function sessionToastToggle(resultMessage, action) {
     showToast(resultMessage, action);
@@ -46,15 +52,15 @@ function sessionToastToggle(resultMessage, action) {
 }
 
 // Navigation hamburger menu
-navToggleBtn.addEventListener('click', (e) => {
-    if (navToggleBtn.firstChild.getAttribute('data-icon') === 'bars') {
-        navToggleBtn.firstChild.setAttribute('data-icon', 'xmark')
-        navToggleBtn.style.position = "fixed";
+NAV_TOGGLE_BTN.addEventListener('click', (e) => {
+    if (NAV_TOGGLE_BTN.firstChild.getAttribute('data-icon') === 'bars') {
+        NAV_TOGGLE_BTN.firstChild.setAttribute('data-icon', 'xmark')
+        NAV_TOGGLE_BTN.style.position = "fixed";
     } else {
-        navToggleBtn.firstChild.setAttribute('data-icon', 'bars');
-        navToggleBtn.style.position = "absolute";
+        NAV_TOGGLE_BTN.firstChild.setAttribute('data-icon', 'bars');
+        NAV_TOGGLE_BTN.style.position = "absolute";
     }
-    toggleAnimation(navigation, 'showNav', 'hideNav');
+    toggleAnimation(NAVIGATION, 'showNav', 'hideNav');
 });
 
 function toggleAnimation(element, firstAnimName, secondAnimName) {
@@ -89,11 +95,6 @@ function docReady(fn) {
 
 docReady(changeThumbnail);
 
-// function that reloads to target page so that up-to-date results (post edit) can be shown
-function pageReload() {
-    window.location.reload();
-}
-
 function submitFilterForm() {
     document.forms["userFilterForm"].submit();
 }
@@ -101,7 +102,7 @@ function submitFilterForm() {
 function imageRemove() {
     let form = $("#avatar-delete-form");
     $.ajax({
-            url: urlAddress + '/employees/remove-avatar/',
+            url: URL_ADDRESS + '/employees/remove-avatar/',
             type: 'POST',
             data: form.serialize(),
             success: function (data, textStatus, xhr) {
@@ -115,7 +116,6 @@ function imageRemove() {
 }
 
 let ident;
-
 function idKeeper(id) {
     ident = id;
 }
@@ -123,7 +123,7 @@ function idKeeper(id) {
 function imageRemoveNEWS() {
     let form = $("#photo-delete-form");
     $.ajax({
-            url: urlAddress + '/news/remove-photo/' + ident,
+            url: URL_ADDRESS + '/news/remove-photo/' + ident,
             type: 'POST',
             data: form.serialize(),
             success: function (data, textStatus, xhr) {
@@ -140,7 +140,7 @@ function imageRemoveNEWS() {
 function genericLikeDislikeFunction(form_id, id, flag) {
     let form = $(form_id);
     $.ajax({
-            url: urlAddress + '/news/react/' + id + '/',
+            url: URL_ADDRESS + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
             headers: flag,
@@ -157,7 +157,7 @@ function genericLikeDislikeFunction(form_id, id, flag) {
 function genericLikeDislikeOnPageFunction(form_id, id, flag) {
     let form = $(form_id);
     $.ajax({
-            url: urlAddress + '/news/react/' + id + '/',
+            url: URL_ADDRESS + '/news/react/' + id + '/',
             type: 'POST',
             data: form.serialize(),
             headers: flag,
@@ -209,14 +209,6 @@ function loadLikeOnPageContainer() {
     });
 }
 
-function submitNewPageLikeButton(id) {
-    genericLikeDislikeOnPageFunction("#news-like-form", id, {'flag': 'like'});
-}
-
-function submitNewPageDislikeButton(id) {
-    genericLikeDislikeOnPageFunction("#news-dislike-form", id, {'flag': ''});
-}
-
 function reveal(field_id) {
     if (document.getElementById("box" + field_id).checked) {
         document.getElementById(field_id).type = 'text';
@@ -226,7 +218,7 @@ function reveal(field_id) {
 
 function dateSet() {
     $.ajax({
-        url: urlAddress + '/employees/previous-login/',
+        url: URL_ADDRESS + '/employees/previous-login/',
         type: 'GET',
     });
 }

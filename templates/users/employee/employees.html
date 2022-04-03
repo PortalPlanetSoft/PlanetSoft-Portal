@@ -38,7 +38,7 @@
 
         </div>
         {% if user.is_admin or user.is_superuser %}
-            <a class="button" onclick="showUserAddModal()">Dodajte zaposlenog <i
+            <a class="button" onclick="displayModal(ADD_USER_URL)">Dodajte zaposlenog <i
                     class="fa-solid fa-circle-plus fa-xl"></i>
             </a>
         {% endif %}
@@ -66,10 +66,10 @@
 
                 <div class="dk-edit">
                     {% if user.is_admin or user.is_superuser %}
-                        <a id="button-user-edit" class="button" onclick="showUserEditModal({{ object.id }})">Izmjeni
+                        <a id="button-user-edit" class="button" onclick="displayModal(VIEW_USER_URL+{{ object.id }})">Izmjeni
                         <i class="fa-regular fa-pen-to-square"></i>
                     {% else %}
-                        <a id="button-user-edit" class="button" onclick="showUserPreviewModal({{ object.id }})">Detalji
+                        <a id="button-user-edit" class="button" onclick="displayModal(VIEW_USER_URL+{{ object.id }})">Detalji
                         <i class="fa-regular fa-address-card"></i>
                     {% endif %}
                     </a>
@@ -108,7 +108,7 @@
         <script src="{% static '/../static/js/toast-utils.js' %}"></script>
         <script src="{% static '/../static/js/const-values.js' %}"></script>
         <script>
-            displayModal(urlAddress + '/employees/notification');
+            displayModal(URL_ADDRESS + '/employees/notification');
             dateSet();
         </script>
     {% endif %}

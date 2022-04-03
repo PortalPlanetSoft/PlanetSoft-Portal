@@ -33,11 +33,11 @@
 
             {{form.image}}
         </div>
-        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red" onclick="displayModal(urlAddress+'/news/remove-photo/'+ {{ object.id }}), idKeeper({{ object.id }})">
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red" onclick="displayModal(URL_ADDRESS+'/news/remove-photo/'+ {{ object.id }}), idKeeper({{ object.id }})">
             Ukloni sliku
         </button>
         <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red"
-                onclick="showNewsDeleteModal({{ object.id }})">Izbriši vijest
+                onclick="displayModal(DELETE_NEWS_URL+{{ object.id }})">Izbriši vijest
         </button>
         <button type="button" id="submitForm" class="ov-form__btn" onclick="submitNewsEditForm({{ object.id }})">
             Sačuvaj

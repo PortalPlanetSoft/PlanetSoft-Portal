@@ -2,66 +2,19 @@
 
 // function for displaying generic modal
 async function displayModal(targetUrlAddress) {
-    modalContainer.style.display = "flex";
+    MODAL_CONTAINER.style.display = "flex";
     await $.ajax({
             url: targetUrlAddress,
             type: 'get',
             success: (data) => {
-                modalContent.innerHTML = data;
-                $('#id_birth_date').attr('max', maxDate);
+                MODAL_CONTENT.innerHTML = data;
+                dateValidation();
             },
             error: (data) => {
-                modalContent.innerHTML = data;
+                MODAL_CONTENT.innerHTML = data;
             },
         },
     )
-}
-
-// onclick function for opening of password change modal
-function showPasswordChangeModal() {
-    displayModal(PASSWORD_CHANGE_URL);
-}
-
-// onclick function for opening of user preview modal
-function showUserPreviewModal(id) {
-    displayModal(VIEW_USER_URL + id + '/');
-}
-
-// onclick function for opening of user edit modal
-function showUserEditModal(id) {
-    displayModal(VIEW_USER_URL + id + '/');
-}
-
-// onclick function for opening of user delete modal
-function showUserDeleteModal(id) {
-    displayModal(DELETE_USER_URL + id + '/');
-}
-
-// onclick function for opening of user add modal
-function showUserAddModal() {
-    displayModal(ADD_USER_URL);
-}
-
-// onclick function for opening of news delete modal
-function showNewsDeleteModal(id) {
-    displayModal(DELETE_NEWS_URL + id + '/');
-}
-
-// function for opening news add modal
-function showNewsAddModal() {
-    displayModal(ADD_NEWS_URL);
-}
-
-function showCreateEventModal() {
-    displayModal(CREATE_EVENT_URL);
-}
-
-function showEditEventModal(id) {
-    displayModal(EDIT_EVENT_URL + id + '/');
-}
-
-function showDeleteEventModal(id) {
-    displayModal(DELETE_EVENT_URL + id + '/');
 }
 
 function submitEventCreateForm() {
@@ -74,14 +27,6 @@ function submitEventEditForm(id) {
 
 function submitEventDeleteForm(id) {
     genericSubmitForm("delete-event-form", DELETE_EVENT_URL + id + '/', DELETE_SUCCESSFUL);
-}
-
-function showDateEventPreviewModal(id) {
-    displayModal(CALENDAR_EVENTS_URL + id);
-}
-
-function showEventPreviewModal(id) {
-    displayModal(EVENT_PREVIEW_URL + id + '/');
 }
 
 // onclick function for opening of news edit modal
@@ -100,14 +45,6 @@ function addImagePreview(imageFeild_id, imagePreview_id){
                 };
                 reader.readAsDataURL(this.files[0]);
             })
-}
-// onclick function for opening news preview modal
-function showNewsPreviewModal(id) {
-    displayModal(VIEW_NEWS_URL + id);
-}
-
-function showAvatarDeleteModal() {
-    displayModal(DELETE_AVATAR_URL);
 }
 
 // function that submits user's password change request
@@ -168,7 +105,7 @@ function genericSubmitForm(form_id, submit_url, success_message) {
         },
         error: function (data, xhr, textStatus) {
             requestUnsuccessful();
-            modalContent.innerHTML = data.responseText;
+            MODAL_CONTENT.innerHTML = data.responseText;
         },
     });
 }
@@ -257,18 +194,18 @@ function requestUnsuccessful() {
 
 // function that closes the modal if area outside of modal is clicked
 window.onclick = function (event) {
-    if (event.target === modalContainer) {
-        modalContainer.style.display = "none";
-        modalContent.innerHTML = "";
+    if (event.target === MODAL_CONTAINER) {
+        MODAL_CONTAINER.style.display = "none";
+        MODAL_CONTENT.innerHTML = "";
     }
 }
 
 // functions for modal closing on button press
 function closeFunction() {
-    modalContainer.style.display = "none";
+    MODAL_CONTAINER.style.display = "none";
     window.location.reload();
 }
 
 function modalClose() {
-    modalContainer.style.display = "none";
+    MODAL_CONTAINER.style.display = "none";
 }
