@@ -1,4 +1,7 @@
-from django.contrib.auth.models import AbstractUser
+from datetime import datetime
+
+from django.contrib.auth import user_logged_in
+from django.contrib.auth.models import AbstractUser, update_last_login
 from django.db import models
 
 from events.models import Event
@@ -26,6 +29,7 @@ class User(AbstractUser):
     birth_date = models.DateField(null=True, default=None, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     business_phone = models.CharField(max_length=15, null=True, blank=True)
+    previous_login = models.DateTimeField('previous login', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
@@ -42,3 +46,13 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name + '(' + self.username + ')'
+
+
+def update_last_and_previous_login(sender, user, **kwargs):
+    user.previous_login = user.last_login
+    user.last_login = datetime.now()
+    user.save(update_fields=["previous_login", "last_login"])
+
+
+user_logged_in.disconnect(update_last_login, dispatch_uid="update_last_login")
+user_logged_in.connect(update_last_and_previous_login, dispatch_uid="update_last_and_previous_login")
