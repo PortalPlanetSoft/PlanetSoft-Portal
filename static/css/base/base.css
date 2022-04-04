@@ -72,6 +72,9 @@ a {
 a:hover {
     color: var(--medium-gray);
 }
+.dv-mobile-fullw{
+    display: flex;
+}
 
 .dk-search {
     display: flex;
@@ -91,15 +94,14 @@ a:hover {
 
 .dk-i {
     display: inline-block;
-    right: 1.8rem;
     color: var(--primary);
+    right: -0.5rem;
     padding: 0.5rem;
     border: 1px solid var(--primary);
     border-radius: 50%;
     box-shadow: 1px 1px var(--light-gray);
     position: relative;
     cursor: pointer;
-    margin-left: 2rem;
 }
 
 .dk-search a {

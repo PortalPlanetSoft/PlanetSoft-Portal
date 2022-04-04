@@ -96,15 +96,12 @@
     }
     .dk-i{
       display: block;
+      font-size: 2.2rem;
       position: relative;
       right: -8%;
-      bottom: 1rem;
+      padding: 0.7rem;
     }
-    .dk-i > svg{
-      position: absolute;
-      bottom: 40%;
-      right: 10%;
-    }
+
     /* CARDS */
     .dk-grid-container {
       grid-template-columns: 1fr;
@@ -286,8 +283,9 @@
   
       }
       .news-i{
-          right: 3.5rem;
           font-size: 2.2rem;
+          right: -8%;
+          padding: 0.7rem;
       }
       .choose_author{
           grid-column: 2/10;
