@@ -275,11 +275,20 @@ a:hover {
     visibility: visible;
 }
 
-.image-container {
+.avatar-image-container {
     height: 200px;
     width: 200px;
     display: flex;
     justify-content: center;
+    position: relative;
+}
+
+.news-image-container {
+    height: 200px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
 
 #remove-avatar-button {
@@ -295,13 +304,16 @@ a:hover {
     visibility: hidden;
     margin: 40px;
     top: 50%;
+    width: 50px;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     position: absolute;
 }
 
-#photo-preview{
+.dv-photo-preview{
     margin: 0;
+    height: 200px;
+    width:200px;
     position: absolute;
     display: flex;
     top: 50%;
@@ -309,8 +321,44 @@ a:hover {
     transform: translateY(-50%);
 }
 
-#photo-preview:hover{
-    opacity: 1.0;
+.news-photo-preview{
+    margin: 0;
+    height: 200px;
+    width:400px;
+    position: absolute;
+    display: flex;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#remove-image-button{
+    visibility: hidden;
+    margin: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: absolute;
+}
+
+#id_image{
+    visibility: hidden;
+    margin: 40px;
+    top: 50%;
+    width: 50px;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: absolute;
+}
+
+.avatar-image-container:hover{
+    background-color: rgba(0, 0, 0, 0.16);
+    border-radius: 5px;
+}
+
+.news-image-container:hover{
+    background-color: rgba(0, 0, 0, 0.16);
+    border-radius: 5px;
 }
 
 .dv-input-container {

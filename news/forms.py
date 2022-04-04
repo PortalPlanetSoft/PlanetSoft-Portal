@@ -12,6 +12,7 @@ LABEL_TEXT = {
 
 class AddNewsArticleForm(forms.ModelForm):
     use_required_attribute = False
+    image = forms.ImageField(required=False, widget=forms.FileInput)
 
     class Meta:
         model = NewsArticle

@@ -25,9 +25,6 @@ $(function () {
             break;
     }
 
-    document.getElementById("id_profile_pic").style.color = "transparent";
-
-
     const TODAYS_DATE = new Date();
 
     let month = TODAYS_DATE.getMonth() + 1;
@@ -43,7 +40,7 @@ $(function () {
     dateValidation();
 });
 
-function dateValidation(){
+function dateValidation() {
     $('#id_birth_date').attr('max', maxDate);
     $('#id_start_time_0').attr('min', maxDate);
     $('#id_end_time_0').attr('min', maxDate);
@@ -119,6 +116,7 @@ function imageRemove() {
 }
 
 let ident;
+
 function idKeeper(id) {
     ident = id;
 }
@@ -226,15 +224,25 @@ function dateSet() {
     });
 }
 
-function showButtons(show){
-    const DELETE_IMAGE_BUTTON = document.getElementById("remove-avatar-button");
-    const INPUT_FIELD = document.getElementById("id_profile_pic");
-    INPUT_FIELD.classList.add("ov-form__btn--blue","ov-form__btn");
-    if(show == 0){
+function showButtonsNewsImage(show) {
+    alert("news "+show);
+    INPUT_FIELD_NEWS.classList.add("ov-form__btn--blue", "ov-form__btn");
+    if (show == 0) {
         DELETE_IMAGE_BUTTON.style.visibility = "visible";
-        INPUT_FIELD.style.visibility = "visible";
+        INPUT_FIELD_NEWS.style.visibility = "visible";
     } else {
         DELETE_IMAGE_BUTTON.style.visibility = "hidden";
+        INPUT_FIELD_NEWS.style.visibility = "hidden";
+    }
+}
+
+function showButtonsAvatarImage(show) {
+    INPUT_FIELD.classList.add("ov-form__btn--blue", "ov-form__btn");
+    if (show == 0) {
+        DELETE_AVATAR_BUTTON.style.visibility = "visible";
+        INPUT_FIELD.style.visibility = "visible";
+    } else {
+        DELETE_AVATAR_BUTTON.style.visibility = "hidden";
         INPUT_FIELD.style.visibility = "hidden";
     }
 }

@@ -85,8 +85,7 @@
             </div>
             {% endif %}
             <label>{{ form.profile_pic.label }}</label>
-            <div class="image-container" onmouseover="showButtons(0)" onmouseleave="showButtons(1)">
-
+            <div class="avatar-image-container" onmouseover="showButtonsAvatarImage(0)" onmouseleave="showButtonsAvatarImage(1)">
                 {% if object.profile_pic %}
                     <img id="photo-preview" class="dv-photo-preview" src={{ object.profile_pic.url }}>
                 {% else %}
@@ -98,10 +97,10 @@
                              alt='woman-profile'>
                     {% endif %}
                 {% endif %}
+
                 {{ form.profile_pic }}
                 <button id="remove-avatar-button" class="ov-form__btn" type="button" onclick="displayModal(DELETE_AVATAR_URL)"><i class="fa-solid fa-trash-can"></i></button>
             </div>
-
 
 
             <div class="ov-form__btn-container">

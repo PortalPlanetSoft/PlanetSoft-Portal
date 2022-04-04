@@ -7,46 +7,50 @@
             {{ error }}
         </div>
     {% endfor %}
-        <div>
-            <label>{{ form.headline.label }}</label>
+    <div>
+        <label>{{ form.headline.label }}</label>
 
-            {{ form.headline }}
-        </div>
-        {% if form.headline.errors %}
-            <div>
-                {{ form.headline.errors }}
-            </div>
-        {% endif %}
+        {{ form.headline }}
+    </div>
+    {% if form.headline.errors %}
         <div>
-            <label>{{ form.content.label }}</label>
-
-            {{form.content}}
+            {{ form.headline.errors }}
         </div>
-        {% if form.content.errors %}
-            <div>
-                {{ form.content.errors }}
-            </div>
-        {% endif %}
+    {% endif %}
+    <div>
+        <label>{{ form.content.label }}</label>
+
+        {{ form.content }}
+    </div>
+    {% if form.content.errors %}
         <div>
-            <label>{{ form.image.label }}</label>
-                {% if object.image %}
-                    <img id="photo-preview" class="dv-photo-preview" src={{ object.image.url }}>
-                {% endif %}
-                    <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/1.png' %}'>
-
-            {{form.image}}
+            {{ form.content.errors }}
         </div>
-        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red" onclick="displayModal(URL_ADDRESS+'/news/remove-photo/'+ {{ object.id }}), idKeeper({{ object.id }})">
-            Ukloni sliku
-        </button>
-        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red"
-                onclick="displayModal(DELETE_NEWS_URL+{{ object.id }})">Izbriši vijest
-        </button>
-        <button type="button" id="submitForm" class="ov-form__btn" onclick="submitNewsEditForm({{ object.id }})">
-            Sačuvaj
-        </button>
-        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">
-            Odustani
-        </button>
+    {% endif %}
+    <div>
+        <label>{{ form.image.label }}</label>
+        <div class="news-image-container" onmouseover="showButtonsNewsImage(0)" onmouseleave="showButtonsNewsImage(1)">
+            {% if object.image %}
+                <img id="news-photo-preview" class="news-photo-preview" src={{ object.image.url }}>
+            {% else %}
+                <img id="news-photo-preview" class="news-photo-preview" src='{% static 'img/news.png' %}'>
+            {% endif %}
+            {{ form.image }}
+            <button type="button" id="remove-image-button" class="ov-form__btn ov-form__btn--red"
+                    onclick="displayModal(URL_ADDRESS+'/news/remove-photo/'+ {{ object.id }}), idKeeper({{ object.id }})">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+        </div>
+    </div>
+
+    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red"
+            onclick="displayModal(DELETE_NEWS_URL+{{ object.id }})">Izbriši vijest
+    </button>
+    <button type="button" id="submitForm" class="ov-form__btn" onclick="submitNewsEditForm({{ object.id }})">
+        Sačuvaj
+    </button>
+    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">
+        Odustani
+    </button>
     </div>
 </form>
