@@ -166,3 +166,10 @@ class LoginNotification(TemplateView):
                                                          start_time__gt=datetime.now(), start_time__lt=tommorow.date())
 
         return context
+
+@login_required
+def previous_login(request):
+    obj = User.objects.filter(id=request.user.id).first()
+    obj.previous_login = datetime.now()
+    obj.save()
+    return HTTP_STATUS_200

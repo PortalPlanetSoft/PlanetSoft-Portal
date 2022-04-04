@@ -1,7 +1,7 @@
 "use strict"
-const modalContent = document.getElementById("modal-content");
-const modalContainer = document.getElementById("modal-container");
-const urlAddress = 'http://127.0.0.1:8000';
+const MODAL_CONTENT = document.getElementById("modal-content");
+const MODAL_CONTAINER = document.getElementById("modal-container");
+const URL_ADDRESS = 'http://127.0.0.1:8000';
 
 // error codes for displaying required fields and toast messages
 const DEFAULT_TOAST = ""; // default message in the toast (empty - neutral)
@@ -22,18 +22,18 @@ const REGEX_MAIL = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+
 const REGEX_NUMBER = /^(\+387|00387|0)(66|65|61)[0-9]{6}$/;
 const REGEX_VPN_NUMBER = /^[0-9]{3}$/;
 
-const PASSWORD_CHANGE_URL = urlAddress + '/employees/password-change/';
-const VIEW_USER_URL = urlAddress + '/employees/';
-const DELETE_USER_URL = urlAddress + '/employees/delete/';
-const ADD_USER_URL = urlAddress + '/employees/create/';
-const ADD_NEWS_URL = urlAddress + '/news/create/';
-const EDIT_NEWS_URL = urlAddress + '/news/';
-const DELETE_NEWS_URL = urlAddress + '/news/delete/';
-const VIEW_NEWS_URL = urlAddress + '/news/article/preview/';
-const DELETE_AVATAR_URL = urlAddress + '/employees/remove-avatar/';
+const PASSWORD_CHANGE_URL = URL_ADDRESS + '/employees/password-change/';
+const VIEW_USER_URL = URL_ADDRESS + '/employees/';
+const DELETE_USER_URL = URL_ADDRESS + '/employees/delete/';
+const ADD_USER_URL = URL_ADDRESS + '/employees/create/';
+const ADD_NEWS_URL = URL_ADDRESS + '/news/create/';
+const EDIT_NEWS_URL = URL_ADDRESS + '/news/';
+const DELETE_NEWS_URL = URL_ADDRESS + '/news/delete/';
+const VIEW_NEWS_URL = URL_ADDRESS + '/news/article/preview/';
+const DELETE_AVATAR_URL = URL_ADDRESS + '/employees/remove-avatar/';
 
-const CREATE_EVENT_URL = urlAddress + '/calendar/create/';
-const DELETE_EVENT_URL = urlAddress + '/calendar/delete/';
-const EDIT_EVENT_URL = urlAddress + '/calendar/';
-const CALENDAR_EVENTS_URL = urlAddress + '/calendar/events/';
-const EVENT_PREVIEW_URL = urlAddress + '/calendar/preview/';
+const CREATE_EVENT_URL = URL_ADDRESS + '/calendar/create/';
+const DELETE_EVENT_URL = URL_ADDRESS + '/calendar/delete/';
+const EDIT_EVENT_URL = URL_ADDRESS + '/calendar/';
+const CALENDAR_EVENTS_URL = URL_ADDRESS + '/calendar/events/';
+const EVENT_PREVIEW_URL = URL_ADDRESS + '/calendar/preview/';

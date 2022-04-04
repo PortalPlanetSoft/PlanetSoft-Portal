@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import path
 
-from .views import EmployeeCreate, EmployeeUpdate, EmployeeList, EmployeeDelete, Profile, PasswordChange,\
-    remove_avatar, LoginNotification
+from .views import EmployeeCreate, EmployeeUpdate, EmployeeList, EmployeeDelete, Profile, PasswordChange, \
+    remove_avatar, LoginNotification, previous_login
 
 urlpatterns = [
     path('', login_required(EmployeeList.as_view()), name='employees'),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('password-change/', login_required(PasswordChange.as_view(
         template_name='users/authentication/password_change.html')), name='password-change'),
     path('remove-avatar/', remove_avatar, name='remove-avatar'),
+    path('previous-login/', previous_login, name='previous-login'),
 ]
