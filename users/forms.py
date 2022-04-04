@@ -128,7 +128,7 @@ class EditEmployeeForm(forms.ModelForm):
             'is_editor': forms.CheckboxInput(attrs={'label': 'Editor'}),
             'birth_date': forms.DateInput(attrs={'placeholder': 'Datum rođenja', 'type': 'date'}),
             'phone': forms.TextInput(attrs={'placeholder': 'Broj telefona'}),
-            'business_phone': forms.TextInput(attrs={'placeholder': 'Poslovni broj telefona'})
+            'business_phone': forms.TextInput(attrs={'placeholder': 'Poslovni broj telefona'}),
         }
 
     def __init__(self, disable_fields=False, *args, **kwargs):

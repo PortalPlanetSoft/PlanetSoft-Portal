@@ -25,6 +25,9 @@ $(function () {
             break;
     }
 
+    document.getElementById("id_profile_pic").style.color = "transparent";
+
+
     const TODAYS_DATE = new Date();
 
     let month = TODAYS_DATE.getMonth() + 1;
@@ -221,4 +224,17 @@ function dateSet() {
         url: URL_ADDRESS + '/employees/previous-login/',
         type: 'GET',
     });
+}
+
+function showButtons(show){
+    const DELETE_IMAGE_BUTTON = document.getElementById("remove-avatar-button");
+    const INPUT_FIELD = document.getElementById("id_profile_pic");
+    INPUT_FIELD.classList.add("ov-form__btn--blue","ov-form__btn");
+    if(show == 0){
+        DELETE_IMAGE_BUTTON.style.visibility = "visible";
+        INPUT_FIELD.style.visibility = "visible";
+    } else {
+        DELETE_IMAGE_BUTTON.style.visibility = "hidden";
+        INPUT_FIELD.style.visibility = "hidden";
+    }
 }
