@@ -39,6 +39,6 @@ const CALENDAR_EVENTS_URL = URL_ADDRESS + '/calendar/events/';
 const EVENT_PREVIEW_URL = URL_ADDRESS + '/calendar/preview/';
 
 const DELETE_AVATAR_BUTTON = document.getElementById("remove-avatar-button");
-const DELETE_IMAGE_BUTTON = document.getElementById("remove-image-button");
+
 const INPUT_FIELD = document.getElementById("id_profile_pic");
-const INPUT_FIELD_NEWS = document.getElementById("id_image");
+

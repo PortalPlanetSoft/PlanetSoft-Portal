@@ -29,11 +29,11 @@
     {% endif %}
     <div>
         <label>{{ form.image.label }}</label>
-        <div class="news-image-container" onmouseover="showButtonsNewsImage(0)" onmouseleave="showButtonsNewsImage(1)">
+        <div class="image-container" onmouseover="showButtonsNewsImage(0)" onmouseleave="showButtonsNewsImage(1)">
             {% if object.image %}
-                <img id="news-photo-preview" class="news-photo-preview" src={{ object.image.url }}>
+                <img id="photo-preview" class="dv-photo-preview" src={{ object.image.url }}>
             {% else %}
-                <img id="news-photo-preview" class="news-photo-preview" src='{% static 'img/news.png' %}'>
+                <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/news.png' %}'>
             {% endif %}
             {{ form.image }}
             <button type="button" id="remove-image-button" class="ov-form__btn ov-form__btn--red"

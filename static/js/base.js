@@ -225,7 +225,8 @@ function dateSet() {
 }
 
 function showButtonsNewsImage(show) {
-    alert("news "+show);
+    const DELETE_IMAGE_BUTTON = document.getElementById("remove-image-button");
+    const INPUT_FIELD_NEWS = document.getElementById("id_image");
     INPUT_FIELD_NEWS.classList.add("ov-form__btn--blue", "ov-form__btn");
     if (show == 0) {
         DELETE_IMAGE_BUTTON.style.visibility = "visible";
