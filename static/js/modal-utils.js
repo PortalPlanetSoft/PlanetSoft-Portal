@@ -32,7 +32,7 @@ function submitEventDeleteForm(id) {
 // onclick function for opening of news edit modal
 async function showNewsEditModal(id) {
     await displayModal(EDIT_NEWS_URL + id + '/').then(
-        res => {
+        () => {
             addImagePreview("id_image", "photo-preview")
         }
     );
