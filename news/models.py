@@ -20,9 +20,11 @@ class Comment(models.Model):
     parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     article = models.ForeignKey(NewsArticle, on_delete=models.CASCADE)
+    likes_comment = models.ManyToManyField(User, related_name='likes_dislikes_comment', through='LikeDislike')
 
 
 class LikeDislike(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    article = models.ForeignKey(NewsArticle, on_delete=models.CASCADE)
+    article = models.ForeignKey(NewsArticle, on_delete=models.CASCADE, null=True)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
     type = models.BooleanField(null=True)

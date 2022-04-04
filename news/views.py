@@ -56,14 +56,20 @@ class NewsList(ListView):
                                                           Q(start_time__lt=after_tommorow.date()))
 
         context['after_tommorow_events'] = Event.objects.filter(Q(start_time__gte=after_tommorow.date()),
-                                                          Q(author__id=self.request.user.pk) |
-                                                          Q(shared=self.request.user.pk),
-                                                          Q(start_time__lt=week.date()))
+                                                                Q(author__id=self.request.user.pk) |
+                                                                Q(shared=self.request.user.pk),
+                                                                Q(start_time__lt=week.date()))
 
         context['liked_articles'] = LikeDislike.objects.filter(user_id=self.request.user).all()
 
+        has_reacted = LikeDislike.objects.filter(comment_id=OuterRef('pk'), user_id=self.request.user.pk)
+
         for article in news:
-            article.top_comments = article.comment_set.all().order_by('-edited_date')[:3]
+            article.top_comments = article.comment_set.all().order_by('-edited_date')[:3].annotate(
+                    likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
+                    dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
+                    liked=Subquery(has_reacted.values('type'))
+                )
 
         context['object_list'] = news
         context['author_list'] = User.objects.filter(Q(is_editor=True) | Q(is_admin=True), is_active=True)
@@ -75,7 +81,7 @@ class NewsList(ListView):
             likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
             dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
             liked=Subquery(has_reacted.values('type')))
-        #top_comments = Comment.objects.filter(article_id__in=queryset.values_list('id')).order_by('-edited_date')[:3]
+        # top_comments = Comment.objects.filter(article_id__in=queryset.values_list('id')).order_by('-edited_date')[:3]
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
 
@@ -231,3 +237,29 @@ def remove_news_photo(request, pk):
     else:
         response = TemplateResponse(request, 'news/photo-confirm-deletion.html', {})
         return response
+
+
+@login_required
+def likes_dislikes_comment(request, pk):
+    liked_disliked_comment = None
+    if LikeDislike.objects.filter(user_id=request.user.pk, comment_id=pk).exists():
+        liked_disliked_comment = LikeDislike.objects.filter(user_id=request.user.pk, comment_id=pk).get()
+
+    if request.headers['flag']:
+        if liked_disliked_comment is not None and liked_disliked_comment.type:
+            liked_disliked_comment.delete()
+        elif liked_disliked_comment is not None and not liked_disliked_comment.type:
+            liked_disliked_comment.type = True
+            liked_disliked_comment.save()
+        else:
+            LikeDislike.objects.create(user_id=request.user.pk, comment_id=pk, type=True)
+    else:
+        if liked_disliked_comment is not None and not liked_disliked_comment.type:
+            liked_disliked_comment.delete()
+        elif liked_disliked_comment is not None and liked_disliked_comment.type:
+            liked_disliked_comment.type = False
+            liked_disliked_comment.save()
+        else:
+            LikeDislike.objects.create(user_id=request.user.pk, comment_id=pk, type=False)
+
+    return HttpResponse(status=HTTP_STATUS_200)
