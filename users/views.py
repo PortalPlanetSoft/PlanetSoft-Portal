@@ -1,11 +1,15 @@
+from datetime import datetime, timedelta
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.template.response import TemplateResponse
-from django.views.generic import CreateView, UpdateView, ListView, DeleteView, FormView
+from django.views.generic import CreateView, UpdateView, ListView, DeleteView, FormView, TemplateView
 
+from events.models import Event
+from news.constants import TOMORROW
 from praksaPlanetSoft.constants import FIRST_PAGE, HTTP_STATUS_400, HTTP_STATUS_401, HTTP_STATUS_200
 from users.constants import USER_CARDS_PER_PAGE
 from users.forms import AddEmployeeForm, EditEmployeeForm, ProfileForm
@@ -41,6 +45,8 @@ class EmployeeList(ListView):
         if self.request.GET.get('location'):
             context['location'] = self.request.GET.get('location')
 
+        context['previous_login_date'] = self.request.user.previous_login.date()
+        context['current_date'] = datetime.now().date()
         context['position'] = self.request.GET.get('position')
         context['object_list'] = users
         context['position_list'] = CompanyPosition.objects.all()
@@ -146,3 +152,17 @@ def remove_avatar(request):
     else:
         response = TemplateResponse(request, 'users/employee/avatar-confirm-deletion.html', {})
         return response
+
+
+class LoginNotification(TemplateView):
+    template_name = 'events/day.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(LoginNotification, self).get_context_data(**kwargs)
+        tommorow = datetime.today() + timedelta(TOMORROW)
+        if self.request.user.previous_login.date() < datetime.now().date():
+            context['event_list'] = Event.objects.filter(Q(author=self.request.user.pk) |
+                                                         Q(shared=self.request.user.pk),
+                                                         start_time__gt=datetime.now(), start_time__lt=tommorow.date())
+
+        return context

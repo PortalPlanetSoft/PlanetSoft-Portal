@@ -100,6 +100,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="news-comment-content">
+                    {% for comment in article.top_comments %}
+                        <div class="comment-content">
+
+                          <div class="profile-img-comment">
+                            {% if comment.author.profile_pic %}
+                                <img src={{ comment.author.profile_pic.url }}>
+                            {% else %}
+                            {% if comment.author.gender == 'M' %}
+                                <img src='{% static 'img/1.png' %}' alt='man-profile'>
+                            {% else %}
+                                <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+                            {% endif %}
+                            {% endif %}
+                          </div>
+                        <a onclick="showUserPreviewModal({{ comment.author.id }})">
+                            <h4>{{ comment.author.first_name }} {{ comment.author.last_name }}</h4></a>
+                        <p>{{ comment.content }}</p>
+
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         {% endfor %}
 
