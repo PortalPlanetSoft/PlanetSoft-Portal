@@ -22,7 +22,7 @@
             </div>
             {% if user.is_admin or user.is_superuser or user.is_editor %}
                 <div class="create_news">
-                    <a onclick="showNewsAddModal()">Dodajte vijest
+                    <a onclick="displayModal(ADD_NEWS_URL)">Dodajte vijest
                         <i class="fa-solid fa-circle-plus fa-xl"></i></a>
                 </div>
             {% endif %}
@@ -43,7 +43,7 @@
                             href="http://127.0.0.1:8000/news/article/{{ article.id }}">{{ article.headline }} </a>
                     </h4></div>
                     <div class="article-author-news-preview">
-                        <a onclick="showUserPreviewModal({{ article.author.id }})"><p>
+                        <a onclick="displayModal(VIEW_USER_URL+{{ article.author.id }})"><p>
                             Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
                     </div>
                 </div>
@@ -87,18 +87,40 @@
                                     class="fa-regular fa-pen-to-square"></i></a></div>
                             <div class="news-button">
                             <a id="button-user-edit" class="button"
-                               onclick="showNewsPreviewModal({{ article.id }})">
+                               onclick="displayModal(VIEW_NEWS_URL+{{ article.id }})">
                                 Prikaži vijest</a>
 
                         {% else %}
 
                             <a id="button-user-edit" class="button"
-                               onclick="showNewsPreviewModal({{ article.id }})">
+                               onclick="displayModal(VIEW_NEWS_URL+{{ article.id }})">
                                 Prikaži vijest</a>
 
                         {% endif %}
                         </div>
                     </div>
+                </div>
+                <div class="news-comment-content">
+                    {% for comment in article.top_comments %}
+                        <div class="comment-content">
+
+                          <div class="profile-img-comment">
+                            {% if comment.author.profile_pic %}
+                                <img src={{ comment.author.profile_pic.url }}>
+                            {% else %}
+                            {% if comment.author.gender == 'M' %}
+                                <img src='{% static 'img/1.png' %}' alt='man-profile'>
+                            {% else %}
+                                <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+                            {% endif %}
+                            {% endif %}
+                          </div>
+                        <a onclick="displayModal(VIEW_USER_URL+{{ comment.author.id }})">
+                            <h4>{{ comment.author.first_name }} {{ comment.author.last_name }}</h4></a>
+                        <p>{{ comment.content }}</p>
+
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         {% endfor %}
@@ -116,7 +138,7 @@
                                 <div class="circle-mid bg-accent"></div>
 
                             {% endif %}
-                            <a onclick="showEventPreviewModal({{ event.id }})"><p>{{ event.title }}</p></a></div>
+                            <a onclick="displayModal(EVENT_PREVIEW_URL+{{ event.id }})"><p>{{ event.title }}</p></a></div>
 
                     {% endfor %}
                 </div>
@@ -131,7 +153,7 @@
                             {% elif event.type == "Daily" or event.type == "Planiranje"%}
                                 <div class="circle-mid bg-accent"></div>
                             {% endif %}
-                            <a onclick="showEventPreviewModal({{ event.id }})"><p>{{ event.title }}</p></a></div>
+                            <a onclick="displayModal(EVENT_PREVIEW_URL+{{ event.id }})"><p>{{ event.title }}</p></a></div>
                     {% endfor %}
                 </div>
             </form>
@@ -139,7 +161,7 @@
                 <h4>Predstojeci dogadjaji</h4>
                 <div class="after-tommorow">
                     {% for event in after_tommorow_events %}
-                        <a onclick="showEventPreviewModal({{ event.id }})"><h4>{{ event.start_time|date }}</h4>
+                        <a onclick="displayModal(EVENT_PREVIEW_URL+{{ event.id }})"><h4>{{ event.start_time|date }}</h4>
                             <p>{{ event.title }}</p></a>
                     {% endfor %}
                 </div>

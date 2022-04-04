@@ -6,7 +6,7 @@
         <div class="header-news-details">
             <div class="creation-date-news"><p>{{ article.creation_date }}</p></div>
             <div class="article-author-news">
-                <a onclick="showUserPreviewModal({{ article.author.id }})"><p>
+                <a onclick="displayModal(VIEW_USER_URL+{{ article.author.id }})"><p>
                     Autor: {{ article.author.first_name }} {{ article.author.last_name }}</p></a>
             </div>
             <div class="article-headline-news"><h4>{{ article.headline }}</h4></div>
@@ -67,7 +67,7 @@
                             {% endif %}
                         {% endif %}
                     </div>
-                    <a onclick="showUserPreviewModal({{ comment.author.id }})">
+                    <a onclick="displayModal(VIEW_USER_URL+{{ comment.author.id }})">
                         <h4>{{ comment.author.first_name }} {{ comment.author.last_name }}</h4></a>
                     <p>{{ comment.content }}</p>
                 </div>

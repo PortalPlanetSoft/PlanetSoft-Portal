@@ -1,4 +1,5 @@
 from calendar import HTMLCalendar
+from datetime import datetime
 
 from django.db.models import Q
 from .models import Event
@@ -17,13 +18,13 @@ class Calendar(HTMLCalendar):
         d = ''
         for event in events_per_day:
             if event.type == 'Rođendan':
-                d += f"<a onclick='showEventPreviewModal({event.id})'><li> {event.title} " \
+                d += f"<a onclick='displayModal(EVENT_PREVIEW_URL+{event.id})'><li> {event.title} " \
                      f"<i class='fa-solid fa-cake-candles'></i> </li></a>"
             else:
-                d += f"<a onclick='showEventPreviewModal({event.id})'><li>{event.title} {event.start_time.strftime('%H:%M')}</li></a>"
+                d += f"<a onclick='displayModal(EVENT_PREVIEW_URL+{event.id})'><li>{event.title} {event.start_time.strftime('%H:%M')}</li></a>"
 
         if day != 0:
-            return f"<td><span class='date'><a onclick='showDateEventPreviewModal(\"{self.year}/{self.month}/{day}\")'>{day}<a/>" \
+            return f"<td><span class='date'><a onclick='displayModal(CALENDAR_EVENTS_URL+\"{self.year}/{self.month}/{day}\")'>{day}<a/>" \
                    f"</span><ul> {d} </ul></td>"
         return '<td></td>'
 
@@ -49,3 +50,9 @@ class Calendar(HTMLCalendar):
             cal += f'{self.format_week(week, events)}\n'
         cal += '</table>\n'
         return cal
+
+
+def str_2_date(date, time):
+    created_date = datetime.strptime(date, '%Y-%m-%d').date()
+    created_time = datetime.strptime(time, '%H:%M').time()
+    return datetime.combine(created_date, created_time)

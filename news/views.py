@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q, Count, OuterRef, Subquery
 from django.http import HttpResponseRedirect, HttpResponse
+from django.template.response import TemplateResponse
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView
 
 from events.models import Event
@@ -59,6 +61,10 @@ class NewsList(ListView):
                                                           Q(start_time__lt=week.date()))
 
         context['liked_articles'] = LikeDislike.objects.filter(user_id=self.request.user).all()
+
+        for article in news:
+            article.top_comments = article.comment_set.all().order_by('-edited_date')[:3]
+
         context['object_list'] = news
         context['author_list'] = User.objects.filter(Q(is_editor=True) | Q(is_admin=True), is_active=True)
         return context
@@ -69,7 +75,7 @@ class NewsList(ListView):
             likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
             dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
             liked=Subquery(has_reacted.values('type')))
-
+        #top_comments = Comment.objects.filter(article_id__in=queryset.values_list('id')).order_by('-edited_date')[:3]
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
 
@@ -181,7 +187,7 @@ def likes_dislikes(request, pk):
             LikeDislike.objects.create(user_id=request.user.pk, article_id=pk, type=False)
 
     return HttpResponse(status=HTTP_STATUS_200)
-    #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -194,7 +200,7 @@ def add_comment(request, pk):
             comment = Comment(content=request.POST.get('content'), author=request.user,
                               article=NewsArticle.objects.get(pk=pk))
         comment.save()
-    #return HttpResponse(status=HTTP_STATUS_200)
+    # return HttpResponse(status=HTTP_STATUS_200)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -215,3 +221,13 @@ class AllComments(ListView):
             dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
             liked=Subquery(has_reacted.values('type'))).get(id=self.kwargs['pk'])
         return context
+
+
+@login_required
+def remove_news_photo(request, pk):
+    if request.POST:
+        NewsArticle.objects.filter(id=pk).first().image.delete(save=True)
+        return HTTP_STATUS_200
+    else:
+        response = TemplateResponse(request, 'news/photo-confirm-deletion.html', {})
+        return response
