@@ -1,20 +1,22 @@
 "use strict"
+
 const MODAL_CONTENT = document.getElementById("modal-content");
 const MODAL_CONTAINER = document.getElementById("modal-container");
 const URL_ADDRESS = 'http://127.0.0.1:8000';
 
-// error codes for displaying required fields and toast messages
-const DEFAULT_TOAST = ""; // default message in the toast (empty - neutral)
-const ERROR_ACTION = "Neuspješno!"; // action not completed successfully
-const SUCCESSFUL_ACTION = "Uspješno sačuvano!"; // action completed successfully
-const DELETE_SUCCESSFUL = "Uspješno obrisano!"; // delete action successful
-const INVALID_EMAIL_ERROR = "Molimo Vas unesite ispravan format e-mail adrese!"; // input email not valid
-const INVALID_PHONE_ERROR = "Molimo Vas unesite ispravan format broja telefona!"; // input phone number not valid
-const INVALID_VPN_ERROR = "Molimo Vas unesite ispravan format VPN telefona!"; // input vpn number not valid
+const NAV_TOGGLE_BTN = document.querySelector('#ov-nav-toggle');
+const NAVIGATION = document.querySelector('#ov-navigation');
 
-// validation codes to determine if validation was successful
-const PASSWORD_VALIDATION_FAIL = "Molimo Vas unesite šifru u odgovarajućem formatu!"; // error that is triggered when new input password does not meet required format
-const PASSWORDS_MATCHING_ERROR = "Molimo Vas unesite istu šifru u oba polja!"; // error that is triggered if the new password is not the same in both fields
+const DEFAULT_TOAST = "";
+const ERROR_ACTION = "Neuspješno!";
+const SUCCESSFUL_ACTION = "Uspješno sačuvano!";
+const DELETE_SUCCESSFUL = "Uspješno obrisano!";
+const INVALID_EMAIL_ERROR = "Molimo Vas unesite ispravan format e-mail adrese!";
+const INVALID_PHONE_ERROR = "Molimo Vas unesite ispravan format broja telefona!";
+const INVALID_VPN_ERROR = "Molimo Vas unesite ispravan format VPN telefona!";
+
+const PASSWORD_VALIDATION_FAIL = "Molimo Vas unesite šifru u odgovarajućem formatu!";
+const PASSWORDS_MATCHING_ERROR = "Molimo Vas unesite istu šifru u oba polja!";
 const FIRST_FIELD_EMPTY = "Polje ne moze biti prazno!";
 
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // minimum eight characters, at least one letter and one number

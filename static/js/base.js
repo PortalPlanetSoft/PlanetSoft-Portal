@@ -1,8 +1,5 @@
 "use strict"
 
-const NAV_TOGGLE_BTN = document.querySelector('#ov-nav-toggle');
-const NAVIGATION = document.querySelector('#ov-navigation');
-
 let maxDate;
 
 // pageOnLoad function that fetches action result from sessionStorage so the toast alert can be shown
