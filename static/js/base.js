@@ -155,6 +155,24 @@ function genericLikeDislikeFunction(form_id, id, flag) {
     );
 }
 
+function genericLikeDislikeFunctionComment(form_id, id, flag) {
+    let form = $(form_id);
+    $.ajax({
+            url: URL_ADDRESS + '/news/likes_dislikes_comment/' + id ,
+            type: 'POST',
+            data: form.serialize(),
+            headers: flag,
+            success: function (data, textStatus, xhr) {
+                loadLikeContainer(id);
+            },
+            error: function (data, textStatus, xhr) {
+                requestUnsuccessful();
+            },
+        },
+    );
+}
+
+
 function genericLikeDislikeOnPageFunction(form_id, id, flag) {
     let form = $(form_id);
     $.ajax({
@@ -179,6 +197,15 @@ function submitLikeButton(id) {
 function submitDislikeButton(id) {
     genericLikeDislikeFunction("#news-dislike-form", id, {'flag': ''});
 }
+
+function submitLikeButtonComment(id) {
+    genericLikeDislikeFunctionComment("#comment-like-form", id, {'flag': 'like'});
+}
+
+function submitDislikeButtonComment(id) {
+    genericLikeDislikeFunctionComment("#comment-dislike-form", id, {'flag': ''});
+}
+
 
 function loadLikeContainer(id) {
     $.ajax({
