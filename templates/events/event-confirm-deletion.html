@@ -6,7 +6,7 @@
         <div class="ov-form__btn-container">
             <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Ne</button>
             <button type="button" id="submitForm" class="ov-form__btn"
-                    onclick="submitEventDeleteForm({{ object.id }})">Da
+                    onclick="genericSubmitForm('delete-event-form', DELETE_EVENT_URL + {{ object.id }} + '/', DELETE_SUCCESSFUL)">Da
             </button>
         </div>
     </div>

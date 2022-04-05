@@ -17,18 +17,6 @@ async function displayModal(targetUrlAddress) {
     )
 }
 
-function submitEventCreateForm() {
-    genericSubmitForm("create-event-form", CREATE_EVENT_URL, SUCCESSFUL_ACTION);
-}
-
-function submitEventEditForm(id) {
-    genericSubmitForm("create-event-form", EDIT_EVENT_URL + id + '/', SUCCESSFUL_ACTION);
-}
-
-function submitEventDeleteForm(id) {
-    genericSubmitForm("delete-event-form", DELETE_EVENT_URL + id + '/', DELETE_SUCCESSFUL);
-}
-
 // onclick function for opening of news edit modal
 async function showNewsEditModal(id) {
     await displayModal(EDIT_NEWS_URL + id + '/').then(
@@ -37,14 +25,15 @@ async function showNewsEditModal(id) {
         }
     );
 }
-function addImagePreview(imageFeild_id, imagePreview_id){
+
+function addImagePreview(imageFeild_id, imagePreview_id) {
     document.getElementById(`${imageFeild_id}`).addEventListener("change", function (e) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById(`${imagePreview_id}`).src = e.target.result;
-                };
-                reader.readAsDataURL(this.files[0]);
-            })
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById(`${imagePreview_id}`).src = e.target.result;
+        };
+        reader.readAsDataURL(this.files[0]);
+    })
 }
 
 // function that submits user's password change request
@@ -116,16 +105,6 @@ function genericValidationError(errors) {
     }
 }
 
-// function that deletes the user
-function submitUserDeleteForm(id) {
-    genericSubmitForm("delete-emp-form", DELETE_USER_URL + id + '/', DELETE_SUCCESSFUL);
-}
-
-// function that submits newly created user's data
-function submitCreateUserForm() {
-    genericSubmitForm("create-emp-form", ADD_USER_URL, SUCCESSFUL_ACTION);
-}
-
 function submitFormMultimediaData(targetUrlAddress, formData_id) {
     let formData = new FormData($(formData_id)[0]);
     $.ajax({
@@ -141,21 +120,6 @@ function submitFormMultimediaData(targetUrlAddress, formData_id) {
             requestUnsuccessful();
         },
     });
-}
-
-// function that submits newly created news article
-function submitNewsAddForm() {
-    submitFormMultimediaData(ADD_NEWS_URL, "#create-news-form");
-}
-
-// function that submits edited article data
-function submitNewsEditForm(id) {
-    submitFormMultimediaData(EDIT_NEWS_URL + id + '/', "#edit-news-form");
-}
-
-// function that deletes selected article
-function submitNewsDeleteForm(id) {
-    genericSubmitForm("delete-news-form", DELETE_NEWS_URL + id + '/', DELETE_SUCCESSFUL)
 }
 
 // function used for validation of email address and phone number

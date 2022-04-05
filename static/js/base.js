@@ -134,16 +134,15 @@ function imageRemoveNEWS() {
     );
 }
 
-
-function genericLikeDislikeFunction(form_id, id, flag) {
+function genericSubmitCommentReaction(url, form_id, target_form_id, id, flag){
     let form = $(form_id);
     $.ajax({
-            url: URL_ADDRESS + '/news/react/' + id + '/',
+            url: url,
             type: 'POST',
             data: form.serialize(),
             headers: flag,
             success: function (data, textStatus, xhr) {
-                loadLikeContainer(id);
+                genericContentLoad(target_form_id, id);
             },
             error: function (data, textStatus, xhr) {
                 requestUnsuccessful();
@@ -152,84 +151,17 @@ function genericLikeDislikeFunction(form_id, id, flag) {
     );
 }
 
-function genericLikeDislikeFunctionComment(form_id, id, flag) {
-    let form = $(form_id);
-    $.ajax({
-            url: URL_ADDRESS + '/news/likes_dislikes_comment/' + id ,
-            type: 'POST',
-            data: form.serialize(),
-            headers: flag,
-            success: function (data, textStatus, xhr) {
-                loadLikeContainer(id);
-            },
-            error: function (data, textStatus, xhr) {
-                requestUnsuccessful();
-            },
-        },
-    );
-}
-
-
-function genericLikeDislikeOnPageFunction(form_id, id, flag) {
-    let form = $(form_id);
-    $.ajax({
-            url: URL_ADDRESS + '/news/react/' + id + '/',
-            type: 'POST',
-            data: form.serialize(),
-            headers: flag,
-            success: function (data, textStatus, xhr) {
-                loadLikeOnPageContainer();
-            },
-            error: function (data, textStatus, xhr) {
-                requestUnsuccessful();
-            },
-        },
-    );
-}
-
-function submitLikeButton(id) {
-    genericLikeDislikeFunction("#news-like-form", id, {'flag': 'like'});
-}
-
-function submitDislikeButton(id) {
-    genericLikeDislikeFunction("#news-dislike-form", id, {'flag': ''});
-}
-
-function submitLikeButtonComment(id) {
-    genericLikeDislikeFunctionComment("#comment-like-form", id, {'flag': 'like'});
-}
-
-function submitDislikeButtonComment(id) {
-    genericLikeDislikeFunctionComment("#comment-dislike-form", id, {'flag': ''});
-}
-
-
-function loadLikeContainer(id) {
+function genericContentLoad(target_form_id, id){
     $.ajax({
         url: window.location.href,
         type: 'GET',
         data: {
-            txtsearch: $('#comment-like-section' + id).val()
+            txtsearch: $(target_form_id + id).val()
         },
         dataType: 'html',
         success: function (data) {
-            let result = $('#comment-like-section' + id).append(data).find('#comment-like-section' + id).html();
-            $('#comment-like-section' + id).html(result);
-        },
-    });
-}
-
-function loadLikeOnPageContainer() {
-    $.ajax({
-        url: window.location.href,
-        type: 'GET',
-        data: {
-            txtsearch: $('.comment-like-section').val()
-        },
-        dataType: 'html',
-        success: function (data) {
-            let result = $('.comment-like-section').append(data).find('.comment-like-section').html();
-            $('.comment-like-section').html(result);
+            let result = $(target_form_id + id).append(data).find(target_form_id + id).html();
+            $(target_form_id + id).html(result);
         },
     });
 }

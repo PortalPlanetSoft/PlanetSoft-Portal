@@ -60,7 +60,7 @@
                         <form id="news-like-form" class="news-like"
                               method="post">
                             {% csrf_token %}
-                            <button type="button" name="article_like_id" onclick="submitLikeButton({{ article.id }})">
+                            <button type="button" name="article_like_id" onclick="genericSubmitCommentReaction(REACT_ARTICLE_URL + {{ article.id }} + '/', '#news-like-form', '#comment-like-section', {{ article.id }}, {'flag': 'like'})">
                                 {% if article.liked %}
                                     <i class="fa-solid fa-thumbs-up"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
@@ -70,17 +70,18 @@
                               method="post">
                             {% csrf_token %}
                             <button type="button" name="article_dislike_id"
-                                    onclick="submitDislikeButton({{ article.id }})">
+                                    onclick="genericSubmitCommentReaction(REACT_ARTICLE_URL + {{ article.id }} + '/', '#news-dislike-form', '#comment-like-section', {{ article.id }}, {'flag': ''})">
                                 {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                             <span>{{ article.dislikes_count }}</span>
                         </form>
-                        <form action="{% url 'comment-on-news' article.pk %}" method="post" class="news-comment">
+{#                        action="{% url 'comment-on-news' article.pk %}"#}
+                        <form id="news-comment-form{{ article.id }}" method="post" class="news-comment">
                             {% csrf_token %}
                             <textarea id="news-comment-input{{ article.id }}" name="content"
                                       placeholder="Dodaj komentar..."
                                       oninput="commentTyped({{ article.id }})"></textarea>
-                            <button type="submit" id="news-comment-icon{{ article.id }}"><i
+                            <button type="button" id="news-comment-icon{{ article.id }}" onclick="genericSubmitCommentReaction(SUBMIT_COMMENT_URL + {{ article.id }}, '#news-comment-form{{ article.id }}', '#news-comment-content', {{ article.id }})"><i
                                     class="fa-solid fa-paper-plane"></i></button>
                         </form>
                     </div>
@@ -104,9 +105,9 @@
                     </div>
                 </div>
             <!-- like dislike za komentare  start-->
-                <div class="news-comment-content">
+                <div id="news-comment-content{{ article.id }}" class="news-comment-content">
                     {% for comment in article.top_comments %}
-                        <div class="comment-content">
+                        <div id="comment-content{{ comment.id }}" class="comment-content">
 
                             <div class="profile-img-comment">
                                 {% if comment.author.profile_pic %}
@@ -128,7 +129,7 @@
                                   method="post">
                                 {% csrf_token %}
                                 <button type="button" name="article_like_id"
-                                        onclick="submitLikeButtonComment({{ comment.id }})"> {% if comment.liked %}
+                                        onclick="genericSubmitCommentReaction(REACT_COMMENT_URL + {{ comment.id }} , '#comment-like-form', '#comment-content', {{ comment.id }}, {'flag': 'like'})"> {% if comment.liked %}
                                     <i class="fa-solid fa-thumbs-up"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
 
@@ -140,7 +141,7 @@
 
 
                                 <button type="button" name="article_dislike_id"
-                                        onclick="submitDislikeButtonComment({{ comment.id }})">
+                                        onclick="genericSubmitCommentReaction(REACT_COMMENT_URL + {{ comment.id }} , '#comment-dislike-form', '#comment-content', {{ comment.id }}, {'flag': ''})">
                                     {% if comment.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
                                         <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                                 <span>{{ comment.dislikes_count }}</span>

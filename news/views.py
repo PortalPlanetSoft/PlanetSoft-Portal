@@ -206,8 +206,8 @@ def add_comment(request, pk):
             comment = Comment(content=request.POST.get('content'), author=request.user,
                               article=NewsArticle.objects.get(pk=pk))
         comment.save()
-    # return HttpResponse(status=HTTP_STATUS_200)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponse(status=HTTP_STATUS_200)
+    #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 class AllComments(ListView):

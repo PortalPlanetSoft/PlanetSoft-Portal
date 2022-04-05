@@ -7,7 +7,7 @@
             <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Odustani
             </button>
             <a type="submitForm" id="submitForm" value="Da" class="ov-form__btn"
-               onclick="submitUserDeleteForm({{ object.id }})">Izbriši</a>
+               onclick="genericSubmitForm('delete-emp-form', DELETE_USER_URL + {{ object.id }} + '/', DELETE_SUCCESSFUL)">Izbriši</a>
         </div>
     </div>
 </form>

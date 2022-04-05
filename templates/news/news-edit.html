@@ -46,7 +46,7 @@
     <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red"
             onclick="displayModal(DELETE_NEWS_URL+{{ object.id }})">Izbriši vijest
     </button>
-    <button type="button" id="submitForm" class="ov-form__btn" onclick="submitNewsEditForm({{ object.id }})">
+    <button type="button" id="submitForm" class="ov-form__btn" onclick="submitFormMultimediaData(EDIT_NEWS_URL + {{ object.id }} + '/', '#edit-news-form')">
         Sačuvaj
     </button>
     <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">
