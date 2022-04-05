@@ -33,6 +33,7 @@ const EDIT_NEWS_URL = URL_ADDRESS + '/news/';
 const DELETE_NEWS_URL = URL_ADDRESS + '/news/delete/';
 const VIEW_NEWS_URL = URL_ADDRESS + '/news/article/preview/';
 const DELETE_AVATAR_URL = URL_ADDRESS + '/employees/remove-avatar/';
+const DELETE_NEWS_PICTURE_URL = URL_ADDRESS + '/news/remove-photo/';
 
 const CREATE_EVENT_URL = URL_ADDRESS + '/calendar/create/';
 const DELETE_EVENT_URL = URL_ADDRESS + '/calendar/delete/';

@@ -116,14 +116,16 @@ let ident;
 
 function idKeeper(id) {
     ident = id;
+    alert(id);
 }
 
-function imageRemoveNEWS() {
-    let form = $("#photo-delete-form");
+function imageRemoveNEWS(form_id) {
+    let formData = new FormData($(form_id)[0]);
+    alert(ident);
     $.ajax({
-            url: URL_ADDRESS + '/news/remove-photo/' + ident,
+            url: DELETE_NEWS_PICTURE_URL + ident,
             type: 'POST',
-            data: form.serialize(),
+            data: formData,
             success: function (data, textStatus, xhr) {
                 requestSuccessful();
             },
