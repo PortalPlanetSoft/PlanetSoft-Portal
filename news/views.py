@@ -28,6 +28,10 @@ class NewsList(ListView):
         paginator = self.paginator_class(news, self.paginate_by)
         news = paginator.page(page)
 
+        # parametar lokacije za GET request
+        if self.request.GET.get('location'):
+            context['location'] = self.request.GET.get('location')
+
         # parametar autora za GET request
         if self.request.GET.get('author'):
             if self.request.GET.get('author') == 'all':
@@ -70,12 +74,12 @@ class NewsList(ListView):
         return context
 
     def get_queryset(self, *args, **kwargs):
+        location = self.request.GET.get('location')
         has_reacted = LikeDislike.objects.filter(article_id=OuterRef('pk'), user_id=self.request.user.pk)
         queryset = NewsArticle.objects.annotate(
             likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
             dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
             liked=Subquery(has_reacted.values('type')))
-        #top_comments = Comment.objects.filter(article_id__in=queryset.values_list('id')).order_by('-edited_date')[:3]
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
 
@@ -89,6 +93,9 @@ class NewsList(ListView):
 
         if author and author != 'all':
             queryset = queryset.filter(Q(author__exact=author))
+
+        if location and location != 'all':
+            queryset = queryset.filter(author__work_location__exact=location)
 
         return queryset
 
