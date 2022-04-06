@@ -158,7 +158,7 @@
                 </div>
             </form>
             <form class="upcoming-event">
-                <h4>Predstojeci dogadjaji</h4>
+                <h4>Predstojeći događaji</h4>
                 <div class="after-tommorow">
                     {% for event in after_tommorow_events %}
                         <a onclick="displayModal(EVENT_PREVIEW_URL+{{ event.id }})"><h4>{{ event.start_time|date }}</h4>
