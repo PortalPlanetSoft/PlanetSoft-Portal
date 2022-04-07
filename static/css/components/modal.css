@@ -26,11 +26,10 @@
 
 
 .ov-delete-modal__question {
-    width: 50%;
+    text-align: center;
     margin: 0 auto !important;
     color: var(--primary);
 }
-
 .ov-delete-modal {
     width: 75%;
     margin: 0 auto !important;

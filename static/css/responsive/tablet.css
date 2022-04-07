@@ -140,7 +140,7 @@
     .ov-form select,
     .ov-form input[type='submit'],
     .ov-form button {
-      font-size: 3rem;
+      font-size: 2rem;
       display: block;
       width: 90%;
     }
@@ -434,6 +434,10 @@
         text-align: center;
           font-size: 1.5rem;
       }
+      .close-button-event{
+          text-align: right;
+          top: -1.5rem;
+      }
   
 
       /* OGI KALENDAR */
@@ -447,7 +451,7 @@
 
       .event-form-content p {
         font-size: 2.5rem;
-        text-align: center;
+
       }
       /* OGI KALENDAR */
   }
