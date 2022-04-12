@@ -62,8 +62,8 @@
                             {% csrf_token %}
                             <button type="button" name="article_like_id" onclick="submitLikeButton({{ article.id }})">
                                 {% if article.liked %}
-                                    <i class="fa-solid fa-thumbs-up"></i> {% else %}
-                                    <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
+                                    <i class="fa-solid fa-thumbs-up fa-2xl"></i> {% else %}
+                                    <i class="fa-regular fa-thumbs-up fa-2xl"></i>{% endif %}</button>
                             <span>{{ article.likes_count }}</span>
                         </form>
                         <form id="news-dislike-form" class="news-dislike"
@@ -71,8 +71,8 @@
                             {% csrf_token %}
                             <button type="button" name="article_dislike_id"
                                     onclick="submitDislikeButton({{ article.id }})">
-                                {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
-                                    <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
+                                {% if article.liked == False %}<i class="fa-solid fa-thumbs-down fa-2xl"></i> {% else %}
+                                    <i class="fa-regular fa-thumbs-down fa-2xl"></i>{% endif %}</button>
                             <span>{{ article.dislikes_count }}</span>
                         </form>
                         <form action="{% url 'comment-on-news' article.pk %}" method="post" class="news-comment">
@@ -172,9 +172,9 @@
 
     <div class="dk-pagination">
         {% if page_obj.has_previous %}
-            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.previous_page_number }}">&lt;</a>
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.previous_page_number }}"><i class="fa-solid fa-chevron-left"></i></a>
         {% else %}
-            <span class="bk-noNextPage">&lt;</span>
+            <span class="bk-noNextPage"><i class="fa-solid fa-chevron-left"></i></span>
         {% endif %}
         {% for i in page_obj.paginator.page_range %}
             {% if page_obj.number == i %}
@@ -184,9 +184,9 @@
             {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
-            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.next_page_number }}">&gt;</a>
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.next_page_number }}"><i class="fa-solid fa-chevron-right"></i></a>
         {% else %}
-            <span class="bk-noNextPage">&gt;</span>
+            <span class="bk-noNextPage"><i class="fa-solid fa-chevron-right"></i></span>
         {% endif %}
 
     </div>

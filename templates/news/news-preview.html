@@ -25,17 +25,23 @@
                       method="post">
                     {% csrf_token %}
                             <button type="button" name="article_like_id" onclick="submitLikeButton({{ article.id }})">
-                                {% if article.liked %}<i class="fa-solid fa-thumbs-up"></i> {% else %}
-                                    <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
-                            <span>{{ article.likes_count }}</span>
+                                {% if article.liked %}<i class="fa-solid fa-thumbs-up fa-2xl"></i> {% else %}
+                                    <i class="fa-regular fa-thumbs-up fa-2xl"></i>
+                                {% endif %}
+                                <span>{{ article.likes_count }}</span>
+                            </button>
+
                         </form>
                 <form id="news-dislike-form" class="news-dislike"
                       method="post">
                     {% csrf_token %}
                     <button type="button" name="article_dislike_id" onclick="submitDislikeButton({{ article.id }})">
-                        {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
-                            <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
-                    <span>{{ article.dislikes_count }}</span>
+                        {% if article.liked == False %}<i class="fa-solid fa-thumbs-down fa-2xl"></i> {% else %}
+                            <i class="fa-regular fa-thumbs-down fa-2xl"></i>
+                        {% endif %}
+                        <span>{{ article.dislikes_count }}</span>
+                    </button>
+
                 </form>
                 <form action="{% url 'comment-on-news' article.pk %}" method="post" class="news-comment">
                     {% csrf_token %}

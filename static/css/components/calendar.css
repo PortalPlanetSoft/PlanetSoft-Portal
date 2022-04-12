@@ -80,6 +80,9 @@
 
 .date a {
     color: var(--primary);
+    padding-top: 0.3rem;
+    padding-left: 0.7rem;
+    display: block;
 }
 
 .calendar li {
@@ -106,7 +109,7 @@
 .calendar ul {
     position: absolute;
     left: 0;
-    top: 10%;
+    top: 15%;
     width: 100%;
     overflow-y: auto;
     max-height: 80%;

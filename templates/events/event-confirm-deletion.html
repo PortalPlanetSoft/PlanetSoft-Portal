@@ -4,9 +4,9 @@
         {% csrf_token %}
         <p class="ov-delete-modal__question">Jeste li sigurni da želite da izbrišete događaj: {{ object.title }}?</p>
         <div class="ov-form__btn-container">
-            <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Ne</button>
-            <button type="button" id="submitForm" class="ov-form__btn"
-                    onclick="submitEventDeleteForm({{ object.id }})">Da
+            <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Odustani</button>
+            <button type="button" id="submitForm" class="ov-form__btn ov-form__btn--red"
+                    onclick="submitEventDeleteForm({{ object.id }})">Izbriši
             </button>
         </div>
     </div>
