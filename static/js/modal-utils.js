@@ -17,6 +17,23 @@ async function displayModal(targetUrlAddress) {
     )
 }
 
+async function newsDeletePicture(targetUrlAddress, id) {
+    MODAL_CONTAINER.style.display = "flex";
+    await $.ajax({
+            url: targetUrlAddress,
+            type: 'get',
+            success: (data) => {
+                MODAL_CONTENT.innerHTML = data;
+                dateValidation();
+                idKeeper(id);
+            },
+            error: (data) => {
+                MODAL_CONTENT.innerHTML = data;
+            },
+        },
+    )
+}
+
 // onclick function for opening of news edit modal
 async function showNewsEditModal(id) {
     await displayModal(EDIT_NEWS_URL + id + '/').then(
