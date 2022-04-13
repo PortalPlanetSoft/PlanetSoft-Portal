@@ -1,4 +1,3 @@
-
 function commentTyped(id){
 
     let commentIcon = document.querySelector(`#news-comment-icon${id}`)
@@ -9,7 +8,7 @@ function commentTyped(id){
             window.innerWidth > 1200 ?
             commentInput.style.height = "16px":
             commentInput.style.height = "40px"
-            commentInput.style.height = (commentInput.scrollHeight) + "px";
+            commentInput.style.height = (commentInput.scrollHeight-16) + "px";
         }
         else {
             window.innerWidth > 1200 ?

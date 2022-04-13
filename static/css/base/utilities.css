@@ -4,6 +4,10 @@
 .bg-accent{
     background-color: var(--accent);
 }
-.flex{
+body .flex{
     display: flex;
+}
+body .flex-col{
+    display: flex;
+    flex-direction: column;
 }

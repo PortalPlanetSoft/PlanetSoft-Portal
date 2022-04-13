@@ -224,4 +224,14 @@
     width: 90%;
     margin: 1rem auto;
   }
-  
+  .shared-choice-container>div{
+    display: flex;
+    flex-direction: column;
+    max-height: 12rem;
+    overflow-y: scroll;
+    padding: 0.5rem 1rem;
+
+  }
+  .photo-preview-container{
+    max-width: 20rem;
+  }
