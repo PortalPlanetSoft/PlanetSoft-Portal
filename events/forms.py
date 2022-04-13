@@ -1,5 +1,4 @@
-from datetime import datetime
-
+from datetime import datetime, timezone
 from django import forms
 from django.forms import SelectMultiple
 
@@ -31,8 +30,9 @@ class CreateEvent(forms.ModelForm):
 
     def clean_start_time(self):
         data = self.cleaned_data['start_time']
-        if data and data.time() < datetime.now().time() or data.date() < datetime.now().date():
+        if data and data < datetime.now(timezone.utc).astimezone():
             raise forms.ValidationError('Događaj ne može počinjati u prošlosti')
+            datetime.now(pytz.utc)
         return data
 
     def __init__(self, *args, **kwargs):
