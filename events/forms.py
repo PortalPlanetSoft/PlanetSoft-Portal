@@ -11,7 +11,8 @@ from users.models import User
 class CreateEvent(forms.ModelForm):
     use_required_attribute = False
     field_order = ['title', 'details', 'start_time', 'end_time', 'repeat_days', 'repeat_every_year']
-    shared = forms.ModelMultipleChoiceField(queryset=User.objects.all(), widget=SelectMultiple, required=False)
+    shared = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=User.objects.all(),
+                                            required=False)
     start_time = forms.SplitDateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
                                                                            time_attrs={'type': 'time'}))
     end_time = forms.SplitDateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
