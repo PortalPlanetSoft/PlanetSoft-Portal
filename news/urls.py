@@ -13,6 +13,7 @@ urlpatterns = [
     path('comment/<int:pk>', add_comment, name='comment-on-news'),
     path('article/<int:pk>', login_required(AllComments.as_view()), name='news-comments'),
     path('article/preview/<int:pk>', login_required(NewsPreview.as_view()), name='news-preview'),
+    path('article/preview/new-page/<int:pk>', login_required(NewsPreview.as_view()), name='news-preview-new-page'),
     path('remove-photo/<int:pk>', remove_news_photo, name='remove-photo'),
     path('likes_dislikes_comment/<int:pk>', likes_dislikes_comment, name='likes_dislike_comment')
 ]

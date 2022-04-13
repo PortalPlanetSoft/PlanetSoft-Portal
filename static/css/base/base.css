@@ -302,10 +302,10 @@ a:hover {
     position: absolute;
 }
 
-.dv-photo-preview{
+.dv-photo-preview {
     margin: 0;
     height: 200px;
-    width:200px;
+    width: 200px;
     position: absolute;
     display: flex;
     top: 50%;
@@ -313,7 +313,7 @@ a:hover {
     transform: translateY(-50%);
 }
 
-#remove-image-button{
+#remove-image-button {
     visibility: hidden;
     margin: 0;
     top: 50%;
@@ -322,7 +322,7 @@ a:hover {
     position: absolute;
 }
 
-#id_image{
+#id_image {
     visibility: hidden;
     margin: 40px;
     top: 50%;
@@ -332,7 +332,7 @@ a:hover {
     position: absolute;
 }
 
-.image-container:hover{
+.image-container:hover {
     background-color: rgba(0, 0, 0, 0.16);
     border-radius: 5px;
 }
@@ -365,4 +365,17 @@ a:hover {
     color: var(--primary);
     padding: 1rem;
 
+}
+
+#boxid_old_password, #boxid_new_password1, #boxid_new_password2, #boxid_password{
+    position: absolute;
+    right: 0;
+    top: 0px;
+    padding: 10px;
+}
+
+.fa-eye {
+    position: absolute;
+    right: 20px;
+    top: 0px;
 }

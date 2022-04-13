@@ -15,7 +15,7 @@ const INVALID_EMAIL_ERROR = "Molimo Vas unesite ispravan format e-mail adrese!";
 const INVALID_PHONE_ERROR = "Molimo Vas unesite ispravan format broja telefona!";
 const INVALID_VPN_ERROR = "Molimo Vas unesite ispravan format VPN telefona!";
 
-const PASSWORD_VALIDATION_FAIL = "Molimo Vas unesite šifru u odgovarajućem formatu!";
+const PASSWORD_VALIDATION_FAIL = "Molimo Vas unesite šifru u odgovarajućem formatu! (Minimalno 8 znakova, od kojih obavezno jedno slovo i jedan broj.)";
 const PASSWORDS_MATCHING_ERROR = "Molimo Vas unesite istu šifru u oba polja!";
 const FIRST_FIELD_EMPTY = "Polje ne moze biti prazno!";
 
@@ -39,6 +39,7 @@ const CREATE_EVENT_URL = URL_ADDRESS + '/calendar/create/';
 const DELETE_EVENT_URL = URL_ADDRESS + '/calendar/delete/';
 const EDIT_EVENT_URL = URL_ADDRESS + '/calendar/';
 const EVENT_PREVIEW_URL = URL_ADDRESS + '/calendar/preview/';
+const CALENDAR_EVENTS_URL = URL_ADDRESS + '/calendar/events/';
 
 const DELETE_AVATAR_BUTTON = document.getElementById("remove-avatar-button");
 const INPUT_FIELD = document.getElementById("id_profile_pic");

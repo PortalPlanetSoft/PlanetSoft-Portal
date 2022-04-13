@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body %}
-        <div class="ov-container-center-content ov-login">
+    <div class="ov-container-center-content ov-login">
         <div class="ov-login__left">
             <form class="ov-form" method="POST">
                 {% csrf_token %}
@@ -13,11 +13,13 @@
                 </div>
                 <div>
                     <label>Lozinka</label>
-
-                    {{ form.password }}
+                    <div>
+                        {{ form.password }}
+                        <input type="checkbox" id="boxid_password" onclick="reveal('id_password')"><i
+                            class="fa-regular fa-eye"></i>
+                    </div>
                 </div>
-                <input type="checkbox" id="boxid_password" onclick ="reveal('id_password')">Prikaži
-                <i class="fa-regular fa-eye"></i>
+
                 <div>
                     <button class="ov-form__btn" type="submit">Prijava</button>
                 </div>
