@@ -1,19 +1,35 @@
 <form id="edit-event-form" class="ov-form event-form">
-    <h3 class="ov-form__title">{{ event.title }}</h3>
+    <h3 class="ov-form__title">Detalji događaja</h3>
+    <button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
+            class="fa-solid fa-rectangle-xmark"></i>
+    </button>
     <div class="event-form-content">
-        <p>{% if event.details %}{{ event.details }}{% else %}Nema detalja{% endif %}</p>
-        <p>Početak u {{  event.start_time|date:'H:i' }} </p>
-        <p>Završava u {% if event.end_time %}{{ event.end_time|date:'H:i'}}{% else %}nepoznato vrijeme{% endif %}</p>
-        <p>Tip {{ event.type }}</p>
-        <p>Autor {{ event.author }}</p>
-        <p>Kreiran {{ event.creation_date.day }}.{{ event.creation_date.month }}.{{ event.creation_date.year }}</p>
+        <div class="event-form-header">
+            <h4>{{ event.title }}</h4>
+            {% if event.type == null%}
+                <p class="not-visible">
+                {% else %}
+                <p>{{ event.type }}</p>
+            {% endif %}
+            <p>{{ event.start_time|date }}</p>
+            <p>Od {{ event.start_time|date:'H:i' }}
+            do {% if event.end_time %}{{ event.end_time|date:'H:i' }}{% else %} nepoznato vrijeme{% endif %}</p>
+            <p>Kreiran {{ event.creation_date.day }}.{{ event.creation_date.month }}.{{ event.creation_date.year }}</p>
+        </div>
+
+        <div class="event-preview-form">
+            <h4>Bilješke</h4>
+            <p>{% if event.details %}{{ event.details }}{% else %}Nema detalja{% endif %}</p>
+        </div>
         <div class="ov-form__btn-container">
-        {% if user.is_admin or user.is_superuser or event.author == request.user %}
-            <button class="ov-form__btn" type="button" onclick="displayModal(EDIT_EVENT_URL+{{ event.id }})">Uredi</button>
-            <button class="ov-form__btn ov-form__btn--blue" type="button" onclick="displayModal(DELETE_EVENT_URL+{{ event.id }})">Izbriši</button>
-        {% endif %}
-        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori
-        </button>
+            {% if user.is_admin or user.is_superuser or event.author == request.user %}
+                <button class="ov-form__btn" type="button" onclick="displayModal(EDIT_EVENT_URL+{{ event.id }})">Uredi
+                </button>
+                <button class="ov-form__btn ov-form__btn--blue" type="button"
+                        onclick="displayModal(DELETE_EVENT_URL+{{ event.id }})">Izbriši
+                </button>
+            {% endif %}
+
         </div>
     </div>
 

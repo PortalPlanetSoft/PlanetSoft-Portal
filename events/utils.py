@@ -2,6 +2,8 @@ from calendar import HTMLCalendar
 from datetime import datetime
 
 from django.db.models import Q
+
+from .constants import MAX_EVENTS_DISPLAYED
 from .models import Event
 
 
@@ -16,12 +18,20 @@ class Calendar(HTMLCalendar):
     def format_day(self, day, events):
         events_per_day = events.filter(start_time__day=day)
         d = ''
+        counter = 0
         for event in events_per_day:
-            if event.type == 'Rođendan':
-                d += f"<a onclick='displayModal(EVENT_PREVIEW_URL+{event.id})'><li> {event.title} " \
-                     f"<i class='fa-solid fa-cake-candles'></i> </li></a>"
+            if counter < MAX_EVENTS_DISPLAYED:
+                if event.type == 'Rođendan':
+                    d += f"<a onclick='displayModal(EVENT_PREVIEW_URL+{event.id})'><li> {event.title} " \
+                         f"<i class='fa-solid fa-cake-candles'></i> </li></a>"
+                else:
+                    d += f"<a onclick='displayModal(EVENT_PREVIEW_URL+{event.id})'><li>{event.title} " \
+                         f"{event.start_time.strftime('%H:%M')}</li></a>"
             else:
-                d += f"<a onclick='displayModal(EVENT_PREVIEW_URL+{event.id})'><li>{event.title} {event.start_time.strftime('%H:%M')}</li></a>"
+                d += f"<a onclick='displayModal(CALENDAR_EVENTS_URL+\"{self.year}/{self.month}/{day}\")'>" \
+                     f"<li> +{len(events_per_day) - MAX_EVENTS_DISPLAYED} Prikaži više</li></a>"
+                break
+            counter += 1
 
         if day != 0:
             return f"<td><span class='date'><a onclick='displayModal(CALENDAR_EVENTS_URL+\"{self.year}/{self.month}/{day}\")'>{day}<a/>" \

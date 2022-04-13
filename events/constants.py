@@ -3,6 +3,8 @@ from django.utils.translation import gettext_lazy as _
 # utils.py
 EVENTS_URL_ADDRESS = 'http://127.0.0.1:8000/calendar/events/'
 
+MAX_EVENTS_DISPLAYED = 2
+
 # calendar.html
 MONTHS = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'Avgust',
           'Septembar', 'Oktobar', 'Novembar', 'Decembar']

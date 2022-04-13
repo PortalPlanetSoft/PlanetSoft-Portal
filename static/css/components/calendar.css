@@ -162,7 +162,40 @@
 
 .event-form-content p {
     font-size: 1.5rem;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
+}
+.event-form{
+    margin:0;
+}
+/* OGI */
+.close-button-event{
+    color: var(--primary);
+    border:none;
+    margin-top: -5rem;
+    background: none;
+    align-items: end;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+}
+.event-form-content h4{
+    font-size: 22px;
+}
+.event-form-content p{
+    font-size: 16px;
+    text-align: left;
+    margin: 0;
+}
+.event-form-header{
+    border-bottom: 1px solid var(--primary);
+}
+.event-preview-form{
+    padding-top: 1rem;
+    border-bottom: 1px solid var(--primary);
+}
+.not-visible {
+  display: none;
 }
 
-/* OGI */

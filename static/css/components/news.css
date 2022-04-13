@@ -51,7 +51,10 @@
     font-size: 1.1rem;
     color: var(--primary);
 }
-
+.news-details-padding{
+    padding-right: 4rem;
+    padding-left: 4rem;
+}
 .grid-news{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -131,7 +134,7 @@
 }
 .commentlike-edit-preview{
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 0fr;
 }
 .comment-like-section {
     display: grid;
@@ -212,7 +215,6 @@
 }
 .dk-news-details{
     color: var(--primary);
-    padding: 1rem;
 }
 .header-news-details{
     display: grid;

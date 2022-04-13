@@ -20,6 +20,18 @@
                     {% endfor %}
                 </select>
             </div>
+            <div>
+                <label>Beograd</label>
+                <input onchange="submitFilterForm()" type="radio" name="location" value="BG"
+                       {% if location == 'BG' %}checked{% endif %} class="radio">
+                <label>Banja Luka</label>
+                <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
+                       {% if location == 'BL' %}checked{% endif %} class="radio">
+                <label>Sve
+                    lokacije</label>
+                <input onchange="submitFilterForm()" type="radio" name="location" value="all"
+                       {% if location == None or location == 'all' %}checked{% endif %} class="radio">
+            </div>
             {% if user.is_admin or user.is_superuser or user.is_editor %}
                 <div class="create_news">
                     <a onclick="displayModal(ADD_NEWS_URL)">Dodajte vijest
@@ -170,35 +182,33 @@
                                 <a onclick="displayModal(EVENT_PREVIEW_URL+{{ event.id }})"><p>{{ event.title }}</p></a>
                             </div>
 
-                        {% endfor %}
-                    </div>
-                </form>
-                <form class="dk-events-sidebar-form">
-                    <div class="tommorows-events">
-                        <h4>Sutra</h4>
-                        {% for event in tommorow_events %}
-                            <div class="dk-event-name-and-flag">
-                                {% if event.type == "Rođendan" or event.type == "Sastanak" %}
-                                    <div class="circle-mid bg-primary"></div>
-                                {% elif event.type == "Daily" or event.type == "Planiranje" %}
-                                    <div class="circle-mid bg-accent"></div>
-                                {% endif %}
-                                <a onclick="displayModal(EVENT_PREVIEW_URL+{{ event.id }})"><p>{{ event.title }}</p></a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </form>
-                <form class="upcoming-event">
-                    <h4>Predstojeci dogadjaji</h4>
-                    <div class="after-tommorow">
-                        {% for event in after_tommorow_events %}
-                            <a onclick="displayModal(EVENT_PREVIEW_URL+{{ event.id }})">
-                                <h4>{{ event.start_time|date }}</h4>
-                                <p>{{ event.title }}</p></a>
-                        {% endfor %}
-                    </div>
-                </form>
-            </div>
+                    {% endfor %}
+                </div>
+            </form>
+            <form class="dk-events-sidebar-form">
+                <div class="tommorows-events">
+                    <h4>Sutra</h4>
+                    {% for event in tommorow_events %}
+                        <div class="dk-event-name-and-flag">
+                            {% if event.type == "Rođendan" or event.type == "Sastanak" %}
+                                <div class="circle-mid bg-primary"></div>
+                            {% elif event.type == "Daily" or event.type == "Planiranje"%}
+                                <div class="circle-mid bg-accent"></div>
+                            {% endif %}
+                            <a onclick="displayModal(EVENT_PREVIEW_URL+{{ event.id }})"><p>{{ event.title }}</p></a></div>
+                    {% endfor %}
+                </div>
+            </form>
+            <form class="upcoming-event">
+                <h4>Predstojeći događaji</h4>
+                <div class="after-tommorow">
+                    {% for event in after_tommorow_events %}
+                        <a onclick="displayModal(EVENT_PREVIEW_URL+{{ event.id }})"><h4>{{ event.start_time|date }}</h4>
+                            <p>{{ event.title }}</p></a>
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
         </div>
     </div>
 
