@@ -46,8 +46,9 @@
         {{ form.repeat_every_year }}
     </div>
 
-    <div>
+      <div class="shared-choice-container">
         <label>{{ form.shared.label }}</label>
+
         {{ form.shared }}
     </div>
     <button type="button" class="ov-form__btn" onclick="genericSubmitForm('create-event-form', EDIT_EVENT_URL + {{ object.id }} + '/', SUCCESSFUL_ACTION)">Potvrdi</button>

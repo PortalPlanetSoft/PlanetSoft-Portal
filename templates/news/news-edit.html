@@ -7,18 +7,18 @@
             {{ error }}
         </div>
     {% endfor %}
-    <div>
-        <label>{{ form.headline.label }}</label>
-
-        {{ form.headline }}
-    </div>
-    {% if form.headline.errors %}
         <div>
-            {{ form.headline.errors }}
+            <label>{{ form.headline.label }}</label>
+
+            {{ form.headline }}
         </div>
-    {% endif %}
-    <div>
-        <label>{{ form.content.label }}</label>
+        {% if form.headline.errors %}
+            <div>
+                {{ form.headline.errors }}
+            </div>
+        {% endif %}
+        <div>
+            <label>{{ form.content.label }}</label>
 
         {{ form.content }}
     </div>
@@ -40,6 +40,21 @@
                     onclick="newsDeletePicture(DELETE_NEWS_PICTURE_URL + {{ object.id }}, id)">
                 <i class="fa-solid fa-trash-can"></i>
             </button>
+            {{form.content}}
+        </div>
+        {% if form.content.errors %}
+            <div>
+                {{ form.content.errors }}
+            </div>
+        {% endif %}
+        <div class="photo-preview-container">
+            <label for="id_image" class="flex-col">{{ form.image.label }}
+            </label>
+             {% if object.image %}
+                    <img id="photo-preview" class="dv-photo-preview" src={{ object.image.url }}>
+                {% endif %}
+                    <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/1.png' %}'>
+            {{form.image}}
         </div>
     </div>
 

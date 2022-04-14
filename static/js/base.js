@@ -71,26 +71,6 @@ function toggleAnimation(element, firstAnimName, secondAnimName) {
     element.style.animationName = secondAnimName;
 }
 
-// function for showing chosen image preview on user settings page (/profile)
-function changeThumbnail() {
-    document.getElementById('id_profile_pic').addEventListener("change", function (e) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            document.getElementById('photo-preview').src = e.target.result;
-        };
-        reader.readAsDataURL(this.files[0]);
-    })
-}
-
-function docReady(fn) {
-    if (document.readyState === "complete" || document === "interactive") {
-        setTimeout(fn, 1);
-    } else {
-        document.addEventListener("DOMContentLoaded", fn);
-    }
-}
-
-docReady(changeThumbnail);
 
 function submitFilterForm() {
     document.forms["userFilterForm"].submit();
@@ -113,17 +93,36 @@ function imageRemove() {
 }
 
 let ident;
-
 function idKeeper(id) {
     ident = id;
 }
 
 function imageRemoveNEWS() {
+    let form = $("#photo-delete-form");
     $.ajax({
             url: DELETE_NEWS_PICTURE_URL + ident,
             type: 'POST',
+            data: form.serialize(),
             success: function (data, textStatus, xhr) {
                 requestSuccessful();
+            },
+            error: function (data, textStatus, xhr) {
+                requestSuccessful();
+            },
+        },
+    );
+}
+
+
+function genericLikeDislikeFunction(form_id, id, flag) {
+    let form = $(form_id);
+    $.ajax({
+            url: URL_ADDRESS + '/news/react/' + id + '/',
+            type: 'POST',
+            data: form.serialize(),
+            headers: flag,
+            success: function (data, textStatus, xhr) {
+                loadLikeContainer(id);
             },
             error: function (data, textStatus, xhr) {
                 requestUnsuccessful();
@@ -176,6 +175,9 @@ function dateSet() {
         url: URL_ADDRESS + '/employees/previous-login/',
         type: 'GET',
     });
+}
+function log(obj){
+    console.log(typeof(obj));
 }
 
 function showButtonsNewsImage(show) {
