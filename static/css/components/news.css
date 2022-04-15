@@ -154,6 +154,8 @@
     grid-template-columns: 1fr 1fr 10fr;
     grid-template-areas: 
     "like dislike comment";
+    align-items: center;
+    justify-items: center;
     width: 90%;
     margin: 0 ;
 }

@@ -32,18 +32,15 @@
     margin: 0 2rem;
     position: relative;
   }
-  .ov-form div[id^="id"], .ov-form div[id^="id"] > div{
-    margin: 0;
+
+  #id_admin_editor, #id_gender, #id_work_location{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
-  .ov-form div[id^="id"] > div{
-    display: inline-block;
-  }
-  
-  .ov-form #id_is_admin, .ov-form #id_is_editor {
-    position: absolute;
-    top: 30%;
-    left: 25%;
-  }
+   #id_gender, #id_work_location{
+     margin: 0 -2rem;
+   }
   .ov-form input[type='text'],
   .ov-form input[type='password'],
   .ov-form input[type='email'],
