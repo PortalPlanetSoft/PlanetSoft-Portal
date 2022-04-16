@@ -52,7 +52,7 @@
                 <div class="headline">
                     <div class="creation-date-news-preview"><p>{{ article.creation_date }}</p></div>
                     <div class="article-headline-news-preview"><h4><a
-                            href="http://127.0.0.1:8000/news/article/preview/new-page/{{ article.id }}">{{ article.headline }} </a>
+                            onclick="displayModal(VIEW_NEWS_URL+{{ article.id }})">{{ article.headline }} </a>
                     </h4></div>
                     <div class="article-author-news-preview">
                         <a onclick="displayModal(VIEW_USER_URL+{{ article.author.id }})"><p>
