@@ -70,10 +70,10 @@ class NewsList(ListView):
 
         for article in news:
             article.top_comments = article.comment_set.all().order_by('-edited_date')[:3].annotate(
-                    likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
-                    dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
-                    liked=Subquery(has_reacted.values('type'))
-                )
+                likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
+                dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
+                liked=Subquery(has_reacted.values('type'))
+            )
 
         context['object_list'] = news
         context['author_list'] = User.objects.filter(Q(is_editor=True) | Q(is_admin=True), is_active=True)
@@ -86,7 +86,7 @@ class NewsList(ListView):
             likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
             dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
             liked=Subquery(has_reacted.values('type')))
-        #top_comments = Comment.objects.filter(article_id__in=queryset.values_list('id')).order_by('-edited_date')[:3]
+        # top_comments = Comment.objects.filter(article_id__in=queryset.values_list('id')).order_by('-edited_date')[:3]
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
 
@@ -155,12 +155,17 @@ class NewsPreview(DetailView):
     def get_context_data(self, **kwargs):
         context = super(NewsPreview, self).get_context_data(**kwargs)
         has_reacted = LikeDislike.objects.filter(article_id=OuterRef('pk'), user_id=self.request.user.pk)
+        has_reacted_comment = LikeDislike.objects.filter(comment_id=OuterRef('pk'), user_id=self.request.user.pk)
         context['article'] = NewsArticle.objects.annotate(
             likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
             dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
             liked=Subquery(has_reacted.values('type'))).get(id=self.kwargs['pk'])
         context['comments'] = Comment.objects.filter(
             article_id=self.kwargs['pk']
+        ).annotate(
+            likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
+            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
+            liked=Subquery(has_reacted_comment.values('type'))
         )
         return context
 
@@ -215,7 +220,7 @@ def add_comment(request, pk):
                               article=NewsArticle.objects.get(pk=pk))
         comment.save()
     return HttpResponse(status=HTTP_STATUS_200)
-    #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 class AllComments(ListView):

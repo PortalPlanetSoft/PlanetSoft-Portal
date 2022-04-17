@@ -168,6 +168,40 @@ function genericContentLoad(target_form_id, id) {
     });
 }
 
+function genericSubmitCommentReactionInModal(url, form_id, target_form_id, id, flag) {
+    let form = $(form_id);
+    $.ajax({
+            url: url,
+            type: 'POST',
+            data: form.serialize(),
+            headers: flag,
+            success: function (data, textStatus, xhr) {
+                genericContentLoadModal(target_form_id, id);
+            },
+            error: function (data, textStatus, xhr) {
+                requestUnsuccessful();
+            },
+        },
+    );
+}
+
+function genericContentLoadModal(target_form_id, id) {
+    $.ajax({
+        url: URL_ADDRESS + '/news/article/preview/' + id,
+        type: 'GET',
+        data: {
+            txtsearch: $(target_form_id).val()
+        },
+        dataType: 'html',
+        success: function (data) {
+            let result = $(target_form_id).append(data).find(target_form_id).html();
+            $(target_form_id).html(result);
+        },
+    });
+}
+
+
+
 function reveal(field_id) {
     if (document.getElementById("box" + field_id).checked) {
         document.getElementById(field_id).type = 'text';

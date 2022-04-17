@@ -25,7 +25,7 @@
                       method="post">
                     {% csrf_token %}
                     <button type="button" name="article_like_id"
-                            onclick="genericSubmitCommentReaction(REACT_ARTICLE_URL + {{ article.id }} + '/', '#news-like-form', '#comment-like-section', {{ article.id }}, {'flag': 'like'})">
+                            onclick="genericSubmitCommentReactionInModal(REACT_ARTICLE_URL + {{ article.id }} + '/', '#news-like-form', '#comment-like-section{{ article.id }}', {{ article.id }}, {'flag': 'like'})">
                         {% if article.liked %}<i class="fa-solid fa-thumbs-up"></i> {% else %}
                             <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
                     <span>{{ article.likes_count }}</span>
@@ -34,7 +34,7 @@
                       method="post">
                     {% csrf_token %}
                     <button type="button" name="article_dislike_id"
-                            onclick="genericSubmitCommentReaction(REACT_ARTICLE_URL + {{ article.id }} + '/', '#news-dislike-form', '#comment-like-section', {{ article.id }}, {'flag': ''})">
+                            onclick="genericSubmitCommentReactionInModal(REACT_ARTICLE_URL + {{ article.id }} + '/', '#news-dislike-form', '#comment-like-section{{ article.id }}', {{ article.id }}, {'flag': ''})">
                         {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
                             <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                     <span>{{ article.dislikes_count }}</span>
@@ -44,7 +44,7 @@
                     <textarea id="news-comment-input{{ article.id }}" name="content" placeholder="Dodaj komentar..."
                               oninput="commentTyped({{ article.id }})"></textarea>
                     <button type="button" id="news-comment-icon{{ article.id }}"
-                            onclick="genericSubmitCommentReaction(SUBMIT_COMMENT_URL + {{ article.id }}, '#news-comment-form{{ article.id }}', '#news-comment-content', {{ article.id }})">
+                            onclick="genericSubmitCommentReactionInModal(SUBMIT_COMMENT_URL + {{ article.id }}, '#news-comment-form{{ article.id }}', '#news-comment-content{{ article.id }}', {{ article.id }})">
                         <i
                                 class="fa-solid fa-paper-plane"></i></button>
                     </button>
@@ -81,7 +81,7 @@
                               method="post">
                             {% csrf_token %}
                             <button type="button" name="article_like_id" class="news__comment-like-dislike-btn"
-                                    onclick="genericSubmitCommentReaction(REACT_COMMENT_URL + {{ comment.id }} , '#comment-like-form', '#comment-content', {{ comment.id }}, {'flag': 'like'})">
+                                    onclick="genericSubmitCommentReactionInModal(REACT_COMMENT_URL + {{ comment.id }} , '#comment-like-form', '#comment-content{{ comment.id }}', {{ article.id }}, {'flag': 'like'})">
                                 {% if comment.liked %}
                                     <i class="fa-solid fa-thumbs-up"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
@@ -91,7 +91,7 @@
                               method="post">
                             {% csrf_token %}
                             <button type="button" name="article_dislike_id" class="news__comment-like-dislike-btn"
-                                    onclick="genericSubmitCommentReaction(REACT_COMMENT_URL + {{ comment.id }} , '#comment-dislike-form', '#comment-content', {{ comment.id }}, {'flag': ''})">
+                                    onclick="genericSubmitCommentReactionInModal(REACT_COMMENT_URL + {{ comment.id }} , '#comment-dislike-form', '#comment-content{{ comment.id }}', {{ article.id }}, {'flag': ''})">
                                 {% if comment.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                             <span>{{ comment.dislikes_count }}</span>
