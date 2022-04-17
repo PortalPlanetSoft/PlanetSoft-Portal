@@ -1,42 +1,37 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-    <form name="userFilterForm">
-        <div class="dk-grid">
-            <div class="search">
+    <form class="dk-search" name="userFilterForm">
+        <div class="dv-input-container">
                 <div class="dv-mobile-fullw">
                     <div><input type="text" placeholder="PRETRAGA..." name="search"></div>
-                    <div class="news-i" onclick="submitFilterForm()">
+                    <div class="dk-i" onclick="submitFilterForm()">
                         <i class="fas fa-search fa-lg"></i>
                     </div>
                 </div>
-            </div>
-            <div class="choose_author">
-                <select name="author" class="dk-author-filter-select" onchange="submitFilterForm()">
+                <div>
+                    <label>Beograd</label>
+                    <input onchange="submitFilterForm()" type="radio" name="location" value="BG"
+                           {% if location == 'BG' %}checked{% endif %} class="radio">
+                    <label>Banja Luka</label>
+                    <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
+                           {% if location == 'BL' %}checked{% endif %} class="radio">
+                    <label>Sve
+                        lokacije</label>
+                    <input onchange="submitFilterForm()" type="radio" name="location" value="all"
+                           {% if location == None or location == 'all' %}checked{% endif %} class="radio">
+                </div>
+                <select name="author" class="ov-form-position" onchange="submitFilterForm()">
                     <option {% if selected == author.pk %} selected {% endif %} value="all">Svi autori</option>
                     {% for author in author_list %}
                         <option {% if selected == author.pk %} selected {% endif %}
                                                                value="{{ author.pk }}">{{ author.first_name }} {{ author.last_name }}</option>
                     {% endfor %}
                 </select>
-            </div>
-            <div>
-                <label>Beograd</label>
-                <input onchange="submitFilterForm()" type="radio" name="location" value="BG"
-                       {% if location == 'BG' %}checked{% endif %} class="radio">
-                <label>Banja Luka</label>
-                <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
-                       {% if location == 'BL' %}checked{% endif %} class="radio">
-                <label>Sve
-                    lokacije</label>
-                <input onchange="submitFilterForm()" type="radio" name="location" value="all"
-                       {% if location == None or location == 'all' %}checked{% endif %} class="radio">
-            </div>
+
             {% if user.is_admin or user.is_superuser or user.is_editor %}
-                <div class="create_news">
                     <a onclick="displayModal(ADD_NEWS_URL)">Dodajte vijest
                         <i class="fa-solid fa-circle-plus fa-xl"></i></a>
-                </div>
             {% endif %}
         </div>
     </form>

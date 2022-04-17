@@ -272,18 +272,19 @@
 .news__comment-profile-img {
     width: 10%;
     height: 5rem;
-    margin-right: 1rem;
+    margin-right: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: center;
 }
 .news__comment-profile-img img { 
+    max-width: 90%;
     height: 100%;
 }
 
 .news__comment-information {
-    width: 90%;
+    width: 85%;
 }
 .news__comment-information div{
     display: flex;
@@ -384,6 +385,7 @@
     padding: 1rem;
     font-size: 0.9rem;
     color: var(--primary);
+    word-break: break-all;
 }
 .todays-events h4,
 .tommorows-events h4{

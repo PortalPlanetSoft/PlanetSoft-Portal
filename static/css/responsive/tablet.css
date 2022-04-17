@@ -34,10 +34,12 @@
       animation-fill-mode: forwards;
       z-index: 1;
     }
+
     .ov-nav__item {
       font-size: 3rem;
       padding: 6rem 0;
-    }
+  }
+
     .ov-nav__item:last-child {
       margin-left: 0;
     }
@@ -145,7 +147,8 @@
       width: 90%;
     }
     .ov-form input[type="date"],
-    .ov-form input[type="file"] {
+    .ov-form input[type="time"],
+    input[type="day"] {
       font-size: 2rem;
     }
   
@@ -234,12 +237,7 @@
       .content{
           padding: 1rem;
       }
-      .headline > p {
-        text-align: center;
-        font-size: 1.5rem;
-        padding: 1rem;
-      }
-      .headline > h4 {
+      .headline h4 a{
         font-size: 3rem;
         padding: 1rem;
       }
@@ -261,7 +259,7 @@
       }
       .comment-like-section-preview button,
       .comment-like-section button, .comment-like-section span{
-        font-size: 1.5rem;
+        font-size: 2rem;
       }
       .comment-like-section-preview textarea,
       .comment-like-section textarea {
@@ -317,7 +315,8 @@
           font-size: 1.5rem;
         }
       .content p{
-            font-size: 1rem;
+            font-size: .8rem;
+            text-align: justify;
         }
       .news{
           grid-column: 2/12;
@@ -382,19 +381,21 @@
       .edit-preview-button-news{
           display: flex;
           padding:1rem;
+          justify-content: center;
       }
       .commentlike-edit-preview .news-preview-button,
       .edit-preview-button-news .news-button{
-          width: 10rem;
+          width: 15rem;
           height: 3rem;
+
       }
       .commentlike-edit-preview .news-preview-button ,
       .edit-preview-button-news .news-button a{
-          font-size: 1.5rem;
+          font-size: 2rem;
 
       }
       .comment-like-section-preview .news-comment textarea{
-            height: 2.5rem;
+          height: 2.5rem;
           font-size: 1.2rem;
         }
       /* CALENDAR */
@@ -475,16 +476,26 @@
       }
       /* OGI KOMENTARI 
       */
-
+      .dv-photo-preview {
+        width: 50%;
+      }
       .image-container {
         width: 90%;
         display: flex;
         justify-content: center;
         position: relative;
       }
-      #id_profile_pic {
+      #id_profile_pic, 
+      #id_image {
         font-size: 2.5rem;
-        
+        width: 40%;
     }
+
+    #remove-avatar-button, #remove-image-button {
+      top: 30%;
+  }
+  #remove-image-button {
+    width: 10%;
+  }
   }
   

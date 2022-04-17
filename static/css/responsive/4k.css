@@ -1,0 +1,24 @@
+@media only screen and (min-width: 2500px) {
+    html {
+        font-size: 28px;
+    }
+    input[type="radio"], input[type="checkbox"]{
+        transform: scale(2);
+    }
+    input[type="date"], input[type="time"]{
+        font-size: 1.3rem;
+    }
+    .ov-form #id_is_admin, .ov-form #id_is_editor {
+        left: 35%;
+        top: 33%;
+    }
+    .comment-like-section-preview .news-comment textarea, .comment-like-section .news-comment textarea {
+        font-size: .7em;
+    }
+    .news-preview-button {
+        font-size: 1rem;
+    }
+    .comment-like-section-preview button, .comment-like-section button, .news__comment-like-dislike-btn{
+        font-size: 1rem;
+    }
+} 
