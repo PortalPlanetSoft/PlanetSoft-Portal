@@ -373,9 +373,12 @@ a:hover {
     top: 0px;
     padding: 10px;
 }
+#boxid_password{
+    display: none;
+}
 
 .fa-eye {
     position: absolute;
-    right: 20px;
+    right: 0px;
     top: 0px;
 }
