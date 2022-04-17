@@ -283,7 +283,7 @@ a:hover {
     position: relative;
 }
 
-#remove-avatar-button {
+#remove-avatar-button, #remove-image-button {
     visibility: hidden;
     margin: 0;
     top: 50%;
@@ -299,7 +299,7 @@ a:hover {
     transform: translateY(-50%);
     position: absolute;
     text-align: center;
-    font-size: .95em;
+    font-size: 1em;
 }
 
 .dv-photo-preview {
@@ -313,23 +313,14 @@ a:hover {
     transform: translateY(-50%);
 }
 
-#remove-image-button {
-    visibility: hidden;
-    margin: 0;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    position: absolute;
-}
-
 #id_image {
     visibility: hidden;
-    margin: 40px;
-    top: 50%;
-    width: 50px;
+    top: 70%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     position: absolute;
+    text-align: center;
+    font-size: 1em;
 }
 
 .image-container:hover {

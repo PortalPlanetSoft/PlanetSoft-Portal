@@ -475,16 +475,26 @@
       }
       /* OGI KOMENTARI 
       */
-
+      .dv-photo-preview {
+        width: 50%;
+      }
       .image-container {
         width: 90%;
         display: flex;
         justify-content: center;
         position: relative;
       }
-      #id_profile_pic {
+      #id_profile_pic, 
+      #id_image {
         font-size: 2.5rem;
-        
+        width: 40%;
     }
+
+    #remove-avatar-button, #remove-image-button {
+      top: 30%;
+  }
+  #remove-image-button {
+    width: 10%;
+  }
   }
   

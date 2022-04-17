@@ -43,14 +43,17 @@
         </div>
     </div>
 
-    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red"
-            onclick="displayModal(DELETE_NEWS_URL + {{ object.id }})">Izbriši vijest
-    </button>
-    <button type="button" id="submitForm" class="ov-form__btn" onclick="submitFormMultimediaData(EDIT_NEWS_URL + {{ object.id }} + '/', '#edit-news-form')">
-        Sačuvaj
-    </button>
-    <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">
-        Odustani
-    </button>
+    <div class="ov-form__btn-container">
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red"
+        onclick="displayModal(DELETE_NEWS_URL + {{ object.id }})">Izbriši
+</button>
+<button type="button" id="submitForm" class="ov-form__btn" onclick="submitFormMultimediaData(EDIT_NEWS_URL + {{ object.id }} + '/', '#edit-news-form')">
+    Sačuvaj
+</button>
+<button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">
+    Odustani
+</button>
+    </div>
+
     </div>
 </form>
