@@ -164,22 +164,6 @@ class NewsPreview(DetailView):
         )
         return context
 
-class NewsPreviewNewPage(DetailView):
-    model = NewsArticle
-    template_name = 'news/news-preview-new-page.html'
-    success_url = '/news/'
-
-    def get_context_data(self, **kwargs):
-        context = super(NewsPreviewNewPage, self).get_context_data(**kwargs)
-        has_reacted = LikeDislike.objects.filter(article_id=OuterRef('pk'), user_id=self.request.user.pk)
-        context['article'] = NewsArticle.objects.annotate(
-            likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
-            dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
-            liked=Subquery(has_reacted.values('type'))).get(id=self.kwargs['pk'])
-        context['comments'] = Comment.objects.filter(
-            article_id=self.kwargs['pk']
-        )
-        return context
 
 class NewsDelete(UserPassesTestMixin, DeleteView):
     model = NewsArticle

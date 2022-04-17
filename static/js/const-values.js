@@ -47,4 +47,5 @@ const INPUT_FIELD = document.getElementById("id_profile_pic");
 const REACT_COMMENT_URL = URL_ADDRESS + '/news/likes_dislikes_comment/';
 const SUBMIT_COMMENT_URL = URL_ADDRESS + '/news/comment/';
 const REACT_ARTICLE_URL = URL_ADDRESS + '/news/react/';
+const RANDOM = URL_ADDRESS + '/news/article';
 

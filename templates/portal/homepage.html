@@ -6,9 +6,13 @@
         <div class="ov-login__left">
             <form class="ov-form" method="POST">
                 {% csrf_token %}
+                {% for error in form.non_field_errors %}
+                    <div class="errorlist">
+                        {{ error }}
+                    </div>
+                {% endfor %}
                 <div>
                     <label>Korisničko ime</label>
-
                     {{ form.username }}
                 </div>
                 <div>
