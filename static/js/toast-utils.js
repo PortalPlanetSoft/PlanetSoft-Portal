@@ -1,4 +1,5 @@
 "use strict"
+
 // toast message that is displayed every time a successful/unsuccessful change is made
 function showToast(message, type) {
     const toastContainer = document.getElementById("toast-container");
@@ -14,4 +15,11 @@ function showToast(message, type) {
     setTimeout(function () {
         toastContainer.className = toastContainer.className.replace("show", "");
     }, 3000);
+}
+
+function filterTextInput() {
+    let value = $(this).val().toLowerCase();
+    $("#id_shared_ *").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
 }

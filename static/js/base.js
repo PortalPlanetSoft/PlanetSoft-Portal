@@ -35,6 +35,10 @@ $(function () {
 
     maxDate = year + '-' + month + '-' + day;
     dateValidation();
+
+
+
+
 });
 
 function dateValidation() {
@@ -93,6 +97,7 @@ function imageRemove() {
 }
 
 let ident;
+
 function idKeeper(id) {
     ident = id;
 }
@@ -131,7 +136,7 @@ function genericLikeDislikeFunction(form_id, id, flag) {
     );
 }
 
-function genericSubmitCommentReaction(url, form_id, target_form_id, id, flag){
+function genericSubmitCommentReaction(url, form_id, target_form_id, id, flag) {
     let form = $(form_id);
     $.ajax({
             url: url,
@@ -148,7 +153,7 @@ function genericSubmitCommentReaction(url, form_id, target_form_id, id, flag){
     );
 }
 
-function genericContentLoad(target_form_id, id){
+function genericContentLoad(target_form_id, id) {
     $.ajax({
         url: window.location.href,
         type: 'GET',
@@ -176,30 +181,33 @@ function dateSet() {
         type: 'GET',
     });
 }
-function log(obj){
-    console.log(typeof(obj));
+
+function log(obj) {
+    console.log(typeof (obj));
 }
 
-function showButtonsNewsImage(show) {
-    const DELETE_IMAGE_BUTTON = document.getElementById("remove-image-button");
-    const INPUT_FIELD_NEWS = document.getElementById("id_image");
+function showButtonsNewsImage(show, firstButtonId, secondButtonId) {
+    const DELETE_IMAGE_BUTTON = document.getElementById(secondButtonId);
+    const INPUT_FIELD_NEWS = document.getElementById(firstButtonId);
     INPUT_FIELD_NEWS.classList.add("ov-form__btn--blue", "ov-form__btn");
-    if (show == 0) {
-        DELETE_IMAGE_BUTTON.style.visibility = "visible";
+    if (show === true) {
         INPUT_FIELD_NEWS.style.visibility = "visible";
+        DELETE_IMAGE_BUTTON.style.visibility = "visible";
     } else {
-        DELETE_IMAGE_BUTTON.style.visibility = "hidden";
         INPUT_FIELD_NEWS.style.visibility = "hidden";
+        DELETE_IMAGE_BUTTON.style.visibility = "hidden";
     }
 }
 
-function showButtonsAvatarImage(show) {
-    INPUT_FIELD.classList.add("ov-form__btn--blue", "ov-form__btn");
-    if (show == 0) {
+function showButtonsAvatarImage(show, firstButtonId, secondButtonId) {
+    const INPUT_FIELD_AVATAR = document.getElementById(firstButtonId);
+    const DELETE_AVATAR_BUTTON = document.getElementById(secondButtonId);
+    INPUT_FIELD_AVATAR.classList.add("ov-form__btn--blue", "ov-form__btn");
+    if (show === true) {
+        INPUT_FIELD_AVATAR.style.visibility = "visible";
         DELETE_AVATAR_BUTTON.style.visibility = "visible";
-        INPUT_FIELD.style.visibility = "visible";
     } else {
+        INPUT_FIELD_AVATAR.style.visibility = "hidden";
         DELETE_AVATAR_BUTTON.style.visibility = "hidden";
-        INPUT_FIELD.style.visibility = "hidden";
     }
 }

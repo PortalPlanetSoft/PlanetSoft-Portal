@@ -332,6 +332,25 @@ a:hover {
     position: absolute;
 }
 
+#remove-avatar-button {
+    visibility: hidden;
+    margin: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: absolute;
+}
+
+#id_profile_pic {
+    visibility: hidden;
+    margin: 40px;
+    top: 50%;
+    width: 50px;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: absolute;
+}
+
 .image-container:hover {
     background-color: rgba(0, 0, 0, 0.16);
     border-radius: 5px;
@@ -372,6 +391,7 @@ a:hover {
     right: 0;
     top: 0px;
     padding: 10px;
+    display: none;
 }
 #boxid_password{
     display: none;
@@ -381,4 +401,6 @@ a:hover {
     position: absolute;
     right: 0px;
     top: 0px;
+    cursor: pointer;
 }
+

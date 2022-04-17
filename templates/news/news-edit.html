@@ -29,11 +29,12 @@
     {% endif %}
     <div>
         <label>{{ form.image.label }}</label>
-        <div class="image-container" onmouseover="showButtonsNewsImage(0)" onmouseleave="showButtonsNewsImage(1)">
             {% if object.image %}
-                <img id="photo-preview" class="dv-photo-preview" src={{ object.image.url }}>
+                <div class="image-container" onmouseover="showButtonsNewsImage(true, 'id_image', 'remove-image-button')" onmouseleave="showButtonsNewsImage(false, 'id_image', 'remove-image-button')">
+                    <img id="photo-preview" class="dv-photo-preview" src={{ object.image.url }}>
             {% else %}
-                <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/news.png' %}'>
+                <div class="image-container" onmouseover="showButtonsNewsImage(true, 'id_image')" onmouseleave="showButtonsNewsImage(false, 'id_image')">
+                    <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/news.png' %}'>
             {% endif %}
             {{ form.image }}
             <button type="button" id="remove-image-button" class="ov-form__btn ov-form__btn--red"
@@ -44,7 +45,7 @@
     </div>
 
     <button type="button" id="close-button" class="ov-form__btn ov-form__btn--red"
-            onclick="displayModal(DELETE_NEWS_URL + {{ object.id }})">Izbriši vijest
+            onclick="displayModal(DELETE_NEWS_URL + {{ object.id }})">Izbriši
     </button>
     <button type="button" id="submitForm" class="ov-form__btn" onclick="submitFormMultimediaData(EDIT_NEWS_URL + {{ object.id }} + '/', '#edit-news-form')">
         Sačuvaj

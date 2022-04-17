@@ -237,6 +237,11 @@
     padding: 0.5rem 1rem;
 
   }
+
+  #shared-choice-container{
+    margin:0px;
+  }
+
   .photo-preview-container{
     max-width: 20rem;
   }
