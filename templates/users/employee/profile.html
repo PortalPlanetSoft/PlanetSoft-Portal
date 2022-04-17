@@ -84,7 +84,9 @@
                 {{ form.business_phone.errors }}
             </div>
             {% endif %}
-            <label>{{ form.profile_pic.label }}</label>
+            <div>
+                <label>{{ form.profile_pic.label }}</label>
+            </div>
             <div class="image-container" onmouseover="showButtonsAvatarImage(0)" onmouseleave="showButtonsAvatarImage(1)">
                 {% if object.profile_pic %}
                     <img id="photo-preview" class="dv-photo-preview" src={{ object.profile_pic.url }}>
