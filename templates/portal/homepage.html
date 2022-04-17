@@ -15,6 +15,11 @@
                     <label>Korisničko ime</label>
                     {{ form.username }}
                 </div>
+                {% if form.username.errors %}
+                    <div>
+                        {{ form.username.errors }}
+                    </div>
+                {% endif %}
                 <div>
                     <label>Lozinka</label>
                     <div class="ov-login__input-container">
@@ -24,14 +29,18 @@
                     </div>
 
                 </div>
+                {% if form.password.errors %}
+                    <div>
+                        {{ form.password.errors }}
+                    </div>
+                {% endif %}
+                <input type="checkbox" id="boxid_password" onclick ="reveal('id_password')">Prikaži
+                <i class="fa-regular fa-eye"></i>
 
                 <div>
                     <button class="ov-form__btn" type="submit">Prijava</button>
                 </div>
             </form>
-        </div>
-        <div class="ov-login__right">
-            <img src='{% static 'img/login_image.jpg' %}' alt="">
         </div>
 
     </div>

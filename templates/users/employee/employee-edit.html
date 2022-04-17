@@ -1,7 +1,7 @@
 {% load static %}
 <form id="edit-emp-form" enctype="multipart/form-data" class="ov-form">
-
-    <h3 class="ov-form__title">Podešavanje Osnovnih Podataka</h3>
+    {% if not form_preview %}
+    <h3 class="ov-form__title">Podešavanje osnovnih podataka</h3>
     <div class="dk-icon-edit">
         {% if object.profile_pic %}
             <img src={{ object.profile_pic.url }}>
@@ -13,7 +13,7 @@
             {% endif %}
         {% endif %}
     </div>
-    {% if not form_preview %}
+
         {% csrf_token %}
         {% for error in form.non_field_errors %}
             <div>
@@ -99,21 +99,23 @@
                 {{ form.work_location.errors }}
             </div>
         {% endif %}
-        <div>
-            <label>{{ form.is_admin.label }}</label>
+    <div id="id_admin_editor">
 
+            <label>{{ form.is_admin.label }}</label>
+            <div>
             {{ form.is_admin }}
-        </div>
+             </div>
+
+            <label>{{ form.is_editor.label }}</label>
+             <div>
+            {{ form.is_editor }}
+            </div>
+    </div>
         {% if form.is_admin.errors %}
             <div>
                 {{ form.is_admin.errors }}
             </div>
         {% endif %}
-        <div>
-            <label>{{ form.is_editor.label }}</label>
-
-            {{ form.is_editor }}
-        </div>
         {% if form.is_editor.errors %}
             <div>
                 {{ form.is_editor.errors }}
@@ -163,7 +165,63 @@
                onclick="submitEditUserForm({{ object.id }})">Sačuvaj</a>
         </div>
     {% else %}
-        {{ form_preview.as_p }}
+
+    <div class="ms-detail-card">
+<div class="dk-icon-edit">
+        {% if object.profile_pic %}
+            <img src={{ object.profile_pic.url }}>
+        {% else %}
+            {% if object.gender == 'M' %}
+                <img src='{% static 'img/1.png' %}' alt='man-profile'>
+            {% else %}
+                <img src='{% static 'img/2.png' %}' alt='woman-profile'>
+            {% endif %}
+        {% endif %}
+    </div>
+           <h3>{{ object.username }}</h3>
+
+        <div>
+            <h2>{{ object.first_name }}</h2>
+            <h2>{{ object.last_name }}</h2>
+{% if object.is_admin %} <h3>Administrator</h3>
+            {% else %}
+            {% if object.is_editor %} <h3>Moderator sajta</h3>
+            {% endif %}
+                {% endif %}
+
+
+        </div>
+      <div>
+
+            <h3>{{ object.birth_date }}</h3>
+        </div>
+        <div>
+
+            <h3>{{ object.work_location }}</h3>
+        </div>
+        <div>
+
+            <h3>{{ object.company_position }}</h3>
+        </div>
+        <div>
+
+            <h3>{{ object.email }}</h3>
+        </div>
+
+        <div>
+
+           <h3>{{ object.phone }}</h3>
+        </div>
+
+        <div>
+
+            <h3>{{ object.business_phone }}</h3>
+        </div>
+
+
+
+
+
         <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue dv-detail-button"
                 onclick="modalClose()">
             Zatvori

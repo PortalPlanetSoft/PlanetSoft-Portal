@@ -1,4 +1,27 @@
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1400px) {
+
+    .dk-grid-container{
+        grid-column-gap: 4rem;
+    }
+    .ov-nav{
+        background-position-x: -3rem;
+    }
+}
+@media only screen and (max-width: 1300px) {
+
+    .dk-grid-container{
+        grid-column-gap: 3rem;
+    }
+}
+
+@media only screen and (max-width: 1200px)
+ {
+
+    .button, button{
+        height: unset;
+    }
+
+
     input[type=radio], input[type=checkbox]{
       height: 2rem;
       width: 2rem;
@@ -41,6 +64,10 @@
     .ov-nav__item:last-child {
       margin-left: 0;
     }
+    .ov-nav__item--icon-only:hover {
+    background-color: var(--primary-light);
+    border-bottom: 3px solid var(--accent);
+    }
     .ov-nav__hamburger-btn {
       display: inline-block;
     }
@@ -81,9 +108,14 @@
       padding: 0.25rem;
       border: 1px solid var(--primary);
       border-radius: 0.5rem;
+      height: 3rem;
     }
     .dk-search a{
       font-size: 2rem;
+      width: auto;
+    }
+    .dk-search a svg{
+        padding: 0.5rem;
     }
     .dv-input-container option{
       font-size: 0.8rem;
@@ -104,15 +136,13 @@
 
     /* CARDS */
     .dk-grid-container {
-      grid-template-columns: 1fr;
+      grid-template-columns: 0.6fr;
     }
   
     .dk-item {
       width: 100%;
     }
-    .dk-item a {
-      font-size: 2rem;
-    }
+
     .dk-name h4 {
       font-size: 2.5rem;
     }
@@ -124,6 +154,9 @@
     /* FOOTER */
     .ov-footer {
       flex-direction: column;
+      align-items: stretch;
+      flex-wrap: wrap;
+      align-content: center;
     }
   
     /* MODAL FORM */
@@ -144,9 +177,18 @@
       display: block;
       width: 90%;
     }
+    .ov-form__btn  {
+        height: unset;
+    }
+    #close-button,#id_company_position{
+    height: unset;
+    }
+
     .ov-form input[type="date"],
     .ov-form input[type="file"] {
       font-size: 2rem;
+      height: unset;
+      width: unset;
     }
   
     .ov-form label[for="id_profile_pic"]::after {
@@ -159,8 +201,10 @@
    }
    .ov-form a {
       font-size: 3rem;
-      width: 84%;
-    }.ov-form button {
+        width: 90%;
+      height: unset;
+    }
+    .ov-form button {
       font-size: 3rem;
     }
     .ov-form option{
@@ -168,15 +212,16 @@
     }
     .ov-form__btn-container {
       flex-direction: column;
+      padding: 0;
     }
     .ov-form__btn-container button:first-child {
       order: 3;
     }
   
     /* LOGIN */
-  .ov-form, .ov-password-change .ov-form{
+   .ov-form, .ov-password-change .ov-form{
       width: 70%;
-    }
+   }
     .ov-login {
       flex-direction: column;
       align-items: center;
@@ -191,9 +236,7 @@
       width: 100%;
       order: 1;
     }
-    .ov-login__right img{
-      width: 100%;
-    }
+
   
     .ov-password-change .ov-form {
       font-size: 2.5rem;
@@ -202,6 +245,7 @@
       font-size: 2.5rem;
       font-weight: bold;
       padding: 1rem 0;
+      height: unset;
     }
     .ov-logout h4{
       font-size: 3rem;
@@ -230,173 +274,175 @@
       display: flex;
       flex-direction: column;
       padding: 1rem;
-      }
-      .content{
+    }
+    .content{
           padding: 1rem;
-      }
-      .headline > p {
+    }
+    .headline > p {
         text-align: center;
         font-size: 1.5rem;
         padding: 1rem;
-      }
-      .headline > h4 {
+    }
+    .headline > h4 {
         font-size: 3rem;
         padding: 1rem;
-      }
-      .headline > div > a {
+    }
+    .headline > div > a {
         font-size: 2rem;
-      }
-      .headline > div > button {
+    }
+    .headline > div > button {
         font-size: 2rem;
-      }
-      .comment-like-section {
+    }
+    .comment-like-section {
         width: 100%;
         grid-template-columns: 1fr 1fr 5fr;
-      }
-      .comment-like-section .news-like, .comment-like-section .news-dislike{
+    }
+    .comment-like-section .news-like, .comment-like-section .news-dislike{
         display: flex;
-      }
-      .comment-like-section .news-comment {
+        align-items: center;
+    }
+    .comment-like-section .news-comment {
         margin-left: 1rem;
-      }
-      .comment-like-section-preview button,
-      .comment-like-section button, .comment-like-section span{
+    }
+    .comment-like-section-preview button,
+    .comment-like-section button, .comment-like-section span{
         font-size: 1.5rem;
-      }
-      .comment-like-section-preview textarea,
-      .comment-like-section textarea {
+        padding-left: 0.3rem;
+    }
+    .comment-like-section-preview textarea,
+    .comment-like-section textarea {
         font-size: 2rem;
-      }
-      .dk-grid {
-          font-size: 1.5rem;
-          grid-row-gap: 2rem;
-      }
-      .dk-grid>div{
+    }
+    .dk-grid {
+      font-size: 1.5rem;
+      grid-row-gap: 2rem;
+    }
+    .dk-grid>div{
         display: flex;
         justify-content: center;
-      }
-      .search{
+    }
+    .search{
         grid-column: 2/10;
-      }
-      .search input{
+    }
+    .search input{
           font-size: 2rem;
           padding: 1rem;
           width: 90%;
-  
-      }
-      .news-i{
+    }
+    .news-i{
           font-size: 2.2rem;
           right: -8%;
           padding: 0.7rem;
-      }
-      .choose_author{
+    }
+    .choose_author{
           grid-column: 2/10;
           align-items: center;
-  }
-      .choose_author select{
+    }
+    .choose_author select{
           padding: 1rem;
           font-size: 2rem;
-      }
-      .create_news{
+    }
+    .create_news{
           font-size: 1.1rem;
           grid-column: 2/10;
-  }
-      .create_news a{
+          width: auto;
+    }
+    .create_news a{
           font-size: 2rem;
-      }
-      .dk-author-filter-select{
+    }
+    .dk-author-filter-select{
         width: 70%;
-      }
-      .dk-author-filter-select option{
+    }
+    .dk-author-filter-select option{
         font-size: 0.8rem;
-      }
-      .article-author-news-preview p{
+    }
+    .article-author-news-preview p{
           padding: 0.5rem ;
           float: none;
           text-align: center;
           font-size: 1.5rem;
-        }
-      .content p{
+    }
+    .content p{
             font-size: 1rem;
-        }
-      .news{
+    }
+    .news{
           grid-column: 2/12;
-      }
-      .events-sidebar-news{
+    }
+    .events-sidebar-news{
             display: none;
-        }
-      .article-author-news p{
+    }
+    .article-author-news p{
           text-align: center;
           font-size: 1.5rem;
-      }
+    }
       /* COMMENT AREA */
-      .comment-like-section .news-comment textarea {
+    .comment-like-section .news-comment textarea {
         height: 2.5rem;
-      }
-      .header-news-details{
+    }
+    .header-news-details{
         display: flex;
         flex-direction: column;
         padding: 1rem;
-      }
-      .dk-news-details{
+    }
+    .dk-news-details{
           padding: 1rem;
-      }
-      .header-news-details > div > p {
+    }
+    .header-news-details > div > p {
         text-align: center;
         font-size: 1.5rem;
         padding: 1rem;
-      }
-      .header-news-details > div > h4 {
+    }
+    .header-news-details > div > h4 {
         text-align: center;
         font-size: 2.2rem;
         padding: 1rem;
-      }
-      .edit-news {
+    }
+    .edit-news {
         text-align: center;
-      }
-      .edit-news a{
+    }
+    .edit-news a{
         font-size: 1.5rem;
-      }
-      .profile-img-comment img{
+    }
+    .profile-img-comment img{
         width: 5.5rem;
         height: 5.5rem;
-      }
-      .comment-content h4{
+    }
+    .comment-content h4{
         font-size: 0.9rem;
-      }
-      .comment-content p{
+    }
+    .comment-content p{
         font-size: 0.8rem;
-      }
-      .comment-content{
+    }
+    .comment-content{
         grid-column: 1/18;
-      }
-      .commentlike-edit-preview,
-      .commentlike-edit-section{
+    }
+    .commentlike-edit-preview,
+    .commentlike-edit-section{
           grid-template-columns: 1fr;
 
-      }
-      .comment-like-section-preview,
-      .comment-like-section{
+    }
+    .comment-like-section-preview,
+    .comment-like-section{
           padding-bottom: 1rem;
-      }
-      .edit-preview-button-news{
+    }
+    .edit-preview-button-news{
           display: flex;
           padding:1rem;
-      }
-      .commentlike-edit-preview .news-preview-button,
-      .edit-preview-button-news .news-button{
+    }
+    .commentlike-edit-preview .news-preview-button,
+    .edit-preview-button-news .news-button{
           width: 10rem;
           height: 3rem;
-      }
-      .commentlike-edit-preview .news-preview-button ,
-      .edit-preview-button-news .news-button a{
+    }
+    .commentlike-edit-preview .news-preview-button ,
+    .edit-preview-button-news .news-button a{
           font-size: 1.5rem;
 
-      }
-      .comment-like-section-preview .news-comment textarea{
+    }
+    .comment-like-section-preview .news-comment textarea{
             height: 2.5rem;
           font-size: 1.2rem;
-        }
+    }
       /* CALENDAR */
       .create-new-event a{
         grid-column: 1/4;
@@ -440,7 +486,7 @@
           text-align: right;
           top: -1.5rem;
       }
-  
+
 
       /* OGI KALENDAR */
       .event-day-item-title {
@@ -468,12 +514,12 @@
       .news__comment-content {
         padding: 0 1rem;
       }
-      .news__comment-like-dislike-btn, 
+      .news__comment-like-dislike-btn,
       .news__comment-like-dislike-count{
         cursor:pointer;
         font-size: 2rem;
       }
-      /* OGI KOMENTARI 
+      /* OGI KOMENTARI
       */
 
       .image-container {
@@ -484,7 +530,6 @@
       }
       #id_profile_pic {
         font-size: 2.5rem;
-        
+
     }
   }
-  

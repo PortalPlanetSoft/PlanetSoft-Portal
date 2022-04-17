@@ -33,15 +33,18 @@
                         <button type="button" name="article_like_id" onclick="genericSubmitCommentReaction(URL_ADDRESS + '/news/react/' + {{ article.id }} + '/', '#news-like-form', '#comment-like-section{{ article.id }}', {{ article.id }}, {'flag': 'like'})
 ">
                             {% if article.liked %}
-                                <i class="fa-solid fa-thumbs-up"></i> {% else %}
-                                <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
-                        <span>{{ article.likes_count }}</span>
+                                <i class="fa-solid fa-thumbs-up fa-xl"></i> {% else %}
+                                <i class="fa-regular fa-thumbs-up fa-xl"></i>
+                            {% endif %}
+                            <span>{{ article.likes_count }}</span>
+                        </button>
+
                     </form>
                     <form id="news-dislike-form" class="news-dislike"
                           method="post">
                         {% csrf_token %}
                         <button type="button" name="article_dislike_id" onclick="genericSubmitCommentReaction(URL_ADDRESS + '/news/react/' + {{ article.id }} + '/', '#news-like-form', '#comment-like-section{{ article.id }}', {{ article.id }}, {'flag': 'like'})">
-                            {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
+                            {% if article.liked == False %}<i class="fa-solid fa-thumbs-down fa-xl"></i> {% else %}
                                 <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                         <span>{{ article.dislikes_count }}</span>
                     </form>

@@ -2,6 +2,8 @@
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     margin-top: 2.5rem;
+    align-items: center;
+    justify-items: center;
 }
 .search{
     grid-column-start: 2;
@@ -51,6 +53,10 @@
     font-size: 1.1rem;
     color: var(--primary);
 }
+.create_news a i{
+    display: inline-block;
+}
+
 .news-details-padding{
     padding-right: 4rem;
     padding-left: 4rem;
@@ -59,7 +65,7 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-row-gap: 2rem;
-    margin-top: 2.5rem;
+    margin: 2.5rem 0;
     grid-column-gap: 2rem;
 
 }
@@ -108,6 +114,7 @@
 .commentlike-edit-section{
     display: grid;
     grid-template-columns:3fr 1fr;
+    align-items: end;
 }
 .edit-preview-button-news{
     display: grid;
@@ -121,16 +128,25 @@
 .news-button{
     border: 1px solid var(--primary);
     padding: 0.3rem;
-    text-align: center;
     border-radius: 0.5rem;
     background: var(--primary-light);
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    width: 7rem;
-    height: 1.7rem;
+    width: 11.875rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
 }
+#button-user-edit{
+    height: unset;
+}
+
 .news-button a{
     font-size: 0.9rem;
+    text-align: center;
 }
 .commentlike-edit-preview{
     display: grid;
@@ -141,6 +157,8 @@
     grid-template-columns: 1fr 1fr 10fr;
     grid-template-areas: 
     "like dislike comment";
+    align-items: center;
+    justify-items: center;
     width: 90%;
     margin: 0 ;
 }
@@ -156,6 +174,8 @@
     border: none;
     background-color: unset;
     color: var(--primary);
+    width: unset;
+    height: unset;
 }
 .comment-like-section-preview button:hover,
 .comment-like-section button:hover {
@@ -170,6 +190,10 @@
     grid-area: like;
     align-self: center;
     justify-self: center;
+}
+.news-like, .news-dislike{
+    width: max-content;
+    padding-right: 1rem;
 }
 .comment-like-section-preview .news-dislike,
 .comment-like-section .news-dislike {
@@ -278,7 +302,7 @@
     justify-content: center;
     align-self: center;
 }
-.news__comment-profile-img img { 
+.news__comment-profile-img img {
     height: 100%;
 }
 
@@ -317,6 +341,20 @@
 
 /* NEWS KOMENTARI - OGI*/
 
+.profile-img-comment{
+    grid-column: 1;
+    grid-row: 1/10;
+    padding: 0.6rem;
+}
+.profile-img-comment img{
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid var(--primary);
+    border-radius: 25rem;
+    padding: 0.2rem;
+    color: var(--primary);
+    background: #fff;
+}
 .header-news-preview{
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -361,8 +399,6 @@
     box-sizing: border-box;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
-    width: 7rem;
-    height: 2rem;
     cursor: pointer;
 }
 .dk-events-sidebar-form{

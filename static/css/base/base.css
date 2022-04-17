@@ -6,8 +6,6 @@ body {
     font-family: sans-serif;
     color: var(--primary);
     height: 100%;
-    background-image: url('../img/background.png');
-    background-size: 100vw auto;
     overflow-x: hidden;
 }
 
@@ -18,7 +16,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 1rem;
+    width: 0.7rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -30,9 +28,13 @@ body {
     border-radius: 1rem;
 }
 
+
 .ov-content {
     flex: 1 0 auto;
+    background: url('../../img/background.svg');
+    background-size: cover;
 }
+
 
 h1 {
     font-size: 4rem;
@@ -64,6 +66,10 @@ p {
     padding: 0;
 }
 
+.button, button{
+    width: 11.875rem;
+    height: 2.5rem;
+}
 a {
     text-decoration: none;
     cursor: pointer;
@@ -110,6 +116,11 @@ a:hover {
     border: none;
     font-size: 1.1rem;
     color: var(--primary);
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+
 }
 
 .dk-grid-container {
@@ -118,19 +129,21 @@ a:hover {
     grid-row-gap: 3rem;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 3rem 11rem 3rem 11rem;
+    justify-content: center;
 }
 
 .dk-edit {
-    padding: 3rem 0 0 0;
     color: var(--primary);
     text-align: center;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .dk-edit a {
     border: 1px solid var(--primary);
-    margin: 5.5rem;
-    padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+    margin: 5.5em;
+    padding: 0.7rem;
     font-size: 0.9rem;
     border-radius: 0.5rem;
     background: #E3EBF1;
@@ -141,7 +154,6 @@ a:hover {
 }
 
 .dk-img img {
-    width: 16rem;
     height: 7rem;
     position: relative;
     border-radius: 1rem;
@@ -156,7 +168,6 @@ a:hover {
 
 .dk-item {
     border: 2px solid var(--primary);
-    padding: 0 0 3rem 0;
     border-radius: 1.25rem;
     background-color: #fff;
     box-sizing: border-box;
@@ -237,17 +248,21 @@ a:hover {
 
 
 .bk-currentPage {
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .bk-noNextPage {
     font-size: 1.33rem;
+    padding: 0.5rem;
 }
 
 
 .dk-search .radio {
     margin-left: 0.5rem;
     width: auto;
+}
+.ms-radio{
+        display: flex;
 }
 
 #toast-container {

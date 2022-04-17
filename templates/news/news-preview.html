@@ -27,7 +27,7 @@
                     <button type="button" name="article_like_id"
                             onclick="genericSubmitCommentReaction(REACT_ARTICLE_URL + {{ article.id }} + '/', '#news-like-form', '#comment-like-section', {{ article.id }}, {'flag': 'like'})">
                         {% if article.liked %}<i class="fa-solid fa-thumbs-up"></i> {% else %}
-                            <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
+                            <i class="fa-regular fa-thumbs-up fa-2xl"></i>{% endif %}</button>
                     <span>{{ article.likes_count }}</span>
                 </form>
                 <form id="news-dislike-form" class="news-dislike"
@@ -36,7 +36,7 @@
                     <button type="button" name="article_dislike_id"
                             onclick="genericSubmitCommentReaction(REACT_ARTICLE_URL + {{ article.id }} + '/', '#news-dislike-form', '#comment-like-section', {{ article.id }}, {'flag': ''})">
                         {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
-                            <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
+                            <i class="fa-regular fa-thumbs-down fa-2xl"></i>{% endif %}</button>
                     <span>{{ article.dislikes_count }}</span>
                 </form>
                 <form id="news-comment-form{{ article.id }}" method="post" class="news-comment">

@@ -31,6 +31,5 @@
     color: var(--primary);
 }
 .ov-delete-modal {
-    width: 75%;
     margin: 0 auto !important;
 }

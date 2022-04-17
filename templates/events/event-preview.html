@@ -22,14 +22,12 @@
             <p>{% if event.details %}{{ event.details }}{% else %}Nema detalja{% endif %}</p>
         </div>
         <div class="ov-form__btn-container">
-            {% if user.is_admin or user.is_superuser or event.author == request.user %}
-                <button class="ov-form__btn" type="button" onclick="displayModal(EDIT_EVENT_URL+{{ event.id }})">Uredi
-                </button>
-                <button class="ov-form__btn ov-form__btn--blue" type="button"
-                        onclick="displayModal(DELETE_EVENT_URL+{{ event.id }})">Izbriši
-                </button>
-            {% endif %}
-
+        {% if user.is_admin or user.is_superuser or event.author == request.user %}
+            <button class="ov-form__btn" type="button" onclick="displayModal(EDIT_EVENT_URL+{{ event.id }})">Uredi</button>
+            <button class="ov-form__btn ov-form__btn--red" type="button" onclick="displayModal(DELETE_EVENT_URL+{{ event.id }})">Izbriši</button>
+        {% endif %}
+        <button type="button" id="close-button" class="ov-form__btn ov-form__btn--blue" onclick="modalClose()">Zatvori
+        </button>
         </div>
     </div>
 

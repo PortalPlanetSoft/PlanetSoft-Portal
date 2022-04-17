@@ -15,8 +15,8 @@
     text-align: center;
     padding: 1rem;
     margin-bottom: 2rem;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
   .ov-form label {
     color: var(--primary);
@@ -38,12 +38,20 @@
   .ov-form div[id^="id"] > div{
     display: inline-block;
   }
+    #id_admin_editor, #id_gender, #id_work_location{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
   
   .ov-form #id_is_admin, .ov-form #id_is_editor {
     position: absolute;
     top: 30%;
     left: 25%;
   }
+   #id_gender, #id_work_location{
+     margin: 0 -2rem;
+   }
   .ov-form input[type='text'],
   .ov-form input[type='password'],
   .ov-form input[type='email'],
@@ -60,14 +68,14 @@
   }
   .ov-form textarea {
     border: 1px solid var(--primary);
-    border-radius: 5px;
+    border-radius: 8px;
     resize: none;
   }
   
   .ov-form select, .ov-form-position {
     color: var(--primary);
     border: 1px solid var(--primary);
-    border-radius: 5px;
+    border-radius: 8px;
     outline: none;
     font-size: 1rem;
     padding: 0.3rem;
@@ -75,7 +83,7 @@
   .ov-form input[type='date'] {
     color: var(--primary);
     border: 1px solid var(--primary);
-    border-radius: 5px;
+    border-radius: 8px;
     outline: none;
     padding: 5px;
     background-color: var(--white);
@@ -105,6 +113,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0 2rem;
+    align-items: center;
   }
   .ov-form__btn-contrainer--col {
     flex-direction: column;
@@ -117,12 +126,13 @@
     margin: 1rem 0.25rem;
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
   }
   .ov-form a {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
   }
   .ov-form__btn--blue {
     background-color: var(--primary-light);
@@ -181,7 +191,6 @@
     flex-direction: row;
     justify-content: space-around;
     min-height: 95vh;
-    position: relative;
   }
   .ov-login__left {
     width: 40%;
@@ -199,7 +208,6 @@
     width: 50%;
   }
   .ov-login button {
-    width: unset;
     padding: 0.5rem 3rem;
   }
   .ov-logout a {
@@ -207,7 +215,7 @@
     color: var(--white);
     padding: 1rem 3rem;
     margin: 1rem 0;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: 0.5s ease;
   }
   .ov-logout a:hover {
@@ -221,13 +229,11 @@
   
   .dv-profile-form {
     max-height: none;
+    width: fit-content;
   }
-  .dv-profile-form .ov-form__btn {
-    width: unset;
-  }
+
   .dv-detail-button {
-    width: 90%;
-    margin: 1rem auto;
+    margin: 1rem 2rem;
   }
   .shared-choice-container>div{
     display: flex;

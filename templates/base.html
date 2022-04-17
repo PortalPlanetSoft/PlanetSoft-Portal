@@ -25,12 +25,12 @@
         <div class="ov-nav__right">
             <div class="ov-nav__navigation" id="ov-navigation">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'news' %}" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
-                    <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
-                    <a href="{% url 'calendar' %}" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
+                    <a href="{% url 'news' %}" class="ov-nav__item"><i class="fas fa-newspaper fa-lg"></i> VIJESTI</a>
+                    <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users fa-lg"></i> ZAPOSLENI</a>
+                    <a href="{% url 'calendar' %}" class="ov-nav__item"><i class="fas fa-calendar fa-lg"></i> KALENDAR</a>
                     <a href="{% url 'profile' %}"
                        class="ov-nav__item ov-nav__item--dropdown-toggle ov-nav__item--icon-only"><i
-                            class="fas fa-user"></i></a>
+                            class="fas fa-user fa-xl"></i></a>
                     <!-- <a href="{% url 'logout' %}" class="ov-nav__item"><i class="fa-solid fa-arrow-right-from-bracket"></i> ODJAVA</a> -->
                     <div class="ov-nav__navigation-dropdown">
                         <!-- <a onclick="showPasswordChangeModal()" class="ov-nav__item ov-nav__navigation-dropdown-item">PROMJENA
