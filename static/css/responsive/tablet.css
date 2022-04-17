@@ -454,5 +454,23 @@
 
       }
       /* OGI KALENDAR */
+
+      /* OGI KOMENTARI */
+
+      .news__comment-author {
+        font-size:2rem;
+      }
+      .news__comment-date {
+        font-size: 1.5rem;
+      }
+      .news__comment-content {
+        padding: 0 1rem;
+      }
+      .news__comment-like-dislike-btn, 
+      .news__comment-like-dislike-count{
+        font-size: 2rem;
+      }
+      /* OGI KOMENTARI 
+      */
   }
   
