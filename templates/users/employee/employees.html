@@ -101,18 +101,13 @@
     </div>
 
 
-    {% if previous_login_date == current_date %}
+    {% if previous_login_date < current_date %}
         <script src="{% static '/../static/js/base.js' %}"></script>
         <script src="{% static '/../static/js/news/news.js' %}"></script>
         <script src="{% static '/../static/js/modal-utils.js' %}"></script>
         <script src="{% static '/../static/js/toast-utils.js' %}"></script>
         <script src="{% static '/../static/js/const-values.js' %}"></script>
         <script>
-            /*if(NOTIFICATIONS == true){
-                displayModal(URL_ADDRESS + '/employees/notification');
-            }else{
-                showToast("Nema nista", SUCCESSFUL_ACTION);
-            }*/
             displayModal(URL_ADDRESS + '/employees/notification');
             dateSet();
         </script>

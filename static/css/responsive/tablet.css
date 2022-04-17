@@ -470,6 +470,7 @@
       }
       .news__comment-like-dislike-btn, 
       .news__comment-like-dislike-count{
+        cursor:pointer;
         font-size: 2rem;
       }
       /* OGI KOMENTARI 

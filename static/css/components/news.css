@@ -308,6 +308,7 @@
 .news__comment-like-dislike-btn {
     background-color: unset;
     border: none;
+    cursor:pointer;
     color: var(--primary);
 }
 .news__comment-like-dislike-count {

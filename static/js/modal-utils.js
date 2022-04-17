@@ -20,7 +20,7 @@ async function displayModal(targetUrlAddress) {
 async function newsDeletePicture(targetUrlAddress, id) {
     MODAL_CONTAINER.style.display = "flex";
     await $.ajax({
-            url: targetUrlAddress,
+            url: targetUrlAddress + id,
             type: 'get',
             success: (data) => {
                 MODAL_CONTENT.innerHTML = data;

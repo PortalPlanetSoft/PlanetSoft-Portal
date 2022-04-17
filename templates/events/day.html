@@ -1,11 +1,7 @@
-{% if event_list %}
-{#    <script>#}
-{#        NOTIFICATIONS = true;#}
-{#    </script>#}
-    {% for event in event_list %}
-        <form class="ov-form">
-            <h3 class="ov-form__title">Dnevni pregled</h3>
-
+<form class="ov-form">
+    <h3 class="ov-form__title">Dnevni pregled</h3>
+    {% if event_list %}
+        {% for event in event_list %}
             <div class="event-day-item">
                 <a onclick="displayModal(EVENT_PREVIEW_URL+{{ event.id }})"><h4
                         class="event-day-item-title">{{ event.title }}</h4></a>
@@ -19,11 +15,9 @@
                     </div>
                 {% endif %}
             </div>
-        </form>
-    {% endfor %}
-{% else %}
-    <h4>nista</h4>
-{#    <script>#}
-{#        NOTIFICATIONS = false;#}
-{#    </script>#}
-{% endif %}
+        {% endfor %}
+    {% else %}
+        <h4>Nema dogadjaja danas.</h4>
+    {% endif %}
+</form>
+
