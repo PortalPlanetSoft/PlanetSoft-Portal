@@ -82,7 +82,7 @@
                               method="post">
                             {% csrf_token %}
                             <button type="button" name="article_like_id" class="news__comment-like-dislike-btn"
-                                    onclick="genericSubmitCommentReactionInModal(REACT_COMMENT_URL + {{ comment.id }} , '#comment-like-form', '#comment-content{{ comment.id }}', {{ article.id }}, {'flag': 'like'})">
+                                    onclick="genericSubmitCommentReactionInModal(REACT_COMMENT_URL + {{ comment.id }} , '#comment-like-form', '#comment-like-dislike{{ comment.id }}', {{ article.id }}, {'flag': 'like'})">
                                 {% if comment.liked %}
                                     <i class="fa-solid fa-thumbs-up"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
@@ -92,12 +92,12 @@
                               method="post">
                             {% csrf_token %}
                             <button type="button" name="article_dislike_id" class="news__comment-like-dislike-btn"
-                                    onclick="genericSubmitCommentReactionInModal(REACT_COMMENT_URL + {{ comment.id }} , '#comment-dislike-form', '#comment-content{{ comment.id }}', {{ article.id }}, {'flag': ''})">
+                                    onclick="genericSubmitCommentReactionInModal(REACT_COMMENT_URL + {{ comment.id }} , '#comment-dislike-form', '#comment-like-dislike{{ comment.id }}', {{ article.id }}, {'flag': ''})">
                                 {% if comment.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                             <span>{{ comment.dislikes_count }}</span>
                         </form>
-                </div>
+                    </div>
             {% endfor %}
         </div>
     </div>

@@ -201,6 +201,7 @@
 
 .event-day-no-events {
     text-align: center;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 3rem;
 }
 

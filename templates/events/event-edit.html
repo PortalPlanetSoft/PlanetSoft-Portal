@@ -1,5 +1,9 @@
 <form id="create-event-form" class="ov-form" method="post">
     {% csrf_token %}
+    <h3 class="ov-form__title">Uređivanje događaja</h3>
+    <button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
+            class="fa-solid fa-rectangle-xmark"></i>
+    </button>
     {% for error in form.non_field_errors %}
         <div>
             {{ error }}

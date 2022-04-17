@@ -166,7 +166,7 @@ class NewsPreview(DetailView):
             likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
             dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
             liked=Subquery(has_reacted_comment.values('type'))
-        )
+        ).order_by('-edited_date')
         return context
 
 
