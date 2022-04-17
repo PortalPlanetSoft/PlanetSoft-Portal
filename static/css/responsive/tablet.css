@@ -147,7 +147,8 @@
       width: 90%;
     }
     .ov-form input[type="date"],
-    .ov-form input[type="file"] {
+    .ov-form input[type="time"],
+    input[type="day"] {
       font-size: 2rem;
     }
   
