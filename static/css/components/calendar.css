@@ -199,3 +199,8 @@
   display: none;
 }
 
+.event-day-no-events {
+    text-align: center;
+    padding: 1rem;
+}
+
