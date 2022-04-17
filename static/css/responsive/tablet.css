@@ -34,10 +34,12 @@
       animation-fill-mode: forwards;
       z-index: 1;
     }
+
     .ov-nav__item {
       font-size: 3rem;
       padding: 6rem 0;
-    }
+  }
+
     .ov-nav__item:last-child {
       margin-left: 0;
     }
