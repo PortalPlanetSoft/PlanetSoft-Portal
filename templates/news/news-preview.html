@@ -76,6 +76,7 @@
                         </div>
                         <p class="news__comment-content">{{ comment.content }}</p>
                     </div>
+                </div>
                     <div id="comment-like-dislike{{ comment.id }}" class="news__comment-btn-container">
                         <form id="comment-like-form" class="news-like"
                               method="post">
@@ -96,7 +97,6 @@
                                     <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                             <span>{{ comment.dislikes_count }}</span>
                         </form>
-                    </div>
                 </div>
             {% endfor %}
         </div>

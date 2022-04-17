@@ -384,6 +384,7 @@
     padding: 1rem;
     font-size: 0.9rem;
     color: var(--primary);
+    word-break: break-all;
 }
 .todays-events h4,
 .tommorows-events h4{
