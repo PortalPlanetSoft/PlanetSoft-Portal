@@ -139,7 +139,7 @@
     .ov-form input[type='email'],
     .ov-form select,
     .ov-form input[type='submit'],
-    .ov-form button {
+    .ov-form button{
       font-size: 2rem;
       display: block;
       width: 90%;
@@ -160,6 +160,8 @@
    .ov-form a {
       font-size: 3rem;
       width: 84%;
+    }.ov-form button {
+      font-size: 3rem;
     }
     .ov-form option{
       font-size: 1rem;
@@ -472,5 +474,16 @@
       }
       /* OGI KOMENTARI 
       */
+
+      .image-container {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+      #id_profile_pic {
+        font-size: 2.5rem;
+        
+    }
   }
   
