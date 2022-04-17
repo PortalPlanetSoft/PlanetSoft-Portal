@@ -2,6 +2,7 @@
 
 let MODAL_CONTENT = document.getElementById("modal-content");
 let MODAL_CONTAINER = document.getElementById("modal-container");
+let NOTIFICATIONS;
 const URL_ADDRESS = 'http://127.0.0.1:8000';
 
 const NAV_TOGGLE_BTN = document.querySelector('#ov-nav-toggle');
