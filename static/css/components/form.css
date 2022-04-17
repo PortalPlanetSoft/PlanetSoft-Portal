@@ -240,3 +240,7 @@
   .photo-preview-container{
     max-width: 20rem;
   }
+
+  .password-change-div{
+    margin:0px !important;
+  }
