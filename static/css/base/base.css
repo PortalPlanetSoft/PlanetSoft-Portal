@@ -276,8 +276,8 @@ a:hover {
 }
 
 .image-container {
-    height: 200px;
-    width: 200px;
+    height: 15rem;
+    width: 15rem;
     display: flex;
     justify-content: center;
     position: relative;
@@ -294,12 +294,12 @@ a:hover {
 
 #id_profile_pic {
     visibility: hidden;
-    margin: 40px;
-    top: 50%;
-    width: 50px;
+    top: 70%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     position: absolute;
+    text-align: center;
+    font-size: .95em;
 }
 
 .dv-photo-preview {

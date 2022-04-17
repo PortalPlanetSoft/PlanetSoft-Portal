@@ -118,11 +118,10 @@
                     </div>
                 </div>
             <!-- like dislike za komentare  start-->
-                <div id="news-comment-content{{ article.id }}" class="news-comment-content">
+                <div id="news-comment-content{{ article.id }}" class="news__comment-list">
                     {% for comment in article.top_comments %}
-                        <div id="comment-content{{ comment.id }}" class="comment-content">
-
-                            <div class="profile-img-comment">
+                        <div id="comment-content{{ comment.id }}" class="news__comment-item">
+                            <div class="news__comment-profile-img">
                                 {% if comment.author.profile_pic %}
                                     <img src={{ comment.author.profile_pic.url }}>
                                 {% else %}
@@ -133,33 +132,40 @@
                                     {% endif %}
                                 {% endif %}
                             </div>
-                            <a onclick="displayModal(VIEW_USER_URL+{{ comment.author.id }})">
-                                <h4>{{ comment.author.first_name }} {{ comment.author.last_name }}</h4></a>
-                            <h6>{{ comment.creation_date }}</h6>
-                            <p>{{ comment.content }}</p>
+                            <div class="news__comment-information">
+                                <div>
+                                    <a  onclick="displayModal(VIEW_USER_URL+{{ comment.author.id }})">
+                                        <h4 class="news__comment-author">{{ comment.author.first_name }} {{ comment.author.last_name }}</h4>
+                                    </a>
+                                    <span class="news__comment-date">{{ comment.creation_date }}</span>
+                                </div>
+                                <p class="news__comment-content">{{ comment.content }}</p>
+                            </div>
+                        </div>
+                        <div class="news__comment-btn-container">
+                            <form id="comment-like-form" 
+                            method="post">
+                          {% csrf_token %}
+                            <button type="button" name="article_like_id" class="news__comment-like-dislike-btn"
+                                    onclick="genericSubmitCommentReaction(REACT_COMMENT_URL + {{ comment.id }} , '#comment-like-form', '#comment-content', {{ comment.id }}, {'flag': 'like'})"> {% if comment.liked %}
+                                <i class="fa-solid fa-thumbs-up"></i> {% else %}
+                                <i class="fa-regular fa-thumbs-up"></i>{% endif %}
+                            </button>
 
-                            <form id="comment-like-form" class="news-like"
-                                  method="post">
-                                {% csrf_token %}
-                                <button type="button" name="article_like_id"
-                                        onclick="genericSubmitCommentReaction(REACT_COMMENT_URL + {{ comment.id }} , '#comment-like-form', '#comment-content', {{ comment.id }}, {'flag': 'like'})"> {% if comment.liked %}
-                                    <i class="fa-solid fa-thumbs-up"></i> {% else %}
-                                    <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
-
-                                <span>{{ comment.likes_count }}</span>
-                            </form>
-                            <form id="comment-dislike-form" class="news-dislike"
-                                  method="post">
-                                {% csrf_token %}
+                            <span class="news__comment-like-dislike-count">{{ comment.likes_count }}</span>
+                      </form>
+                      <form id="comment-dislike-form" 
+                            method="post">
+                          {% csrf_token %}
 
 
-                                <button type="button" name="article_dislike_id"
-                                        onclick="genericSubmitCommentReaction(REACT_COMMENT_URL + {{ comment.id }} , '#comment-dislike-form', '#comment-content', {{ comment.id }}, {'flag': ''})">
-                                    {% if comment.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
-                                        <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
-                                <span>{{ comment.dislikes_count }}</span>
+                          <button type="button" name="article_dislike_id" class="news__comment-like-dislike-btn"
+                                  onclick="genericSubmitCommentReaction(REACT_COMMENT_URL + {{ comment.id }} , '#comment-dislike-form', '#comment-content', {{ comment.id }}, {'flag': ''})">
+                              {% if comment.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
+                                  <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
+                          <span class="news__comment-like-dislike-count">{{ comment.dislikes_count }}</span>
 
-                            </form>
+                      </form>
                         </div>
                         <!-- like dislike za komentare end-->
                     {% endfor %}
