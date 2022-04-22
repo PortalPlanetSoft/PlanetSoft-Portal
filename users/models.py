@@ -40,6 +40,7 @@ class User(AbstractUser):
             defaults={
                 'start_time': self.birth_date,
                 'author': self,
+                'end_time': self.birth_date,
             }
         )
         obj.shared.set(User.objects.all())

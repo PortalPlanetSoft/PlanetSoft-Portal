@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
+
 from django import forms
-from django.forms import SelectMultiple
 
 from events.constants import LABEL_TEXT_EVENT
 from events.models import Event
