@@ -11,7 +11,7 @@ class Event(models.Model):
     title = models.CharField(max_length=48)
     details = models.CharField(max_length=256, null=True, blank=True)
     start_time = models.DateTimeField()
-    end_time = models.DateTimeField(null=True, blank=True)
+    end_time = models.DateTimeField()
     repeat_days = models.IntegerField(default=0, null=True, blank=True)
     repeat_every_year = models.BooleanField(default=False)
     type = models.CharField(max_length=20, null=True, blank=True, choices=EVENT_TYPES)

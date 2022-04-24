@@ -25,6 +25,7 @@
         <div class="ov-nav__right">
             <div class="ov-nav__navigation" id="ov-navigation">
                 {% if user.is_authenticated %}
+                    <a href="{% url 'dms' %}" class="ov-nav__item"><i class="fas fa-newspaper"></i> DMS</a>
                     <a href="{% url 'news' %}" class="ov-nav__item"><i class="fas fa-newspaper"></i> VIJESTI</a>
                     <a href="{% url 'employees' %}" class="ov-nav__item"><i class="fas fa-users"></i> ZAPOSLENI</a>
                     <a href="{% url 'calendar' %}" class="ov-nav__item"><i class="fas fa-calendar"></i> KALENDAR</a>
