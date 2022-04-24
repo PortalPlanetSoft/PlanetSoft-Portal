@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'portal',
     'news',
     'events',
+    'dms',
 ]
 
 MIDDLEWARE = [

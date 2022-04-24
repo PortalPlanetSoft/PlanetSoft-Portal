@@ -29,7 +29,7 @@ class User(AbstractUser):
     birth_date = models.DateField(null=True, default=None, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     business_phone = models.CharField(max_length=15, null=True, blank=True)
-    previous_login = models.DateTimeField('previous login', blank=True, null=True, default=datetime.now())
+    previous_login = models.DateTimeField('previous login', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
@@ -40,6 +40,7 @@ class User(AbstractUser):
             defaults={
                 'start_time': self.birth_date,
                 'author': self,
+                'end_time': self.birth_date,
             }
         )
         obj.shared.set(User.objects.all())
