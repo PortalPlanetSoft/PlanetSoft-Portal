@@ -204,7 +204,7 @@
     .ov-password-change .ov-form {
       font-size: 2.5rem;
     }
-    .ov-login .ov-form__btn, .ov-password-change .ov-form__btn .btn{
+    .ov-login .ov-form__btn, .ov-password-change .ov-form__btn{
       font-size: 2.5rem;
       font-weight: bold;
       padding: 1rem 0;
