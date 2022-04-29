@@ -114,8 +114,8 @@ a:hover {
 
 .dk-grid-container {
     display: grid;
-    grid-column-gap: 8rem;
-    grid-row-gap: 3rem;
+    grid-column-gap: 9rem;
+    grid-row-gap: 4rem;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 3rem 11rem 3rem 11rem;
 }
@@ -131,7 +131,7 @@ a:hover {
     border: 1px solid var(--primary);
     margin: 5.5rem;
     padding: 0.3rem 0.7rem 0.3rem 0.7rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
     border-radius: 0.5rem;
     background: #E3EBF1;
     box-sizing: border-box;
@@ -142,7 +142,7 @@ a:hover {
 
 .dk-img img {
     width: 16rem;
-    height: 7rem;
+    height: 8.5rem;
     position: relative;
     border-radius: 1rem;
     text-align: center;
@@ -192,12 +192,12 @@ a:hover {
 }
 
 .dk-name {
-    padding: 0 0 1rem 0;
+    padding: 0 0 2rem 0;
 }
 
 .dk-name h4 {
     color: var(--primary);
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     display: block;
     clear: both;
     text-align: center;
@@ -207,6 +207,7 @@ a:hover {
     color: var(--primary);
     font-size: 1rem;
     text-align: center;
+    padding: 1.5rem;
 }
 
 .dk-pagination a {
@@ -277,7 +278,6 @@ a:hover {
 
 .image-container {
     height: 15rem;
-    width: 15rem;
     display: flex;
     justify-content: center;
     position: relative;
@@ -360,10 +360,13 @@ a:hover {
 .dv-newscard-photo {
     display: flex;
     justify-content: center;
+    padding-top: 1.5rem;
 }
 
 .dv-newscard-photo > img {
     max-width: 50%;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
 
 }
 

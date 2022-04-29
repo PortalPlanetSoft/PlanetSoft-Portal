@@ -10,16 +10,17 @@
                     </div>
                 </div>
                 <div>
-                    <label>Beograd</label>
+
                     <input onchange="submitFilterForm()" type="radio" name="location" value="BG"
-                           {% if location == 'BG' %}checked{% endif %} class="radio">
-                    <label>Banja Luka</label>
+                           {% if location == 'BG' %}checked{% endif %} class="radio"> <label>Beograd</label>
+
                     <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
-                           {% if location == 'BL' %}checked{% endif %} class="radio">
-                    <label>Sve
-                        lokacije</label>
+                           {% if location == 'BL' %}checked{% endif %} class="radio"><label>Banja Luka</label>
+
                     <input onchange="submitFilterForm()" type="radio" name="location" value="all"
                            {% if location == None or location == 'all' %}checked{% endif %} class="radio">
+                 <label>Sve
+                        lokacije</label>
                 </div>
                 <select name="author" class="ov-form-position" onchange="submitFilterForm()">
                     <option {% if selected == author.pk %} selected {% endif %} value="all">Svi autori</option>
@@ -28,12 +29,12 @@
                                                                value="{{ author.pk }}">{{ author.first_name }} {{ author.last_name }}</option>
                     {% endfor %}
                 </select>
-
+</div>
             {% if user.is_admin or user.is_superuser or user.is_editor %}
                     <a onclick="displayModal(ADD_NEWS_URL)">Dodajte vijest
                         <i class="fa-solid fa-circle-plus fa-xl"></i></a>
             {% endif %}
-        </div>
+
     </form>
 
 
@@ -222,9 +223,10 @@
 
     <div class="dk-pagination">
         {% if page_obj.has_previous %}
-            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.previous_page_number }}">&lt;</a>
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.previous_page_number }}">
+                <i class="fa-solid fa-chevron-left"></i></a>
         {% else %}
-            <span class="bk-noNextPage">&lt;</span>
+            <span class="bk-noNextPage"><i class="fa-solid fa-chevron-left"></i></a></span>
         {% endif %}
         {% for i in page_obj.paginator.page_range %}
             {% if page_obj.number == i %}
@@ -234,9 +236,9 @@
             {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
-            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.next_page_number }}">&gt;</a>
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.next_page_number }}"><i class="fa-solid fa-chevron-right"></i></a>
         {% else %}
-            <span class="bk-noNextPage">&gt;</span>
+            <span class="bk-noNextPage"><i class="fa-solid fa-chevron-right"></i></span>
         {% endif %}
 
     </div>
