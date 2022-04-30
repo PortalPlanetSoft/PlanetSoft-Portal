@@ -52,7 +52,7 @@
 
       <div class="shared-choice-container">
         <label>{{ form.shared.label }}</label>
-
+        <input id="myInput" type="text" onkeyup="filterTextInput()" placeholder="Pretraga...">
         {{ form.shared }}
     </div>
     <button type="button" class="ov-form__btn" onclick="genericSubmitForm('create-event-form', EDIT_EVENT_URL + {{ object.id }} + '/', SUCCESSFUL_ACTION)">Potvrdi</button>

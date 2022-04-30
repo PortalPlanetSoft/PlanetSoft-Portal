@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-        <div class="create-new-event">
-            <a onclick="displayModal(CREATE_EVENT_URL)">Novi događaj <i class="fa-solid fa-circle-plus fa-xl"></i></a>
-        </div>
+    <div class="create-new-event">
+        <a onclick="displayModal(CREATE_EVENT_URL)">Novi događaj <i class="fa-solid fa-circle-plus fa-xl"></i></a>
+    </div>
     <div class="dk-calendar">
         <div class="dk-create-calendar">
             <div class="year-month-calendar">
@@ -20,14 +20,18 @@
                 </div>
                 <div class="up-down-month">
                     {% if previous_month != 12 %}
-                        <a href="{% url 'specific-month-calendar' year previous_month %}"><i class="fa-solid fa-angle-up"></i></a>
+                        <a href="{% url 'specific-month-calendar' year previous_month %}"><i
+                                class="fa-solid fa-angle-up"></i></a>
                     {% else %}
-                        <a href="{% url 'specific-month-calendar' previous_year previous_month %}"><i class="fa-solid fa-angle-up"></i></a>
+                        <a href="{% url 'specific-month-calendar' previous_year previous_month %}"><i
+                                class="fa-solid fa-angle-up"></i></a>
                     {% endif %}
                     {% if next_month != 1 %}
-                        <a href="{% url 'specific-month-calendar' year next_month %}"><i class="fa-solid fa-angle-down"></i></a>
+                        <a href="{% url 'specific-month-calendar' year next_month %}"><i
+                                class="fa-solid fa-angle-down"></i></a>
                     {% else %}
-                        <a href="{% url 'specific-month-calendar' next_year next_month %}"><i class="fa-solid fa-angle-down"></i></a>
+                        <a href="{% url 'specific-month-calendar' next_year next_month %}"><i
+                                class="fa-solid fa-angle-down"></i></a>
                     {% endif %}
                 </div>
             </div>
