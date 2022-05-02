@@ -45,4 +45,3 @@ const CALENDAR_EVENTS_URL = URL_ADDRESS + '/calendar/events/';
 const REACT_COMMENT_URL = URL_ADDRESS + '/news/likes_dislikes_comment/';
 const SUBMIT_COMMENT_URL = URL_ADDRESS + '/news/comment/';
 const REACT_ARTICLE_URL = URL_ADDRESS + '/news/react/';
-
