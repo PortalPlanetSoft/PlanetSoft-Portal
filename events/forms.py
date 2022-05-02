@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime
 
 from django import forms
 
@@ -15,7 +15,7 @@ class CreateEvent(forms.ModelForm):
     start_time = forms.SplitDateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
                                                                            time_attrs={'type': 'time'}))
     end_time = forms.SplitDateTimeField(widget=forms.SplitDateTimeWidget(date_attrs={'type': 'date'},
-                                                                         time_attrs={'type': 'time'}), required=False)
+                                                                         time_attrs={'type': 'time'}))
 
     class Meta:
         model = Event
@@ -30,9 +30,8 @@ class CreateEvent(forms.ModelForm):
 
     def clean_start_time(self):
         data = self.cleaned_data['start_time']
-        if data and data < datetime.now(timezone.utc).astimezone():
+        if data and data < datetime.now():
             raise forms.ValidationError('Događaj ne može počinjati u prošlosti')
-            datetime.now(pytz.utc)
         return data
 
     def __init__(self, *args, **kwargs):

@@ -114,13 +114,22 @@ AUTH_USER_MODEL = 'users.User'
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'sr-latn'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Belgrade'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_L10N = True
+
+USE_TZ = False
+
+'''CELERY_TIMEZONE = "Europe/Belgrade"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 24 * 60 * 14
+CELERY_BROKER_URL = '127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'''
 
 
 # Static files (CSS, JavaScript, Images)
@@ -136,6 +145,6 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'employees/'
+LOGIN_REDIRECT_URL = 'news/'
 LOGIN_URL = 'login'
 

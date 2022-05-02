@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
@@ -119,8 +119,8 @@ class DayDetails(ListView):
     model = Event
 
     def get_queryset(self, *args, **kwargs):
+        selected_day = datetime(year=self.kwargs['year'], month=self.kwargs['month'], day=self.kwargs['day'])
+        day_after = selected_day + timedelta(days=1)
         query_set = super().get_queryset().filter(Q(author=self.request.user) | Q(shared=self.request.user),
-                                                  start_time__year=self.kwargs['year'],
-                                                  start_time__month=self.kwargs['month'],
-                                                  start_time__day=self.kwargs['day']).distinct()
+                                                  start_time__gte=selected_day, start_time__lt=day_after).distinct()
         return query_set

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q, Count, OuterRef, Subquery
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView
 
@@ -85,8 +85,9 @@ class NewsList(ListView):
         queryset = NewsArticle.objects.annotate(
             likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
             dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
-            liked=Subquery(has_reacted.values('type')))
-        # top_comments = Comment.objects.filter(article_id__in=queryset.values_list('id')).order_by('-edited_date')[:3]
+            liked=Subquery(has_reacted.values('type')),
+            comment_count=Count('comment')
+        )
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
 

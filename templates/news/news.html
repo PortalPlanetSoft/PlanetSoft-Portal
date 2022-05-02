@@ -56,6 +56,8 @@
                 </div>
                 <div class="content">
                     <p>{{ article.content }}</p>
+                 <i class="far fa-comment"></i>
+                            <span>{{ article.comment_count }}</span>
                     <div class="dv-newscard-photo">
                         {% if article.image %}
                             <img src={{ article.image.url }}>
