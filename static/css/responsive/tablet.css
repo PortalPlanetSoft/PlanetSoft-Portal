@@ -115,6 +115,9 @@
     .dk-item a {
       font-size: 2rem;
     }
+    .dk-item p{
+        font-size: 1.8rem;
+    }
     .dk-name h4 {
       font-size: 2.5rem;
     }
@@ -201,7 +204,7 @@
     .ov-password-change .ov-form {
       font-size: 2.5rem;
     }
-    .ov-login .ov-form__btn, .ov-password-change .ov-form__btn{
+    .ov-login .ov-form__btn, .ov-password-change .ov-form__btn .btn{
       font-size: 2.5rem;
       font-weight: bold;
       padding: 1rem 0;
@@ -312,12 +315,14 @@
           padding: 0.5rem ;
           float: none;
           text-align: center;
-          font-size: 1.5rem;
+          font-size: 1.8rem;
         }
       .content p{
-            font-size: .8rem;
             text-align: justify;
         }
+      .content-news-preview p{
+          font-size: 1.6rem;
+      }
       .news{
           grid-column: 2/12;
       }
@@ -400,8 +405,9 @@
         }
       /* CALENDAR */
       .create-new-event a{
-        grid-column: 1/4;
+        grid-column: 2/10;
         font-size: 1.8rem;
+
       }
   
       .dk-create-calendar{
@@ -428,6 +434,7 @@
       }
       .article-headline-news-preview h4{
         padding: 0.5rem ;
+        font-size: 2.5rem;
       }
       .article-headline-news-preview a{
           font-size: 2.3rem;
@@ -435,7 +442,7 @@
       .creation-date-news-preview p{
         padding: 0.5rem ;
         text-align: center;
-          font-size: 1.5rem;
+          font-size: 1.8rem;
       }
       .close-button-event{
           text-align: right;
@@ -468,6 +475,7 @@
       }
       .news__comment-content {
         padding: 0 1rem;
+        font-size: 1.8rem;
       }
       .news__comment-like-dislike-btn, 
       .news__comment-like-dislike-count{

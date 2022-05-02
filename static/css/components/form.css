@@ -106,6 +106,18 @@
     justify-content: space-between;
     padding: 0 2rem;
   }
+  .btn{
+    width: 3rem;
+    border: 1px solid var(--primary);
+    outline: none;
+    background-color: var(--accent-light);
+    color: var(--primary);
+    margin: 1rem 0.25rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    flex: 1;
+  }
   .ov-form__btn-contrainer--col {
     flex-direction: column;
   }
@@ -118,6 +130,7 @@
     font-size: 1rem;
     padding: 0.5rem 1rem;
     border-radius: 5px;
+    flex: 1;
   }
   .ov-form a {
     display: flex;

@@ -1,12 +1,12 @@
 .create-new-event {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(18, 1fr);
 }
 
 .create-new-event a {
     font-size: 1.1rem;
     color: var(--primary);
-    grid-column: 7;
+    grid-column: 14/18;
     padding-bottom: 2rem;
 }
 
