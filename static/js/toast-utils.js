@@ -18,8 +18,10 @@ function showToast(message, type) {
 }
 
 function filterTextInput() {
-    let value = $(this).val().toLowerCase();
-    $("#id_shared_ *").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $("#myInput").on("input", function () {
+        let value = $(this).val().toLowerCase();
+        $("#id_shared label").filter(function (i, item) {
+            $(item).toggle($(item).text().toLowerCase().indexOf(value) > -1)
+        });
     });
 }

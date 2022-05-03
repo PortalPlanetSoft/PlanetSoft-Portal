@@ -1,6 +1,6 @@
-
-<form  method="post">
+<form class="ov-form" method="post">
     {% csrf_token %}
-    Da li ste sigurni da zelite obrisati fajl
-    <input type="submit" value="Submit">
+    Da li ste sigurni da zelite obrisati fajl?
+    <input type="button" onclick="modalClose()" value="Ne">
+    <input type="button" onclick="genericDeleteFunction(URL_ADDRESS + '/dms/delete/' + {{ object.id }})" value="Da">
 </form>

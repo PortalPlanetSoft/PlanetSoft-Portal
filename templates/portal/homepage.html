@@ -4,10 +4,10 @@
 {% block body %}
     <div class="ov-container-center-content ov-login">
         <div class="ov-login__left">
-            <form class="ov-form" method="POST">
+            <form id="login-form" class="ov-form" method="POST" novalidate>
                 {% csrf_token %}
                 {% for error in form.non_field_errors %}
-                    <div class="errorlist">
+                    <div id= "error-list" class="errorlist">
                         {{ error }}
                     </div>
                 {% endfor %}
@@ -22,9 +22,7 @@
                         <input type="checkbox" id="boxid_password" onclick="reveal('id_password')"><label for="boxid_password"><i
                         class="fa-regular fa-eye"></i></label>
                     </div>
-
                 </div>
-
                 <div>
                     <button class="ov-form__btn" type="submit">Prijava</button>
                 </div>
@@ -33,7 +31,5 @@
         <div class="ov-login__right">
             <img src='{% static 'img/login_image.jpg' %}' alt="">
         </div>
-
     </div>
-
 {% endblock %}

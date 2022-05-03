@@ -37,8 +37,6 @@ $(function () {
     dateValidation();
 
 
-
-
 });
 
 function dateValidation() {
@@ -199,7 +197,6 @@ function genericContentLoadModal(target_form_id, id) {
         },
     });
 }
-
 
 
 function reveal(field_id) {

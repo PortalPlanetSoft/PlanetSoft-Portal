@@ -190,3 +190,17 @@ function closeFunction() {
 function modalClose() {
     MODAL_CONTAINER.style.display = "none";
 }
+
+function genericDeleteFunction(targetUrlAddress){
+    alert(targetUrlAddress);
+    $.ajax({
+        url: targetUrlAddress,
+        type: 'POST',
+        success: function (data, textStatus, xhr) {
+            requestSuccessful();
+        },
+        error: function (data, xhr, textStatus) {
+            requestSuccessful();
+        },
+    });
+}
