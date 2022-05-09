@@ -11,3 +11,7 @@ body .flex-col{
     display: flex;
     flex-direction: column;
 }
+
+.p-x-md {
+    padding: 0 2rem;
+}

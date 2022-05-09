@@ -1,5 +1,7 @@
 <form id="create-folder-form" class="ov-form" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input class="ov-form__btn" type="button" onclick="submitFormMultimediaData(URL_ADDRESS + '/dms/create_folder/', '#create-folder-form')" value="Sačuvaj">
+    <div class="ov-form__btn-container">
+        <input class="ov-form__btn" type="button" onclick="submitFormMultimediaData(URL_ADDRESS + '/dms/create_folder/', '#create-folder-form')" value="Sačuvaj">
+    </div>
 </form>

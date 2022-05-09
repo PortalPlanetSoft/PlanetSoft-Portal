@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-    <a class="button" onclick="displayModal(URL_ADDRESS + '/dms/create/')">Dodajte dokument<i class="fa-solid fa-circle-plus fa-xl"></i></a>
-    <a class="button" onclick="displayModal(URL_ADDRESS + '/dms/create_folder/')">Dodajte folder<i class="fa-solid fa-circle-plus fa-xl"></i></a>
-    <h1>API se zove 127.0.0.1:8000/dms/naziv_foldera</h1>
-    <h1>Npr. 127.0.0.1:8000/dms/slike pod uslovom da folder sa nazivom slike ima u bazi</h1>
+    <div class="p-x-md">
+        <a class="button" onclick="displayModal(URL_ADDRESS + '/dms/create/')">Dodajte dokument<i class="fa-solid fa-circle-plus fa-xl"></i></a>
+        <a class="button p-x-md" onclick="displayModal(URL_ADDRESS + '/dms/create_folder/')">Dodajte folder<i class="fa-solid fa-circle-plus fa-xl"></i></a>
+        <h1>API se zove 127.0.0.1:8000/dms/naziv_foldera</h1>
+        <h1>Npr. 127.0.0.1:8000/dms/slike pod uslovom da folder sa nazivom slike ima u bazi</h1>
+    </div>
 {% endblock %}

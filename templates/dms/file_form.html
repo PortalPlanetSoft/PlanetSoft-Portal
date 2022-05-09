@@ -1,5 +1,7 @@
 <form id="create-document-form" class="ov-form" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input class="ov-form__btn" type="button" onclick="submitFormMultimediaData(URL_ADDRESS + '/dms/create/', '#create-document-form')" value="Sačuvaj">
+    <div class="ov-form__btn-container">
+        <input class="ov-form__btn" type="button" onclick="submitFormMultimediaData(URL_ADDRESS + '/dms/create/', '#create-document-form')" value="Sačuvaj">
+    </div>
 </form>
