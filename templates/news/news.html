@@ -83,11 +83,8 @@
                                 {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                             <span>{{ article.dislikes_count }}</span>
+                            <span><i class="far fa-comment"></i> {{ article.comment_count }}</span>
                         </form>
-                        <div id="comment-count-container">
-                            <i class="far fa-comment"></i>
-                            <span>{{ article.comment_count }}</span>
-                        </div>
                         <form id="news-comment-form{{ article.id }}" method="post" class="news-comment">
                             {% csrf_token %}
                             <textarea id="news-comment-input{{ article.id }}" name="content"
@@ -95,8 +92,7 @@
                                       oninput="commentTyped({{ article.id }})"></textarea>
                             <button type="button" id="news-comment-icon{{ article.id }}"
                                     onclick="genericSubmitCommentReaction(SUBMIT_COMMENT_URL + {{ article.id }}, '#news-comment-form{{ article.id }}', '#news', {{ article.id }})">
-                                <i
-                                        class="fa-solid fa-paper-plane"></i></button>
+                                <i class="fa-solid fa-paper-plane"></i></button>
                         </form>
                     </div>
                     <div class="edit-preview-button-news">

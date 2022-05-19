@@ -138,7 +138,7 @@
 }
 .commentlike-edit-preview{
     display: grid;
-    grid-template-columns: 2fr 0fr;
+    grid-template-columns: 1fr 3fr 7fr;
 }
 .comment-like-section {
     display: grid;
@@ -176,7 +176,7 @@
     justify-self: center;
 }
 .comment-like-section-preview .news-dislike,
-.comment-like-section .news-dislike {
+.comment-like-section .news-dislike{
     grid-area: dislike;
     align-self: center;
     justify-self: center;
