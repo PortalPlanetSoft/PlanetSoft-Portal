@@ -83,6 +83,8 @@
                                 {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                             <span>{{ article.dislikes_count }}</span>
+                            <i class="far fa-comment"></i>
+                                <span>{{ article.comment_count }}</span>
                         </form>
                         {#                        action="{% url 'comment-on-news' article.pk %}"#}
                         <form id="news-comment-form{{ article.id }}" method="post" class="news-comment">
