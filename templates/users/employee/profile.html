@@ -92,31 +92,28 @@
                     <div class="image-container"
                          onmouseover="showButtonsAvatarImage(true, 'id_profile_pic', 'remove-avatar-button')"
                          onmouseleave="showButtonsAvatarImage(false, 'id_profile_pic', 'remove-avatar-button')">
-                        <img id="photo-preview" class="dv-photo-preview" src={{ object.profile_pic.url }}>
+                    <img id="photo-preview" class="dv-photo-preview" src={{ object.profile_pic.url }}>
 
                 {% else %}
                     <div class="image-container" onmouseover="showButtonsAvatarImage(true, 'id_profile_pic', '')"
                          onmouseleave="showButtonsAvatarImage(false, 'id_profile_pic', '')">
-                        {% if object.gender == 'M' %}
-                            <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/1.png' %}'
-                                 alt='man-profile'>
-                        {% else %}
-                            <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/2.png' %}'
-                                 alt='woman-profile'>
-                        {% endif %}
-
+                    {% if object.gender == 'M' %}
+                        <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/1.png' %}'
+                             alt='man-profile'>
+                    {% else %}
+                        <img id="photo-preview" class="dv-photo-preview" src='{% static 'img/2.png' %}'
+                             alt='woman-profile'>
+                    {% endif %}
                 {% endif %}
                 {{ form.profile_pic }}
-                <button id="remove-avatar-button" class="ov-form__btn" type="button"
+                <button id="remove-avatar-button" class="ov-form__btn ov-form__btn--red" type="button"
                         onclick="displayModal(DELETE_AVATAR_URL)"><i class="fa-solid fa-trash-can"></i></button>
-            </div>
-
-
-            <div class="ov-form__btn-container">
-                <button class="btn" type="submit">Potvrdi</button>
-                <a class=" ov-form__btn--blue btn" onclick="displayModal(PASSWORD_CHANGE_URL)">Promjena
-                    lozinke</a>
-            </div>
+                </div>
+                <div class="ov-form__btn-container">
+                    <button class="btn" type="submit">Potvrdi</button>
+                    <a class="ov-form__btn--blue btn" onclick="displayModal(PASSWORD_CHANGE_URL)">Promjena
+                        lozinke</a>
+                </div>
         </form>
     </div>
     <script src="{% static 'js/users/profile.js' %}"></script>

@@ -392,7 +392,6 @@
       .edit-preview-button-news .news-button{
           width: 15rem;
           height: 3rem;
-
       }
       .commentlike-edit-preview .news-preview-button ,
       .edit-preview-button-news .news-button a{
@@ -446,7 +445,7 @@
       }
       .close-button-event{
           text-align: right;
-          top: -1.5rem;
+          /*top: -1.5rem;*/
       }
   
 

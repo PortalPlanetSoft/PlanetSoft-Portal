@@ -171,7 +171,7 @@
 .close-button-event{
     color: var(--primary);
     border:none;
-    margin-top: -5rem;
+    /*margin-top: -5rem;*/
     background: none;
     align-items: end;
     float: right;

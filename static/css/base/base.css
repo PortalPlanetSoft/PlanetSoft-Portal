@@ -336,7 +336,7 @@ a:hover {
     visibility: hidden;
     margin: 40px;
     top: 50%;
-    width: 50px;
+    width: 60px;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     position: absolute;
@@ -398,3 +398,6 @@ a:hover {
     cursor: pointer;
 }
 
+#id_image{
+    width: 60px;
+}
