@@ -1,8 +1,10 @@
 {% load static %}
 <form id="news-article" class="news-preview">
-    <h3 class="ov-form__title">Pregled vijesti<button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
-            class="fa-solid fa-rectangle-xmark"></i>
-    </button></h3>
+    <h3 class="ov-form__title">Pregled vijesti
+        <button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
+                class="fa-solid fa-rectangle-xmark"></i>
+        </button>
+    </h3>
 
     <div class="news-content">
         <div class="dk-news-preview">
@@ -43,15 +45,14 @@
                             <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                     <span>{{ article.dislikes_count }}</span>
                 </form>
-                <i class="far fa-comment"></i>
-                <span>{{ article.comment_count }}</span>
                 <form id="news-comment-form{{ article.id }}" method="post" class="news-comment">
                     {% csrf_token %}
                     <textarea id="news-comment-input{{ article.id }}" name="content" placeholder="Dodaj komentar..."
                               oninput="commentTyped({{ article.id }})"></textarea>
                     <button type="button" id="news-comment-icon{{ article.id }}"
-                            onclick="genericSubmitCommentReactionInModal(SUBMIT_COMMENT_URL + {{ article.id }}, '#news-comment-form{{ article.id }}', '#news-article', {{ article.id }})">
-                        <i class="fa-solid fa-paper-plane"></i></button>
+                            onclick="genericSubmitCommentReactionInModal(SUBMIT_COMMENT_URL + {{ article.id }}, '#news-comment-form{{ article.id }}', '#news-comment-content{{ article.id }}', {{ article.id }})">
+                        <i
+                                class="fa-solid fa-paper-plane"></i></button>
                     </button>
                 </form>
             </div>
