@@ -1,8 +1,8 @@
 <form class="ov-form">
-    <h3 class="ov-form__title">Dnevni pregled</h3>
-    <button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
+    <h3 class="ov-form__title">Dnevni pregled<button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
             class="fa-solid fa-rectangle-xmark"></i>
-    </button>
+    </button></h3>
+
     {% if event_list %}
         {% for event in event_list %}
             <div class="event-day-item">

@@ -3,37 +3,37 @@
 {% block body %}
     <form class="dk-search" name="userFilterForm">
         <div class="dv-input-container">
-                <div class="dv-mobile-fullw">
-                    <div><input type="text" placeholder="PRETRAGA..." name="search"></div>
-                    <div class="dk-i" onclick="submitFilterForm()">
-                        <i class="fas fa-search fa-lg"></i>
-                    </div>
+            <div class="dv-mobile-fullw">
+                <div><input type="text" placeholder="PRETRAGA..." name="search"></div>
+                <div class="dk-i" onclick="submitFilterForm()">
+                    <i class="fas fa-search fa-lg"></i>
                 </div>
-                <div>
+            </div>
+            <div>
 
-                    <input onchange="submitFilterForm()" type="radio" name="location" value="BG"
-                           {% if location == 'BG' %}checked{% endif %} class="radio"> <label>Beograd</label>
+                <input onchange="submitFilterForm()" type="radio" name="location" value="BG"
+                       {% if location == 'BG' %}checked{% endif %} class="radio"> <label>Beograd</label>
 
-                    <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
-                           {% if location == 'BL' %}checked{% endif %} class="radio"><label>Banja Luka</label>
+                <input onchange="submitFilterForm()" type="radio" name="location" value="BL"
+                       {% if location == 'BL' %}checked{% endif %} class="radio"><label>Banja Luka</label>
 
-                    <input onchange="submitFilterForm()" type="radio" name="location" value="all"
-                           {% if location == None or location == 'all' %}checked{% endif %} class="radio">
-                 <label>Sve
-                        lokacije</label>
-                </div>
-                <select name="author" class="ov-form-position" onchange="submitFilterForm()">
-                    <option {% if selected == author.pk %} selected {% endif %} value="all">Svi autori</option>
-                    {% for author in author_list %}
-                        <option {% if selected == author.pk %} selected {% endif %}
-                                                               value="{{ author.pk }}">{{ author.first_name }} {{ author.last_name }}</option>
-                    {% endfor %}
-                </select>
-</div>
-            {% if user.is_admin or user.is_superuser or user.is_editor %}
-                    <a onclick="displayModal(ADD_NEWS_URL)">Dodajte vijest
-                        <i class="fa-solid fa-circle-plus fa-xl"></i></a>
-            {% endif %}
+                <input onchange="submitFilterForm()" type="radio" name="location" value="all"
+                       {% if location == None or location == 'all' %}checked{% endif %} class="radio">
+                <label>Sve
+                    lokacije</label>
+            </div>
+            <select name="author" class="ov-form-position" onchange="submitFilterForm()">
+                <option {% if selected == author.pk %} selected {% endif %} value="all">Svi autori</option>
+                {% for author in author_list %}
+                    <option {% if selected == author.pk %} selected {% endif %}
+                                                           value="{{ author.pk }}">{{ author.first_name }} {{ author.last_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% if user.is_admin or user.is_superuser or user.is_editor %}
+            <a onclick="displayModal(ADD_NEWS_URL)">Dodajte vijest
+                <i class="fa-solid fa-circle-plus fa-xl"></i></a>
+        {% endif %}
 
     </form>
 
@@ -43,7 +43,7 @@
 
         {% for article in object_list %}
 
-            <div class="news">
+            <div id="news{{ article.id }}" class="news">
 
                 <div class="headline">
                     <div class="creation-date-news-preview"><p>{{ article.creation_date }}</p></div>
@@ -83,17 +83,16 @@
                                 {% if article.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
                                     <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
                             <span>{{ article.dislikes_count }}</span>
+                            <span><i class="far fa-comment"></i> {{ article.comment_count }}</span>
                         </form>
-                        {#                        action="{% url 'comment-on-news' article.pk %}"#}
                         <form id="news-comment-form{{ article.id }}" method="post" class="news-comment">
                             {% csrf_token %}
                             <textarea id="news-comment-input{{ article.id }}" name="content"
                                       placeholder="Dodaj komentar..."
                                       oninput="commentTyped({{ article.id }})"></textarea>
                             <button type="button" id="news-comment-icon{{ article.id }}"
-                                    onclick="genericSubmitCommentReaction(SUBMIT_COMMENT_URL + {{ article.id }}, '#news-comment-form{{ article.id }}', '#news-comment-content', {{ article.id }})">
-                                <i
-                                        class="fa-solid fa-paper-plane"></i></button>
+                                    onclick="genericSubmitCommentReaction(SUBMIT_COMMENT_URL + {{ article.id }}, '#news-comment-form{{ article.id }}', '#news', {{ article.id }})">
+                                <i class="fa-solid fa-paper-plane"></i></button>
                         </form>
                     </div>
                     <div class="edit-preview-button-news">
@@ -107,11 +106,11 @@
                             </div>
 
                         {% else %}
-
-                            <a id="button-user-edit" class="button"
-                               onclick="displayModal(VIEW_NEWS_URL+{{ article.id }})">
-                                Prikaži vijest</a>
-
+                            <div id="user-news-preview-button" class="news-button">
+                                <a id="button-user-edit" class="button"
+                                   onclick="displayModal(VIEW_NEWS_URL+{{ article.id }})">
+                                    Prikaži vijest</a>
+                            </div>
                         {% endif %}
 
                     </div>
@@ -236,7 +235,8 @@
             {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
-            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.next_page_number }}"><i class="fa-solid fa-chevron-right"></i></a>
+            <a href="?{% if search %}search={{ search }}&{% endif %}{% if author %}author={{ author }}&{% endif %}page={{ page_obj.next_page_number }}"><i
+                    class="fa-solid fa-chevron-right"></i></a>
         {% else %}
             <span class="bk-noNextPage"><i class="fa-solid fa-chevron-right"></i></span>
         {% endif %}

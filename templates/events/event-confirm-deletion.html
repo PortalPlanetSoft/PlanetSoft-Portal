@@ -1,8 +1,8 @@
 <form id="delete-event-form" class="ov-form" method="post">
-    <h3 class="ov-form__title">Brisanje događajа</h3>
-    <button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
+    <h3 class="ov-form__title">Brisanje događajа<button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
             class="fa-solid fa-rectangle-xmark"></i>
-    </button>
+    </button></h3>
+
     <div class="ov-delete-modal">
         {% csrf_token %}
         <p class="ov-delete-modal__question">Jeste li sigurni da želite da izbrišete događaj: {{ object.title }}?</p>

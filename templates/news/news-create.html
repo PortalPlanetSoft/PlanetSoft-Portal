@@ -1,8 +1,8 @@
 <form id="create-news-form" class="ov-form" method="post" enctype="multipart/form-data">
-    <h3 class="ov-form__title">Kreiranje nove vijesti</h3>
-    <button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
+    <h3 class="ov-form__title">Kreiranje nove vijesti<button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
             class="fa-solid fa-rectangle-xmark"></i>
-    </button>
+    </button></h3>
+
     {% csrf_token %}
     {% for error in form.non_field_errors %}
         <div>

@@ -1,509 +1,595 @@
 @media only screen and (max-width: 1200px) {
-    input[type=radio], input[type=checkbox]{
-      height: 2rem;
-      width: 2rem;
+    input[type=radio], input[type=checkbox] {
+        height: 2rem;
+        width: 2rem;
     }
+
     /* NAVIGATION */
     .ov-nav {
-      flex-direction: column;
+        flex-direction: column;
     }
+
     .ov-nav__left {
-      padding: 2rem 0;
-      margin-bottom: 1rem;
-      align-self: flex-start;
+        padding: 2rem 0;
+        margin-bottom: 1rem;
+        align-self: flex-start;
     }
+
     .ov-nav__title {
-      font-size: 2.5rem;
+        font-size: 2.5rem;
     }
-  
+
     .ov-nav__navigation {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: var(--white);
-      width: 100vw;
-      height: 1vh;
-      transform: translateY(-60rem);
-      animation-name: none;
-      animation-duration: 1s;
-      animation-timing-function: ease;
-      animation-fill-mode: forwards;
-      z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: var(--white);
+        width: 100vw;
+        height: 1vh;
+        transform: translateY(-60rem);
+        animation-name: none;
+        animation-duration: 1s;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+        z-index: 1;
     }
 
     .ov-nav__item {
-      font-size: 3rem;
-      padding: 6rem 0;
-  }
+        font-size: 3rem;
+        padding: 6rem 0;
+    }
 
     .ov-nav__item:last-child {
-      margin-left: 0;
+        margin-left: 0;
     }
+
     .ov-nav__hamburger-btn {
-      display: inline-block;
+        display: inline-block;
     }
-  
+
     /* DROPDOWN */
     .ov-nav__navigation-dropdown {
-      position: unset;
-      background: unset;
-      text-align: center;
-      width: 50%;
-      display: block;
-      border: none;
+        position: unset;
+        background: unset;
+        text-align: center;
+        width: 50%;
+        display: block;
+        border: none;
     }
-  
+
     /* SEARCH AND FILTERS */
     .dk-search {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      font-size: 2rem;
-  
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        font-size: 2rem;
+
     }
+
     .dk-search input {
-      font-size: 2rem;
-      padding: 1rem;
-      width: 95%;
+        font-size: 2rem;
+        padding: 1rem;
+        width: 95%;
     }
-    .dk-search input[type=radio]{
-      height: 2rem;
-      width: 2rem;
+
+    .dk-search input[type=radio] {
+        height: 2rem;
+        width: 2rem;
     }
-    .dk-search select{
-      font-size: 2rem;
-      width: 70%;
-      display: block;
-      outline: none;
-      padding: 0.25rem;
-      border: 1px solid var(--primary);
-      border-radius: 0.5rem;
+
+    .dk-search select {
+        font-size: 2rem;
+        width: 70%;
+        display: block;
+        outline: none;
+        padding: 0.25rem;
+        border: 1px solid var(--primary);
+        border-radius: 0.5rem;
     }
-    .dk-search a{
-      font-size: 2rem;
+
+    .dk-search a {
+        font-size: 2rem;
     }
-    .dv-input-container option{
-      font-size: 0.8rem;
+
+    .dv-input-container option {
+        font-size: 0.8rem;
     }
-  
-    .dv-input-container{
-      flex-direction: column;
-      gap: 2rem;
-      font-size: 2rem;
+
+    .dv-input-container {
+        flex-direction: column;
+        gap: 2rem;
+        font-size: 2rem;
     }
-    .dk-i{
-      display: block;
-      font-size: 2.2rem;
-      position: relative;
-      right: -8%;
-      padding: 0.7rem;
+
+    .dk-i {
+        display: block;
+        font-size: 2.2rem;
+        position: relative;
+        right: -8%;
+        padding: 0.7rem;
     }
 
     /* CARDS */
     .dk-grid-container {
-      grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
     }
-  
+
     .dk-item {
-      width: 100%;
+        width: 100%;
     }
+
     .dk-item a {
-      font-size: 2rem;
+        font-size: 2rem;
     }
-    .dk-item p{
+
+    .dk-item p {
         font-size: 1.8rem;
     }
+
     .dk-name h4 {
-      font-size: 2.5rem;
+        font-size: 2.5rem;
     }
+
     .dk-pagination a,
     .dk-pagination span {
-      font-size: 3rem;
+        font-size: 3rem;
     }
-  
+
     /* FOOTER */
     .ov-footer {
-      flex-direction: column;
+        flex-direction: column;
     }
-  
+
     /* MODAL FORM */
     .modal-container .ov-form {
-      width: 80vw;
+        width: 80vw;
     }
+
     .ov-form__title {
-      font-size: 3rem;
+        font-size: 3rem;
     }
+
     .ov-form label,
     .ov-form input[type='text'],
     .ov-form input[type='password'],
     .ov-form input[type='email'],
     .ov-form select,
     .ov-form input[type='submit'],
-    .ov-form button{
-      font-size: 2rem;
-      display: block;
-      width: 90%;
+    .ov-form button {
+        font-size: 2rem;
+        display: block;
+        width: 90%;
     }
+
     .ov-form input[type="date"],
     .ov-form input[type="time"],
     input[type="day"] {
-      font-size: 2rem;
+        font-size: 2rem;
     }
-  
+
     .ov-form label[for="id_profile_pic"]::after {
-      font-size: 2rem;
+        font-size: 2rem;
     }
-  
-    
-   .ov-form #id_is_admin, .ov-form #id_is_editor {
-     left: 55%;
-   }
-   .ov-form a {
-      font-size: 3rem;
-      width: 84%;
-    }.ov-form button {
-      font-size: 3rem;
+
+
+    .ov-form #id_is_admin, .ov-form #id_is_editor {
+        left: 55%;
     }
-    .ov-form option{
-      font-size: 1rem;
+
+    .ov-form a {
+        font-size: 3rem;
+        width: 84%;
     }
+
+    .ov-form button {
+        font-size: 3rem;
+    }
+
+    .ov-form option {
+        font-size: 1rem;
+    }
+
     .ov-form__btn-container {
-      flex-direction: column;
+        flex-direction: column;
     }
+
     .ov-form__btn-container button:first-child {
-      order: 3;
+        order: 3;
     }
-  
+
     /* LOGIN */
-  .ov-form, .ov-password-change .ov-form{
-      width: 70%;
+    .ov-form, .ov-password-change .ov-form {
+        width: 70%;
     }
+
     .ov-login {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
+
     .ov-login .ov-form {
-      width: 70%;
-      padding: 2rem;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        width: 70%;
+        padding: 2rem;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     }
+
     .ov-login__left {
-      width: 100%;
-      order: 1;
+        width: 100%;
+        order: 1;
     }
-    .ov-login__right img{
-      width: 100%;
+
+    .ov-login__right img {
+        width: 100%;
     }
-  
+
     .ov-password-change .ov-form {
-      font-size: 2.5rem;
+        font-size: 2.5rem;
     }
-    .ov-login .ov-form__btn, .ov-password-change .ov-form__btn{
-      font-size: 2.5rem;
-      font-weight: bold;
-      padding: 1rem 0;
+
+    .ov-login .ov-form__btn, .ov-password-change .ov-form__btn .btn {
+        font-size: 2.5rem;
+        font-weight: bold;
+        padding: 1rem 0;
     }
-    .ov-logout h4{
-      font-size: 3rem;
+
+    .ov-logout h4 {
+        font-size: 3rem;
     }
+
     .ov-logout a {
-      font-size: 2.5rem;
+        font-size: 2.5rem;
     }
+
     .errorlist li {
-      font-size: 2rem;
+        font-size: 2rem;
     }
-  
+
     /* DELETE MODAL */
     .ov-delete-modal__question {
-      width: 50%;
-      margin: 0 auto !important;
-      color: var(--primary);
-      font-size: 2.5rem;
-  }
-    .dv-mobile-fullw{
-      width: 100%;
+        width: 50%;
+        margin: 0 auto !important;
+        color: var(--primary);
+        font-size: 2.5rem;
     }
-  
-  
+
+    .dv-mobile-fullw {
+        width: 100%;
+    }
+
+
     /* NEWS */
     .headline {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      }
-      .content{
-          padding: 1rem;
-      }
-      .headline h4 a{
-        font-size: 3rem;
-        padding: 1rem;
-      }
-      .headline > div > a {
-        font-size: 2rem;
-      }
-      .headline > div > button {
-        font-size: 2rem;
-      }
-      .comment-like-section {
-        width: 100%;
-        grid-template-columns: 1fr 1fr 5fr;
-      }
-      .comment-like-section .news-like, .comment-like-section .news-dislike{
-        display: flex;
-      }
-      .comment-like-section .news-comment {
-        margin-left: 1rem;
-      }
-      .comment-like-section-preview button,
-      .comment-like-section button, .comment-like-section span{
-        font-size: 2rem;
-      }
-      .comment-like-section-preview textarea,
-      .comment-like-section textarea {
-        font-size: 2rem;
-      }
-      .dk-grid {
-          font-size: 1.5rem;
-          grid-row-gap: 2rem;
-      }
-      .dk-grid>div{
-        display: flex;
-        justify-content: center;
-      }
-      .search{
-        grid-column: 2/10;
-      }
-      .search input{
-          font-size: 2rem;
-          padding: 1rem;
-          width: 90%;
-  
-      }
-      .news-i{
-          font-size: 2.2rem;
-          right: -8%;
-          padding: 0.7rem;
-      }
-      .choose_author{
-          grid-column: 2/10;
-          align-items: center;
-  }
-      .choose_author select{
-          padding: 1rem;
-          font-size: 2rem;
-      }
-      .create_news{
-          font-size: 1.1rem;
-          grid-column: 2/10;
-  }
-      .create_news a{
-          font-size: 2rem;
-      }
-      .dk-author-filter-select{
-        width: 70%;
-      }
-      .dk-author-filter-select option{
-        font-size: 0.8rem;
-      }
-      .article-author-news-preview p{
-          padding: 0.5rem ;
-          float: none;
-          text-align: center;
-          font-size: 1.8rem;
-        }
-      .content p{
-            text-align: justify;
-        }
-      .content-news-preview p{
-          font-size: 1.6rem;
-      }
-      .news{
-          grid-column: 2/12;
-      }
-      .events-sidebar-news{
-            display: none;
-        }
-      .article-author-news p{
-          text-align: center;
-          font-size: 1.5rem;
-      }
-      /* COMMENT AREA */
-      .comment-like-section .news-comment textarea {
-        height: 2.5rem;
-      }
-      .header-news-details{
         display: flex;
         flex-direction: column;
         padding: 1rem;
-      }
-      .dk-news-details{
-          padding: 1rem;
-      }
-      .header-news-details > div > p {
+    }
+
+    .content {
+        padding: 1rem;
+    }
+
+    .headline h4 a {
+        font-size: 3rem;
+        padding: 1rem;
+    }
+
+    .headline > div > a {
+        font-size: 2rem;
+    }
+
+    .headline > div > button {
+        font-size: 2rem;
+    }
+
+    .comment-like-section {
+        width: 100%;
+        grid-template-columns: 1fr 1fr 5fr;
+    }
+
+    .comment-like-section .news-like, .comment-like-section .news-dislike {
+        display: flex;
+    }
+
+    .comment-like-section .news-comment {
+        margin-left: 1rem;
+    }
+
+    .comment-like-section-preview button,
+    .comment-like-section button, .comment-like-section span {
+        font-size: 2rem;
+    }
+
+    .comment-like-section-preview textarea,
+    .comment-like-section textarea {
+        font-size: 2rem;
+    }
+
+    .dk-grid {
+        font-size: 1.5rem;
+        grid-row-gap: 2rem;
+    }
+
+    .dk-grid > div {
+        display: flex;
+        justify-content: center;
+    }
+
+    .search {
+        grid-column: 2/10;
+    }
+
+    .search input {
+        font-size: 2rem;
+        padding: 1rem;
+        width: 90%;
+
+    }
+
+    .news-i {
+        font-size: 2.2rem;
+        right: -8%;
+        padding: 0.7rem;
+    }
+
+    .choose_author {
+        grid-column: 2/10;
+        align-items: center;
+    }
+
+    .choose_author select {
+        padding: 1rem;
+        font-size: 2rem;
+    }
+
+    .create_news {
+        font-size: 1.1rem;
+        grid-column: 2/10;
+    }
+
+    .create_news a {
+        font-size: 2rem;
+    }
+
+    .dk-author-filter-select {
+        width: 70%;
+    }
+
+    .dk-author-filter-select option {
+        font-size: 0.8rem;
+    }
+
+    .article-author-news-preview p {
+        padding: 0.5rem;
+        float: none;
+        text-align: center;
+        font-size: 1.8rem;
+    }
+
+    .content p {
+        text-align: justify;
+    }
+
+    .content-news-preview p {
+        font-size: 1.6rem;
+    }
+
+    .news {
+        grid-column: 2/12;
+    }
+
+    .events-sidebar-news {
+        display: none;
+    }
+
+    .article-author-news p {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    /* COMMENT AREA */
+    .comment-like-section .news-comment textarea {
+        height: 2.5rem;
+    }
+
+    .header-news-details {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .dk-news-details {
+        padding: 1rem;
+    }
+
+    .header-news-details > div > p {
         text-align: center;
         font-size: 1.5rem;
         padding: 1rem;
-      }
-      .header-news-details > div > h4 {
+    }
+
+    .header-news-details > div > h4 {
         text-align: center;
         font-size: 2.2rem;
         padding: 1rem;
-      }
-      .edit-news {
+    }
+
+    .edit-news {
         text-align: center;
-      }
-      .edit-news a{
+    }
+
+    .edit-news a {
         font-size: 1.5rem;
-      }
-      .profile-img-comment img{
+    }
+
+    .profile-img-comment img {
         width: 5.5rem;
         height: 5.5rem;
-      }
-      .comment-content h4{
+    }
+
+    .comment-content h4 {
         font-size: 0.9rem;
-      }
-      .comment-content p{
+    }
+
+    .comment-content p {
         font-size: 0.8rem;
-      }
-      .comment-content{
+    }
+
+    .comment-content {
         grid-column: 1/18;
-      }
-      .commentlike-edit-preview,
-      .commentlike-edit-section{
-          grid-template-columns: 1fr;
+    }
 
-      }
-      .comment-like-section-preview,
-      .comment-like-section{
-          padding-bottom: 1rem;
-      }
-      .edit-preview-button-news{
-          display: flex;
-          padding:1rem;
-          justify-content: center;
-      }
-      .commentlike-edit-preview .news-preview-button,
-      .edit-preview-button-news .news-button{
-          width: 15rem;
-          height: 3rem;
+    .commentlike-edit-preview,
+    .commentlike-edit-section {
+        grid-template-columns: 1fr;
 
-      }
-      .commentlike-edit-preview .news-preview-button ,
-      .edit-preview-button-news .news-button a{
-          font-size: 2rem;
+    }
 
-      }
-      .comment-like-section-preview .news-comment textarea{
-          height: 2.5rem;
-          font-size: 1.2rem;
-        }
-      /* CALENDAR */
-      .create-new-event a{
+    .comment-like-section-preview,
+    .comment-like-section {
+        padding-bottom: 1rem;
+    }
+
+    .edit-preview-button-news {
+        display: flex;
+        padding: 1rem;
+        justify-content: center;
+    }
+
+    .commentlike-edit-preview .news-preview-button,
+    .edit-preview-button-news .news-button {
+        width: 15rem;
+        height: 3rem;
+    }
+
+    .commentlike-edit-preview .news-preview-button,
+    .edit-preview-button-news .news-button a {
+        font-size: 2rem;
+
+    }
+
+    .comment-like-section-preview .news-comment textarea {
+        height: 2.5rem;
+        font-size: 1.2rem;
+    }
+
+    /* CALENDAR */
+    .create-new-event a {
         grid-column: 2/10;
         font-size: 1.8rem;
 
-      }
-  
-      .dk-create-calendar{
+    }
+
+    .dk-create-calendar {
         width: 60rem;
-      }
-  
-      .calendar {
+    }
+
+    .calendar {
         width: 60rem;
-      }
-  
-      .calendar a {
+    }
+
+    .calendar a {
         font-size: 1.8rem;
-      }
-  
-      .calendar th{
+    }
+
+    .calendar th {
         font-size: 1.5rem;
-      }
-  
-      .calendar li{
+    }
+
+    .calendar li {
         font-size: 1.4rem;
-      }
-      .header-news-preview{
+    }
+
+    .header-news-preview {
         grid-template-columns: 1fr;
-      }
-      .article-headline-news-preview h4{
-        padding: 0.5rem ;
+    }
+
+    .article-headline-news-preview h4 {
+        padding: 0.5rem;
         font-size: 2.5rem;
-      }
-      .article-headline-news-preview a{
-          font-size: 2.3rem;
-      }
-      .creation-date-news-preview p{
-        padding: 0.5rem ;
+    }
+
+    .article-headline-news-preview a {
+        font-size: 2.3rem;
+    }
+
+    .creation-date-news-preview p {
+        padding: 0.5rem;
         text-align: center;
-          font-size: 1.8rem;
-      }
-      .close-button-event{
-          text-align: right;
-          top: -1.5rem;
-      }
-  
+        font-size: 1.8rem;
+    }
 
-      /* OGI KALENDAR */
-      .event-day-item-title {
+    .close-button-event {
+        text-align: right;
+        /*top: -1.5rem;*/
+    }
+
+
+    /* OGI KALENDAR */
+    .event-day-item-title {
         font-size: 3rem;
-      }
+    }
 
-      .event-day-item .ov-form__btn-container {
+    .event-day-item .ov-form__btn-container {
         flex-direction: row;
-      }
+    }
 
-      .event-form-content p {
+    .event-form-content p {
         font-size: 2.5rem;
 
-      }
-      /* OGI KALENDAR */
+    }
 
-      /* OGI KOMENTARI */
+    /* OGI KALENDAR */
+    /* OGI KOMENTARI */
+    .news__comment-author {
+        font-size: 2rem;
+    }
 
-      .news__comment-author {
-        font-size:2rem;
-      }
-      .news__comment-date {
+    .news__comment-date {
         font-size: 1.5rem;
-      }
-      .news__comment-content {
+    }
+
+    .news__comment-content {
         padding: 0 1rem;
         font-size: 1.8rem;
-      }
-      .news__comment-like-dislike-btn, 
-      .news__comment-like-dislike-count{
-        cursor:pointer;
+    }
+
+    .news__comment-like-dislike-btn,
+    .news__comment-like-dislike-count {
+        cursor: pointer;
         font-size: 2rem;
-      }
-      /* OGI KOMENTARI 
-      */
-      .dv-photo-preview {
+    }
+
+    /* OGI KOMENTARI
+    */
+    .dv-photo-preview {
         width: 50%;
-      }
-      .image-container {
+    }
+
+    .image-container {
         width: 90%;
         display: flex;
         justify-content: center;
         position: relative;
-      }
-      #id_profile_pic, 
-      #id_image {
+    }
+
+    #id_profile_pic,
+    #id_image {
         font-size: 2.5rem;
         width: 40%;
     }
 
     #remove-avatar-button, #remove-image-button {
-      top: 30%;
-  }
-  #remove-image-button {
-    width: 10%;
-  }
-  }
+        top: 30%;
+    }
+
+    #remove-image-button {
+        width: 10%;
+    }
+}
   

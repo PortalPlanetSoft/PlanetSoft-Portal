@@ -132,6 +132,10 @@
 .news-button a{
     font-size: 0.9rem;
 }
+
+#user-news-preview-button{
+    margin-left: 12.5rem;
+}
 .commentlike-edit-preview{
     display: grid;
     grid-template-columns: 2fr 0fr;
@@ -172,7 +176,7 @@
     justify-self: center;
 }
 .comment-like-section-preview .news-dislike,
-.comment-like-section .news-dislike {
+.comment-like-section .news-dislike{
     grid-area: dislike;
     align-self: center;
     justify-self: center;
@@ -337,9 +341,15 @@
     max-height: 70vh;
     overflow: unset;
     overflow-y: auto;
-    padding:1rem;
     width: 70vw;
 }
+
+.news-content{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
 .creation-date-news-preview p{
     font-size: 1rem;
 }

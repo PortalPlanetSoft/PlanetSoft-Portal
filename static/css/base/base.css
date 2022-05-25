@@ -286,6 +286,7 @@ a:hover {
 #remove-avatar-button, #remove-image-button {
     visibility: hidden;
     margin: 0;
+    width: 60px;
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
@@ -295,6 +296,7 @@ a:hover {
 #id_profile_pic {
     visibility: hidden;
     top: 70%;
+    width: 50px;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     position: absolute;
@@ -316,6 +318,7 @@ a:hover {
 #id_image {
     visibility: hidden;
     top: 70%;
+    width: 60px;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     position: absolute;
@@ -327,6 +330,7 @@ a:hover {
     visibility: hidden;
     margin: 0;
     top: 50%;
+    width: 60px;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     position: absolute;
@@ -336,7 +340,7 @@ a:hover {
     visibility: hidden;
     margin: 40px;
     top: 50%;
-    width: 50px;
+    width: 60px;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     position: absolute;
@@ -398,3 +402,6 @@ a:hover {
     cursor: pointer;
 }
 
+#id_image{
+    width: 60px;
+}

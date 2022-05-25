@@ -85,8 +85,9 @@ class NewsList(ListView):
         queryset = NewsArticle.objects.annotate(
             likes_count=Count('likedislike', filter=Q(likedislike__type=True)),
             dislikes_count=Count('likedislike', filter=Q(likedislike__type=False)),
-            liked=Subquery(has_reacted.values('type')))
-        # top_comments = Comment.objects.filter(article_id__in=queryset.values_list('id')).order_by('-edited_date')[:3]
+            liked=Subquery(has_reacted.values('type')),
+            comment_count=Count('comment')
+        )
         search = self.request.GET.get('search')
         author = self.request.GET.get('author')
 
@@ -151,6 +152,12 @@ class NewsPreview(DetailView):
     model = NewsArticle
     template_name = 'news/news-preview.html'
     success_url = '/news/'
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = NewsArticle.objects.annotate(
+            comment_count=Count('comment'))
+        return queryset
+
 
     def get_context_data(self, **kwargs):
         context = super(NewsPreview, self).get_context_data(**kwargs)

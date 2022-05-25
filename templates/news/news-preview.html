@@ -1,6 +1,12 @@
 {% load static %}
-<form class="news-preview">
-    <div>
+<form id="news-article" class="news-preview">
+    <h3 class="ov-form__title">Pregled vijesti
+        <button type="button" id="close-button" class="close-button-event" onclick="modalClose()"><i
+                class="fa-solid fa-rectangle-xmark"></i>
+        </button>
+    </h3>
+
+    <div class="news-content">
         <div class="dk-news-preview">
             <div class="header-news-preview">
                 <div class="creation-date-news-preview"><p>{{ article.creation_date }}</p></div>
@@ -50,8 +56,6 @@
                     </button>
                 </form>
             </div>
-            <button type="button" id="close-button" class="news-preview-button" onclick="modalClose()">Nazad
-                <i class="fa-solid fa-circle-left"></i></button>
         </div>
         <div id="news-comment-content{{ article.id }}" class="news__comment-list">
             {% for comment in comments %}
@@ -77,27 +81,27 @@
                         <p class="news__comment-content">{{ comment.content }}</p>
                     </div>
                 </div>
-                    <div id="comment-like-dislike{{ comment.id }}" class="news__comment-btn-container">
-                        <form id="comment-like-form" class="news-like"
-                              method="post">
-                            {% csrf_token %}
-                            <button type="button" name="article_like_id" class="news__comment-like-dislike-btn"
-                                    onclick="genericSubmitCommentReactionInModal(REACT_COMMENT_URL + {{ comment.id }} , '#comment-like-form', '#comment-like-dislike{{ comment.id }}', {{ article.id }}, {'flag': 'like'})">
-                                {% if comment.liked %}
-                                    <i class="fa-solid fa-thumbs-up"></i> {% else %}
-                                    <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
-                            <span>{{ comment.likes_count }}</span>
-                        </form>
-                        <form id="comment-dislike-form" class="news-dislike"
-                              method="post">
-                            {% csrf_token %}
-                            <button type="button" name="article_dislike_id" class="news__comment-like-dislike-btn"
-                                    onclick="genericSubmitCommentReactionInModal(REACT_COMMENT_URL + {{ comment.id }} , '#comment-dislike-form', '#comment-like-dislike{{ comment.id }}', {{ article.id }}, {'flag': ''})">
-                                {% if comment.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
-                                    <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
-                            <span>{{ comment.dislikes_count }}</span>
-                        </form>
-                    </div>
+                <div id="comment-like-dislike{{ comment.id }}" class="news__comment-btn-container">
+                    <form id="comment-like-form" class="news-like"
+                          method="post">
+                        {% csrf_token %}
+                        <button type="button" name="article_like_id" class="news__comment-like-dislike-btn"
+                                onclick="genericSubmitCommentReactionInModal(REACT_COMMENT_URL + {{ comment.id }} , '#comment-like-form', '#comment-like-dislike{{ comment.id }}', {{ article.id }}, {'flag': 'like'})">
+                            {% if comment.liked %}
+                                <i class="fa-solid fa-thumbs-up"></i> {% else %}
+                                <i class="fa-regular fa-thumbs-up"></i>{% endif %}</button>
+                        <span>{{ comment.likes_count }}</span>
+                    </form>
+                    <form id="comment-dislike-form" class="news-dislike"
+                          method="post">
+                        {% csrf_token %}
+                        <button type="button" name="article_dislike_id" class="news__comment-like-dislike-btn"
+                                onclick="genericSubmitCommentReactionInModal(REACT_COMMENT_URL + {{ comment.id }} , '#comment-dislike-form', '#comment-like-dislike{{ comment.id }}', {{ article.id }}, {'flag': ''})">
+                            {% if comment.liked == False %}<i class="fa-solid fa-thumbs-down"></i> {% else %}
+                                <i class="fa-regular fa-thumbs-down"></i>{% endif %}</button>
+                        <span>{{ comment.dislikes_count }}</span>
+                    </form>
+                </div>
             {% endfor %}
         </div>
     </div>
